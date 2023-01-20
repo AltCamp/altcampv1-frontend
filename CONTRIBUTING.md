@@ -1,4 +1,4 @@
-# Contributing to the React Project
+# Contributing to StudyBuddy
 
 ## Introduction
 
