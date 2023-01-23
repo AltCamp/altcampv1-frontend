@@ -1,4 +1,7 @@
 # Studybuddyv1-frontend
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ## About StudyBuddy
 StudyBuddy by AltSchool is an e-learning platform that allows students to post messages to the discussion threads, interact and receive feedback from other students and instructors, and hence create a deeper understanding of the subject matter being discussed.
@@ -19,6 +22,21 @@ This project is licensed under the MIT License - see the [LICENSE](/LICENSE) fil
 ## Contributors
 * **Jane Doe**: [GitHub]() - [LinkedIn]() - [Twitter]() - [Portfolio]() - [Blog]()
 
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://boyei.tech/"><img src="https://avatars.githubusercontent.com/u/74235313?v=4?s=100" width="100px;" alt="Samuel Adeboye Folaranmi"/><br /><sub><b>Samuel Adeboye Folaranmi</b></sub></a><br /><a href="https://github.com/StudyBuddyv1/studybuddyv1-frontend/commits?author=Boye95" title="Code">💻</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 
 ## Acknowledgements
 * [AltSchool Africa](https://www.altschoolafrica.com/schools/engineering)
