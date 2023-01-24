@@ -5,7 +5,10 @@
     --InterThin: 'Inter', sans-serif;
 
     /* colors variables */
-
+    /* color variables for Login page */
+    --secondaryBlue: #6A6FF5;
+    --neutralDark: #212529;
+    
     
 }
 
