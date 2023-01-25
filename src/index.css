@@ -4,12 +4,44 @@
     /* fonts variables */
     --InterThin: 'Inter', sans-serif;
 
-    /* colors variables */
-    /* color variables for Login page */
-    --secondaryBlue: #6A6FF5;
-    --neutralDark: #212529;
-    
-    
+    /* Color Variables (Using Figma Assets) */
+
+    /* Primary Colors */
+    --primary-clr-black: #333130;
+    --primary-clr-drkst-brown: #55524F;
+    --primary-clr-drker-brown: #807B77;
+    --primary-clr-drk-brown: #AAA49F;
+    --primary-clr-lt-brown: #D4CDC6;
+    --primary-clr-pink-1: #F7F2ED;
+    --primary-clr-pink-2: #FFF7F1;
+    --primary-clr-pink-3: #FFF9F4;
+    --primary-clr-pink-4: #FFFAF6;
+
+    /* Neutral Colors */
+    --neutral-clr-black: #000;
+    --neutral-clr-white: #fff;
+
+    --neutral-clr-deep-grey: #212529;
+    --neutral-clr-drkst-grey: #343A40;
+    --neutral-clr-drker-grey: #495057;
+    --neutral-clr-drk-grey: #6C757D;
+    --neutral-clr-grey-1: #ADB5BD;
+    --neutral-clr-grey-2: #CED4DA;
+    --neutral-clr-lt-grey: #DEE2E6;
+    --neutral-clr-lter-grey: #E9ECEF;
+    --neutral-clr-ltest-grey: #F8F9FA;
+
+    /* Secondary Colors */
+    --secondary-clr-deep-blue: #151631;
+    --secondary-clr-drkst-blue: #232552;
+    --secondary-clr-drkr-blue: #35377A;
+    --secondary-clr-drk-blue: #474AA3;
+    --secondary-clr-lt-blue: #585CCC;
+    --secondary-clr-lter-blue: #6A6FF5;
+    --secondary-clr-ltest-blue: #8387F7;
+    --secondary-clr-lt-purple: #9C9FF8;
+    --secondary-clr-lter-purple: #CDCFFC;
+
 }
 
 .container {
