@@ -4,18 +4,32 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
 
 // Import the pages routes
-import { Login, Register } from './pages'
+import {AltStudent, Mentor} from './pages'
+
+// import components from altStudent
+import { AltStudentRegister, AltStudentLogin } from './pages/auth/altStudent'
+
 
 // set up router using createBrowserRouter
 const router = createBrowserRouter([
   {
-    path: '/login',
-    element: <Login />
+    path: '/altstudent',
+    element: <AltStudent />,
+    children: [
+      {
+        path: '/altstudent/login',
+        element: <AltStudentLogin />
+      },
+      {
+        path: '/altstudent/register',
+        element: <AltStudentRegister />
+      }
+    ]
   },
-  {
-    path: '/register',
-    element: <Register />
-  }
+  // {
+  //   path: '/register',
+  //   element: <Register />
+  // }
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
