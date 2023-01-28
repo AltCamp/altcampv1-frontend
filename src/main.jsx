@@ -5,6 +5,7 @@ import './index.css'
 
 // Import the pages routes
 import { Login, Register } from './pages'
+import Landing from './pages/landing/landing'
 
 // set up router using createBrowserRouter
 const router = createBrowserRouter([
@@ -15,7 +16,10 @@ const router = createBrowserRouter([
   {
     path: '/register',
     element: <Register />
-  }
+  },
+  {
+    path: '/',
+    element: <Landing />}
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(

@@ -1,0 +1,178 @@
+.intro-area {
+    width: 100%;
+    height: 720px;
+    background-image: url('/Students-reading.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+    padding: 150px 360px 100px;
+}
+
+.intro-area h1 {
+    color: white;
+    font-size: 60px;
+    padding: 20px 50px;
+    font-weight: bold;
+    /* background-color: aqua; */
+}
+
+.intro-area p {
+    color: white;
+    font-weight: 500;
+    padding: 20px 160px;
+    margin: 50px 0;
+    line-height: 2;
+}
+
+.intro-area button {
+    margin: 50px;
+    padding: 14px 40px;
+    color: white;
+    background-color: var(--secondary-clr-lt-blue);
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 16px;
+    font-family: inherit;
+}
+
+.about-us-area {
+    background-color: var(--secondary-clr-lter-purple);
+    height: 968px;
+    /* width: 1200px; */
+    padding: 100px calc((100% - 1200px)/2) 400px;
+    display: flex;
+    text-align: center;
+}
+
+.about-us-text {
+    width: 50%;
+    text-align: left;
+    /* background-color: yellow; */
+}
+
+.about-us-text h2 {
+    /* background-color: crimson; */
+    font-size: 48px;
+    padding-top: 0;
+    margin: 0 0 40px;
+    color: var(--neutral-clr-drkst-grey);
+}
+
+.about-us-text p {
+    color: var(--neutral-clr-drkst-grey);
+    /* background-color: aqua; */
+    font-size: 24px;
+    line-height: 2;
+    width: 500px;
+}
+
+.about-us-image-area {
+    /* background-color: orange; */
+    width: 50%;
+    position: relative;
+}
+
+
+.about-us-image-area img {
+    width: 564px;
+}
+
+.about-us-image{
+    position: absolute;
+    z-index: 5;
+    margin-top: 36px;
+    left: 20px;
+}
+
+.decor-box {
+    width: 441px;
+    height: 242px;
+    /* background-color: red; */
+    border-radius: 10px;
+    z-index: 1
+}
+
+.decor-box-1 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: var(--neutral-clr-deep-grey);
+}
+
+.decor-box-2 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: var(--secondary-clr-drk-blue);
+}
+
+.tracks-container{
+    width: 1200px;
+    height: 354px;
+    background-color: var(--secondary-clr-deep-blue);
+    margin: 0 auto;
+    margin-top: -177px;
+    border-radius: 10px;
+    padding: 30px 50px;
+}
+
+.benefits-area{
+    margin-top: 177px;
+}
+
+.benefits-area h5{
+    font-size: 16px;
+    color: var(--neutral-clr-drkst-grey);
+    text-align: center;
+}
+
+.benefits-area h2{
+    font-size: 40px;
+    color: var(--neutral-clr-drkst-grey);
+    text-align: center;
+}
+.benefits-container{
+    width: 1200px;
+    margin: 0 auto;
+    /* background-color: red; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.benefit-card{
+    width: 384px;
+    height: 442px;
+    text-align: center;
+    padding: 30px;
+    box-shadow: 0px 0px 5px 0.8px rgba(95, 94, 94, 0.5);
+    border-radius: 10px;
+    margin: 30px 0;
+    /* margin: 40px; */
+}
+
+.benefit-icon{
+    margin: 20px auto;
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    background-color: var(--secondary-clr-lter-purple);
+}
+
+.benefit-icon svg{
+    margin: 21px auto;
+    color: var(--secondary-clr-lter-blue);
+}
+
+.benefit-card h3{
+    font-size: 24px;
+    padding: 10px 0;
+}
+
+.benefit-card p{
+    font-size: 20px;
+    line-height: 2;
+    color: var(--neutral-clr-drk-grey);
+}
