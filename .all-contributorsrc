@@ -23,6 +23,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "vader-js",
+      "name": "Ayomide Shittu",
+      "avatar_url": "https://avatars.githubusercontent.com/u/100224192?v=4",
+      "profile": "https://github.com/vader-js",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
