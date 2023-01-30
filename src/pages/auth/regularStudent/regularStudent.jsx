@@ -10,9 +10,18 @@ import RegularStudentRegister from './regularStudentRegister/regularStudentRegis
 
 export default function RegularStudent () {
   return (
-    <div>
-      <div className=''>
-        <img src={authHeroImage} alt='' className='' />
+    <div className='rglrStudent'>
+      <div className='rglrHero'>
+        <div className='rglrHeroOverlay'>
+          <div className='rglrHeroContent'>
+            <img src={studyBuddyLogo} alt='studyBuddy Logo' className='' />
+            <p className=''>
+              Learning made easy and interesting. Share what you know even as
+              you learn what you something new
+            </p>
+          </div>
+        </div>
+        <img src={authHeroImage} alt='hero image of a student' className='' />
       </div>
       <div className=''>
         <Outlet />
