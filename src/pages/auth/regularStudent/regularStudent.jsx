@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import authHeroImage from '../../../assets/general/AuthBackground.webp'
 import studyBuddyLogo from '../../../assets/general/Authlogo.png'
-import './regularStudent.css'
+import rglrStudStyle from './regularStudent.module.css'
 
 export default function RegularStudent () {
   const navigate = useNavigate()
@@ -14,14 +14,14 @@ export default function RegularStudent () {
   let activeStyle = {
     color: '#212529',
     fontWeight: '700',
-    borderBottom: '4px solid #212529',
+    borderBottom: '4px solid #212529'
   }
 
   return (
-    <div className='rglrStudent'>
-      <div className='rglrHero'>
-        <div className='rglrHeroOverlay'>
-          <div className='rglrHeroContent'>
+    <div className={rglrStudStyle.container}>
+      <div className={rglrStudStyle.hero}>
+        <div className={rglrStudStyle.heroOverlay}>
+          <div className={rglrStudStyle.heroContent}>
             <img src={studyBuddyLogo} alt='studyBuddy Logo' className='' />
             <p className=''>
               Learning made easy and interesting. Share what you know even as
@@ -31,8 +31,8 @@ export default function RegularStudent () {
         </div>
         <img src={authHeroImage} alt='hero image of a student' className='' />
       </div>
-      <div className='rglrAuthSection'>
-        <div className='rglrAuthContent'>
+      <div className={rglrStudStyle.authSection}>
+        <div className={rglrStudStyle.authContent}>
           <nav className=''>
             <NavLink
               to='/regularstudent/register'
