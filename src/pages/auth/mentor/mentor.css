@@ -1,0 +1,68 @@
+* {
+  font-family: "Inter", sans-serif;
+  height: max-content;
+  overflow: hidden;
+}
+.mentorContainer {
+  display: flex;
+}
+
+.mentorBackground {
+  background-image: linear-gradient(
+      rgba(35, 37, 82, 0.7),
+      rgba(35, 37, 82, 0.7)
+    ),
+    url("../../../../src/assets/general/AuthBackground.webp");
+  max-width: fit-content;
+  width: 50%;
+  height: 100vh;
+  background-size: auto;
+  background-repeat: no-repeat;
+}
+
+.mentorLogo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  top: 50%;
+}
+
+.mentorText {
+  color: var(--neutral-clr-white);
+  text-align: center;
+  width: 55%;
+  margin-top: 1.5rem;
+  font-weight: 500;
+  font-size: 1.125rem;
+  line-height: 2.25rem;
+}
+
+.mentorForm {
+  width: 50%;
+}
+
+.mentorNavbar {
+  margin-top: 3rem;
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
+  margin: 0 auto;
+  width: 70%;
+}
+.navItem {
+  width: 50%;
+  text-align: center;
+}
+.navItem .link {
+  text-decoration: none;
+  text-transform: uppercase;
+  display: inline-block;
+  font-size: 0.875rem;
+  line-height: 2.5rem;
+  font-weight: 500;
+}
