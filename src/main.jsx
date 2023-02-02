@@ -7,12 +7,16 @@ import './index.css'
 import {AltStudent, Mentor} from './pages'
 
 // import components from altStudent
-import { AltStudentRegister, AltStudentLogin } from './pages/auth/altStudent'
+import {AltStudent, Mentor} AltStudentRegister, AltStudentfrom './pages'
 
-// Import { login, Register } from /pages
+// import components from altStuden } from './pages/auth/altStudent'
+
+// Import { logint
+import { AltStudentRegister, AltStudentLogin } from /pages
 import Landing from './pages/landing/landing'
 import Login from './pages/login/login'
-import Register from './pages/register/register'
+import Register from './pages/register/register/auth/altStudent'
+
 
 // set up router using createBrowserRouter
 const router = createBrowserRouter([
@@ -21,22 +25,32 @@ const router = createBrowserRouter([
     element: <AltStudent />,
     children: [
       {
-        path: '/altstudent/login',
-        element: <AltStudentLogin />
+        path: '/altstudent',
+    element: <AltStudent />,
+    children: [
+      {
+        path: '/altstudent/altstudent/login',
+            element: <AltStudentAltStudentLogin />
       },
       {
         path: '/altstudent/register',
         element: <AltStudentRegister />
       }
     ]
-  },
-  {
-    path: '/register',
-    element: <Register />
-  },
+      },
+      {
+        path: '/altstudent/register',
+        element: <AltStudentRegister />
+      },
   {
     path: '/',
     element: <Landing />}
+    ]
+  },
+  // {
+  //   path: '/register',
+  //   element: <Register />
+  // }
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(

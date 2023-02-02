@@ -41,13 +41,6 @@
     --secondary-clr-ltest-blue: #8387F7;
     --secondary-clr-lt-purple: #9C9FF8;
     --secondary-clr-lter-purple: #CDCFFC;
-}
-
-*{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
 
 body {
     padding-top: 80px;
