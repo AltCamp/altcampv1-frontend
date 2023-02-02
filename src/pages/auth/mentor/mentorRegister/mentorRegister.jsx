@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import "./mentorRegister.css";
+import mentorRegister from "./mentorRegister.module.css";
 
 export default function MentorRegister() {
   const [password, setPassword] = useState(false);
   
 
   return (
-    <div className="mentorRegisterContainer">
-      <h2 className="mentorRegistrationHeading">Register as a Mentor</h2>
+    <div className={mentorRegister.container}>
+      <h2 className={mentorRegister.heading}>Register as a Mentor</h2>
 
       <form action="">
         {!password && (
-          <div className="mentorRegistrationForm">
+          <div className={mentorRegister.formGroup}>
             <label htmlFor="firstName">First Name</label>
             <input
               type="text"
@@ -47,15 +47,15 @@ export default function MentorRegister() {
               onClick={() => setPassword(true)}
               type="submit"
               value="Continue"
-              className="continue"
+              className={mentorRegister.continue}
               required
             />
           </div>
         )}
 
         {password && (
-          <div className="mentorSetPasswordContainer">
-            <div className="mentorSetPassword">
+          <div className={mentorRegister.setPasswordContainer}>
+            <div className={mentorRegister.setPassword}>
               <label htmlFor="password">Password</label>
               <input
                 type="password"
@@ -75,7 +75,7 @@ export default function MentorRegister() {
               <input
                 type="submit"
                 value="Create Account"
-                className="create"
+                className={mentorRegister.create}
                 required
               />
             </div>

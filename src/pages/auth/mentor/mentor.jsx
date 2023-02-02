@@ -1,9 +1,7 @@
 // import
 import React, { useEffect } from "react";
 import { Outlet, useNavigate, NavLink } from "react-router-dom";
-import "./mentor.css";
-import MentorLogin from "./mentorLogin/mentorLogin";
-import MentorRegister from "./mentorRegister/mentorRegister";
+import mentor from "./mentor.module.css";
 import logo from "../../../../src/assets/general/Authlogo.png";
 
 export default function Mentor() {
@@ -12,41 +10,44 @@ export default function Mentor() {
     navigate("/mentor/register");
   }, []);
   let activeStyle = {
-        borderBottom: "2px solid var(--neutral-clr-deep-grey)",
+    width: "180px",
+    borderBottom: "4px solid var(--neutral-clr-deep-grey)",
   };
   return (
-    <div className="mentorContainer">
-      <div className="mentorBackground">
-        <div className="mentorLogo container">
+    <div className={mentor.container}>
+      <div className={mentor.background}>
+        <div className={mentor.logo}>
           <img src={logo} alt="logo" />
-          <p className="mentorText">
-            Learning made easy and interesting.Share what you know and learn
-            what you don't.
+          <p className={mentor.text}>
+            Learning made easy and interesting. Share what you know even as you
+            learn what you something new
           </p>
         </div>
       </div>
-      <div className="mentorForm">
-        <div className="mentorNavbar">
-          <ul className="nav">
-            <li className="navItem">
+      <div className={mentor.formGroup}>
+        <div className={mentor.navbar}>
+          <ul className={mentor.nav}>
+            <li className={mentor.navItem}>
               <NavLink
                 to="/mentor/register"
                 style={({ isActive }) => {
                   return isActive ? activeStyle : null;
                 }}
-                className="link">
+                className={mentor.link}
+              >
                 Register
-                </NavLink>
+              </NavLink>
             </li>
-            <li className="navItem">
+            <li className={mentor.navItem}>
               <NavLink
                 to="/mentor/login"
-                style={({ isActive }) => {  
+                style={({ isActive }) => {
                   return isActive ? activeStyle : null;
                 }}
-                className="link">
+                className={mentor.link}
+              >
                 Login
-                </NavLink>
+              </NavLink>
             </li>
           </ul>
         </div>

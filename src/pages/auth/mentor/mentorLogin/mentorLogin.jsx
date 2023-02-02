@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./mentorLogin.css";
+import mentorLogin from "./mentorLogin.module.css";
 export default function MentorRegister() {
   const [forgotPassword, setForgotPassword] = useState(false);
   const [newPassword, setNewPassword] = useState(false);
   const [otp, setOtp] = useState(new Array(4).fill(""));
 
   return (
-    <div className="mentorLoginContainer">
-      <h2 className="mentorLoginHeading">Welcome Back</h2>
+    <div className={mentorLogin.container}>
+      <h2 className={mentorLogin.heading}>Welcome Back</h2>
       <form action="">
         {!forgotPassword && (
-          <div className="mentorLoginForm">
+          <div className={mentorLogin.formGroup}>
             <label htmlFor="email">Email Address</label>
             <input
               type="email"
@@ -28,17 +28,17 @@ export default function MentorRegister() {
               placeholder="********"
               required
             />
-            <input type="submit" value="Log In" className="login" required />
+            <input type="submit" value="Log In" className={mentorLogin.login} required />
             <Link
               onClick={() => setForgotPassword(true)}
-              className="setForgotPassword"
+            className={mentorLogin.forgotPassword}
             >
               Forgot Password
             </Link>
           </div>
         )}
         {forgotPassword && !newPassword && (
-          <div className="mentorForgotPasswordForm">
+          <div className={mentorLogin.forgotPasswordForm}>
             <label htmlFor="email">Email Address</label>
             <input
               type="email"
@@ -52,21 +52,21 @@ export default function MentorRegister() {
               onClick={() => setNewPassword(true)}
               type="submit"
               value="Send"
-              className="send"
+              className={mentorLogin.send}
               required
             />
           </div>
         )}
         {newPassword && (
-          <div className="passwordTokenContainer">
+          <div className={mentorLogin.tokenContainer}>
             <p>Enter the verification code sent to your email address</p>
-            <div className="passwordToken">
-              <div className="mentorToken">
+            <div className={mentorLogin.passwordToken}>
+              <div className={mentorLogin.token}>
                 {otp.map((data, index) => {
                   return (
                     <input
                       type="text"
-                      className="mentorOtp"
+                      className={mentorLogin.otp}
                       name="otp"
                       maxLength="1"
                       key={index}
@@ -75,10 +75,10 @@ export default function MentorRegister() {
                   );
                 })}
               </div>
-              <input type="submit" value="Verify" className="verify" required />
+              <input type="submit" value="Verify" className={mentorLogin.verify} required />
               <Link
                 onClick={() => setNewPassword(true)}
-                className="resendToken"
+                className={mentorLogin.resendToken}
               >
                 Resend Code
               </Link>
