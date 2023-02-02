@@ -7,15 +7,7 @@ import './index.css'
 import {AltStudent, Mentor} from './pages'
 
 // import components from altStudent
-import {AltStudent, Mentor} AltStudentRegister, AltStudentfrom './pages'
-
-// import components from altStuden } from './pages/auth/altStudent'
-
-// Import { logint
-import { AltStudentRegister, AltStudentLogin } from /pages
-import Landing from './pages/landing/landing'
-import Login from './pages/login/login'
-import Register from './pages/register/register/auth/altStudent'
+import { AltStudentRegister, AltStudentLogin } from './pages/auth/altStudent'
 
 
 // set up router using createBrowserRouter
@@ -25,26 +17,13 @@ const router = createBrowserRouter([
     element: <AltStudent />,
     children: [
       {
-        path: '/altstudent',
-    element: <AltStudent />,
-    children: [
-      {
-        path: '/altstudent/altstudent/login',
-            element: <AltStudentAltStudentLogin />
+        path: '/altstudent/login',
+        element: <AltStudentLogin />
       },
       {
         path: '/altstudent/register',
         element: <AltStudentRegister />
       }
-    ]
-      },
-      {
-        path: '/altstudent/register',
-        element: <AltStudentRegister />
-      },
-  {
-    path: '/',
-    element: <Landing />}
     ]
   },
   // {

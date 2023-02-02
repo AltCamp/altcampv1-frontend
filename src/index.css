@@ -41,10 +41,17 @@
     --secondary-clr-ltest-blue: #8387F7;
     --secondary-clr-lt-purple: #9C9FF8;
     --secondary-clr-lter-purple: #CDCFFC;
+}
 
-body {
+body{
     padding-top: 80px;
     font-family: var(--InterThin);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 
