@@ -1,6 +1,7 @@
 import styles from './landing.module.css'
 import Navbar from '../../components/Navbar'
-import { Bubble, Convert3DCube, ReceiptSquare, Brush2, ChartCircle } from 'iconsax-react'
+import { Bubble, Convert3DCube, ReceiptSquare, Brush2, ChartCircle, TickSquare } from 'iconsax-react'
+import Footer from '../../components/Footer'
 
 const Landing = () => {
     return (
@@ -36,18 +37,45 @@ const Landing = () => {
                     <div className={`${styles['decor-box']} ${styles['decor-box-2']}`}></div>
                 </div>
             </div>
-            <div className={styles['tracks-container']}>
+            <div className={styles['tracks-area']}>
                 <h2>Tracks on StudyBuddy</h2>
-                <div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
+                <div className={styles['tracks-container']}>
+                    <div className={styles['track']}>
+                        <TickSquare size="32" variant="Bold" />
+                        <p>Frontend Engineering</p>
+                    </div>
+                    <div className={styles['track']}>
+                        <TickSquare size="32" variant="Bold" />
+                        <p>Product Design</p>
+                    </div>
+                    <div className={styles['track']}>
+                        <TickSquare size="32" variant="Bold" />
+                        <p>Data Analysis</p>
+                    </div>
+                    <div className={styles['track']}>
+                        <TickSquare size="32" variant="Bold" />
+                        <p>Backend Engineering</p>
+                    </div>
+                    <div className={styles['track']}>
+                        <TickSquare size="32" variant="Bold" />
+                        <p>Product Marketing</p>
+                    </div>
+                    <div className={styles['track']}>
+                        <TickSquare size="32" variant="Bold" />
+                        <p>Data Engineering</p>
+                    </div>
+                    <div className={styles['track']}>
+                        <TickSquare size="32" variant="Bold" />
+                        <p>Cloud Engineering</p>
+                    </div>
+                    <div className={styles['track']}>
+                        <TickSquare size="32" variant="Bold" />
+                        <p>Product Management</p>
+                    </div>
+                    <div className={styles['track']}>
+                        <TickSquare size="32" variant="Bold" />
+                        <p>Data Science</p>
+                    </div>
                 </div>
             </div>
             <div className={styles['benefits-area']}>
@@ -77,27 +105,47 @@ const Landing = () => {
                     </div>
                     <div className={styles['benefit-card']}>
                         <div className={styles['benefit-icon']}>
-                        <ReceiptSquare size="40" />
+                            <ReceiptSquare size="40" />
                         </div>
                         <h3>Career Growth</h3>
                         <p>Actively participating in the community provided will have your learning process and therefore help your career</p>
                     </div>
                     <div className={styles['benefit-card']}>
                         <div className={styles['benefit-icon']}>
-                        <Brush2 size="40" />
+                            <Brush2 size="40" />
                         </div>
                         <h3>Skill Analysis</h3>
                         <p>There are different breakdown of skills for each track and quizzes are available in order for you to assess your skills</p>
                     </div>
                     <div className={styles['benefit-card']}>
                         <div className={styles['benefit-icon']}>
-<ChartCircle size='40' />
+                            <ChartCircle size='40' />
                         </div>
                         <h3>Learning Circle</h3>
                         <p>For Altschoolers who have learning circle, Study Buddy allows you to interact with your circle members as a group</p>
                     </div>
+                    <button>
+                        Get Started
+                    </button>
                 </div>
             </div>
+            <div className={styles['outro-area']}>
+                <div className={styles['icon-boxes-area']}>
+                    <div className={`${styles['icon-box']} ${styles['icon-box-1']}`}>
+                    </div>
+                    <div className={`${styles['icon-box']} ${styles['icon-box-2']}`}></div>
+                    <div className={`${styles['icon-box']} ${styles['icon-box-3']}`}></div>
+                    <div className={`${styles['icon-box']} ${styles['icon-box-4']}`}></div>
+                    <div className={`${styles['icon-box']} ${styles['icon-box-5']}`}></div>
+                </div>
+                <div className={styles['call-to-action-area']}>
+                    <h1>Learn and share knowledge the easy way</h1>
+                    <p>Share what you know even as you learn what you do not know in the most convenient way.</p>
+                    <button>Get Started</button>
+                </div>
+            </div>
+
+            <Footer />
         </>
     )
 }

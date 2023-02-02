@@ -1,11 +1,17 @@
 .intro-area {
     width: 100%;
     height: 720px;
-    background-image: url('/Students-reading.png');
+    /* background-image: url('/Students-reading.png'); */
+    background-image :linear-gradient(
+        rgba(0, 0, 0, 0.6), 
+        rgba(0, 0, 0, 0.6)
+      ),
+      url('/Students-reading.png');
     background-repeat: no-repeat;
     background-size: cover;
     text-align: center;
     padding: 150px 360px 100px;
+    position: relative;
 }
 
 .intro-area h1 {
@@ -13,6 +19,7 @@
     font-size: 60px;
     padding: 20px 50px;
     font-weight: bold;
+    z-index: 10;
     /* background-color: aqua; */
 }
 
@@ -22,6 +29,7 @@
     padding: 20px 160px;
     margin: 50px 0;
     line-height: 2;
+    z-index: 10;
 }
 
 .intro-area button {
@@ -35,6 +43,7 @@
     font-weight: bold;
     font-size: 16px;
     font-family: inherit;
+    z-index: 100;
 }
 
 .about-us-area {
@@ -79,7 +88,7 @@
     width: 564px;
 }
 
-.about-us-image{
+.about-us-image {
     position: absolute;
     z-index: 5;
     margin-top: 36px;
@@ -108,7 +117,7 @@
     background-color: var(--secondary-clr-drk-blue);
 }
 
-.tracks-container{
+.tracks-area {
     width: 1200px;
     height: 354px;
     background-color: var(--secondary-clr-deep-blue);
@@ -118,22 +127,59 @@
     padding: 30px 50px;
 }
 
-.benefits-area{
+.tracks-area h2 {
+    color: white;
+    text-align: center;
+    font-size: 40px;
+}
+
+.tracks-container {
+    margin-top: 20px;
+    height: 80%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    row-gap: 50px;
+}
+
+
+.tracks-container p {
+    color: var(--neutral-clr-lt-grey);
+    font-size: 20px;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+}
+
+.track {
+    text-align: left;
+}
+
+.track svg {
+    vertical-align: middle;
+    color: #556AEB;
+    /* background-color: white; */
+    margin: 0 20px;
+}
+
+
+.benefits-area {
     margin-top: 177px;
 }
 
-.benefits-area h5{
+.benefits-area h5 {
     font-size: 16px;
     color: var(--neutral-clr-drkst-grey);
     text-align: center;
 }
 
-.benefits-area h2{
+.benefits-area h2 {
     font-size: 40px;
     color: var(--neutral-clr-drkst-grey);
     text-align: center;
 }
-.benefits-container{
+
+.benefits-container {
     width: 1200px;
     margin: 0 auto;
     /* background-color: red; */
@@ -142,7 +188,7 @@
     justify-content: space-between;
 }
 
-.benefit-card{
+.benefit-card {
     width: 384px;
     height: 442px;
     text-align: center;
@@ -153,7 +199,7 @@
     /* margin: 40px; */
 }
 
-.benefit-icon{
+.benefit-icon {
     margin: 20px auto;
     width: 84px;
     height: 84px;
@@ -161,18 +207,119 @@
     background-color: var(--secondary-clr-lter-purple);
 }
 
-.benefit-icon svg{
+.benefit-icon svg {
     margin: 21px auto;
     color: var(--secondary-clr-lter-blue);
 }
 
-.benefit-card h3{
+.benefit-card h3 {
     font-size: 24px;
     padding: 10px 0;
 }
 
-.benefit-card p{
+.benefit-card p {
     font-size: 20px;
     line-height: 2;
     color: var(--neutral-clr-drk-grey);
+}
+
+.benefits-container button {
+    padding: 14px 40px;
+    color: white;
+    background-color: var(--secondary-clr-lt-blue);
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 16px;
+    font-family: inherit;
+    margin: 20px auto 100px;
+}
+
+.outro-area {
+    height: 648px;
+    width: 100%;
+    /* width: 1440px; */
+    background-color: var(--secondary-clr-lter-purple);
+    display: flex;
+}
+
+.icon-boxes-area {
+    background-color: yellow;
+    width: 50%;
+    position: relative;
+    padding: 100px;
+}
+
+.icon-box {
+    width: 96px;
+    height: 96px;
+    background-color: var(--secondary-clr-ltest-blue);
+    transform: rotate(45deg);
+    border-radius: 8px;
+    /* box-shadow: 0px 20px 0px 5px black; */
+    box-shadow: 30px 0 5px -3px #888;
+}
+
+.icon-box-1 {
+    position: absolute;
+    left: calc(50% - 48px);
+}
+
+.icon-box-2 {
+    position: absolute;
+    top: 220px;
+    left: calc(25% - 48px);
+}
+
+.icon-box-3 {
+    position: absolute;
+    top: 220px;
+    left: calc(75% - 48px);
+}
+
+.icon-box-4 {
+    position: absolute;
+    top: 440px;
+    left: calc(35% - 48px);
+}
+
+.icon-box-5 {
+    position: absolute;
+    top: 440px;
+    left: calc(65% - 48px);
+}
+
+
+
+
+.call-to-action-area {
+    width: 50%;
+    /* background-color: green; */
+    padding: 152px 160px;
+
+}
+
+.call-to-action-area h1 {
+    font-size: 48px;
+    margin: 20px 0;
+}
+
+.call-to-action-area p {
+    font-size: 20px;
+    color: var(--neutral-clr-drk-grey);
+    margin: 20px 0;
+}
+
+.call-to-action-area button {
+    padding: 14px 40px;
+    color: white;
+    background-color: var(--secondary-clr-lt-blue);
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 16px;
+    font-family: inherit;
+    margin: 20px 0;
 }

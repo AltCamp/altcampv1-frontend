@@ -15,5 +15,6 @@ This PR...
 - [ ] added/updated a component
 - [ ] fixed a bug
 - [ ] added/updated a new route
+- [ ] added or changed css styles
 
 Fixes #
