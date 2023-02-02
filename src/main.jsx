@@ -10,7 +10,12 @@ import { AltStudent, Mentor, RegularStudent } from './pages'
 import { AltStudentRegister, AltStudentLogin } from './pages/auth/altStudent'
 
 // import components from RegularStudent
-import { RegularStudentRegister, RegularStudentLogin } from './pages/auth/regularStudent'
+import {
+  RegularStudentRegister,
+  RegularStudentLogin,
+  RegularStudentLoginGroup,
+  ForgotPassword
+} from './pages/auth/regularStudent'
 
 // set up router using createBrowserRouter
 const router = createBrowserRouter([
@@ -34,7 +39,17 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/regularstudent/login',
-        element: <RegularStudentLogin />
+        element: <RegularStudentLoginGroup />,
+        children: [
+          {
+            path: '/regularstudent/login/form',
+            element: <RegularStudentLogin />
+          },
+          {
+            path: '/regularstudent/login/forgotpassword',
+            element: <ForgotPassword />
+          }
+        ]
       },
       {
         path: '/regularstudent/register',
