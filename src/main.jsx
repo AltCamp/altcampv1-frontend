@@ -1,3 +1,4 @@
+import { element } from 'prop-types'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
@@ -11,9 +12,14 @@ import { AltStudentRegister, AltStudentLogin } from './pages/auth/altStudent'
 
 // import components from RegularStudent
 import { RegularStudentRegister, RegularStudentLogin } from './pages/auth/regularStudent'
+import Landing from './pages/landing/landing'
 
 // set up router using createBrowserRouter
 const router = createBrowserRouter([
+  {
+      path: '/',
+      element: <Landing />
+  },
   {
     path: '/altstudent',
     element: <AltStudent />,
@@ -28,7 +34,7 @@ const router = createBrowserRouter([
       }
     ]
   },
-  {
+   {
     path: '/regularstudent',
     element: <RegularStudent />,
     children: [
@@ -39,7 +45,7 @@ const router = createBrowserRouter([
       {
         path: '/regularstudent/register',
         element: <RegularStudentRegister />
-      }
+      },
     ]
   }
 ])

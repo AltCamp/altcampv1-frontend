@@ -3,8 +3,8 @@ import { Outlet, useNavigate, Link, NavLink } from 'react-router-dom'
 import './altStudent.css'
 import AltStudentLogin from './altStudentLogin/altStudentLogin'
 import AltStudentRegister from './altStudentRegister/altStudentRegister'
-import background from '../Assets/images/AuthBackground.png'
-import logo from '../Assets/images/Authlogo.png'
+// import background from '../Assets/images/AuthBackground.png'
+// import logo from '../Assets/images/Authlogo.png'
 
 export default function AltStudent () {
   const navigate = useNavigate();
