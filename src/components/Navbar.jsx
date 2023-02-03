@@ -7,7 +7,7 @@ const Navbar = () => {
         <nav className={styles['main-nav']}>
             <div className={styles['brand-logo']}>
                 {/* <svg> */}
-                    <img src="/studybuddy.svg" alt="" />
+                    <img src="src\assets\general\Authlogo.png" alt="" />                    
                 {/* </svg> */}
             </div>
             <div className={styles['nav-paths']}>

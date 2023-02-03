@@ -245,7 +245,7 @@
 }
 
 .icon-boxes-area {
-    background-color: yellow;
+    /* background-color: yellow; */
     width: 50%;
     position: relative;
     padding: 100px;
@@ -289,9 +289,6 @@
     top: 440px;
     left: calc(65% - 48px);
 }
-
-
-
 
 .call-to-action-area {
     width: 50%;

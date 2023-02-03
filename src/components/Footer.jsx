@@ -8,7 +8,7 @@ const Footer = () => {
     return (
         <footer className={styles['main-footer']}>
             <div className={styles['']}>
-                <img src="/studybuddy.svg" alt="" />
+                <img src="src\assets\general\Authlogo.png" alt="" />
                 <div className={styles['sm-container']}>
                     <div className={styles['sm-link-container']}>
                         <Facebook size='12' variant="Bold" />

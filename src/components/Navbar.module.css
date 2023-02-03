@@ -13,11 +13,10 @@
     z-index: 100;
 }
 
-.brand-logo {}
 
 .brand-logo img {
     width: 120px;
-    filter: invert(100%) 
+    /* filter: invert(100%)  */
 }
 
 .nav-paths {
