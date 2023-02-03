@@ -19,15 +19,13 @@
   gap: 1rem;
 }
 
-.formGroup,
-.passwordFormGroup {
+.formGroup {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-.formGroup,
-.passwordFormGroup label {
+.formGroup label {
   font-family: var(--Inter);
   color: var(--primary-clr-drkst-brown);
   font-size: 1rem;
@@ -52,6 +50,10 @@
   outline: none;
   border: 1px solid var(--primary-clr-drkst-brown);
 }
+
+/* .formGroup input::placeholder {
+  color: var(--neutral-clr-drkst-grey);
+} */
 
 .formGroup select {
   width: 100%;
@@ -97,64 +99,25 @@
 }
 
 .stepTwo {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-/* styling for password input element and show passowrd icon */
-.passwordFormGroup .inputGroup {
-  display: flex;
-  flex-direction: row;
-  gap: 0.5rem;
-  align-items: center;
-  width: 100%;
-  height: 2.5rem;
-  border: 1px solid var(--neutral-clr-grey-2);
-  border-radius: 4px;
-  box-shadow: 0px 2px 2px rgba(33, 37, 41, 0.06),
-    0px 0px 1px rgba(33, 37, 41, 0.08);
-  padding: 0.5rem;
-  font-family: var(--Inter);
-  font-size: 1rem;
-  font-weight: 400;
-  color: var(--neutral-clr-drkst-grey);
-}
-
-.passwordFormGroup .inputGroup:focus-within {
-  outline: none;
-  border: 1px solid var(--primary-clr-drkst-brown);
-}
-
-.passwordFormGroup .inputGroup input {
-  width: 100%;
-  height: 100%;
-  border: none;
-  outline: none;
-  font-family: var(--Inter);
-  font-size: 1rem;
-  font-weight: 400;
-  color: var(--neutral-clr-drkst-grey);
-}
-
-.passwordFormGroup .inputGroup .showPasswordIcon {
-  cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 .submitButton {
-  margin-top: 1rem;
-  width: 100%;
-  height: 2.5rem;
-  border: none;
-  border-radius: 4px;
-  background-color: var(--secondary-clr-lter-blue);
-  color: var(--neutral-clr-white);
-  font-family: var(--Inter);
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
+    margin-top: 1rem;
+    width: 100%;
+    height: 2.5rem;
+    border: none;
+    border-radius: 4px;
+    background-color: var(--secondary-clr-lter-blue);
+    color: var(--neutral-clr-white);
+    font-family: var(--Inter);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
 }
 
 .submitButton:hover {
-  background-color: var(--secondary-clr-drk-blue);
+    background-color: var(--secondary-clr-drk-blue);
 }
