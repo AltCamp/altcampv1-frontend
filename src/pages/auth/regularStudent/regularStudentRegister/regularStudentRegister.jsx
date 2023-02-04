@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import rglrStudRegStyle from './regularStudentRegister.module.css'
-import eyeIcon from '../../../../assets/general/eye.svg'
 
 export default function RegularStudentRegister () {
   const [enterPassword, setEnterPassword] = useState(false)
-  const [toggleShowPassword, setToggleShowPassword] = useState(false)
 
   return (
     <div className={rglrStudRegStyle.container}>
@@ -62,39 +60,23 @@ export default function RegularStudentRegister () {
 
         {enterPassword && (
           <div className={rglrStudRegStyle.stepTwo}>
-            <div className={rglrStudRegStyle.passwordFormGroup}>
+            <div className={rglrStudRegStyle.formGroup}>
               <label htmlFor='password'>Password</label>
-              <div className={rglrStudRegStyle.inputGroup}>
-                <input
-                  type={toggleShowPassword ? 'text' : 'password'}
-                  name='password'
-                  id='password'
-                  placeholder=''
-                />
-                <img
-                  src={eyeIcon}
-                  alt='showPassword'
-                  className={rglrStudRegStyle.showPasswordIcon}
-                  onClick={() => setToggleShowPassword(!toggleShowPassword)}
-                />
-              </div>
+              <input
+                type='password'
+                name='password'
+                id='password'
+                placeholder='********'
+              />
             </div>
-            <div className={rglrStudRegStyle.passwordFormGroup}>
+            <div className={rglrStudRegStyle.formGroup}>
               <label htmlFor='confirmPassword'>Confirm Password</label>
-              <div className={rglrStudRegStyle.inputGroup}>
-                <input
-                  type={toggleShowPassword ? 'text' : 'password'}
-                  name='confirmPassword'
-                  id='confirmPassword'
-                  placeholder=''
-                />
-                <img
-                  src={eyeIcon}
-                  alt='showPassword'
-                  className={rglrStudRegStyle.showPasswordIcon}
-                  onClick={() => setToggleShowPassword(!toggleShowPassword)}
-                />
-              </div>
+              <input
+                type='password'
+                name='confirmPassword'
+                id='confirmPassword'
+                placeholder='********'
+              />
             </div>
             <button type='submit' className={rglrStudRegStyle.submitButton}>
               Create Account
