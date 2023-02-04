@@ -1,7 +1,7 @@
 * {
   font-family: "Inter", sans-serif;
-  height: max-content;
-  overflow: hidden;
+  /* height: max-content; */
+  /* overflow: hidden; */
 }
 .container {
   display: flex;

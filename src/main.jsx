@@ -18,9 +18,14 @@ import { ForgotPassword, LoginGroup, UserLogin } from "./pages/auth/userLogin";
 
 // import components from Mentor
 import { MentorLogin, MentorRegister } from "./pages/auth/mentor";
+import Landing from './pages/landing/landing';
 
 // set up router using createBrowserRouter
 const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Landing />
+  },
   {
     path: "/altstudent",
     element: <AltStudent />,

@@ -1,16 +1,16 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import styles from './Navbar.module.css'
+import mainNavbarStyles from './Navbar.module.css'
 
 const Navbar = () => {
     return (
-        <nav className={styles['main-nav']}>
-            <div className={styles['brand-logo']}>
+        <nav className={mainNavbarStyles['main-nav']}>
+            <div className={mainNavbarStyles['brand-logo']}>
                 {/* <svg> */}
                     <img src="src\assets\general\Authlogo.png" alt="" />                    
                 {/* </svg> */}
             </div>
-            <div className={styles['nav-paths']}>
+            <div className={mainNavbarStyles['nav-paths']}>
                 <NavLink to={'/'}>
                     Home
                 </NavLink>
@@ -21,7 +21,7 @@ const Navbar = () => {
                     Features
                 </NavLink>
                 <NavLink to={''}>
-                    <button className={styles['get-started-btn']}>
+                    <button className={mainNavbarStyles['get-started-btn']}>
                         Get Started
                     </button>
                 </NavLink>
