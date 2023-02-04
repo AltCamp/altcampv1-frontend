@@ -43,7 +43,7 @@ const router = createBrowserRouter([
         element: <LoginGroup />,
         children: [
           {
-            path: "/regularstudent/login/form",
+            index: true,
             element: <UserLogin />,
           },
           {
@@ -53,7 +53,7 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: "/regularstudent/register",
+        index: true,
         element: <RegularStudentRegister />,
       },
     ],
