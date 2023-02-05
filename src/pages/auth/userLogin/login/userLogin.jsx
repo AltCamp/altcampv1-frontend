@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+// import { motion, AnimatePresence } from 'framer-motion'
 import { Link, Outlet } from 'react-router-dom'
 import userLoginStyle from './userLogin.module.css'
 import eyeIcon from '../../../../assets/general/eye.svg'
