@@ -1,16 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import { NavLink, Outlet, useNavigate } from 'react-router-dom'
+import React from 'react'
+import { NavLink, Outlet } from 'react-router-dom'
 import authHeroImage from '../../../assets/general/AuthBackground.webp'
 import studyBuddyLogo from '../../../assets/general/Authlogo.png'
 import rglrStudStyle from './regularStudent.module.css'
 
 export default function RegularStudent () {
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    navigate('/regularstudent/register')
-  }, [])
-
   let activeStyle = {
     color: '#212529',
     fontWeight: '700',
@@ -35,9 +29,10 @@ export default function RegularStudent () {
         <div className={rglrStudStyle.authContent}>
           <nav className=''>
             <NavLink
-              to='/regularstudent/register'
+              to='/regularstudent'
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
               className='a1'
+              end
             >
               REGISTER
             </NavLink>
