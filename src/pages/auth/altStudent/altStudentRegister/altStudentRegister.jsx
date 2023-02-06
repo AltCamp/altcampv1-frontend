@@ -2,9 +2,7 @@ import React from 'react'
 import './altStudentRegister.css'
 
 export default function AltStudentRegister() {
-  // const [continue, setContinue] = useState(false);
   return (
-    
         <div className="RegisterContainer">
             <h1 className="registerheading h1">
               Register as a student
