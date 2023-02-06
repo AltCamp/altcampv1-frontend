@@ -2,6 +2,8 @@ import landingPageStyles from './landing.module.css'
 import Navbar from '../../components/Navbar'
 import { Bubble, Convert3DCube, ReceiptSquare, Brush2, ChartCircle, TickSquare } from 'iconsax-react'
 import Footer from '../../components/Footer'
+import heroImage from '../../assets/general/Students-reading.webp'
+import heroImage2 from '../../assets/general/Team-demonstration.webp'
 
 const Landing = () => {
     return (
@@ -32,7 +34,8 @@ const Landing = () => {
                 <div className={landingPageStyles['about-us-image-area']}>
                     <div className={`${landingPageStyles['decor-box']} ${landingPageStyles['decor-box-1']}`}></div>
                     <div className={landingPageStyles['about-us-image']}>
-                        <img src="/Team-demonstration.png" alt="" />
+                        {/* <img src="/Team-demonstration.png" alt="" /> */}
+                        <img src={heroImage2} alt="" />
                     </div>
                     <div className={`${landingPageStyles['decor-box']} ${landingPageStyles['decor-box-2']}`}></div>
                 </div>
