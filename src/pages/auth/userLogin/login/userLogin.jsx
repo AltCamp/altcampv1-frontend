@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Link, Outlet } from 'react-router-dom'
+// import { motion, AnimatePresence } from 'framer-motion'
+import { Link, useLocation } from 'react-router-dom'
 import userLoginStyle from './userLogin.module.css'
 import eyeIcon from '../../../../assets/general/eye.svg'
 
 export default function UserLogin () {
     const [showPassword, setShowPassword] = useState(false)
+
+    const parentPath = useLocation().pathname.split('/')[1]
+    // console.log(parentPath)
 
   return (
     <div className={userLoginStyle.container}>
@@ -38,7 +41,7 @@ export default function UserLogin () {
           </div>
         </div>
         <button className={userLoginStyle.loginButton}>Login</button>
-        <Link to='/regularstudent/login/forgotpassword' className={userLoginStyle.forgotPassword}>
+        <Link to={`/${parentPath}/login/forgotpassword`} className={userLoginStyle.forgotPassword}>
           Forgot Password?
         </Link>
       </form>
