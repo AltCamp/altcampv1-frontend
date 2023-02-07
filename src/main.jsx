@@ -30,13 +30,6 @@ const router = createBrowserRouter([
     path: "/altstudent",
     element: <AltStudent />,
     children: [
-<<<<<<< HEAD
-=======
-      // {
-      //   path: "/altstudent/login",
-      //   element: <AltStudentLogin />,
-      // },
->>>>>>> 96f23b3fa731e6ddbfd6ecf69389b51b25e8192f
       {
         path: "/altstudent/register",
         element: <AltStudentRegister />,
