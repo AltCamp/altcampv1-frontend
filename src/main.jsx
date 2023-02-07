@@ -8,7 +8,9 @@ import "./index.css";
 import { AltStudent, Mentor, RegularStudent } from "./pages";
 
 // import components from altStudent
-import { AltStudentRegister, AltStudentLogin } from "./pages/auth/altStudent";
+
+import { AltStudentRegister } from "./pages/auth/altStudent";
+// import { AltStudentRegister, AltStudentLogin } from "./pages/auth/altStudent";
 
 // import components from RegularStudent
 import { RegularStudentRegister } from "./pages/auth/regularStudent";
@@ -30,10 +32,10 @@ const router = createBrowserRouter([
     path: "/altstudent",
     element: <AltStudent />,
     children: [
-      {
-        path: "/altstudent/login",
-        element: <AltStudentLogin />,
-      },
+      // {
+      //   path: "/altstudent/login",
+      //   element: <AltStudentLogin />,
+      // },
       {
         path: "/altstudent/register",
         element: <AltStudentRegister />,
