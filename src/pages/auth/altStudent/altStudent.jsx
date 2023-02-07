@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Outlet, useNavigate, NavLink } from "react-router-dom";
-// import altStudStyle from "./altStudent.css";
+import altStudStyle from "./altStudent.module.css";
 import authHeroImage from "../../../assets/general/AuthBackground.webp";
 import studyBuddyLogo from "../../../assets/general/Authlogo.png";
 
