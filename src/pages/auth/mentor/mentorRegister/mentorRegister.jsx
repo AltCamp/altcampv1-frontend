@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import mentorRegister from "./mentorRegister.module.css";
+import eyeIcon from '../../../../assets/general/eye.svg'
 
 export default function MentorRegister() {
   const [password, setPassword] = useState(false);
-
+    const [showPassword, setShowPassword] = useState(false)
   return (
     <div className={mentorRegister.container}>
       <h2 className={mentorRegister.heading}>Register as a Mentor</h2>
 
-      <form action="">
+      <form action="" className="form">
         {!password && (
           <div className={mentorRegister.formGroup}>
             <label htmlFor="firstName">First Name</label>
@@ -42,13 +43,15 @@ export default function MentorRegister() {
               placeholder="seun@studybuddy.com"
               required
             />
-            <input
+            <div className="continueButton">
+              <input
               onClick={() => setPassword(true)}
               type="submit"
               value="Continue"
               className={mentorRegister.continue}
               required
             />
+            </div>
           </div>
         )}
 
@@ -56,21 +59,37 @@ export default function MentorRegister() {
           <div className={mentorRegister.setPasswordContainer}>
             <div className={mentorRegister.setPassword}>
               <label htmlFor="password">Password</label>
-              <input
-                type="password"
+            <div className={mentorRegister.inputGroup}>
+                <input
+                type={showPassword ? 'text' : 'password'}
                 name="password"
                 id="password"
                 placeholder="********"
                 required
-              />
+                />
+                  <img
+              src={eyeIcon}
+              alt='eye icon'
+              className={mentorRegister.showPasswordIcon}
+              onClick={() => setShowPassword(!showPassword)}
+            />
+              </div>
               <label htmlFor="confirmPassword">Confirm Password</label>
-              <input
-                type="password"
-                name="confirmPassword"
-                id="confirmPassword"
+              <div className={mentorRegister.inputGroup}>
+                <input
+                type={showPassword ? 'text' : 'password'}
+                name="password"
+                id="password"
                 placeholder="********"
                 required
-              />
+                />
+                  <img
+              src={eyeIcon}
+              alt='eye icon'
+              className={mentorRegister.showPasswordIcon}
+              onClick={() => setShowPassword(!showPassword)}
+            />
+              </div>
               <input
                 type="submit"
                 value="Create Account"

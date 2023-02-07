@@ -1,3 +1,4 @@
+import { element } from 'prop-types'
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -17,13 +18,25 @@ import { ForgotPassword, LoginGroup, UserLogin } from "./pages/auth/userLogin";
 
 // import components from Mentor
 import { MentorLogin, MentorRegister } from "./pages/auth/mentor";
+import Landing from './pages/landing/landing';
 
 // set up router using createBrowserRouter
 const router = createBrowserRouter([
   {
+    path: '/',
+    element: <Landing />
+  },
+  {
     path: "/altstudent",
     element: <AltStudent />,
     children: [
+<<<<<<< HEAD
+=======
+      // {
+      //   path: "/altstudent/login",
+      //   element: <AltStudentLogin />,
+      // },
+>>>>>>> 96f23b3fa731e6ddbfd6ecf69389b51b25e8192f
       {
         path: "/altstudent/register",
         element: <AltStudentRegister />,
@@ -58,12 +71,12 @@ const router = createBrowserRouter([
     path: "/mentor",
     element: <Mentor />,
     children: [
-     {
+      {
         path: "/mentor/login",
         element: <LoginGroup />,
         children: [
           {
-            path: "/mentor/login/form",
+            index: true,
             element: <UserLogin />,
           },
           {
@@ -74,7 +87,7 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "/mentor/register",
+        index: true,
         element: <MentorRegister />,
       },
     ],
