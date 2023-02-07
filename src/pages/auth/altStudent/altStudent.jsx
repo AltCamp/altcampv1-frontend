@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Outlet, useNavigate, NavLink } from "react-router-dom";
-import altStudStyle from "./altStudent.css";
+import altStudStyle from "./altStudent.module.css";
 import authHeroImage from "../../../assets/general/AuthBackground.webp";
 import studyBuddyLogo from "../../../assets/general/Authlogo.png";
 
@@ -33,7 +33,7 @@ export default function AltStudent() {
       <div className={altStudStyle.Altstudentright}>
         <div className={altStudStyle.Altstudentnav}>
           <ul className={altStudStyle.navigation}>
-            <li className={altStudStyle.navigation - item}>
+            <li className={altStudStyle.navigationItem}>
               <NavLink
                 to="/altstudent/register"
                 style={({ isActive }) => {
@@ -42,18 +42,6 @@ export default function AltStudent() {
                 className={altStudStyle.link}
               >
                 Register
-              </NavLink>
-            </li>
-
-            <li className={altStudStyle.navigation - item}>
-              <NavLink
-                to="/altstudent/login"
-                style={({ isActive }) => {
-                  return isActive ? activeStyle : null;
-                }}
-                className={altStudStyle.link}
-              >
-                Login
               </NavLink>
             </li>
           </ul>
