@@ -1,3 +1,4 @@
+import { element } from 'prop-types'
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -7,7 +8,7 @@ import "./index.css";
 import { AltStudent, Mentor, RegularStudent } from "./pages";
 
 // import components from altStudent
-import { AltStudentRegister, AltStudentLogin } from "./pages/auth/altStudent";
+import { AltStudentRegister } from "./pages/auth/altStudent";
 
 // import components from RegularStudent
 import { RegularStudentRegister } from "./pages/auth/regularStudent";
@@ -17,17 +18,22 @@ import { ForgotPassword, LoginGroup, UserLogin } from "./pages/auth/userLogin";
 
 // import components from Mentor
 import { MentorLogin, MentorRegister } from "./pages/auth/mentor";
+import Landing from './pages/landing/landing';
 
 // set up router using createBrowserRouter
 const router = createBrowserRouter([
   {
+    path: '/',
+    element: <Landing />
+  },
+  {
     path: "/altstudent",
     element: <AltStudent />,
     children: [
-      {
-        path: "/altstudent/login",
-        element: <AltStudentLogin />,
-      },
+      // {
+      //   path: "/altstudent/login",
+      //   element: <AltStudentLogin />,
+      // },
       {
         path: "/altstudent/register",
         element: <AltStudentRegister />,
@@ -62,12 +68,12 @@ const router = createBrowserRouter([
     path: "/mentor",
     element: <Mentor />,
     children: [
-     {
+      {
         path: "/mentor/login",
         element: <LoginGroup />,
         children: [
           {
-            path: "/mentor/login/form",
+            index: true,
             element: <UserLogin />,
           },
           {
@@ -78,7 +84,7 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "/mentor/register",
+        index: true,
         element: <MentorRegister />,
       },
     ],
