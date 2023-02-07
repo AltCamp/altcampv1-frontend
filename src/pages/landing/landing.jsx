@@ -1,9 +1,17 @@
 import landingPageStyles from './landing.module.css'
 import Navbar from '../../components/Navbar'
-import { Bubble, Convert3DCube, ReceiptSquare, Brush2, ChartCircle, TickSquare } from 'iconsax-react'
+import { Bubble, Convert3DCube, ReceiptSquare, Brush2, ChartCircle, TickSquare, RecordCircle } from 'iconsax-react'
 import Footer from '../../components/Footer'
 import heroImage from '../../assets/general/Students-reading.webp'
 import heroImage2 from '../../assets/general/Team-demonstration.webp'
+import codeIcon from "../../assets/icons/code.png"
+import figmaIcon from "../../assets/icons/figma.png"
+import notionIcon from "../../assets/icons/notion.png"
+import pieIcon from "../../assets/icons/pie.png"
+import pythonIcon from "../../assets/icons/python.png"
+
+
+
 
 const Landing = () => {
     return (
@@ -18,7 +26,7 @@ const Landing = () => {
                         A community for Altschoolers that provides  easy access to  assistance from peers and mentors to expand your knowledge.
                     </p>
                     <button>
-                        Get Started
+                        <a href='/regularstudent/login'>Get Started</a>
                     </button>
                 </div>
             </div>
@@ -101,7 +109,7 @@ const Landing = () => {
                     </div>
                     <div className={landingPageStyles['benefit-card']}>
                         <div className={landingPageStyles['benefit-icon']}>
-
+                            <RecordCircle size="40" />
                         </div>
                         <h3>Access to Mentors</h3>
                         <p>Study Buddy has mentors that are knowledgeable in different tech careers and they give answers to any question you may have</p>
@@ -128,23 +136,34 @@ const Landing = () => {
                         <p>For Altschoolers who have learning circle, Study Buddy allows you to interact with your circle members as a group</p>
                     </div>
                     <button>
-                        Get Started
+                        <a href='/regularstudent/login'>Get Started</a>
                     </button>
                 </div>
             </div>
             <div className={landingPageStyles['outro-area']}>
                 <div className={landingPageStyles['icon-boxes-area']}>
                     <div className={`${landingPageStyles['icon-box']} ${landingPageStyles['icon-box-1']}`}>
+                        <img src={codeIcon} alt="" />
                     </div>
-                    <div className={`${landingPageStyles['icon-box']} ${landingPageStyles['icon-box-2']}`}></div>
-                    <div className={`${landingPageStyles['icon-box']} ${landingPageStyles['icon-box-3']}`}></div>
-                    <div className={`${landingPageStyles['icon-box']} ${landingPageStyles['icon-box-4']}`}></div>
-                    <div className={`${landingPageStyles['icon-box']} ${landingPageStyles['icon-box-5']}`}></div>
+                    <div className={`${landingPageStyles['icon-box']} ${landingPageStyles['icon-box-2']}`}>
+                        <img src={pieIcon} alt="" />
+                    </div>
+                    <div className={`${landingPageStyles['icon-box']} ${landingPageStyles['icon-box-3']}`}>
+                        <img src={notionIcon} alt="" />
+                    </div>
+                    <div className={`${landingPageStyles['icon-box']} ${landingPageStyles['icon-box-4']}`}>
+                        <img src={pythonIcon} alt="" />
+                    </div>
+                    <div className={`${landingPageStyles['icon-box']} ${landingPageStyles['icon-box-5']}`}>
+                        <img src={figmaIcon} alt="" />
+                    </div>
                 </div>
                 <div className={landingPageStyles['call-to-action-area']}>
                     <h1>Learn and share knowledge the easy way</h1>
                     <p>Share what you know even as you learn what you do not know in the most convenient way.</p>
-                    <button>Get Started</button>
+                    <button>
+                        <a href='/regularstudent/login'>Get Started</a>
+                    </button>
                 </div>
             </div>
 
