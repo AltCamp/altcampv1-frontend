@@ -1,16 +1,11 @@
 // import
 import React, { useEffect } from "react";
-import { Outlet, useNavigate, NavLink } from "react-router-dom";
+import { Outlet, NavLink } from "react-router-dom";
 import mentor from "./mentor.module.css";
 import logo from "../../../../src/assets/general/Authlogo.png";
 
 export default function Mentor() {
-  const navigate = useNavigate();
-  useEffect(() => {
-    navigate("/mentor/register");
-  }, []);
   let activeStyle = {
-    width: "180px",
     borderBottom: "4px solid var(--neutral-clr-deep-grey)",
   };
   return (
@@ -26,32 +21,30 @@ export default function Mentor() {
       </div>
       <div className={mentor.formGroup}>
         <div className={mentor.navbar}>
-          <ul className={mentor.nav}>
-            <li className={mentor.navItem}>
-              <NavLink
-                to="/mentor/register"
-                style={({ isActive }) => {
-                  return isActive ? activeStyle : null;
-                }}
-                className={mentor.link}
-              >
-                Register
-              </NavLink>
-            </li>
-            <li className={mentor.navItem}>
-              <NavLink
-                to="/mentor/login"
-                style={({ isActive }) => {
-                  return isActive ? activeStyle : null;
-                }}
-                className={mentor.link}
-              >
-                Login
-              </NavLink>
-            </li>
-          </ul>
+          <nav className="">
+            <NavLink
+              to="/mentor"
+              style={({ isActive }) => {
+                return isActive ? activeStyle : null;
+              }}
+              className={mentor.link}
+              end
+            >
+              Register
+            </NavLink>
+            <NavLink
+              to="/mentor/login"
+              style={({ isActive }) => {
+                return isActive ? activeStyle : null;
+              }}
+              className={mentor.link}
+            >
+              Login
+            </NavLink>
+          </nav>
+
+          <Outlet />
         </div>
-        <Outlet />
       </div>
     </div>
   );

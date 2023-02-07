@@ -8,9 +8,7 @@ import "./index.css";
 import { AltStudent, Mentor, RegularStudent } from "./pages";
 
 // import components from altStudent
-
 import { AltStudentRegister } from "./pages/auth/altStudent";
-// import { AltStudentRegister, AltStudentLogin } from "./pages/auth/altStudent";
 
 // import components from RegularStudent
 import { RegularStudentRegister } from "./pages/auth/regularStudent";
@@ -75,7 +73,7 @@ const router = createBrowserRouter([
         element: <LoginGroup />,
         children: [
           {
-            path: "/mentor/login/form",
+            index: true,
             element: <UserLogin />,
           },
           {
@@ -86,7 +84,7 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "/mentor/register",
+        index: true,
         element: <MentorRegister />,
       },
     ],
