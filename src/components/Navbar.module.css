@@ -37,7 +37,7 @@
 
 .get-started-btn{
     padding: 14px 40px;
-    color: white;
+    color: #fff;
     background-color: var(--secondary-clr-lt-blue);
     border: none;
     outline: none;
@@ -45,4 +45,9 @@
     font-weight: bold;
     font-size: 16px;
     font-family: inherit;
+}
+
+.get-started-btn:hover{
+color: var(--secondary-clr-lt-blue);
+background-color: white;
 }

@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import { faGithubAlt, faGoogle, faFacebook, faTwitter, faLinkedin, faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons'
 import { Facebook, Instagram, Twitch, Youtube } from 'iconsax-react'
 
 import mainFooterStyles from './Footer.module.css'
@@ -11,19 +11,19 @@ const Footer = () => {
                 <img src="src\assets\general\Authlogo.png" alt="" />
                 <div className={mainFooterStyles['sm-container']}>
                     <div className={mainFooterStyles['sm-link-container']}>
-                        <Facebook size='12' variant="Bold" />
-                    </div>
-                    <div className={mainFooterStyles['sm-link-container']}>
-                        <Facebook size='12' variant="Bold" />
-                    </div>
-                    <div className={mainFooterStyles['sm-link-container']}>
                         <Youtube size='12' variant="Bold" />
                     </div>
                     <div className={mainFooterStyles['sm-link-container']}>
-                        <Instagram size='12' />
+                    <FontAwesomeIcon icon={faLinkedin} />
                     </div>
                     <div className={mainFooterStyles['sm-link-container']}>
-                        <FontAwesomeIcon icon={faEnvelope} />
+                    <FontAwesomeIcon icon={faFacebookF} />
+                    </div>
+                    <div className={mainFooterStyles['sm-link-container']}>
+                    <FontAwesomeIcon icon={faInstagram} />
+                    </div>
+                    <div className={mainFooterStyles['sm-link-container']}>
+                        <FontAwesomeIcon icon={faTwitter} />
                     </div>
                 </div>
                 <p>© 2022 - 2023</p>
