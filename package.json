@@ -2,7 +2,7 @@
   "name": "studybuddyv1",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://gitname.github.io/react-gh-pages",
+  "homepage": "https://StudyBuddyv1.github.io/studybuddyv1-frontend",
   "type": "module",
   "scripts": {
     "predeploy": "npm run build",
