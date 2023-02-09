@@ -43,7 +43,7 @@ export default function MentorRegister() {
               placeholder="seun@studybuddy.com"
               required
             />
-            <div className="continueButton">
+            <div className={mentorRegister.continueButton}>
               <input
               onClick={() => setPassword(true)}
               type="submit"
