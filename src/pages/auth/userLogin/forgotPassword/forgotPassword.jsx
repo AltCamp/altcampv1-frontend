@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import OtpInput from 'react-otp-input'
+// import OtpInput from 'react-otp-input'
 import fgtPassStyle from './forgotPassword.module.css'
 import eyeIcon from '../../../../assets/general/eye.svg'
 
