@@ -63,14 +63,12 @@ select {
 
 .continue {
   width: 100%;
-  height: 2.5rem;
-  border: none;
   align-items: center;
+  padding: 0.5rem;
   background: var(--secondary-clr-lter-blue);
   border-radius: 0.25rem;
-  font-weight: 500;
-  font-size: 1rem;
-  line-height: 1.75rem;
+  font-weight: 700;
+  font-size: 1.125rem;
   letter-spacing: 0.025rem;
   text-transform: capitalize;
   color: var(--neutral-clr-white) !important;
