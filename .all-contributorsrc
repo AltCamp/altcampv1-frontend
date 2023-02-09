@@ -23,6 +23,24 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "vader-js",
+      "name": "Ayomide Shittu",
+      "avatar_url": "https://avatars.githubusercontent.com/u/100224192?v=4",
+      "profile": "https://github.com/vader-js",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Watermelon-Sugar",
+      "name": "Iyiola Oluwaseyi",
+      "avatar_url": "https://avatars.githubusercontent.com/u/60761852?v=4",
+      "profile": "https://github.com/Watermelon-Sugar",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
