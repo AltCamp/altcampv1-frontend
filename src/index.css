@@ -1,105 +1,65 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 :root {
-    /* fonts variables */
-    --Inter: "Inter", sans-serif;
+  /* fonts variables */
+  --Inter: "Inter", sans-serif;
 
-    /* Color Variables (Using Figma Assets) */
+  /* Color Variables (Using Figma Assets) */
 
-    /* Primary Colors */
-    --primary-clr-black: #333130;
-    --primary-clr-drkst-brown: #55524f;
-    --primary-clr-drker-brown: #807b77;
-    --primary-clr-drk-brown: #aaa49f;
-    --primary-clr-lt-brown: #d4cdc6;
-    --primary-clr-pink-1: #f7f2ed;
-    --primary-clr-pink-2: #fff7f1;
-    --primary-clr-pink-3: #fff9f4;
-    --primary-clr-pink-4: #fffaf6;
+  /* Primary Colors */
+  --primary-clr-black: #333130;
+  --primary-clr-drkst-brown: #55524f;
+  --primary-clr-drker-brown: #807b77;
+  --primary-clr-drk-brown: #aaa49f;
+  --primary-clr-lt-brown: #d4cdc6;
+  --primary-clr-pink-1: #f7f2ed;
+  --primary-clr-pink-2: #fff7f1;
+  --primary-clr-pink-3: #fff9f4;
+  --primary-clr-pink-4: #fffaf6;
 
-    /* Neutral Colors */
-    --neutral-clr-black: #000;
-    --neutral-clr-white: #fff;
+  /* Neutral Colors */
+  --neutral-clr-black: #000;
+  --neutral-clr-white: #fff;
 
-    --neutral-clr-deep-grey: #212529;
-    --neutral-clr-drkst-grey: #343a40;
-    --neutral-clr-drker-grey: #495057;
-    --neutral-clr-drk-grey: #6c757d;
-    --neutral-clr-grey-1: #adb5bd;
-    --neutral-clr-grey-2: #ced4da;
-    --neutral-clr-lt-grey: #dee2e6;
-    --neutral-clr-lter-grey: #e9ecef;
-    --neutral-clr-ltest-grey: #f8f9fa;
+  --neutral-clr-deep-grey: #212529;
+  --neutral-clr-drkst-grey: #343a40;
+  --neutral-clr-drker-grey: #495057;
+  --neutral-clr-drk-grey: #6c757d;
+  --neutral-clr-grey-1: #adb5bd;
+  --neutral-clr-grey-2: #ced4da;
+  --neutral-clr-lt-grey: #dee2e6;
+  --neutral-clr-lter-grey: #e9ecef;
+  --neutral-clr-ltest-grey: #f8f9fa;
 
-    /* Secondary Colors */
-    --secondary-clr-deep-blue: #151631;
-    --secondary-clr-drkst-blue: #232552;
-    --secondary-clr-drkr-blue: #35377a;
-    --secondary-clr-drk-blue: #474aa3;
-    --secondary-clr-lt-blue: #585ccc;
-    --secondary-clr-lter-blue: #6a6ff5;
-    --secondary-clr-ltest-blue: #8387f7;
-    --secondary-clr-lt-purple: #9c9ff8;
-    --secondary-clr-lter-purple: #cdcffc;
+  /* Secondary Colors */
+  --secondary-clr-deep-blue: #151631;
+  --secondary-clr-drkst-blue: #232552;
+  --secondary-clr-drkr-blue: #35377a;
+  --secondary-clr-drk-blue: #474aa3;
+  --secondary-clr-lt-blue: #585ccc;
+  --secondary-clr-lter-blue: #6a6ff5;
+  --secondary-clr-ltest-blue: #8387f7;
+  --secondary-clr-ltester-blue: #f0f1fe;
+  --secondary-clr-lt-purple: #9c9ff8;
+  --secondary-clr-lter-purple: #cdcffc;
 }
+
+/* secondary-blue-100 #F0F1FE */
+/* spacing between Benefit and items below */
 
 body {
-    padding-top: 80px;
-    font-family: var(--Inter);
+  /* padding-top: 80px; */
+  font-family: var(--Inter);
 }
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 .container {
-    width: 100%;
-    max-width: 1440px;
-    margin: 0 auto;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
-
-/* custom font classes */
-/* desktop screens styles */
-/* .h1 {
-    font-family: var(--InterThin);
-    font-size: 3.75rem;
-    font-weight: 700;
-}
-
-.h2 {
-    font-family: var(--InterThin);
-    font-size: 3rem;
-    font-weight: 700;
-}
-
-.h3 {
-    font-family: var(--InterThin);
-    font-size: 1.625rem;
-    font-weight: 700;
-}
-
-.subtitle1 {
-    font-family: var(--InterThin);
-    font-size: 2.5rem;
-    font-weight: 400;
-}
-
-.subtitle2 {
-    font-family: var(--InterThin);
-    font-size: 1.125rem;
-    font-weight: 700;
-}
-
-.p_bold {
-    font-family: var(--InterThin);
-    font-size: 1.125rem;
-    font-weight: 700;
-}
-
-.p_regular {
-    font-family: var(--InterThin);
-    font-size: 1.125rem;
-    font-weight: 500;
-} */
