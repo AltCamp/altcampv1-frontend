@@ -7,7 +7,8 @@ import studyBuddyLogo from "../../../assets/general/Authlogo.png";
 export default function AltStudent() {
 
   let activeStyle = {
-    borderBottom: "3px solid #212529",
+    borderBottom: "4px solid var(--secondary-clr-lter-blue)",
+    color: "var(--secondary-clr-lter-blue)"
   };
 
   return (
