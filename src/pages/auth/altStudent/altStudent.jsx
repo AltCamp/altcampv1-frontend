@@ -11,21 +11,21 @@ export default function AltStudent() {
   };
 
   return (
-    <div className={altStudStyle["AltstudentContainer"]}>
-      <div className={altStudStyle["AltstudentLeft"]}>
-        <div className={altStudStyle["AltstudentImage"]}>
+    <div className={altStudStyle["altstudentContainer"]}>
+      <div className={altStudStyle["altstudentLeft"]}>
+        <div className={altStudStyle["altstudentImage"]}>
           <img src={authHeroImage} alt="background" />
         </div>
-        <div className={altStudStyle["AltstudentLogo"]}>
+        <div className={altStudStyle["altstudentLogo"]}>
           <img src={studyBuddyLogo} alt="logo" />
-          <p className={altStudStyle["AltstudentParagraph"]}>
+          <p className={altStudStyle["altstudentParagraph"]}>
             Learning made easy and interesting.Share what you know and learn
             what you don't.
           </p>
         </div>
       </div>
-      <div className={altStudStyle["AltstudentRight"]}>
-        <div className={altStudStyle["AltstudentNav"]}>
+      <div className={altStudStyle["altstudentRight"]}>
+        <div className={altStudStyle["altstudentNav"]}>
           <ul className={altStudStyle["navigation"]}>
             <li className={altStudStyle["navigationItem"]}>
               <NavLink

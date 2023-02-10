@@ -1,33 +1,33 @@
-.AltstudentContainer{
+.altstudentContainer{
     height: 100vh;
     width: 100vw;
     display: flex;
 }
-.AltstudentLeft{
+.altstudentLeft{
     flex: 1;
     width: 100%;
     height: 100%;
 }
-.AltstudentRight{
+.altstudentRight{
     flex: 1;
     width: 100%;
     height: 100%;
-    padding: 0 2%;
+    padding: 1.5% 2%;
 }
-.AltstudentImage{
+.altstudentImage{
     height: 100%;
     width: 100%;
     position: relative;
     background: linear-gradient(200.44deg, rgba(35,37,82,0.7) 16.41%, rgba(35,37,82,0.5) 77.16%);
 }
-.AltstudentImage img{
+.altstudentImage img{
     width: 100%;
     height: 100vh;
     object-fit: cover;
     position: relative;
     z-index: -1; 
 }
-.AltstudentLogo{
+.altstudentLogo{
    position: absolute;
    top: 40%;
    width: 50%;
@@ -37,16 +37,16 @@
    align-items: center;
    
 }
-.AltstudentLogo img{
+.altstudentLogo img{
     margin-bottom: 20px;
 }
-.AltstudentParagraph{
+.altstudentParagraph{
     width: 370px;
     font-size: 18px;
     line-height: 36px;
     color: #FFFFFF;
 }
-.AltstudentNav{
+.altstudentNav{
     width: 100%;
     height: 48px;
    
