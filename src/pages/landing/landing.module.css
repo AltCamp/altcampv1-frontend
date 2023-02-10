@@ -1,12 +1,19 @@
+button a{
+    text-decoration: none;
+    color: inherit;
+}
+button:hover{
+    transform: scale(0.98);
+}
+
 .intro-area {
     width: 100%;
     height: 720px;
-    /* background-image: url('/Students-reading.png'); */
     background-image :linear-gradient(
         rgba(0, 0, 0, 0.6), 
         rgba(0, 0, 0, 0.6)
       ),
-      url('/Students-reading.png');
+      url('../../assets/general/Students-reading.webp');
     background-repeat: no-repeat;
     background-size: cover;
     text-align: center;
@@ -47,7 +54,7 @@
 }
 
 .about-us-area {
-    background-color: var(--secondary-clr-lter-purple);
+    background-color: var(--secondary-clr-ltester-blue);
     height: 968px;
     /* width: 1200px; */
     padding: 100px calc((100% - 1200px)/2) 400px;
@@ -131,6 +138,7 @@
     color: white;
     text-align: center;
     font-size: 40px;
+    margin-bottom: 50px;
 }
 
 .tracks-container {
@@ -139,7 +147,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-    row-gap: 50px;
+    /* row-gap: 5px; */
 }
 
 
@@ -169,14 +177,16 @@
 
 .benefits-area h5 {
     font-size: 16px;
-    color: var(--neutral-clr-drkst-grey);
+    color: var(--primary-clr-drker-brown);
     text-align: center;
+    margin-bottom: 10px;
 }
 
 .benefits-area h2 {
     font-size: 40px;
     color: var(--neutral-clr-drkst-grey);
     text-align: center;
+    margin-bottom: 40px;
 }
 
 .benefits-container {
@@ -193,7 +203,7 @@
     height: 442px;
     text-align: center;
     padding: 30px;
-    box-shadow: 0px 0px 5px 0.8px rgba(95, 94, 94, 0.5);
+    box-shadow: 0px 2px 12px rgba(86, 86, 86, 0.15);
     border-radius: 10px;
     margin: 30px 0;
     /* margin: 40px; */
@@ -204,7 +214,7 @@
     width: 84px;
     height: 84px;
     border-radius: 50%;
-    background-color: var(--secondary-clr-lter-purple);
+    background-color: var(--secondary-clr-ltester-blue);
 }
 
 .benefit-icon svg {
@@ -240,55 +250,19 @@
     height: 648px;
     width: 100%;
     /* width: 1440px; */
-    background-color: var(--secondary-clr-lter-purple);
+    background-color: var(--secondary-clr-ltester-blue);
     display: flex;
 }
 
 .icon-boxes-area {
     /* background-color: yellow; */
     width: 50%;
-    position: relative;
-    padding: 100px;
+    display: flex;
+    justify-content: center;
+    /* position: relative; */
+    padding: 50px;
 }
 
-.icon-box {
-    width: 96px;
-    height: 96px;
-    background-color: var(--secondary-clr-ltest-blue);
-    transform: rotate(45deg);
-    border-radius: 8px;
-    /* box-shadow: 0px 20px 0px 5px black; */
-    box-shadow: 30px 0 5px -3px #888;
-}
-
-.icon-box-1 {
-    position: absolute;
-    left: calc(50% - 48px);
-}
-
-.icon-box-2 {
-    position: absolute;
-    top: 220px;
-    left: calc(25% - 48px);
-}
-
-.icon-box-3 {
-    position: absolute;
-    top: 220px;
-    left: calc(75% - 48px);
-}
-
-.icon-box-4 {
-    position: absolute;
-    top: 440px;
-    left: calc(35% - 48px);
-}
-
-.icon-box-5 {
-    position: absolute;
-    top: 440px;
-    left: calc(65% - 48px);
-}
 
 .call-to-action-area {
     width: 50%;

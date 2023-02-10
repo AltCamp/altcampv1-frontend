@@ -6,9 +6,7 @@ const Navbar = () => {
     return (
         <nav className={mainNavbarStyles['main-nav']}>
             <div className={mainNavbarStyles['brand-logo']}>
-                {/* <svg> */}
                     <img src="src\assets\general\Authlogo.png" alt="" />                    
-                {/* </svg> */}
             </div>
             <div className={mainNavbarStyles['nav-paths']}>
                 <NavLink to={'/'}>
@@ -20,7 +18,7 @@ const Navbar = () => {
                 <NavLink to={''}>
                     Features
                 </NavLink>
-                <NavLink to={''}>
+                <NavLink to={'/regularstudent/login'}>
                     <button className={mainNavbarStyles['get-started-btn']}>
                         Get Started
                     </button>
