@@ -51,7 +51,6 @@
 }
 
 .authSection {
-  /* left: 50%; */
   width: 50%;
   padding: 1rem;
   display: flex;
@@ -82,5 +81,4 @@
   align-items: center;
   text-decoration: none;
   border-bottom: 4px solid var(--neutral-clr-lt-grey);
-  /* border-radius: 4px; */
 }
