@@ -1,51 +1,53 @@
-import React, { useEffect } from "react";
-import { Outlet, useNavigate, NavLink } from "react-router-dom";
-<<<<<<< HEAD
+import React from "react";
+import { Outlet, NavLink } from "react-router-dom";
 import altStudStyle from "./altStudent.module.css";
-=======
-// import altStudStyle from "./altStudent.css";
->>>>>>> 96f23b3fa731e6ddbfd6ecf69389b51b25e8192f
 import authHeroImage from "../../../assets/general/AuthBackground.webp";
 import studyBuddyLogo from "../../../assets/general/Authlogo.png";
 
 export default function AltStudent() {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    navigate("/altstudent/register");
-  }, []);
 
   let activeStyle = {
-    textDecoration: "none",
-    color: "black",
+    borderBottom: "3px solid #212529",
   };
 
   return (
-    <div className={altStudStyle.AltstudentContainer}>
-      <div className={altStudStyle.Altstudentleft}>
-        <div className={altStudStyle.Altstudentimage}>
+    <div className={altStudStyle["AltstudentContainer"]}>
+      <div className={altStudStyle["AltstudentLeft"]}>
+        <div className={altStudStyle["AltstudentImage"]}>
           <img src={authHeroImage} alt="background" />
         </div>
-        <div className={altStudStyle.Altstudentlogo}>
+        <div className={altStudStyle["AltstudentLogo"]}>
           <img src={studyBuddyLogo} alt="logo" />
-          <p className={altStudStyle.Altstudentparagraph}>
+          <p className={altStudStyle["AltstudentParagraph"]}>
             Learning made easy and interesting.Share what you know and learn
             what you don't.
           </p>
         </div>
       </div>
-      <div className={altStudStyle.Altstudentright}>
-        <div className={altStudStyle.Altstudentnav}>
-          <ul className={altStudStyle.navigation}>
-            <li className={altStudStyle.navigationItem}>
+      <div className={altStudStyle["AltstudentRight"]}>
+        <div className={altStudStyle["AltstudentNav"]}>
+          <ul className={altStudStyle["navigation"]}>
+            <li className={altStudStyle["navigationItem"]}>
               <NavLink
-                to="/altstudent/register"
+                to="/altstudent"
                 style={({ isActive }) => {
                   return isActive ? activeStyle : null;
                 }}
-                className={altStudStyle.link}
+                className={altStudStyle["link"]}
+                end
               >
                 Register
+              </NavLink>
+            </li>
+            <li className={altStudStyle["navigationItem"]}>
+              <NavLink
+                to="/altstudent/login"
+                style={({ isActive }) => {
+                  return isActive ? activeStyle : null;
+                }}
+                className={altStudStyle["link"]}
+              >
+                LOGIN
               </NavLink>
             </li>
           </ul>

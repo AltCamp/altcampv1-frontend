@@ -1,4 +1,4 @@
-.RegisterContainer{
+.registerContainer{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -7,15 +7,15 @@
     height: 100%;
     padding: 0 10%;
 }
-.registerheading{
+.registerHeading{
     font-weight: 600;
     font-size: 40px;
     line-height: 64px;
 }
-.registerform{
+.registerForm{
     width: 100%;
 }
-.registerform form{
+.registerForm form{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -23,7 +23,7 @@
     width: 100%;
     margin-top: 20px;
 }
-.registerform form input, select{
+.registerForm form input, select{
     width: 100%;
     height: 50px;
     border: 1px solid #E5E5E5;
@@ -31,7 +31,7 @@
     padding: 10px 12px 10px 16px;
     margin-bottom: 20px;
 }
-.registerform form label{
+.registerForm form label{
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;

@@ -1,13 +1,13 @@
 import React from 'react'
-import './altStudentRegister.css'
+import altStudReg from './altStudentRegister.module.css'
 
 export default function AltStudentRegister() {
   return (
-        <div className="RegisterContainer">
-            <h1 className="registerheading h1">
+        <div className={altStudReg["registerContainer"]}>
+            <h1 className={altStudReg["registerHeading h1"]}>
               Register as a student
             </h1>
-            <div className="registerform">
+            <div className={altStudReg["registerForm"]}>
               <form action="">
                 <label htmlFor="FirstName">First Name</label>
                 <input type="text" name="FirstName" id="FirstName" placeholder='Seun'/>
@@ -23,7 +23,7 @@ export default function AltStudentRegister() {
                 <input type="text" name="studentNumber" id="studentNumber" placeholder='ALT/2020/0001'/>
                 <label htmlFor="email">Email Address</label>
                 <input type="email" name="email" id="email" placeholder='seun@gmail.com'/>
-                <input type="submit" value="Continue" className='submit' />
+                <input type="submit" value="Continue" className={altStudReg['submit']} />
               </form>
             </div>
         </div>

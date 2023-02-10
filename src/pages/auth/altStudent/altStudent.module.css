@@ -3,35 +3,31 @@
     width: 100vw;
     display: flex;
 }
-.Altstudentleft{
+.AltstudentLeft{
     flex: 1;
     width: 100%;
     height: 100%;
 }
-.Altstudentright{
+.AltstudentRight{
     flex: 1;
     width: 100%;
     height: 100%;
-    padding: 2%;
+    padding: 0 2%;
 }
-.Altstudentimage{
+.AltstudentImage{
     height: 100%;
     width: 100%;
     position: relative;
-    /* filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)); */
-    /* background: #232552;  */
-    /* background: rgb(35,37,82); */
-    /* opacity: 0.7; */
     background: linear-gradient(200.44deg, rgba(35,37,82,0.7) 16.41%, rgba(35,37,82,0.5) 77.16%);
 }
-.Altstudentimage img{
+.AltstudentImage img{
     width: 100%;
     height: 100vh;
     object-fit: cover;
     position: relative;
     z-index: -1; 
 }
-.Altstudentlogo{
+.AltstudentLogo{
    position: absolute;
    top: 40%;
    width: 50%;
@@ -41,16 +37,16 @@
    align-items: center;
    
 }
-.Altstudentlogo img{
+.AltstudentLogo img{
     margin-bottom: 20px;
 }
-.Altstudentparagraph{
+.AltstudentParagraph{
     width: 370px;
     font-size: 18px;
     line-height: 36px;
     color: #FFFFFF;
 }
-.Altstudentnav{
+.AltstudentNav{
     width: 100%;
     height: 48px;
    
@@ -70,29 +66,16 @@
     text-align: center;
 }
 .link{
-    font-family: 'Inter';
+    font-family: var(--Inter);
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
     line-height: 40px;
     text-transform: uppercase;
     text-decoration: none;
-    position: relative;
     width: 100%;
     height: 100%;
     display: inline-block;
     color: black;
-}
-.link::after{
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: rgb(210, 208, 208);
-    z-index: -1;
-}
-.active::after{
-    background: black;
+    border-bottom: 3px solid var(--neutral-clr-lt-grey);
 }
