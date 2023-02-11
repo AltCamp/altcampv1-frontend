@@ -6,9 +6,9 @@ import rglrStudStyle from './regularStudent.module.css'
 
 export default function RegularStudent () {
   let activeStyle = {
-    color: '#212529',
+    color: '#6a6ff5',
     fontWeight: '700',
-    borderBottom: '4px solid #212529'
+    borderBottom: '4px solid #6a6ff5'
   }
 
   return (
