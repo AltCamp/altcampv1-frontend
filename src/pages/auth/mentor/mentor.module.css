@@ -82,3 +82,22 @@
   font-weight: 700;
   color: var(--neutral-clr-deep-grey);
 }
+/** mobile view **/
+@media (max-width: 768px) {
+  .background{
+    background-image: none;
+    display: none;
+  }
+
+  .container {
+    display: block;
+  }
+
+  .formGroup {
+    width: 100%;
+  }
+
+  .navbar {
+    margin-top: 0;
+  }
+}
