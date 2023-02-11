@@ -1,6 +1,6 @@
 # Studybuddyv1-frontend
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ## About StudyBuddy
@@ -27,10 +27,11 @@ This project is licensed under the MIT License - see the [LICENSE](/LICENSE) fil
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://boyei.tech/"><img src="https://avatars.githubusercontent.com/u/74235313?v=4?s=100" width="100px;" alt="Samuel Adeboye Folaranmi"/><br /><sub><b>Samuel Adeboye Folaranmi</b></sub></a><br /><a href="https://github.com/StudyBuddyv1/studybuddyv1-frontend/commits?author=Boye95" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://boyei.tech/"><img src="https://avatars.githubusercontent.com/u/74235313?v=4?s=100" width="100px;" alt="Samuel Adeboye Folaranmi"/><br /><sub><b>Samuel Adeboye Folaranmi</b></sub></a><br /><a href="#maintenance-Boye95" title="Maintenance">🚧</a> <a href="https://github.com/StudyBuddyv1/studybuddyv1-frontend/commits?author=Boye95" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Yinkajay"><img src="https://avatars.githubusercontent.com/u/61986054?v=4?s=100" width="100px;" alt="Yínx"/><br /><sub><b>Yínx</b></sub></a><br /><a href="https://github.com/StudyBuddyv1/studybuddyv1-frontend/commits?author=Yinkajay" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/vader-js"><img src="https://avatars.githubusercontent.com/u/100224192?v=4?s=100" width="100px;" alt="Ayomide Shittu"/><br /><sub><b>Ayomide Shittu</b></sub></a><br /><a href="https://github.com/StudyBuddyv1/studybuddyv1-frontend/commits?author=vader-js" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Watermelon-Sugar"><img src="https://avatars.githubusercontent.com/u/60761852?v=4?s=100" width="100px;" alt="Iyiola Oluwaseyi"/><br /><sub><b>Iyiola Oluwaseyi</b></sub></a><br /><a href="https://github.com/StudyBuddyv1/studybuddyv1-frontend/commits?author=Watermelon-Sugar" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/just-talis"><img src="https://avatars.githubusercontent.com/u/93126974?v=4?s=100" width="100px;" alt="Esther Simon"/><br /><sub><b>Esther Simon</b></sub></a><br /><a href="https://github.com/StudyBuddyv1/studybuddyv1-frontend/commits?author=just-talis" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
