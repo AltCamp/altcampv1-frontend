@@ -1,9 +1,8 @@
 .container {
-  margin-top: 3rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .heading {
@@ -135,4 +134,17 @@ select {
   color: var(--neutral-clr-white);
   margin-top: 2.5rem;
   cursor: pointer;
+}
+
+@media (max-width: 425px) {
+  .heading {
+    font-size: 1.7rem;
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .heading {
+    font-size: 1.25rem;
+  }
 }
