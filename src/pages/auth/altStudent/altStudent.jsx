@@ -26,6 +26,7 @@ export default function AltStudent() {
         </div>
       </div>
       <div className={altStudStyle["altstudentRight"]}>
+        <div className={altStudStyle["rightDetails"]}>
         <div className={altStudStyle["altstudentNav"]}>
           <ul className={altStudStyle["navigation"]}>
             <li className={altStudStyle["navigationItem"]}>
@@ -54,6 +55,7 @@ export default function AltStudent() {
           </ul>
         </div>
         <Outlet />
+        </div>
       </div>
     </div>
   );
