@@ -4,7 +4,7 @@ import altStudReg from './altStudentRegister.module.css'
 export default function AltStudentRegister() {
   return (
         <div className={altStudReg["registerContainer"]}>
-            <h1 className={altStudReg["registerHeading h1"]}>
+            <h1 className={altStudReg["registerHeading"]}>
               Register as a student
             </h1>
             <div className={altStudReg["registerForm"]}>
