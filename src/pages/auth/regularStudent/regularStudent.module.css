@@ -52,10 +52,11 @@
 
 .authSection {
   width: 50%;
-  padding: 1rem;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  /* gap: 2rem; */
 }
 
 .authContent {
@@ -63,6 +64,10 @@
   height: 90%;
   display: flex;
   flex-direction: column;
+}
+
+.mobileLogo {
+  display: none;
 }
 
 .authContent nav {
@@ -81,4 +86,32 @@
   align-items: center;
   text-decoration: none;
   border-bottom: 4px solid var(--neutral-clr-lt-grey);
+}
+
+/** mobile view **/
+
+@media (max-width: 1000px) {
+  .container {
+    display: flex;
+    overflow: auto;
+  }
+
+  .hero {
+    display: none;
+  }
+
+  .authSection {
+    width: 100%;
+  }
+
+  .mobileLogo {
+    display: flex;
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 650px) {
+  .authContent {
+    width: 90%;
+  }
 }
