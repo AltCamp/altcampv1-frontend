@@ -89,38 +89,47 @@
   border-bottom: 4px solid var(--neutral-clr-lt-grey);
 }
 
+.mobileLogo{
+  display: none;
+}
+
 /* Mobile View */
 
 @media (max-width: 1000px) {
-  .altstudentImage img,
-  .altstudentImage,
-  .altstudentLogo,
-  .altstudentLogo img,
-  .altstudentParagraph,
   .altstudentLeft {
     display: none;
   }
-}
+  .altstudentRight{
+    padding-top: 2rem;
 
-@media (max-width: 425px) {
-  .altstudentImage img,
-  .altstudentImage,
-  .altstudentLogo,
-  .altstudentLogo img,
-  .altstudentParagraph,
-  .altstudentLeft {
-    display: none;
+  }
+  .altstudentContainer{
+    display: block;
+    overflow: auto;
   }
 
+  .mobileLogo{
+    display: flex;
+    justify-content: center;
+    padding: 20px 0px;
+  }
+
+  .rightDetails{
+    width: 90%;
+  }
 }
+
 
  @media (max-width: 425px) {
-  .altstudentImage img,
-  .altstudentImage,
-  .altstudentLogo,
-  .altstudentLogo img,
-  .altstudentParagraph,
   .altstudentLeft{
     display: none;
+  }
+  .rightDetails{
+    width: 97%;
+  }
+
+  .altstudentRight{
+    padding: 1.5rem;
+
   }
 } 

@@ -53,3 +53,18 @@ select {
   font-size: 1rem;
   color: #ffffff;
 }
+
+/* Mobile View */
+
+@media (max-width: 425px){
+  .registerHeading{
+    font-size: 1.7rem;
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 320px){
+  .registerHeading{
+    font-size: 1.25rem;
+  }
+}

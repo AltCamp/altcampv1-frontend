@@ -119,3 +119,11 @@
   text-decoration: none;
   cursor: pointer;
 }
+
+/* Responsive screens */
+
+@media screen and (max-width: 600px) {
+  .header {
+    font-size: 1.5rem;
+  }
+}
