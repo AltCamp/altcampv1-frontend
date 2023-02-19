@@ -1,6 +1,6 @@
 # Studybuddyv1-frontend
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ## About StudyBuddy
@@ -32,6 +32,7 @@ This project is licensed under the MIT License - see the [LICENSE](/LICENSE) fil
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/vader-js"><img src="https://avatars.githubusercontent.com/u/100224192?v=4?s=100" width="100px;" alt="Ayomide Shittu"/><br /><sub><b>Ayomide Shittu</b></sub></a><br /><a href="https://github.com/StudyBuddyv1/studybuddyv1-frontend/commits?author=vader-js" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Watermelon-Sugar"><img src="https://avatars.githubusercontent.com/u/60761852?v=4?s=100" width="100px;" alt="Iyiola Oluwaseyi"/><br /><sub><b>Iyiola Oluwaseyi</b></sub></a><br /><a href="https://github.com/StudyBuddyv1/studybuddyv1-frontend/commits?author=Watermelon-Sugar" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/just-talis"><img src="https://avatars.githubusercontent.com/u/93126974?v=4?s=100" width="100px;" alt="Esther Simon"/><br /><sub><b>Esther Simon</b></sub></a><br /><a href="https://github.com/StudyBuddyv1/studybuddyv1-frontend/commits?author=just-talis" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Dozzy91"><img src="https://avatars.githubusercontent.com/u/49005814?v=4?s=100" width="100px;" alt="Azu Chidozie"/><br /><sub><b>Azu Chidozie</b></sub></a><br /><a href="https://github.com/StudyBuddyv1/studybuddyv1-frontend/commits?author=Dozzy91" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
