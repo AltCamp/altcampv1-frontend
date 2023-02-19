@@ -3,6 +3,7 @@ import { Outlet, NavLink } from "react-router-dom";
 import altStudStyle from "./altStudent.module.css";
 import authHeroImage from "../../../assets/general/AuthBackground.webp";
 import studyBuddyLogo from "../../../assets/general/Authlogo.png";
+import mobileLogo from "../../../assets/general/AuthBlackLogo.png"
 
 export default function AltStudent() {
 
@@ -13,6 +14,7 @@ export default function AltStudent() {
 
   return (
     <div className={altStudStyle["altstudentContainer"]}>
+    <div className={altStudStyle["mobileLogo"]}><img src={mobileLogo} /></div>
       <div className={altStudStyle["altstudentLeft"]}>
         <div className={altStudStyle["altstudentImage"]}>
           <img src={authHeroImage} alt="background" />
