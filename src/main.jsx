@@ -20,6 +20,9 @@ import { ForgotPassword, LoginGroup, UserLogin } from "./pages/auth/userLogin";
 import { MentorRegister } from "./pages/auth/mentor";
 import Landing from './pages/landing/landing';
 
+import Layout from './pages/dashboard/layout/layout'	
+
+
 // set up router using createBrowserRouter
 const router = createBrowserRouter([
   {
@@ -99,6 +102,19 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    element: <Layout />,
+    children: [
+      {
+        path: "/forum",
+        element: <div>Forum</div>,
+      },
+      {
+        path: "/topics",
+        element: <div>TOpic</div>,
+      }
+    ]
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
