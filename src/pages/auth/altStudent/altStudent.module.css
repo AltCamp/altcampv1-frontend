@@ -1,87 +1,135 @@
-.altstudentContainer{
-    height: 100vh;
-    width: 100vw;
-    display: flex;
+.altstudentContainer {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
 }
-.altstudentLeft{
-    flex: 1;
-    width: 100%;
-    height: 100%;
+.altstudentLeft {
+  flex: 1;
+  width: 100%;
+  height: 100%;
 }
-.altstudentRight{
-    flex: 1;
-    display: flex;
-    flex-direction: column; 
-    justify-content: flex-start;
-    width: 100%;
-    height: 100%;
-    padding: 2.5rem 2rem;
+.altstudentRight {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
+  padding: 2.5rem 2rem;
 }
-.rightDetails{
-    margin: 0 auto;
-    width: 70%
+.rightDetails {
+  margin: 0 auto;
+  width: 70%;
 }
-.altstudentImage{
-    height: 100%;
-    width: 100%;
-    position: relative;
-    background: linear-gradient(200.44deg, rgba(35,37,82,0.7) 16.41%, rgba(35,37,82,0.5) 77.16%);
+.altstudentImage {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  background: linear-gradient(
+    200.44deg,
+    rgba(35, 37, 82, 0.7) 16.41%,
+    rgba(35, 37, 82, 0.5) 77.16%
+  );
 }
-.altstudentImage img{
-    width: 100%;
-    height: 100vh;
-    object-fit: cover;
-    position: relative;
-    z-index: -1; 
+.altstudentImage img {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  position: relative;
+  z-index: -1;
 }
-.altstudentLogo{
-   position: absolute;
-   top: 40%;
-   width: 50%;
-   height: auto;
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   
+.altstudentLogo {
+  position: absolute;
+  top: 40%;
+  width: 50%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.altstudentLogo img{
-    margin-bottom: 20px;
+.altstudentLogo img {
+  margin-bottom: 20px;
 }
-.altstudentParagraph{
-    width: 370px;
-    font-size: 18px;
-    line-height: 36px;
-    color: #FFFFFF;
+.altstudentParagraph {
+  width: 370px;
+  font-size: 18px;
+  line-height: 36px;
+  color: #ffffff;
 }
-.altstudentNav{
-    width: 100%;
-    height: 48px;
+.altstudentNav {
+  width: 100%;
+  height: 48px;
 }
-.navigation{
+.navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  list-style-type: none;
+}
+.navigationItem {
+  width: 50%;
+  height: 100%;
+  text-align: center;
+}
+.link {
+  font-family: var(--Inter);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 2.5rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  color: black;
+  border-bottom: 4px solid var(--neutral-clr-lt-grey);
+}
+
+.mobileLogo{
+  display: none;
+}
+
+/* Mobile View */
+
+@media (max-width: 1000px) {
+  .altstudentLeft {
+    display: none;
+  }
+  .altstudentRight{
+    padding-top: 2rem;
+
+  }
+  .altstudentContainer{
+    display: block;
+    overflow: auto;
+  }
+
+  .mobileLogo{
     display: flex;
     justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    margin: 0 auto;
-    list-style-type: none;
+    padding: 20px 0px;
+  }
+
+  .rightDetails{
+    width: 90%;
+  }
 }
-.navigationItem{
-    width: 50%;
-    height: 100%;
-    text-align: center;
-}
-.link{
-    font-family: var(--Inter);
-    font-style: normal;
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 2.5rem;
-    text-transform: uppercase;
-    text-decoration: none;
-    width: 100%;
-    height: 100%;
-    display: inline-block;
-    color: black;
-    border-bottom: 4px solid var(--neutral-clr-lt-grey);
-}
+
+
+ @media (max-width: 425px) {
+  .altstudentLeft{
+    display: none;
+  }
+  .rightDetails{
+    width: 97%;
+  }
+
+  .altstudentRight{
+    padding: 1.5rem;
+
+  }
+} 
