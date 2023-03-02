@@ -9,7 +9,9 @@ export default function Layout() {
       <Sidebar />
       <div className={layoutStyles.sectionTwo}>
         <Topbar />
-        <Outlet />
+        <div className={layoutStyles.outlet}>
+          <Outlet />
+        </div>
       </div>
     </div>
   );

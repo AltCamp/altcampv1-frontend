@@ -29,15 +29,16 @@ export default function Sidebar() {
           <h2>OVERVIEW</h2>
           <div className="">
             <NavLink
-              to="/feed"
+              to="/dashboard"
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
+              end
             >
               <img src={feed} alt="" className="" />
               Feed
             </NavLink>
             <NavLink
-              to="/community"
+              to="/dashboard/community"
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
@@ -45,7 +46,7 @@ export default function Sidebar() {
               Community
             </NavLink>
             <NavLink
-              to="/topics"
+              to="/dashboard/topics"
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
@@ -53,7 +54,7 @@ export default function Sidebar() {
               Topics
             </NavLink>
             <NavLink
-              to="/bookmarks"
+              to="/dashboard/bookmarks"
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
@@ -66,7 +67,7 @@ export default function Sidebar() {
           <h2>LEARNING</h2>
           <div className="">
             <NavLink
-              to="/circle"
+              to="/dashboard/circle"
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
@@ -74,7 +75,7 @@ export default function Sidebar() {
               Learning Circle
             </NavLink>
             <NavLink
-              to="/resources"
+              to="/dashboard/resources"
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
@@ -82,7 +83,7 @@ export default function Sidebar() {
               Learning Resources
             </NavLink>
             <NavLink
-              to="/contributors"
+              to="/dashboard/contributors"
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
@@ -90,7 +91,7 @@ export default function Sidebar() {
               Contributors
             </NavLink>
             <NavLink
-              to="/quiz"
+              to="/dashboard/quiz"
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
@@ -103,7 +104,7 @@ export default function Sidebar() {
           <h2>ACCOUNT</h2>
           <div className="">
             <NavLink
-              to="/profile"
+              to="/dashboard/profile"
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
@@ -111,7 +112,7 @@ export default function Sidebar() {
               Profile
             </NavLink>
             <NavLink
-              to="/resources"
+              to="/dashboard/settings"
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
@@ -119,7 +120,7 @@ export default function Sidebar() {
               Settings
             </NavLink>
             <NavLink
-              to="/contributors"
+              to="/dashboard/contributors"
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
@@ -127,7 +128,7 @@ export default function Sidebar() {
               Notifications
             </NavLink>
             <NavLink
-              to="/quiz"
+              to="/"
               className={sidebarStyle.logout}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
