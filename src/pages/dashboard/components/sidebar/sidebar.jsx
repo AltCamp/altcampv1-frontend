@@ -14,7 +14,6 @@ import profile from "../../../../assets/icons/profile.svg";
 import notification from "../../../../assets/icons/notification.svg";
 import quiz from "../../../../assets/icons/quiz.svg";
 import resources from "../../../../assets/icons/resources.svg";
-import search from "../../../../assets/icons/search.svg";
 
 export default function Sidebar() {
   let activeStyle = {
