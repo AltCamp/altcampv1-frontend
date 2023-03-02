@@ -22,6 +22,8 @@ import Landing from './pages/landing/landing';
 
 import Layout from './pages/dashboard/layout/layout'	
 
+// import dashboard pages from layout
+import { Community, Feed } from "./pages/dashboard/pages";
 
 // set up router using createBrowserRouter
 const router = createBrowserRouter([
@@ -106,12 +108,12 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        path: "/forum",
-        element: <div>Forum</div>,
+        path: "/feed",
+        element: <Feed />,
       },
       {
-        path: "/topics",
-        element: <div>TOpic</div>,
+        path: "/community",
+        element: <Community />,
       }
     ]
   }

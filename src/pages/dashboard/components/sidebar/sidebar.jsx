@@ -18,14 +18,13 @@ import search from "../../../../assets/icons/search.svg";
 
 export default function Sidebar() {
   let activeStyle = {
-    color: "#6a6ff5",
-    fontWeight: "700",
-    borderBottom: "4px solid #6a6ff5",
+    color: "#474AA3",
+    fontWeight: "600",
   };
 
   return (
     <div className={sidebarStyle.container}>
-      <img src={darkLogo} alt="" className="" />
+      <img src={darkLogo} alt="" className={sidebarStyle.img} />
       <nav className={sidebarStyle.nav}>
         <div className={sidebarStyle.navGroup}>
           <h2>OVERVIEW</h2>
@@ -98,6 +97,42 @@ export default function Sidebar() {
             >
               <img src={quiz} alt="" className="" />
               Quiz
+            </NavLink>
+          </div>
+        </div>
+        <div className={sidebarStyle.navGroup}>
+          <h2>ACCOUNT</h2>
+          <div className="">
+            <NavLink
+              to="/profile"
+              className={sidebarStyle.link}
+              style={({ isActive }) => (isActive ? activeStyle : undefined)}
+            >
+              <img src={profile} alt="" className="" />
+              Profile
+            </NavLink>
+            <NavLink
+              to="/resources"
+              className={sidebarStyle.link}
+              style={({ isActive }) => (isActive ? activeStyle : undefined)}
+            >
+              <img src={settings} alt="" className="" />
+              Settings
+            </NavLink>
+            <NavLink
+              to="/contributors"
+              className={sidebarStyle.link}
+              style={({ isActive }) => (isActive ? activeStyle : undefined)}
+            >
+              <img src={notification} alt="" className="" />
+              Notifications
+            </NavLink>
+            <NavLink
+              to="/quiz"
+              className={sidebarStyle.logout}
+              style={({ isActive }) => (isActive ? activeStyle : undefined)}
+            >
+              Log Out
             </NavLink>
           </div>
         </div>
