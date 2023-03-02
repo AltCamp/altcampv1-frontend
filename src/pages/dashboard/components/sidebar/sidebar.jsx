@@ -120,7 +120,7 @@ export default function Sidebar() {
               Settings
             </NavLink>
             <NavLink
-              to="/dashboard/contributors"
+              to="/dashboard/notifications"
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
