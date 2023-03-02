@@ -22,6 +22,8 @@ import Landing from './pages/landing/landing';
 
 import Layout from './pages/dashboard/layout/layout'	
 
+// import dashboard pages from layout
+import { Community, Feed, Bookmarks, Profile, Notifications, Contributors, Resources, Topics, Settings, Circle, Quiz } from "./pages/dashboard/pages";
 
 // set up router using createBrowserRouter
 const router = createBrowserRouter([
@@ -103,15 +105,52 @@ const router = createBrowserRouter([
     ],
   },
   {
+    path: "/dashboard",
     element: <Layout />,
     children: [
       {
-        path: "/forum",
-        element: <div>Forum</div>,
+        index: true,
+        element: <Feed />,
       },
       {
-        path: "/topics",
-        element: <div>TOpic</div>,
+        path: "/dashboard/community",
+        element: <Community />,
+      },
+      {
+        path: "/dashboard/bookmarks",
+        element: <Bookmarks />
+      },
+      {
+        path: "/dashboard/profile",
+        element: <Profile />
+      },
+      {
+        path: "/dashboard/contributors",
+        element: <Contributors />
+      },
+      {
+        path: "/dashboard/notifications",
+        element: <Notifications />
+      },
+      {
+        path: "/dashboard/resources",
+        element: <Resources />
+      },
+      {
+        path: "/dashboard/topics",
+        element: <Topics />
+      },
+      {
+        path: "/dashboard/settings",
+        element: <Settings />
+      },
+      {
+        path: "/dashboard/circle",
+        element: <Circle />
+      },
+      {
+        path: "/dashboard/quiz",
+        element: <Quiz />
       }
     ]
   }

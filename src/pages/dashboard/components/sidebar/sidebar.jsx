@@ -14,32 +14,31 @@ import profile from "../../../../assets/icons/profile.svg";
 import notification from "../../../../assets/icons/notification.svg";
 import quiz from "../../../../assets/icons/quiz.svg";
 import resources from "../../../../assets/icons/resources.svg";
-import search from "../../../../assets/icons/search.svg";
 
 export default function Sidebar() {
   let activeStyle = {
-    color: "#6a6ff5",
-    fontWeight: "700",
-    borderBottom: "4px solid #6a6ff5",
+    color: "#474AA3",
+    fontWeight: "600",
   };
 
   return (
     <div className={sidebarStyle.container}>
-      <img src={darkLogo} alt="" className="" />
+      <img src={darkLogo} alt="" className={sidebarStyle.img} />
       <nav className={sidebarStyle.nav}>
         <div className={sidebarStyle.navGroup}>
           <h2>OVERVIEW</h2>
           <div className="">
             <NavLink
-              to="/feed"
+              to="/dashboard"
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
+              end
             >
               <img src={feed} alt="" className="" />
               Feed
             </NavLink>
             <NavLink
-              to="/community"
+              to="/dashboard/community"
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
@@ -47,7 +46,7 @@ export default function Sidebar() {
               Community
             </NavLink>
             <NavLink
-              to="/topics"
+              to="/dashboard/topics"
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
@@ -55,7 +54,7 @@ export default function Sidebar() {
               Topics
             </NavLink>
             <NavLink
-              to="/bookmarks"
+              to="/dashboard/bookmarks"
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
@@ -68,7 +67,7 @@ export default function Sidebar() {
           <h2>LEARNING</h2>
           <div className="">
             <NavLink
-              to="/circle"
+              to="/dashboard/circle"
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
@@ -76,7 +75,7 @@ export default function Sidebar() {
               Learning Circle
             </NavLink>
             <NavLink
-              to="/resources"
+              to="/dashboard/resources"
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
@@ -84,7 +83,7 @@ export default function Sidebar() {
               Learning Resources
             </NavLink>
             <NavLink
-              to="/contributors"
+              to="/dashboard/contributors"
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
@@ -92,12 +91,48 @@ export default function Sidebar() {
               Contributors
             </NavLink>
             <NavLink
-              to="/quiz"
+              to="/dashboard/quiz"
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
               <img src={quiz} alt="" className="" />
               Quiz
+            </NavLink>
+          </div>
+        </div>
+        <div className={sidebarStyle.navGroup}>
+          <h2>ACCOUNT</h2>
+          <div className="">
+            <NavLink
+              to="/dashboard/profile"
+              className={sidebarStyle.link}
+              style={({ isActive }) => (isActive ? activeStyle : undefined)}
+            >
+              <img src={profile} alt="" className="" />
+              Profile
+            </NavLink>
+            <NavLink
+              to="/dashboard/settings"
+              className={sidebarStyle.link}
+              style={({ isActive }) => (isActive ? activeStyle : undefined)}
+            >
+              <img src={settings} alt="" className="" />
+              Settings
+            </NavLink>
+            <NavLink
+              to="/dashboard/contributors"
+              className={sidebarStyle.link}
+              style={({ isActive }) => (isActive ? activeStyle : undefined)}
+            >
+              <img src={notification} alt="" className="" />
+              Notifications
+            </NavLink>
+            <NavLink
+              to="/"
+              className={sidebarStyle.logout}
+              style={({ isActive }) => (isActive ? activeStyle : undefined)}
+            >
+              Log Out
             </NavLink>
           </div>
         </div>
