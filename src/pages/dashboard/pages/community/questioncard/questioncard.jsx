@@ -1,6 +1,8 @@
 import questionCardStyles from './questioncard.module.css'
 import { ArrowDown, ArrowUp, ArchiveAdd, Edit } from 'iconsax-react'
 
+import gravatar from '../../../../../assets/general/gravatar.png'
+
 export default function Questioncard () {
   return (
     <div className={questionCardStyles.container}>
@@ -38,9 +40,18 @@ export default function Questioncard () {
           </div>
         </div>
 
-        <div className={questionCardStyles.answerBtn}>
-          <Edit size='17' className={questionCardStyles.editIcon} />
-          Answer
+        <div className={questionCardStyles.authorAnswerLink}>
+          <div className={questionCardStyles.author}>
+            <div className={questionCardStyles.authorImg}>
+              <img src={gravatar} alt='' />
+            </div>
+            <div className={questionCardStyles.authorName}>Seun Akin</div>
+          </div>
+          <span className={questionCardStyles.authorDivider}>|</span>
+          <div className={questionCardStyles.answerBtn}>
+            <Edit size='17' className={questionCardStyles.editIcon} />
+            Answer
+          </div>
         </div>
       </div>
     </div>
