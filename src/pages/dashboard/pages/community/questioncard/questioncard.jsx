@@ -39,7 +39,7 @@ export default function Questioncard () {
         </div>
 
         <div className={questionCardStyles.answerBtn}>
-          <Edit size='19' className={questionCardStyles.editIcon} />
+          <Edit size='17' className={questionCardStyles.editIcon} />
           Answer
         </div>
       </div>

@@ -57,6 +57,28 @@ body {
   padding: 0;
 }
 
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 2px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #000000;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b1b0b0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 .container {
   width: 100%;
   max-width: 1440px;

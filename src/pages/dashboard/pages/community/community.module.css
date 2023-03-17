@@ -6,6 +6,7 @@
     padding-top: 2rem;
     padding-bottom: 3rem;
     font-family: var(--Inter);
+    position: relative;
 }
 
 .sectionOne {

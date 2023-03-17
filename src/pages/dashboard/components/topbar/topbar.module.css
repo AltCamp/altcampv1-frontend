@@ -7,6 +7,10 @@
   align-items: center;
   justify-content: space-around;
   font-family: var(--Inter);
+  position: fixed;
+  top: 0;
+  left: 16rem;
+  z-index: 100;
 }
 
 .searchBox {
