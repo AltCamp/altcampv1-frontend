@@ -46,6 +46,22 @@ export default function Community () {
           <Questioncard />
           <Questioncard />
         </div>
+
+        {/* pagination */}
+        <div className={communityStyle.pagination}>
+          <button className={communityStyle.previousBtn}>
+            Previous
+          </button>
+          <button className={communityStyle['pageBtn', 'active']}>1</button>
+          <button className={communityStyle.pageBtn}>2</button>
+          <button className={communityStyle.pageBtn}>3</button>
+          <button className={communityStyle.nextBtn}>Next</button>
+          <div className={communityStyle.pageCount}>
+            <span className={communityStyle.currentPage}>1</span>
+            <span className={communityStyle.divider}>/</span>
+            <span className={communityStyle.totalPage}>60</span>
+          </div>
+        </div>
       </div>
     </div>
   )
