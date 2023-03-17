@@ -49,9 +49,8 @@
     color: var(--neutral-clr-grey-1);
 }
 
-.link img {
+.link .icon {
     color: inherit;
-    fill: currentColor;
 }
 
 .logout {

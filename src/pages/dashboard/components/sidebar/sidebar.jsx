@@ -1,134 +1,117 @@
-import sidebarStyle from "./sidebar.module.css";
-import darkLogo from "../../../../assets/general/AuthBlackLogo.png";
-import { NavLink } from "react-router-dom";
+import sidebarStyle from './sidebar.module.css'
+import darkLogo from '../../../../assets/general/AuthBlackLogo.png'
+import { NavLink } from 'react-router-dom'
 
 // import link icons
-import bookmark from "../../../../assets/icons/bookmark.svg";
-import circle from "../../../../assets/icons/circle.svg";
-import community from "../../../../assets/icons/community.svg";
-import feed from "../../../../assets/icons/feed.svg";
-import topics from "../../../../assets/icons/topics.svg";
-import contributors from "../../../../assets/icons/contributors.svg";
-import settings from "../../../../assets/icons/settings.svg";
-import profile from "../../../../assets/icons/profile.svg";
-import notification from "../../../../assets/icons/notification.svg";
-import quiz from "../../../../assets/icons/quiz.svg";
-import resources from "../../../../assets/icons/resources.svg";
 
-export default function Sidebar() {
+import { Airdrop, Bookmark, Bubble, ChartCircle, Designtools, FtxToken, Layer, Notification, People, ProfileCircle } from 'iconsax-react'
+
+export default function Sidebar () {
   let activeStyle = {
-    color: "#474AA3",
-    fontWeight: "600",
-  };
+    color: '#474AA3',
+    fontWeight: '600'
+  }
 
   return (
     <div className={sidebarStyle.container}>
-      <img src={darkLogo} alt="" className={sidebarStyle.img} />
+      <img src={darkLogo} alt='' className={sidebarStyle.img} />
       <nav className={sidebarStyle.nav}>
         <div className={sidebarStyle.navGroup}>
           <h2>OVERVIEW</h2>
-          <div className="">
+          <div className=''>
             <NavLink
-              to="/dashboard"
+              to='/dashboard'
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
               end
             >
-              <img src={feed} alt="" className="" />
+              <FtxToken size='23' className={sidebarStyle.icon} />
               Feed
             </NavLink>
             <NavLink
-              to="/dashboard/community"
+              to='/dashboard/community'
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
-              <img src={community} alt="" className="" />
+              <People size='23' className={sidebarStyle.icon} />
               Community
             </NavLink>
             <NavLink
-              to="/dashboard/topics"
+              to='/dashboard/topics'
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
-              <img src={topics} alt="" className="" />
+              <Airdrop size='23' className={sidebarStyle.icon} />
               Topics
             </NavLink>
             <NavLink
-              to="/dashboard/bookmarks"
+              to='/dashboard/bookmarks'
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
-              <img src={bookmark} alt="" className="" />
+              <Bookmark size='23' className={sidebarStyle.icon} />
               Bookmarks
             </NavLink>
           </div>
         </div>
         <div className={sidebarStyle.navGroup}>
           <h2>LEARNING</h2>
-          <div className="">
+          <div className=''>
             <NavLink
-              to="/dashboard/circle"
+              to='/dashboard/circle'
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
-              <img src={circle} alt="" className="" />
+              <ChartCircle size='23' className={sidebarStyle.icon} />
               Learning Circle
             </NavLink>
             <NavLink
-              to="/dashboard/resources"
+              to='/dashboard/resources'
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
-              <img src={resources} alt="" className="" />
+              <Bubble size='23' className={sidebarStyle.icon} />
               Learning Resources
             </NavLink>
             <NavLink
-              to="/dashboard/contributors"
+              to='/dashboard/contributors'
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
-              <img src={contributors} alt="" className="" />
+              <Layer size='23' className={sidebarStyle.icon} />
               Contributors
             </NavLink>
             <NavLink
-              to="/dashboard/quiz"
+              to='/dashboard/quiz'
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
-              <img src={quiz} alt="" className="" />
+              <Designtools size='23' className={sidebarStyle.icon} />
               Quiz
             </NavLink>
           </div>
         </div>
         <div className={sidebarStyle.navGroup}>
-          <h2>ACCOUNT</h2>
-          <div className="">
+          <h2>PERSONAL</h2>
+          <div className=''>
             <NavLink
-              to="/dashboard/profile"
+              to='/dashboard/account'
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
-              <img src={profile} alt="" className="" />
-              Profile
+              <ProfileCircle size='23' className={sidebarStyle.icon} />
+              Account
             </NavLink>
             <NavLink
-              to="/dashboard/settings"
+              to='/dashboard/notifications'
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
-              <img src={settings} alt="" className="" />
-              Settings
-            </NavLink>
-            <NavLink
-              to="/dashboard/notifications"
-              className={sidebarStyle.link}
-              style={({ isActive }) => (isActive ? activeStyle : undefined)}
-            >
-              <img src={notification} alt="" className="" />
+              <Notification size='23' className={sidebarStyle.icon} />
               Notifications
             </NavLink>
             <NavLink
-              to="/"
+              to='/'
               className={sidebarStyle.logout}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
@@ -138,5 +121,5 @@ export default function Sidebar() {
         </div>
       </nav>
     </div>
-  );
+  )
 }

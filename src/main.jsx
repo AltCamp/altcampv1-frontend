@@ -23,7 +23,7 @@ import Landing from './pages/landing/landing';
 import Layout from './pages/dashboard/layout/layout'	
 
 // import dashboard pages from layout
-import { Community, Feed, Bookmarks, Profile, Notifications, Contributors, Resources, Topics, Settings, Circle, Quiz } from "./pages/dashboard/pages";
+import { Community, Feed, Bookmarks, Account, Notifications, Contributors, Resources, Topics, Circle, Quiz } from "./pages/dashboard/pages";
 
 // set up router using createBrowserRouter
 const router = createBrowserRouter([
@@ -121,8 +121,8 @@ const router = createBrowserRouter([
         element: <Bookmarks />
       },
       {
-        path: "/dashboard/profile",
-        element: <Profile />
+        path: "/dashboard/account",
+        element: <Account />
       },
       {
         path: "/dashboard/contributors",
@@ -139,10 +139,6 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/topics",
         element: <Topics />
-      },
-      {
-        path: "/dashboard/settings",
-        element: <Settings />
       },
       {
         path: "/dashboard/circle",
