@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 import questionCardStyles from './questioncard.module.css'
 import { ArrowDown, ArrowUp, ArchiveAdd, Edit } from 'iconsax-react'
 
@@ -7,9 +9,11 @@ export default function Questioncard () {
   return (
     <div className={questionCardStyles.container}>
       <div className={questionCardStyles.header}>
-        <h3 className={questionCardStyles.title}>
-          What is the difference between Product design and Ui/Ux?
-        </h3>
+        <Link to='/dashboard/community/:id'>
+          <h3 className={questionCardStyles.title}>
+            What is the difference between Product design and Ui/Ux?
+          </h3>
+        </Link>
         <div className={questionCardStyles.tags}>
           <span className={questionCardStyles.tag}>UI/UX</span>
           <span className={questionCardStyles.tag}>Design</span>
@@ -48,10 +52,10 @@ export default function Questioncard () {
             <div className={questionCardStyles.authorName}>Seun Akin</div>
           </div>
           <span className={questionCardStyles.authorDivider}>|</span>
-          <div className={questionCardStyles.answerBtn}>
+          <Link to='/dashboard/community/:id' className={questionCardStyles.answerBtn}>
             <Edit size='17' className={questionCardStyles.editIcon} />
             Answer
-          </div>
+          </Link>
         </div>
       </div>
     </div>

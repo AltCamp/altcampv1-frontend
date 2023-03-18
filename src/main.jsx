@@ -25,6 +25,10 @@ import Layout from './pages/dashboard/layout/layout'
 // import dashboard pages from layout
 import { Community, Feed, Bookmarks, Account, Notifications, Contributors, Resources, Topics, Circle, Quiz } from "./pages/dashboard/pages";
 
+// import single question page 
+import Questionpage from './pages/dashboard/pages/community/questionpage/questionpage'
+
+
 // set up router using createBrowserRouter
 const router = createBrowserRouter([
   {
@@ -114,7 +118,12 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/community",
-        element: <Community />,
+        element: <Community />
+      },
+      // dynamic route for for each question
+      {
+        path: '/dashboard/community/:id',
+        element: <Questionpage />
       },
       {
         path: "/dashboard/bookmarks",
@@ -147,7 +156,7 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/quiz",
         element: <Quiz />
-      }
+      },
     ]
   }
 ]);
