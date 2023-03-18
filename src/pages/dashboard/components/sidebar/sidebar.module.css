@@ -1,12 +1,16 @@
 .container {
     background: white;
-    width: 18rem;
+    width: 16%;
+    height: 100%;
     font-family: var(--Inter);
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
     gap: 3rem;
     padding: 1rem;
+    position: fixed;
+    top: 0;
+    left: 0;
 }
 
 .img {
