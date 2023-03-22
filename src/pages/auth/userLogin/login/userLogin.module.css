@@ -110,6 +110,11 @@
   background-color: var(--secondary-clr-drkst-blue);
 }
 
+.loginButton:disabled {
+  background-color: var(--neutral-clr-grey-2);
+  cursor: not-allowed;
+}
+
 .forgotPassword {
   font-family: var(--Inter);
   font-size: 0.875rem;

@@ -2,9 +2,21 @@ import React, { useState } from "react";
 import mentorRegister from "./mentorRegister.module.css";
 import eyeIcon from '../../../../assets/general/eye.svg'
 
+
+
 export default function MentorRegister() {
   const [password, setPassword] = useState(false);
     const [showPassword, setShowPassword] = useState(false)
+
+
+  const handleLogin = (e) => {
+    e.preventDefault()
+    login({
+      email: e.target.email.value,
+      password: e.target.password.value
+    })
+  }
+
   return (
     <div className={mentorRegister.container}>
       <h2 className={mentorRegister.heading}>Register as a Mentor</h2>
