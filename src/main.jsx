@@ -1,33 +1,47 @@
 import { element } from 'prop-types'
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import "./index.css";
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import './index.css'
+
+// import redux store
+import { store } from './app/store'
+import { Provider } from 'react-redux'
 
 // Import the pages routes
-import { AltStudent, Mentor, RegularStudent } from "./pages";
+import { AltStudent, Mentor, RegularStudent } from './pages'
 
 // import components from altStudent
-import { AltStudentRegister } from "./pages/auth/altStudent";
+import { AltStudentRegister } from './pages/auth/altStudent'
 
 // import components from RegularStudent
-import { RegularStudentRegister } from "./pages/auth/regularStudent";
+import { RegularStudentRegister } from './pages/auth/regularStudent'
 
 // import components for UserLogin
-import { ForgotPassword, LoginGroup, UserLogin } from "./pages/auth/userLogin";
+import { ForgotPassword, LoginGroup, UserLogin } from './pages/auth/userLogin'
 
 // import components from Mentor
-import { MentorRegister } from "./pages/auth/mentor";
-import Landing from './pages/landing/landing';
+import { MentorRegister } from './pages/auth/mentor'
+import Landing from './pages/landing/landing'
 
-import Layout from './pages/dashboard/layout/layout'	
+import Layout from './pages/dashboard/layout/layout'
 
 // import dashboard pages from layout
-import { Community, Feed, Bookmarks, Account, Notifications, Contributors, Resources, Topics, Circle, Quiz } from "./pages/dashboard/pages";
+import {
+  Community,
+  Feed,
+  Bookmarks,
+  Account,
+  Notifications,
+  Contributors,
+  Resources,
+  Topics,
+  Circle,
+  Quiz
+} from './pages/dashboard/pages'
 
-// import single question page 
+// import single question page
 import Questionpage from './pages/dashboard/pages/community/questionpage/questionpage'
-
 
 // set up router using createBrowserRouter
 const router = createBrowserRouter([
@@ -36,88 +50,88 @@ const router = createBrowserRouter([
     element: <Landing />
   },
   {
-    path: "/altstudent",
+    path: '/altstudent',
     element: <AltStudent />,
     children: [
       {
-        path: "/altstudent/login",
+        path: '/altstudent/login',
         element: <LoginGroup />,
         children: [
           {
             index: true,
-            element: <UserLogin />,
+            element: <UserLogin />
           },
           {
-            path: "/altstudent/login/forgotpassword",
-            element: <ForgotPassword />,
-          },
-        ],
+            path: '/altstudent/login/forgotpassword',
+            element: <ForgotPassword />
+          }
+        ]
       },
       {
         index: true,
-        element: <AltStudentRegister />,
+        element: <AltStudentRegister />
       }
-    ],
+    ]
   },
   {
-    path: "/regularstudent",
+    path: '/regularstudent',
     element: <RegularStudent />,
     children: [
       {
-        path: "/regularstudent/login",
+        path: '/regularstudent/login',
         element: <LoginGroup />,
         children: [
           {
             index: true,
-            element: <UserLogin />,
+            element: <UserLogin />
           },
           {
-            path: "/regularstudent/login/forgotpassword",
-            element: <ForgotPassword />,
-          },
-        ],
+            path: '/regularstudent/login/forgotpassword',
+            element: <ForgotPassword />
+          }
+        ]
       },
       {
         index: true,
-        element: <RegularStudentRegister />,
-      },
-    ],
+        element: <RegularStudentRegister />
+      }
+    ]
   },
   {
-    path: "/mentor",
+    path: '/mentor',
     element: <Mentor />,
     children: [
       {
-        path: "/mentor/login",
+        path: '/mentor/login',
         element: <LoginGroup />,
         children: [
           {
             index: true,
-            element: <UserLogin />,
+            element: <UserLogin />
           },
           {
-            path: "/mentor/login/forgotpassword",
-            element: <ForgotPassword />,
-          },
-        ],
+            path: '/mentor/login/forgotpassword',
+            element: <ForgotPassword />
+          }
+        ]
       },
 
       {
         index: true,
-        element: <MentorRegister />,
-      },
-    ],
+        element: <MentorRegister />
+      }
+    ]
   },
   {
-    path: "/dashboard",
+    path: '/dashboard',
     element: <Layout />,
     children: [
       {
         index: true,
-        element: <Feed />,
+        element: <Feed />
       },
       {
-        path: "/dashboard/community",
+        path: '/dashboard/community',
         element: <Community />
       },
       // dynamic route for for each question
@@ -126,43 +140,45 @@ const router = createBrowserRouter([
         element: <Questionpage />
       },
       {
-        path: "/dashboard/bookmarks",
+        path: '/dashboard/bookmarks',
         element: <Bookmarks />
       },
       {
-        path: "/dashboard/account",
+        path: '/dashboard/account',
         element: <Account />
       },
       {
-        path: "/dashboard/contributors",
+        path: '/dashboard/contributors',
         element: <Contributors />
       },
       {
-        path: "/dashboard/notifications",
+        path: '/dashboard/notifications',
         element: <Notifications />
       },
       {
-        path: "/dashboard/resources",
+        path: '/dashboard/resources',
         element: <Resources />
       },
       {
-        path: "/dashboard/topics",
+        path: '/dashboard/topics',
         element: <Topics />
       },
       {
-        path: "/dashboard/circle",
+        path: '/dashboard/circle',
         element: <Circle />
       },
       {
-        path: "/dashboard/quiz",
+        path: '/dashboard/quiz',
         element: <Quiz />
-      },
+      }
     ]
   }
-]);
+])
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
-);
+)
