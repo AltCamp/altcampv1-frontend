@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-// import OtpInput from 'react-otp-input'
+import OtpInput from 'react18-input-otp'
 import fgtPassStyle from './forgotPassword.module.css'
 import eyeIcon from '../../../../assets/general/eye.svg'
 
@@ -22,7 +22,7 @@ export default function ForgotPassword () {
             A Four-Digit code will be sent to your mail
           </p>
           <div className={fgtPassStyle.formGroup}>
-            <label htmlFor='email'>Enter your email address</label>
+            <label htmlFor='email'>Enter the email address you registered with</label>
             <input
               type='email'
               name='email'
@@ -31,10 +31,10 @@ export default function ForgotPassword () {
               required
             />
           </div>
-          <p className={fgtPassStyle.emailInstruction}>
+          {/* <p className={fgtPassStyle.emailInstruction}>
             Make sure you enter the email address you used while registering
             your account
-          </p>
+          </p> */}
           <button
             className={fgtPassStyle.submitButton}
             onClick={() => setRenderOtpScreen(true)}
