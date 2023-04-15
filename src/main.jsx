@@ -25,6 +25,9 @@ import { MentorRegister } from './pages/auth/mentor'
 import Landing from './pages/landing/landing'
 
 import Layout from './pages/dashboard/layout/layout'
+import Editprofile from './pages/dashboard/pages/account/profileEdit/editprofile'
+import Resetpass from './pages/dashboard/pages/account/resetpassword/resetpass'
+import DeactivateAcc from './pages/dashboard/pages/account/deactivateaccount/deactivateAcc'
 
 // import dashboard pages from layout
 import {
@@ -145,11 +148,27 @@ const router = createBrowserRouter([
       },
       {
         path: '/dashboard/account',
-        element: <Account />
+        element: <Account />,
+        children: [
+          { 
+            index: true,
+            element: <Editprofile />,
+          },
+          {
+            path: '/dashboard/account/resetpassword',
+            element: <Resetpass />
+          },
+          {
+            path: '/dashboard/account/deactivateaccount',
+            element: <DeactivateAcc />
+          }
+        ]
+
       },
       {
         path: '/dashboard/contributors',
         element: <Contributors />
+      
       },
       {
         path: '/dashboard/notifications',
