@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 
 // import link icons
 
-import { FtxToken, People } from 'iconsax-react'
+import { Airdrop, Bookmark, Bubble, ChartCircle, Designtools, FtxToken, Layer, Notification, People, ProfileCircle } from 'iconsax-react'
 
 export default function Sidebar () {
   let activeStyle = {
@@ -41,7 +41,7 @@ export default function Sidebar () {
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
-              <People size='23' className={sidebarStyle.icon} />
+              <Airdrop size='23' className={sidebarStyle.icon} />
               Topics
             </NavLink>
             <NavLink
@@ -49,7 +49,7 @@ export default function Sidebar () {
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
-              <People size='23' className={sidebarStyle.icon} />
+              <Bookmark size='23' className={sidebarStyle.icon} />
               Bookmarks
             </NavLink>
           </div>
@@ -62,7 +62,7 @@ export default function Sidebar () {
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
-              <People size='23' className={sidebarStyle.icon} />
+              <ChartCircle size='23' className={sidebarStyle.icon} />
               Learning Circle
             </NavLink>
             <NavLink
@@ -70,7 +70,7 @@ export default function Sidebar () {
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
-              <People size='23' className={sidebarStyle.icon} />
+              <Bubble size='23' className={sidebarStyle.icon} />
               Learning Resources
             </NavLink>
             <NavLink
@@ -78,7 +78,7 @@ export default function Sidebar () {
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
-              <People size='23' className={sidebarStyle.icon} />
+              <Layer size='23' className={sidebarStyle.icon} />
               Contributors
             </NavLink>
             <NavLink
@@ -86,7 +86,7 @@ export default function Sidebar () {
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
-              <People size='23' className={sidebarStyle.icon} />
+              <Designtools size='23' className={sidebarStyle.icon} />
               Quiz
             </NavLink>
           </div>
@@ -95,11 +95,11 @@ export default function Sidebar () {
           <h2>PERSONAL</h2>
           <div className=''>
             <NavLink
-              to='/dashboard/profile'
+              to='/dashboard/account'
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
-              <People size='23' className={sidebarStyle.icon} />
+              <ProfileCircle size='23' className={sidebarStyle.icon} />
               Account
             </NavLink>
             <NavLink
@@ -107,7 +107,7 @@ export default function Sidebar () {
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
-              <People size='23' className={sidebarStyle.icon} />
+              <Notification size='23' className={sidebarStyle.icon} />
               Notifications
             </NavLink>
             <NavLink
