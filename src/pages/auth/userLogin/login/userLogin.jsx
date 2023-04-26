@@ -25,8 +25,16 @@ export default function UserLogin () {
     login({ email: email, password: password })
   }
 
-  console.log(data)
-  console.log(error)
+  console.log(email, password)
+
+  // useEffect(() => {
+  //   if(isSuccess) {
+  //     set
+  //   }
+  // }, [isSuccess, isError])
+
+  // console.log(data)
+  // console.log(error)
 
   return (
     <div className={userLoginStyle.container}>
