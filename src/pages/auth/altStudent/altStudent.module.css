@@ -79,7 +79,7 @@
   font-family: var(--Inter);
   font-style: normal;
   font-weight: 700;
-  font-size: 14px;
+  /* font-size: 14px; */
   line-height: 2.5rem;
   text-transform: uppercase;
   text-decoration: none;
