@@ -47,6 +47,7 @@ export default function UserLogin () {
             name='email'
             id='email'
             placeholder='seun@studybuddy.com'
+            className={userLoginStyle.email}
             onChange={e => setEmail(e.target.value)}
           />
         </div>
@@ -58,6 +59,7 @@ export default function UserLogin () {
               name='password'
               id='password'
               placeholder='********'
+              className={userLoginStyle.password}
               onChange={e => setPassword(e.target.value)}
             />
             <img

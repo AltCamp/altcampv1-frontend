@@ -8,8 +8,9 @@ import mobileLogo from "../../../assets/general/AuthBlackLogo.png"
 export default function AltStudent() {
 
   let activeStyle = {
-    borderBottom: "4px solid var(--secondary-clr-lter-blue)",
-    color: "var(--secondary-clr-lter-blue)"
+    color: "#6a6ff5",
+    fontWeight: "700",
+    borderBottom: "4px solid #6a6ff5",
   };
 
   return (
