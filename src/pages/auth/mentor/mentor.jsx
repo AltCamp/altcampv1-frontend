@@ -4,7 +4,7 @@ import { Outlet, NavLink } from "react-router-dom";
 import mentor from "./mentor.module.css";
 import logo from "../../../../src/assets/general/Authlogo.png";
 import background from "../../../assets/general/AuthBackground.webp";
-import mobilelogo from "../../../assets/general/AuthBlackLogo.png";
+import mobilelogo from "../../../assets/general/AuthBlackLogo.svg";
 
 export default function Mentor() {
   let activeStyle = {

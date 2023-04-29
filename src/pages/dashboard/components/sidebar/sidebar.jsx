@@ -1,5 +1,5 @@
 import sidebarStyle from './sidebar.module.css'
-import darkLogo from '../../../../assets/general/AuthBlackLogo.png'
+import darkLogo from '../../../../assets/general/AuthBlackLogo.svg'
 import { NavLink } from 'react-router-dom'
 
 // import link icons

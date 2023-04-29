@@ -3,7 +3,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import authHeroImage from "../../../assets/general/AuthBackground.webp";
 import studyBuddyLogo from "../../../assets/general/Authlogo.png";
 import rglrStudStyle from "./regularStudent.module.css";
-import mobileLogo from "./../../../assets/general/AuthBlackLogo.png";
+import mobileLogo from "./../../../assets/general/AuthBlackLogo.svg";
 
 export default function RegularStudent() {
   let activeStyle = {
