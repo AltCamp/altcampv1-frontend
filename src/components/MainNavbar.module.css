@@ -89,9 +89,14 @@
 
 
 @media screen and (max-width: 1024px) {
-
+.main-nav{
+    height: max-content;
+}
     .get-started-btn,
     .register-options {
         display: none;
+    }
+    .nav-paths a{
+        padding: 10px 0;
     }
 }
