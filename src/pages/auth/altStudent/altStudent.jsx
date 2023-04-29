@@ -3,7 +3,7 @@ import { Outlet, NavLink } from "react-router-dom";
 import altStudStyle from "./altStudent.module.css";
 import authHeroImage from "../../../assets/general/AuthBackground.webp";
 import studyBuddyLogo from "../../../assets/general/Authlogo.png";
-import mobileLogo from "../../../assets/general/AuthBlackLogo.png"
+import mobileLogo from "../../../assets/general/AuthBlackLogo.svg"
 
 export default function AltStudent() {
 
