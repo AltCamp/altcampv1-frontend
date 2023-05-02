@@ -5,14 +5,17 @@ import { ArrowDown, ArrowUp, ArchiveAdd, Edit } from 'iconsax-react'
 
 import gravatar from '../../../../../assets/general/gravatar.png'
 
-export default function Questioncard () {
+import ReactTimeAgo from 'react-time-ago'
+
+export default function Questioncard ({ question }) {
   return (
     <div className={questionCardStyles.container}>
       <div className={questionCardStyles.header}>
-        <Link to='/dashboard/community/:id'>
-          <h3 className={questionCardStyles.title}>
-            What is the difference between Product design and Ui/Ux?
-          </h3>
+        <Link
+          to={`/dashboard/community/question/${question.title}`}
+          state={{ question: question._id }}
+        >
+          <h3 className={questionCardStyles.title}>{question.title}</h3>
         </Link>
         <div className={questionCardStyles.tags}>
           <span className={questionCardStyles.tag}>UI/UX</span>
@@ -23,20 +26,24 @@ export default function Questioncard () {
       <div className={questionCardStyles.body}>
         <div className={questionCardStyles.otherInfo}>
           <div className={questionCardStyles.info}>
-            <span className={questionCardStyles.answerCount}>5 answers</span>
+            <span className={questionCardStyles.answerCount}>
+              {question.answer.length} Answers
+            </span>
             <span className={questionCardStyles.divider}>|</span>
             <span className={questionCardStyles.timePosted}>
-              Last Request 12hrs ago
+              {`Last Requested `}
+              {<ReactTimeAgo date={question.createdAt} locale='en-US' />}
             </span>
           </div>
 
           <div className={questionCardStyles.votes}>
             <div className={questionCardStyles.upvotes}>
               <ArrowUp size='19' className={questionCardStyles.icon} />
-              15
+              {question.upvotes}
             </div>
             <div className={questionCardStyles.downvotes}>
-              <ArrowDown size='19' className={questionCardStyles.icon} />5
+              <ArrowDown size='19' className={questionCardStyles.icon} />
+              {question.downvotes}
             </div>
             <div className={questionCardStyles.bookmark}>
               <ArchiveAdd size='19' className={questionCardStyles.icon} />
@@ -49,10 +56,16 @@ export default function Questioncard () {
             <div className={questionCardStyles.authorImg}>
               <img src={gravatar} alt='' />
             </div>
-            <div className={questionCardStyles.authorName}>Seun Akin</div>
+            <div className={questionCardStyles.authorName}>
+              {question.author.firstname} {question.author.lastname}
+            </div>
           </div>
           <span className={questionCardStyles.authorDivider}>|</span>
-          <Link to='/dashboard/community/:id' className={questionCardStyles.answerBtn}>
+          <Link
+            to={`/dashboard/community/question/${question.title}`}
+            state={{ question: question._id }}
+            className={questionCardStyles.answerBtn}
+          >
             <Edit size='17' className={questionCardStyles.editIcon} />
             Answer
           </Link>

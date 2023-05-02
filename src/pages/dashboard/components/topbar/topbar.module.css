@@ -85,7 +85,7 @@
 }
 
 .profileDetails .profileName {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   color: var(--neutral-clr-deep-grey);
 }
@@ -97,4 +97,5 @@
   background: #585dcc;
   border-radius: 5px;
   padding: 0.2rem 0.5rem;
+  text-transform: uppercase;
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import authHeroImage from "../../../assets/general/AuthBackground.webp";
-import studyBuddyLogo from "../../../assets/general/Authlogo.png";
+import altcampWhiteLogo from "../../../assets/general/AuthWhiteLogo.svg";
 import rglrStudStyle from "./regularStudent.module.css";
 import mobileLogo from "./../../../assets/general/AuthBlackLogo.svg";
 
@@ -17,7 +17,7 @@ export default function RegularStudent() {
       <div className={rglrStudStyle.hero}>
         <div className={rglrStudStyle.heroOverlay}>
           <div className={rglrStudStyle.heroContent}>
-            <img src={studyBuddyLogo} alt="studyBuddy Logo" className="" />
+            <img src={altcampWhiteLogo} alt="studyBuddy Logo" className="" />
             <p className="">
               Learning made easy and interesting. Share what you know even as
               you learn what you something new

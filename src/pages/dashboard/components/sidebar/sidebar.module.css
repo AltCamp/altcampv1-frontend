@@ -60,6 +60,12 @@
 
 .logout {
     color: #D10909;
-    font-weight: 500;
     font-size: 15px;
+    outline: none;
+    border: none;
+    background: none;
+    padding: none;
+    cursor: pointer;
+    font-weight: 600;
+    align-self: flex-start;
 }
