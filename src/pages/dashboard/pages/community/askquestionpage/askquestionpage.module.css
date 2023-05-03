@@ -91,6 +91,10 @@
   outline: none;
 }
 
+.tagsField:disabled {
+  background-color: var(--neutral-clr-grey-2);
+}
+
 .next,
 .submitBtn {
   display: flex;
@@ -127,6 +131,32 @@
   display: flex;
   justify-content: flex-end;
 }
+
+.errorBody {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 65%;
+  padding: 0.5rem;
+  background: rgb(122, 13, 5);
+  border-radius: 8px;
+}
+
+.successBody {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 65%;
+  padding: 0.5rem;
+  background: rgb(0, 122, 13);
+  border-radius: 8px;
+}
+
+.errorText, .successText {
+  color: white;
+  font-size: 14px;
+}
+
 
 /* .tox-tinymce {
   width: 100%;

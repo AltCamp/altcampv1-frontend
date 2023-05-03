@@ -1,8 +1,7 @@
-
-import { useState } from 'react';
+import { useState } from 'react'
 
 import createAnswerStyles from './createanswer.module.css'
-import RichEditor from './../../richeditor/richeditor';
+import RichEditor from './../../richeditor/richeditor'
 
 export default function Createanswer () {
   const [body, setBody] = useState('')
@@ -14,7 +13,9 @@ export default function Createanswer () {
           Your Answer
         </label>
         <RichEditor setBody={setBody} />
-        <button className={createAnswerStyles.submitBtn}>Send Answer</button>
+        <button className={createAnswerStyles.submitBtn} disabled={true}>
+          Send Answer
+        </button>
       </form>
     </div>
   )

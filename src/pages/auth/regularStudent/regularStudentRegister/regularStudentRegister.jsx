@@ -24,6 +24,8 @@ export default function RegularStudentRegister () {
   const [password, setPassword] = useState('')
   const [confirmPassowrd, setConfirmPassword] = useState('')
 
+  const [errorText, setErrorText] = useState('')
+
   const dispatch = useDispatch()
 
   const navigate = useNavigate()
@@ -45,12 +47,23 @@ export default function RegularStudentRegister () {
 
   useEffect(() => {
     if (isSuccess) {
-      console.log(data)
+      // console.log(data)
       dispatch(setUser(data?.data))
       navigate('/dashboard')
     }
     if (isError) {
-      console.log(error)
+      setErrorText(error.data.message)
+    }
+    if (
+      firstName == '' ||
+      lastName == '' ||
+      email == '' ||
+      matric == '' ||
+      track == '' ||
+      password == '' ||
+      confirmPassowrd == ''
+    ) {
+      setErrorText('Please fill all fields')
     }
   }, [isSuccess, isError])
 
@@ -72,6 +85,7 @@ export default function RegularStudentRegister () {
                 id='firstName'
                 placeholder='Seun'
                 onChange={e => setFirstName(e.target.value)}
+                required
               />
             </div>
             <div className={rglrStudRegStyle.formGroup}>
@@ -82,6 +96,7 @@ export default function RegularStudentRegister () {
                 id='lastName'
                 placeholder='Ogunlana'
                 onChange={e => setLastName(e.target.value)}
+                required
               />
             </div>
             <div className={rglrStudRegStyle.formGroup}>
@@ -92,6 +107,7 @@ export default function RegularStudentRegister () {
                 id='email'
                 placeholder='seun@studybuddy.com'
                 onChange={e => setEmail(e.target.value)}
+                required
               />
             </div>
             <div className={rglrStudRegStyle.formGroup}>
@@ -102,6 +118,7 @@ export default function RegularStudentRegister () {
                 id='matric'
                 placeholder='ALT/NIN/2220'
                 onChange={e => setMatric(e.target.value)}
+                required
               />
             </div>
             <div className={rglrStudRegStyle.formGroup}>
@@ -135,6 +152,7 @@ export default function RegularStudentRegister () {
                   id='password'
                   placeholder=''
                   onChange={e => setPassword(e.target.value)}
+                  required
                 />
                 <img
                   src={eyeIcon}
@@ -153,6 +171,7 @@ export default function RegularStudentRegister () {
                   id='confirmPassword'
                   placeholder=''
                   onChange={e => setConfirmPassword(e.target.value)}
+                  required
                 />
                 <img
                   src={eyeIcon}
@@ -162,6 +181,14 @@ export default function RegularStudentRegister () {
                 />
               </div>
             </div>
+
+            {/* error ui */}
+            {errorText && (
+              <div className={rglrStudRegStyle.errorText}>
+                <p>{errorText}</p>
+              </div>
+            )}
+
             <button
               type='submit'
               className={rglrStudRegStyle.submitButton}

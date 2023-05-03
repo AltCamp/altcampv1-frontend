@@ -17,6 +17,8 @@ export default function UserLogin () {
   const parentPath = useLocation().pathname.split('/')[1]
   // console.log(parentPath)
 
+  const [errorText, setErrorText] = useState('')
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -40,7 +42,7 @@ export default function UserLogin () {
       dispatch(setUser(data?.data))
       navigate('/dashboard')
     } else if(isError) {
-      console.log(error)
+      setErrorText(error.data.message)
     }
   }, [isSuccess, isError])
 
@@ -81,6 +83,14 @@ export default function UserLogin () {
             />
           </div>
         </div>
+
+        {/* error ui */}
+        {errorText && (
+          <div className={userLoginStyle.errorText}>
+            <p>{errorText}</p>
+          </div>
+        )}
+
         <button
           className={userLoginStyle.loginButton}
           type='submit'

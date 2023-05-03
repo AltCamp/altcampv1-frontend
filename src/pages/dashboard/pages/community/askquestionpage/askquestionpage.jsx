@@ -14,6 +14,8 @@ export default function AskQuestionPage () {
   const [body, setBody] = useState('')
   const [emptyTitle, setEmptyTitle] = useState(false)
 
+  const [errorText, setErrorText] = useState('')
+
   const { question } = useParams()
   const navigate = useNavigate()
 
@@ -31,16 +33,17 @@ export default function AskQuestionPage () {
   }
 
   useEffect(() => {
-    if(isSuccess) {
+    if (isSuccess) {
       navigate('/dashboard/community')
     }
   }, [isSuccess])
 
   useEffect(() => {
     if (isSuccess) {
-      console.log('data:', data)
+      // console.log('data:', data)
+      setErrorText('')
     } else if (isError) {
-      console.log('error:', error)
+      setErrorText(error.data.message)
     }
   }, [data, isLoading, isSuccess, isError, error])
 
@@ -144,9 +147,27 @@ export default function AskQuestionPage () {
               type='text'
               placeholder=''
               className={askQuestionPageStyles.tagsField}
+              disabled={true}
             />
           </div>
         </div>
+
+        {/* error message ui */}
+        {errorText && (
+          <div className={askQuestionPageStyles.errorBody}>
+            <p className={askQuestionPageStyles.errorText}>{errorText}</p>
+          </div>
+        )}
+
+        {/* succesful message */}
+        {isSuccess && (
+          <div className={askQuestionPageStyles.successBody}>
+            <p className={askQuestionPageStyles.successText}>
+              Question created successfully
+            </p>
+          </div>
+        )}
+
         <div className={askQuestionPageStyles.submit}>
           <button
             ref={ref}
