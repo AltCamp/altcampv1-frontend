@@ -2,9 +2,9 @@
 import React, { useEffect } from "react";
 import { Outlet, NavLink } from "react-router-dom";
 import mentor from "./mentor.module.css";
-import logo from "../../../../src/assets/general/Authlogo.png";
+import altcampLogo from "../../../../src/assets/general/AuthWhiteLogo.svg";
 import background from "../../../assets/general/AuthBackground.webp";
-import mobilelogo from "../../../assets/general/AuthBlackLogo.png";
+import mobilelogo from "../../../assets/general/AuthBlackLogo.svg";
 
 export default function Mentor() {
   let activeStyle = {
@@ -17,7 +17,7 @@ export default function Mentor() {
       <div className={mentor.background}>
         <div className={mentor.backgroundOverlay}>
           <div className={mentor.logo}>
-            <img src={logo} alt="logo" />
+            <img src={altcampLogo} alt="logo" />
             <p className={mentor.text}>
               Learning made easy and interesting. Share what you know even as
               you learn what you something new

@@ -1,16 +1,39 @@
 import sidebarStyle from './sidebar.module.css'
-import darkLogo from '../../../../assets/general/AuthBlackLogo.png'
-import { NavLink } from 'react-router-dom'
+import darkLogo from '../../../../assets/general/AuthBlackLogo.svg'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 // import link icons
 
-import { Airdrop, Bookmark, Bubble, ChartCircle, Designtools, FtxToken, Layer, Notification, People, ProfileCircle } from 'iconsax-react'
+import {
+  Airdrop,
+  Bookmark,
+  Bubble,
+  ChartCircle,
+  Designtools,
+  FtxToken,
+  Layer,
+  Notification,
+  People,
+  ProfileCircle
+} from 'iconsax-react'
+
+import { useSelector, useDispatch } from 'react-redux'
+
+import { removeUser } from '../../../../app/slices/generalSlices/userSlice'
 
 export default function Sidebar () {
   let activeStyle = {
     color: '#474AA3',
     fontWeight: '600'
   }
+
+  const dispatch = useDispatch()
+
+  const navigate = useNavigate()
+
+  const user = useSelector(state => state?.user.user)
+
+  // console.log(user)
 
   return (
     <div className={sidebarStyle.container}>
@@ -110,13 +133,15 @@ export default function Sidebar () {
               <Notification size='23' className={sidebarStyle.icon} />
               Notifications
             </NavLink>
-            <NavLink
-              to='/'
+            <button
               className={sidebarStyle.logout}
-              style={({ isActive }) => (isActive ? activeStyle : undefined)}
+              onClick={() => {
+                dispatch(removeUser())
+                navigate('/regularstudent/login')
+              }}
             >
               Log Out
-            </NavLink>
+            </button>
           </div>
         </div>
       </nav>

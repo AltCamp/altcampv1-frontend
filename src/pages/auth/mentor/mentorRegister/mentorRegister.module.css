@@ -136,6 +136,11 @@ select {
   cursor: pointer;
 }
 
+.create:disabled {
+  background-color: var(--neutral-clr-grey-2);
+  cursor: not-allowed;
+}
+
 @media (max-width: 425px) {
   .heading {
     font-size: 1.7rem;

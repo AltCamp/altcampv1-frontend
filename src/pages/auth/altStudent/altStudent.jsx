@@ -2,14 +2,15 @@ import React from "react";
 import { Outlet, NavLink } from "react-router-dom";
 import altStudStyle from "./altStudent.module.css";
 import authHeroImage from "../../../assets/general/AuthBackground.webp";
-import studyBuddyLogo from "../../../assets/general/Authlogo.png";
-import mobileLogo from "../../../assets/general/AuthBlackLogo.png"
+import altcampLogo from "../../../assets/general/AuthWhiteLogo.svg";
+import mobileLogo from "../../../assets/general/AuthBlackLogo.svg"
 
 export default function AltStudent() {
 
   let activeStyle = {
-    borderBottom: "4px solid var(--secondary-clr-lter-blue)",
-    color: "var(--secondary-clr-lter-blue)"
+    color: "#6a6ff5",
+    fontWeight: "700",
+    borderBottom: "4px solid #6a6ff5",
   };
 
   return (
@@ -20,7 +21,7 @@ export default function AltStudent() {
           <img src={authHeroImage} alt="background" />
         </div>
         <div className={altStudStyle["altstudentLogo"]}>
-          <img src={studyBuddyLogo} alt="logo" />
+          <img src={altcampLogo} alt="logo" />
           <p className={altStudStyle["altstudentParagraph"]}>
             Learning made easy and interesting.Share what you know and learn
             what you don't.

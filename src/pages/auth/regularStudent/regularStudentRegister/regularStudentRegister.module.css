@@ -17,7 +17,7 @@
 .stepOne {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .formGroup,
@@ -158,6 +158,17 @@
 
 .submitButton:hover {
   background-color: var(--secondary-clr-drk-blue);
+}
+
+.errorText {
+  font-family: var(--Inter);
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: white;
+  background-color: rgb(148, 17, 17);
+  padding: 0.5rem;
+  border-radius: 4px;
+  text-align: center;
 }
 
 /* Responsive screens */

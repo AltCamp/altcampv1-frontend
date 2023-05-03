@@ -73,6 +73,21 @@
   background-color: var(--primary-clr-pink-2);
 }
 
+.author {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--secondary-clr-drk-blue);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.authorImg img {
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+}
+
 .otherInfo {
   display: flex;
   justify-content: space-between;
@@ -117,6 +132,22 @@
 
 .icon:hover {
   color: var(--neutral-clr-drker-grey);
+}
+
+.upvotes {
+  font-weight: 500;
+  color: #0E8A1A;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.downvotes {
+  font-weight: 500;
+  color: var(--neutral-clr-drkst-grey);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 
 .questionCta {
@@ -188,4 +219,30 @@
 
 .createAnswer {
   margin-top: 3rem;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.loader {
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid var(--secondary-clr-lter-blue);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

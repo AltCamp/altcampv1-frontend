@@ -1,16 +1,80 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import rglrStudRegStyle from './regularStudentRegister.module.css'
 import eyeIcon from '../../../../assets/general/eye.svg'
+
+import { setUser } from '../../../../app/slices/generalSlices/userSlice'
+
+import { useDispatch } from 'react-redux'
+
+import { useRegisterStudentMutation } from '../../../../app/slices/apiSlices/authSlice'
+
+import { useNavigate } from 'react-router-dom'
 
 export default function RegularStudentRegister () {
   const [enterPassword, setEnterPassword] = useState(false)
   const [toggleShowPassword, setToggleShowPassword] = useState(false)
 
+  // user data state
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [email, setEmail] = useState('')
+  const [matric, setMatric] = useState('')
+  const [track, setTrack] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmPassowrd, setConfirmPassword] = useState('')
+
+  const [errorText, setErrorText] = useState('')
+
+  const dispatch = useDispatch()
+
+  const navigate = useNavigate()
+
+  const [registerStudent, { data, isLoading, isSuccess, isError, error }] =
+    useRegisterStudentMutation()
+
+  const handleStudentRegister = e => {
+    e.preventDefault()
+    registerStudent({
+      firstname: firstName,
+      lastname: lastName,
+      email,
+      password,
+      track,
+      matric
+    })
+  }
+
+  useEffect(() => {
+    if (isSuccess) {
+      // console.log(data)
+      dispatch(setUser(data?.data))
+      navigate('/dashboard')
+    }
+    if (isError) {
+      setErrorText(error.data.message)
+    }
+    if (
+      firstName == '' ||
+      lastName == '' ||
+      email == '' ||
+      matric == '' ||
+      track == '' ||
+      password == '' ||
+      confirmPassowrd == ''
+    ) {
+      setErrorText('Please fill all fields')
+    }
+  }, [isSuccess, isError])
+
   return (
     <div className={rglrStudRegStyle.container}>
-      <h2 className={rglrStudRegStyle.header}>Register as a Regular Student</h2>
-      <form action='' className={rglrStudRegStyle.form}>
+      <h2 className={rglrStudRegStyle.header}>Register as an AltSchooler</h2>
+      <form
+        action=''
+        className={rglrStudRegStyle.form}
+        onSubmit={handleStudentRegister}
+      >
         {!enterPassword && (
           <div className={rglrStudRegStyle.stepOne}>
             <div className={rglrStudRegStyle.formGroup}>
@@ -20,6 +84,8 @@ export default function RegularStudentRegister () {
                 name='firstName'
                 id='firstName'
                 placeholder='Seun'
+                onChange={e => setFirstName(e.target.value)}
+                required
               />
             </div>
             <div className={rglrStudRegStyle.formGroup}>
@@ -29,6 +95,8 @@ export default function RegularStudentRegister () {
                 name='lastName'
                 id='lastName'
                 placeholder='Ogunlana'
+                onChange={e => setLastName(e.target.value)}
+                required
               />
             </div>
             <div className={rglrStudRegStyle.formGroup}>
@@ -38,11 +106,24 @@ export default function RegularStudentRegister () {
                 name='email'
                 id='email'
                 placeholder='seun@studybuddy.com'
+                onChange={e => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div className={rglrStudRegStyle.formGroup}>
+              <label htmlFor='matric'>Altschool Student Number</label>
+              <input
+                type='text'
+                name='matric'
+                id='matric'
+                placeholder='ALT/NIN/2220'
+                onChange={e => setMatric(e.target.value)}
+                required
               />
             </div>
             <div className={rglrStudRegStyle.formGroup}>
               <label htmlFor=''>Track</label>
-              <select name='' id=''>
+              <select name='' id='' onChange={e => setTrack(e.target.value)}>
                 <option value=''>Select Track</option>
                 <option value='product design'>Product Design</option>
                 <option value='frontend engineering'>
@@ -70,6 +151,8 @@ export default function RegularStudentRegister () {
                   name='password'
                   id='password'
                   placeholder=''
+                  onChange={e => setPassword(e.target.value)}
+                  required
                 />
                 <img
                   src={eyeIcon}
@@ -87,6 +170,8 @@ export default function RegularStudentRegister () {
                   name='confirmPassword'
                   id='confirmPassword'
                   placeholder=''
+                  onChange={e => setConfirmPassword(e.target.value)}
+                  required
                 />
                 <img
                   src={eyeIcon}
@@ -96,8 +181,20 @@ export default function RegularStudentRegister () {
                 />
               </div>
             </div>
-            <button type='submit' className={rglrStudRegStyle.submitButton}>
-              Create Account
+
+            {/* error ui */}
+            {errorText && (
+              <div className={rglrStudRegStyle.errorText}>
+                <p>{errorText}</p>
+              </div>
+            )}
+
+            <button
+              type='submit'
+              className={rglrStudRegStyle.submitButton}
+              disabled={isLoading}
+            >
+              {isLoading ? 'Unlocking the door...' : 'Create Account'}
             </button>
           </div>
         )}

@@ -1,7 +1,8 @@
 .container {
     background: white;
-    width: 16%;
+    width: 16rem;
     height: 100%;
+    overflow-y: scroll;
     font-family: var(--Inter);
     display: flex;
     flex-direction: column;
@@ -59,6 +60,12 @@
 
 .logout {
     color: #D10909;
-    font-weight: 500;
     font-size: 15px;
+    outline: none;
+    border: none;
+    background: none;
+    padding: none;
+    cursor: pointer;
+    font-weight: 600;
+    align-self: flex-start;
 }

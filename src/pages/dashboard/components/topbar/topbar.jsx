@@ -5,7 +5,17 @@ import avatar from '../../../../assets/general/avatar.png'
 
 import { SearchNormal1, Notification } from 'iconsax-react'
 
+import { useSelector } from 'react-redux'
+
 export default function Topbar () {
+  const { user } = useSelector(state => state?.user.user)
+
+  // console.log(user)
+
+  // const account = user?.account
+
+
+
   return (
     <div className={topbarStyles.container}>
       <div className={topbarStyles.notify}>
@@ -27,8 +37,12 @@ export default function Topbar () {
           <img src={avatar} alt='' className='' />
         </div>
         <div className={topbarStyles.profileDetails}>
-          <p className={topbarStyles.profileName}>Oluwaseun</p>
-          <p className={topbarStyles.profileBadge}>STUDENT</p>
+          <p className={topbarStyles.profileName}>
+            {user?.firstname}
+          </p>
+          <p className={topbarStyles.profileBadge}>
+            {user?.accountType}
+          </p>
         </div>
       </div>
     </div>
