@@ -12,6 +12,10 @@ export default function Topbar () {
 
   // console.log(user)
 
+  // const account = user?.account
+
+
+
   return (
     <div className={topbarStyles.container}>
       <div className={topbarStyles.notify}>

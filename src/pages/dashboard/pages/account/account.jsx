@@ -41,6 +41,10 @@ export default function Account () {
 
   const { user } = useSelector(state => state?.user.user)
 
+  // console.log(user)
+
+  
+
   return (
     <>
       <main className={accountStyles['main']}>
@@ -138,7 +142,7 @@ export default function Account () {
                   <span>Last Name</span>
                   <span>{user?.lastname}</span>
                 </div>
-                {user?.owner.matric && (
+                {user?.owner?.matric && (
                   <div className={accountStyles['profileDetails_sNum']}>
                     <span>Student Number</span>
                     <span>{user?.owner.matric}</span>
