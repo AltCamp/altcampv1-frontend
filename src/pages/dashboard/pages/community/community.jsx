@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import communityStyle from './community.module.css'
 
@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom'
 import { useGetAllQuestionsQuery } from '../../../../app/slices/apiSlices/communitySlices/questionSlice'
 
 export default function Community () {
+  const [sortedQuestions, setSortedQuestions] = useState()
   const { data, isLoading, isSuccess, isError, error } =
     useGetAllQuestionsQuery()
 
@@ -24,6 +25,18 @@ export default function Community () {
   //     console.log('error:', error)
   //   }
   // }, [data, isLoading, isSuccess, isError, error])
+
+  // sort the questions by most recntly added
+  useEffect(() => {
+    if (questions) {
+      // create a copy of the questions array
+      const copyQuestions = [...questions]
+      const theQuestions = copyQuestions.sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      )
+      setSortedQuestions(theQuestions)
+    }
+  }, [questions])
 
   return (
     <div className={communityStyle.container}>
@@ -49,7 +62,7 @@ export default function Community () {
               <div className={communityStyle.loader}></div>
             </div>
           )}
-          {questions?.map(question => (
+          {sortedQuestions?.map(question => (
             <Questioncard key={question._id} question={question} />
           ))}
         </div>
