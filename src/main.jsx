@@ -1,8 +1,17 @@
-import { element } from 'prop-types'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
+
+// javascript-time-ago initialztion
+
+import TimeAgo from 'javascript-time-ago'
+
+import en from 'javascript-time-ago/locale/en.json'
+import ru from 'javascript-time-ago/locale/ru.json'
+
+TimeAgo.addDefaultLocale(en)
+TimeAgo.addLocale(ru)
 
 // import redux store
 import { store } from './app/store'
@@ -40,11 +49,12 @@ import {
   Resources,
   Topics,
   Circle,
-  Quiz
-} from './pages/dashboard/pages'
+  Quiz,
 
-// import single question page
-import Questionpage from './pages/dashboard/pages/community/questionpage/questionpage'
+  // subpages of community
+  Questionpage,
+  AskQuestionPage
+} from './pages/dashboard/pages'
 
 // set up router using createBrowserRouter
 const router = createBrowserRouter([
@@ -139,8 +149,12 @@ const router = createBrowserRouter([
       },
       // dynamic route for for each question
       {
-        path: '/dashboard/community/:id',
+        path: '/dashboard/community/question/:question',
         element: <Questionpage />
+      },
+      {
+        path: '/dashboard/community/ask/:question',
+        element: <AskQuestionPage />
       },
       {
         path: '/dashboard/bookmarks',

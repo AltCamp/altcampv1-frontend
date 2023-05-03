@@ -20,11 +20,11 @@ export default function MentorRegister () {
   const handleRegisterMentor = e => {
     e.preventDefault()
     registerMentor({
-      email: email,
-      password: password,
+      email,
+      password,
       firstname: firstName,
       lastname: lastName,
-      track: track
+      track
     })
   }
 
