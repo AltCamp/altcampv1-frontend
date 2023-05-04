@@ -22,7 +22,7 @@ export default function AltStudentRegister () {
             placeholder='Akingboye'
           />
           <label htmlFor='Track'>Track</label>
-          <select name='Track' id='Track'>
+          <select name='Track' id='Track' className={altStudReg['select']}>
             <option value='Frontend'>Frontend</option>
             <option value='Backend'>Backend</option>
             <option value='Product Design'>Product Design</option>
