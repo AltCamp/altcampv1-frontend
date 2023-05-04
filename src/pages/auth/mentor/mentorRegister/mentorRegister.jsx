@@ -73,6 +73,7 @@ export default function MentorRegister () {
               id='track'
               onChange={e => setTrack(e.target.value)}
               required
+              className={mentorRegister.select}
             >
               <option value='Product Design'>Product Design</option>
               <option value='Frontend'>Frontend</option>

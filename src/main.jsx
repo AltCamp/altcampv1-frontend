@@ -156,8 +156,6 @@ const router = createBrowserRouter([
   {
     path: '/dashboard',
     element: <Layout />,
-    // a loader grabbing the user stae from loclaStorage,
-    //  checks if true or false then redirect to login if false
     loader: () => {
       if (!localStorage.getItem('user')) {
         return redirect('/regularstudent/login')

@@ -90,10 +90,21 @@
 
 /** mobile view **/
 
+@media (max-width: 1200px) {
+  .heroContent {
+    width: 60%;
+  }
+  .authContent {
+    width: 85%;
+  }
+
+}
+
 @media (max-width: 1000px) {
   .container {
     display: flex;
-    overflow: auto;
+    height: auto;
+    overflow-y: scroll;
   }
 
   .hero {
@@ -102,6 +113,7 @@
 
   .authSection {
     width: 100%;
+    margin-bottom: 1rem;
   }
 
   .mobileLogo {
