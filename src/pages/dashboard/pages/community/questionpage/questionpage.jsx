@@ -141,7 +141,7 @@ export default function Questionpage () {
                     <span className={questionPageStyles.tag}>Design</span>
                   </div>
                 </div>
-                
+
                 <div className={questionPageStyles.author}>
                   <div className={questionPageStyles.authorImg}>
                     <img src={gravatar} alt='' />
@@ -213,12 +213,10 @@ export default function Questionpage () {
           {/* question and answers section */}
           <div className={questionPageStyles.body}>
             <div className={questionPageStyles.questionGroup}>
-              <div className={questionPageStyles.question}>
-                <div
-                  // className='post_body'
-                  dangerouslySetInnerHTML={{ __html: clean }}
-                />
-              </div>
+              <div
+                className={questionPageStyles.question}
+                dangerouslySetInnerHTML={{ __html: clean }}
+              />
             </div>
 
             <div className={questionPageStyles.answers}>

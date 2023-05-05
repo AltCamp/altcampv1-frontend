@@ -190,11 +190,20 @@
   width: 60%;
 }
 
-.p {
+.question p {
   color: var(--neutral-clr-deep-grey);
   font-size: 16px;
   font-weight: 300;
   line-height: 1.5;
+}
+
+.question code {
+  background-color: var(--neutral-clr-lt-grey);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  color: var(--neutral-clr-drk-grey);
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .answers {

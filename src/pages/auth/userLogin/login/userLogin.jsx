@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import userLoginStyle from './userLogin.module.css'
 import eyeIcon from '../../../../assets/general/eye.svg'
+import eyeClosedIcon from '../../../../assets/general/eyeclosed.svg'
 
 // import apiSLice hook
 import { useLoginMutation } from '../../../../app/slices/apiSlices/authSlice'
@@ -38,10 +39,10 @@ export default function UserLogin () {
   // console.log(email, password)
 
   useEffect(() => {
-    if(isSuccess) {
+    if (isSuccess) {
       dispatch(setUser(data?.data))
       navigate('/dashboard')
-    } else if(isError) {
+    } else if (isError) {
       setErrorText(error.data.message)
     }
   }, [isSuccess, isError])
@@ -76,7 +77,7 @@ export default function UserLogin () {
               onChange={e => setPassword(e.target.value)}
             />
             <img
-              src={eyeIcon}
+              src={showPassword ? eyeClosedIcon : eyeIcon}
               alt='eye icon'
               className={userLoginStyle.showPasswordIcon}
               onClick={() => setShowPassword(!showPassword)}
