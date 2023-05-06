@@ -1,5 +1,5 @@
 .container {
-  width: 84%;
+  width: 100%;
   background: white;
   height: 4rem;
   box-shadow: 0px 2px 12px rgba(86, 86, 86, 0.15);
@@ -7,11 +7,20 @@
   align-items: center;
   justify-content: space-around;
   font-family: var(--Inter);
-  position: fixed;
+  padding: 10px;
+  position: sticky;
   top: 0;
   /* left: 16%; */
-  right: 0;
+  /* right: 0; */
   z-index: 100;
+}
+
+.hamburger {
+  display: none;
+}
+
+.logo {
+  display: none;
 }
 
 .searchBox {
@@ -38,7 +47,6 @@
   font-size: 12px;
 }
 
-
 .searchBox input::placeholder {
   color: var(--neutral-clr-grey-1);
   font-family: var(--Inter);
@@ -62,6 +70,14 @@
   display: flex;
   align-items: center;
   gap: 0.8rem;
+}
+
+.notifyMobile {
+  display: none;
+}
+
+.searchMobile {
+  display: none;
 }
 
 .profileInfo .profileImg {
@@ -98,4 +114,71 @@
   border-radius: 5px;
   padding: 0.2rem 0.5rem;
   text-transform: uppercase;
+}
+
+@media (max-width: 950px) {
+  .container {
+    width: 100%;
+    height: 5rem;
+    justify-content: space-between;
+  }
+  .hamburger {
+    display: block;
+    cursor: pointer;
+  }
+
+  .imgSmallScreen {
+    display: none;
+  }
+
+  .searchBox {
+    display: none;
+  }
+
+  .searchMobile {
+    display: flex;
+    cursor: pointer;
+  }
+
+  .notifyDesktop {
+    display: none;
+  }
+
+  .notifyMobile {
+    display: flex;
+  }
+
+  .logo {
+    display: flex;
+  }
+
+  .showSearch {
+    display: flex;
+    position: absolute;
+    top: 5.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    animation: showSearch 0.5s ease-in-out forwards;
+  }
+
+  @keyframes showSearch {
+    0% {
+      opacity: 0;
+      transform: translateX(-50%) scale(0.5);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+  }
+}
+
+@media (max-width: 450px) {
+  .img {
+    display: none;
+  }
+  .imgSmallScreen {
+    display: flex;
+  }
 }

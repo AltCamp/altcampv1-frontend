@@ -27,6 +27,10 @@ import { useUpvoteQuestionMutation } from '../../../../../app/slices/apiSlices/c
 
 import { useDownvoteQuestionMutation } from '../../../../../app/slices/apiSlices/communitySlices/questionSlice'
 
+import { removeUser } from '../../../../../app/slices/generalSlices/userSlice'
+
+import { useDispatch } from 'react-redux'
+
 import ReactTimeAgo from 'react-time-ago'
 import DOMPurify from 'isomorphic-dompurify'
 
@@ -37,6 +41,8 @@ export default function Questionpage () {
   const navigate = useNavigate()
 
   const location = useLocation()
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (location.state) {
@@ -79,7 +85,7 @@ export default function Questionpage () {
       isLoading: downvoteLoading,
       isSuccess: downvoteSuccess,
       isError: downvoteIsError,
-      error: downvoteErrorr
+      error: downvoteError
     }
   ] = useDownvoteQuestionMutation()
 
@@ -101,10 +107,18 @@ export default function Questionpage () {
     }
   }, [upvoteSuccess, downvoteSuccess, questionSuccess])
 
-  // console.log({
-  //   question: questionState,
-  //   error: upvoteError || downvoteErrorr || questionError
-  // })
+  useEffect(() => {
+    if (upvoteIsError || downvoteIsError || questionIsError) {
+      if (
+        upvoteError?.originalStatus === 401 ||
+        downvoteError?.originalStatus === 401 ||
+        questionError?.originalStatus === 401
+      ) {
+        dispatch(removeUser())
+        navigate('/regularstudent/login')
+      }
+    }
+  }, [upvoteIsError, downvoteIsError, questionIsError])
 
   return (
     <>
@@ -155,7 +169,9 @@ export default function Questionpage () {
                 <div className={questionPageStyles.otherInfo}>
                   <div className={questionPageStyles.info}>
                     <span className={questionPageStyles.timePosted}>
-                      {`Request `}{' '}
+                      <span className={questionPageStyles.requested}>
+                        Request{' '}
+                      </span>
                       {questionState &&
                         (questionSuccess ||
                           upvoteSuccess ||

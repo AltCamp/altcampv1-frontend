@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-import { baseQuery } from "../api";
+import { baseQuery } from "../../../constants/api";
+
 
 export const questionSlice = createApi({
   reducerPath: "questionApi",

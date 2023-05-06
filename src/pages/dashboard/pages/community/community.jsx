@@ -4,9 +4,12 @@ import communityStyle from './community.module.css'
 
 import Questioncard from './questioncard/questioncard'
 
-import { Link } from 'react-router-dom'
+import { Link, useNavigation } from 'react-router-dom'
 
 import { useGetAllQuestionsQuery } from '../../../../app/slices/apiSlices/communitySlices/questionSlice'
+
+import { removeUser } from '../../../../app/slices/generalSlices/userSlice'
+import { useDispatch } from 'react-redux'
 
 export default function Community () {
   const [sortedQuestions, setSortedQuestions] = useState()
@@ -15,16 +18,10 @@ export default function Community () {
 
   const questions = data?.data
 
-  // console.log(questions)
+  const dispatch = useDispatch()
 
-  // useEffect(() => {
-  //   if (isSuccess) {
-  //     console.log('data:', questions)
-  //   }
-  //   if (isError) {
-  //     console.log('error:', error)
-  //   }
-  // }, [data, isLoading, isSuccess, isError, error])
+  const navigate = useNavigation()
+  
 
   // sort the questions by most recntly added
   useEffect(() => {
@@ -37,6 +34,16 @@ export default function Community () {
       setSortedQuestions(theQuestions)
     }
   }, [questions])
+
+  useEffect(() => {
+    if (isError) {
+      if (error.originalStatus === 401) {
+        dispatch(removeUser())
+        navigate('/regularstudent/login')
+        console.log('me')
+      }
+    }
+  }, [isError, error])
 
   return (
     <div className={communityStyle.container}>
