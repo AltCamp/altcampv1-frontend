@@ -97,19 +97,6 @@ export default function RegularStudentRegister () {
           />
         </div>
         <div
-          className={`${rglrStudRegStyle.formGroup} ${rglrStudRegStyle.matric}`}
-        >
-          <label htmlFor='matric'>Altschool Student Number</label>
-          <input
-            type='text'
-            name='matric'
-            id='matric'
-            placeholder='ALT/NIN/2220'
-            onChange={e => setMatric(e.target.value)}
-            required
-          />
-        </div>
-        <div
           className={`${rglrStudRegStyle.formGroup} ${rglrStudRegStyle.track}`}
         >
           <label htmlFor=''>Track</label>
@@ -127,6 +114,19 @@ export default function RegularStudentRegister () {
             <option value='product management'>Product Management</option>
             <option value='product marketing'>Product Marketing</option>
           </select>
+        </div>
+        <div
+          className={`${rglrStudRegStyle.formGroup} ${rglrStudRegStyle.matric}`}
+        >
+          <label htmlFor='matric'>Altschool Student Number</label>
+          <input
+            type='text'
+            name='matric'
+            id='matric'
+            placeholder='ALT/NIN/2220'
+            onChange={e => setMatric(e.target.value)}
+            required
+          />
         </div>
         <div
           className={`${rglrStudRegStyle.formGroup} ${rglrStudRegStyle.email}`}
