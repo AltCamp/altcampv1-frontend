@@ -165,6 +165,10 @@
     width: 100%;
     padding: 2rem 0.5rem;
   }
+
+  .submit {
+    width: 100%;
+  }
 }
 
 @media (max-width: 900px) {
