@@ -142,3 +142,37 @@
   background-color: var(--secondary-clr-lter-blue);
   color: var(--neutral-clr-white);
 }
+
+
+@media (max-width: 600px) {
+  .container {
+    height: auto;
+    gap: 1rem;
+  }
+  .body {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: rem;
+  }
+  .otherInfo {
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .authorImg img {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+  .authorDivider {
+    display: none;
+  }
+  .answerBtn {
+    display: none;
+  }
+}
+
+@media (max-width: 450px) {
+  .requested {
+    display: none;
+  }
+}

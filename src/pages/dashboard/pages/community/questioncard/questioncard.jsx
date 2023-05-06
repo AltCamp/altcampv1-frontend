@@ -8,6 +8,7 @@ import gravatar from '../../../../../assets/general/gravatar.png'
 import ReactTimeAgo from 'react-time-ago'
 
 export default function Questioncard ({ question }) {
+
   return (
     <div className={questionCardStyles.container}>
       <div className={questionCardStyles.header}>
@@ -31,7 +32,9 @@ export default function Questioncard ({ question }) {
             </span>
             <span className={questionCardStyles.divider}>|</span>
             <span className={questionCardStyles.timePosted}>
-              {`Last Requested `}
+              <span className={questionCardStyles.requested}>
+                Requested{' '}
+              </span>
               {<ReactTimeAgo date={question.createdAt} locale='en-US' />}
             </span>
           </div>
