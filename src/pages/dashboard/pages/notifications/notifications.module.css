@@ -149,3 +149,22 @@
   border-radius: 4px;
   padding: 0.5rem 0.7rem;
 }
+
+.modalSection{
+    display: flex;
+    flex-direction: row;
+    /* border: 2px solid red; */
+    justify-content:space-around;
+    width: 80px;
+    padding: 0;
+    margin: 0;
+}
+
+.verticalLine{
+  /* border: none; */
+  border-right: 1px solid black;
+  /* margin: 1.5rem; */
+  /* border-right: 1px solid var(--neutral-clr-lt-grey); */
+  padding: 0;
+  margin: 0;
+}
