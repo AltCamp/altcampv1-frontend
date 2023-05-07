@@ -20,11 +20,11 @@ export default function MentorRegister () {
   const handleRegisterMentor = e => {
     e.preventDefault()
     registerMentor({
-      email: email,
-      password: password,
+      email,
+      password,
       firstname: firstName,
       lastname: lastName,
-      track: track
+      track
     })
   }
 
@@ -73,6 +73,7 @@ export default function MentorRegister () {
               id='track'
               onChange={e => setTrack(e.target.value)}
               required
+              className={mentorRegister.select}
             >
               <option value='Product Design'>Product Design</option>
               <option value='Frontend'>Frontend</option>

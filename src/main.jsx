@@ -1,8 +1,17 @@
-import { element } from 'prop-types'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, redirect, RouterProvider } from 'react-router-dom'
 import './index.css'
+
+// javascript-time-ago initialztion
+
+import TimeAgo from 'javascript-time-ago'
+
+import en from 'javascript-time-ago/locale/en.json'
+import ru from 'javascript-time-ago/locale/ru.json'
+
+TimeAgo.addDefaultLocale(en)
+TimeAgo.addLocale(ru)
 
 // import redux store
 import { store } from './app/store'
@@ -40,11 +49,12 @@ import {
   Resources,
   Topics,
   Circle,
-  Quiz
-} from './pages/dashboard/pages'
+  Quiz,
 
-// import single question page
-import Questionpage from './pages/dashboard/pages/community/questionpage/questionpage'
+  // subpages of community
+  Questionpage,
+  AskQuestionPage
+} from './pages/dashboard/pages'
 
 // set up router using createBrowserRouter
 const router = createBrowserRouter([
@@ -55,6 +65,12 @@ const router = createBrowserRouter([
   {
     path: '/altstudent',
     element: <AltStudent />,
+    loader: () => {
+      if (localStorage.getItem('user')) {
+        return redirect('/dashboard')
+      }
+      return null
+    },
     children: [
       {
         path: '/altstudent/login',
@@ -79,6 +95,12 @@ const router = createBrowserRouter([
   {
     path: '/regularstudent',
     element: <RegularStudent />,
+    loader: () => {
+      if (localStorage.getItem('user')) {
+        return redirect('/dashboard')
+      }
+      return null
+    },
     children: [
       {
         path: '/regularstudent/login',
@@ -103,6 +125,12 @@ const router = createBrowserRouter([
   {
     path: '/mentor',
     element: <Mentor />,
+    loader: () => {
+      if (localStorage.getItem('user')) {
+        return redirect('/dashboard')
+      }
+      return null
+    },
     children: [
       {
         path: '/mentor/login',
@@ -128,6 +156,12 @@ const router = createBrowserRouter([
   {
     path: '/dashboard',
     element: <Layout />,
+    loader: () => {
+      if (!localStorage.getItem('user')) {
+        return redirect('/regularstudent/login')
+      }
+      return null
+    },
     children: [
       {
         index: true,
@@ -139,8 +173,12 @@ const router = createBrowserRouter([
       },
       // dynamic route for for each question
       {
-        path: '/dashboard/community/:id',
+        path: '/dashboard/community/question/:question',
         element: <Questionpage />
+      },
+      {
+        path: '/dashboard/community/ask/:question',
+        element: <AskQuestionPage />
       },
       {
         path: '/dashboard/bookmarks',
@@ -150,9 +188,9 @@ const router = createBrowserRouter([
         path: '/dashboard/account',
         element: <Account />,
         children: [
-          { 
+          {
             index: true,
-            element: <Editprofile />,
+            element: <Editprofile />
           },
           {
             path: '/dashboard/account/resetpassword',
@@ -163,12 +201,10 @@ const router = createBrowserRouter([
             element: <DeactivateAcc />
           }
         ]
-
       },
       {
         path: '/dashboard/contributors',
         element: <Contributors />
-      
       },
       {
         path: '/dashboard/notifications',
