@@ -108,6 +108,9 @@ export default function RegularStudentRegister () {
           >
             <option value=''>Select Track</option>
             <option value='backend engineering'>Backend Engineering</option>
+            <option value='cloud engineering'>Cloud Engineering</option>
+            <option value='data analysis'>Data Analysis</option>
+            <option value='data engineering'>Data Engineering</option>
             <option value='data science'>Data Science</option>
             <option value='frontend engineering'>Frontend Engineering</option>
             <option value='product design'>Product Design</option>
