@@ -4,15 +4,21 @@ import communityStyle from './community.module.css'
 
 import Questioncard from './questioncard/questioncard'
 
-import { Link, useNavigation } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 
 import { useGetAllQuestionsQuery } from '../../../../app/slices/apiSlices/communitySlices/questionSlice'
 
 import { removeUser } from '../../../../app/slices/generalSlices/userSlice'
 import { useDispatch } from 'react-redux'
 
+import { CloseCircle } from 'iconsax-react'
+
+import greenCheck from '../../../../assets/general/greencreatepostcheck.svg'
+
 export default function Community () {
   const [sortedQuestions, setSortedQuestions] = useState()
+  const [newPostCreated, setNewPostCreated] = useState(false)
+
   const { data, isLoading, isSuccess, isError, error } =
     useGetAllQuestionsQuery()
 
@@ -20,8 +26,29 @@ export default function Community () {
 
   const dispatch = useDispatch()
 
-  const navigate = useNavigation()
-  
+  const navigate = useNavigate()
+
+  const location = useLocation()
+
+  // check location state for new post created and clear it after handleNewPostCreated is called
+
+  useEffect(() => {
+    if (location.state) {
+      if (location.state.created) {
+        setNewPostCreated(true)
+      } else {
+        setNewPostCreated(false)
+      }
+    }
+  }, [location])
+
+  const handleNewPostCreated = () => {
+    setNewPostCreated(!newPostCreated)
+    // reload the page
+    window.location.reload()
+    navigate(location.pathname, { state: {} })
+
+  }
 
   // sort the questions by most recntly added
   useEffect(() => {
@@ -45,8 +72,39 @@ export default function Community () {
     }
   }, [isError, error])
 
+  useEffect(() => {
+    if (newPostCreated) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'auto'
+    }
+  }, [newPostCreated])
+
   return (
     <div className={communityStyle.container}>
+      {newPostCreated && (
+        <div className={communityStyle.creationSuccessOverlay}>
+          <div className={communityStyle.creationSuccess}>
+            <CloseCircle
+              size='20'
+              className={communityStyle.closeIcon}
+              onClick={handleNewPostCreated}
+            />
+            <div className={communityStyle.successIcon}>
+              <img src={greenCheck} alt='' className={communityStyle.check} />
+            </div>
+            <p className={communityStyle.successText}>
+              Your question has been submitted successfully.
+            </p>
+            <button
+              className={communityStyle.successBtn}
+              onClick={handleNewPostCreated}
+            >
+              Done
+            </button>
+          </div>
+        </div>
+      )}
       <div className={communityStyle.sectionOne}>
         <div className={communityStyle.header}>
           <div className={communityStyle.title}>
