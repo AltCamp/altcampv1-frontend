@@ -79,7 +79,7 @@ export default function Questionpage () {
       isLoading: downvoteLoading,
       isSuccess: downvoteSuccess,
       isError: downvoteIsError,
-      error: downvoteErrorr
+      error: downvoteError
     }
   ] = useDownvoteQuestionMutation()
 
@@ -101,10 +101,6 @@ export default function Questionpage () {
     }
   }, [upvoteSuccess, downvoteSuccess, questionSuccess])
 
-  // console.log({
-  //   question: questionState,
-  //   error: upvoteError || downvoteErrorr || questionError
-  // })
 
   return (
     <>
@@ -155,7 +151,9 @@ export default function Questionpage () {
                 <div className={questionPageStyles.otherInfo}>
                   <div className={questionPageStyles.info}>
                     <span className={questionPageStyles.timePosted}>
-                      {`Request `}{' '}
+                      <span className={questionPageStyles.requested}>
+                        Request{' '}
+                      </span>
                       {questionState &&
                         (questionSuccess ||
                           upvoteSuccess ||

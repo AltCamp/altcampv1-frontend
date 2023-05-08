@@ -86,6 +86,7 @@
   align-items: center;
   text-decoration: none;
   border-bottom: 4px solid var(--neutral-clr-lt-grey);
+  color: var(--neutral-clr-drkst-grey);
 }
 
 /** mobile view **/
