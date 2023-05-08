@@ -3,6 +3,9 @@ import notificationsStyles from "./notifications.module.css";
 import ReactPaginate from "react-paginate";
 import EmptyNotification from "../../../../assets/general/EmptyNotification.png";
 import { Link } from "react-router-dom";
+import FilterModal from "./modals/filterModal";
+import SortModal from "./modals/sortModal";
+
 export default function Notifications() {
   const [notification, setNotification] = useState(true);
 
@@ -115,17 +118,21 @@ export default function Notifications() {
           </div>
         </div>
       )}
-{/* Notifications content */}
-      
+      {/* Notifications content */}
+
       {notification && (
         <div className={notificationsStyles.notifications}>
           <div className={notificationsStyles.notificationHeader}>
             <h3>Notifications</h3>
-            
-            {/* modal icons */}
-            <div></div>
-          </div>
 
+            {/* modal icons */}
+
+            <div className={notificationsStyles.modalSection}>
+              <SortModal />
+              <div className={notificationsStyles.verticalLine}></div>
+              <FilterModal />
+            </div>
+          </div>
           <div className={notificationsStyles.main}>
             {notificationsToDisplay.map((item) => (
               <div>

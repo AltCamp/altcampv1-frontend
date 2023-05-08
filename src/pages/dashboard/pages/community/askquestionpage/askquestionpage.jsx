@@ -34,7 +34,7 @@ export default function AskQuestionPage () {
 
   useEffect(() => {
     if (isSuccess) {
-      navigate('/dashboard/community')
+      navigate('/dashboard/community', { state: { created: true } })
     }
   }, [isSuccess])
 

@@ -44,6 +44,7 @@ export default function Account () {
   // console.log(user)
 
   
+  
 
   return (
     <>
@@ -164,7 +165,7 @@ export default function Account () {
                 </div>
               </section>
               <p className={accountStyles['edit']} onClick={handleEdit}>
-                Edit message
+                Edit details
               </p>
             </div>
           </article>

@@ -97,6 +97,28 @@ export default function RegularStudentRegister () {
           />
         </div>
         <div
+          className={`${rglrStudRegStyle.formGroup} ${rglrStudRegStyle.track}`}
+        >
+          <label htmlFor=''>Track</label>
+          <select
+            name=''
+            id=''
+            onChange={e => setTrack(e.target.value)}
+            required
+          >
+            <option value=''>Select Track</option>
+            <option value='backend engineering'>Backend Engineering</option>
+            <option value='cloud engineering'>Cloud Engineering</option>
+            <option value='data analysis'>Data Analysis</option>
+            <option value='data engineering'>Data Engineering</option>
+            <option value='data science'>Data Science</option>
+            <option value='frontend engineering'>Frontend Engineering</option>
+            <option value='product design'>Product Design</option>
+            <option value='product management'>Product Management</option>
+            <option value='product marketing'>Product Marketing</option>
+          </select>
+        </div>
+        <div
           className={`${rglrStudRegStyle.formGroup} ${rglrStudRegStyle.matric}`}
         >
           <label htmlFor='matric'>Altschool Student Number</label>
@@ -108,22 +130,6 @@ export default function RegularStudentRegister () {
             onChange={e => setMatric(e.target.value)}
             required
           />
-        </div>
-        <div
-          className={`${rglrStudRegStyle.formGroup} ${rglrStudRegStyle.track}`}
-        >
-          <label htmlFor=''>Track</label>
-          <select
-            name=''
-            id=''
-            onChange={e => setTrack(e.target.value)}
-            required
-          >
-            <option value=''>Select Track</option>
-            <option value='product design'>Product Design</option>
-            <option value='frontend engineering'>Frontend Engineering</option>
-            <option value='backend engineering'>Backend Engineering</option>
-          </select>
         </div>
         <div
           className={`${rglrStudRegStyle.formGroup} ${rglrStudRegStyle.email}`}
