@@ -39,7 +39,7 @@ export default function Account () {
     fontWeight: '600'
   }
 
-  const { user } = useSelector(state => state?.user.user)
+  const {user} = useSelector(state => state?.user.user)
 
   // console.log(user)
 
@@ -55,7 +55,7 @@ export default function Account () {
                 <img src={img} alt='' />
               </div>
               <h1 className={accountStyles['sidePanel_profileName']}>
-                {user?.firstname} {user?.lastname}
+                {user?.account.firstname} {user?.account.lastname}
               </h1>
             </div>
             <div className={accountStyles['links']}>
@@ -136,11 +136,11 @@ export default function Account () {
               >
                 <div className={accountStyles['profileDetails_fName']}>
                   <span>First Name</span>
-                  <span>{user?.firstname}</span>
+                  <span>{user?.account.firstname}</span>
                 </div>
                 <div className={accountStyles['profileDetails_lName']}>
                   <span>Last Name</span>
-                  <span>{user?.lastname}</span>
+                  <span>{user?.account.lastname}</span>
                 </div>
                 {user?.owner?.matric && (
                   <div className={accountStyles['profileDetails_sNum']}>
@@ -160,7 +160,7 @@ export default function Account () {
                 )}
                 <div className={accountStyles['profileDetails_email']}>
                   <span>Email</span>
-                  <span>{user?.email}</span>
+                  <span>{user?.account.email}</span>
                 </div>
               </section>
               <p className={accountStyles['edit']} onClick={handleEdit}>
