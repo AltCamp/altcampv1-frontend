@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import sidebarStyle from './sidebar.module.css'
 import darkLogo from '../../../../assets/general/AuthBlackLogo.svg'
 import { NavLink, useNavigate } from 'react-router-dom'
@@ -21,6 +22,8 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { removeUser } from '../../../../app/slices/generalSlices/userSlice'
 
+import decode from 'jwt-decode'
+
 export default function Sidebar ({ toggleSideBar, handleSideBar }) {
   let activeStyle = {
     color: '#474AA3',
@@ -31,11 +34,21 @@ export default function Sidebar ({ toggleSideBar, handleSideBar }) {
 
   const navigate = useNavigate()
 
-  // const user = useSelector(state => state?.user.user)
+  const user = useSelector(state => state?.user.user)
 
-  // console.log(user)
+  // console.log(decode(user.token).exp)
 
   const toggleWidth = window.innerWidth < 950
+
+  // automatically log user out if token as expired
+  useEffect(() => {
+    if (user) {
+      if (decode(user.token).exp < Date.now() / 1000) {
+        dispatch(removeUser())
+        navigate('/regularstudent/login')
+      }
+    }
+  }, [user])
 
   return (
     <div

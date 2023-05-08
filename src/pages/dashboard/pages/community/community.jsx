@@ -8,8 +8,6 @@ import { Link, useNavigate, useLocation } from 'react-router-dom'
 
 import { useGetAllQuestionsQuery } from '../../../../app/slices/apiSlices/communitySlices/questionSlice'
 
-import { removeUser } from '../../../../app/slices/generalSlices/userSlice'
-import { useDispatch } from 'react-redux'
 
 import { CloseCircle } from 'iconsax-react'
 
@@ -23,8 +21,6 @@ export default function Community () {
     useGetAllQuestionsQuery()
 
   const questions = data?.data
-
-  const dispatch = useDispatch()
 
   const navigate = useNavigate()
 
@@ -62,15 +58,6 @@ export default function Community () {
     }
   }, [questions])
 
-  useEffect(() => {
-    if (isError) {
-      if (error.originalStatus === 401) {
-        dispatch(removeUser())
-        navigate('/regularstudent/login')
-        console.log('me')
-      }
-    }
-  }, [isError, error])
 
   useEffect(() => {
     if (newPostCreated) {
