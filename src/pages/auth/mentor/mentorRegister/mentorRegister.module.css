@@ -30,7 +30,7 @@
 }
 
 .formGroup input,
-select {
+.select {
   font-weight: 400;
   height: 2.5rem;
   border: 1px solid var(--neutral-clr-grey-2);
@@ -134,6 +134,11 @@ select {
   color: var(--neutral-clr-white);
   margin-top: 2.5rem;
   cursor: pointer;
+}
+
+.create:disabled {
+  background-color: var(--neutral-clr-grey-2);
+  cursor: not-allowed;
 }
 
 @media (max-width: 425px) {

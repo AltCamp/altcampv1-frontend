@@ -1,0 +1,17 @@
+.container{
+    width: 100%;
+    background: var(--neutral-clr-white);
+    }
+    .header{
+        background: var( --primary-clr-pink-1);
+        width: 100%;
+        height: 3rem; 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 2rem;
+    }
+    .header p{
+        font-size: 18px;
+        line-height: 32px;
+    }
