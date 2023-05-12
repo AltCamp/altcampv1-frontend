@@ -137,3 +137,8 @@
   }
 }
 
+@media (max-width: 425px) {
+  .mentorForm .mentorName {
+    display: block;
+  }
+}
