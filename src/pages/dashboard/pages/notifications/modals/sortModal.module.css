@@ -19,9 +19,9 @@
 
 .sortContent {
   position: absolute;
-  transform: translate(-50%, -50%);
-  top: 40%;
-  left: 83.5%;
+  /* transform: translate(-50%, -50%); */
+  top: 20%;
+  left: 82.25%;
   /* box-sizing: border-box; */
 
   /* Auto layout */

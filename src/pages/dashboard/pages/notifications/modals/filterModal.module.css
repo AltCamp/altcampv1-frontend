@@ -21,9 +21,9 @@
 
 .filterContent {
   position: absolute;
-  transform: translate(-50%, -50%);
-  top: 40%;
-  left: 87%;
+  /* transform: translate(-50%, -50%); */
+  top: 20%;
+  left: 84.75%;
   /* box-sizing: border-box; */
 
   /* Auto layout */
