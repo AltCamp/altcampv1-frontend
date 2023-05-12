@@ -65,15 +65,6 @@ export default function filterModal() {
             </div>
           ))}
         </div>
-        // <div className={filterStyles.filterContent}>
-        //   <h4 className={filterStyles.heading}>Filter by showing</h4>
-        //   <div className={filterStyles.options}>
-        //     <hr />
-        //     <div>Unread notifications only</div>
-        //     <hr />
-        //     <div>Read notifications only</div>
-        //   </div>
-        // </div>
       )}
     </div>
   );
