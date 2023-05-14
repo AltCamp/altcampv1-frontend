@@ -34,7 +34,7 @@ export default function filterModal() {
     },
   ];
   return (
-    <div ref={modal}>
+    <div ref={modal} className={filterStyles.modalParent}>
       <img
         src={filterIcon}
         alt="filter"

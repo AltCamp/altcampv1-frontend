@@ -3,10 +3,6 @@
   margin-bottom: 15px;
 }
 
-/* .options hr {
-  border: 0 none;
-  border: 0.5px solid #ced4da;
-} */
 
 .options {
   line-height: 40px;
@@ -17,18 +13,22 @@
     cursor: pointer;
 }
 
+.modalParent{
+  position: relative;
+}
+
 .sortContent {
   position: absolute;
-  /* transform: translate(-50%, -50%); */
-  top: 20%;
-  left: 82.25%;
-  /* box-sizing: border-box; */
+
+  top: 35px;
+  right: 0px;
+
 
   /* Auto layout */
 
   display: flex;
   flex-direction: column;
-  /* align-items: flex-start; */
+
   padding: 16px 24px;
   gap: 5px;
 
