@@ -302,7 +302,7 @@ button:hover {
 
 @media screen and (min-width:601px) and (max-width:1024px) {
     .intro-area {
-        height: 448px;
+        height: max-content;
         padding: 100px 100px 100px;
     }
 

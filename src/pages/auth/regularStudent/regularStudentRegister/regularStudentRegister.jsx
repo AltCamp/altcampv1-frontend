@@ -6,6 +6,9 @@ import eyeIcon from '../../../../assets/general/eye.svg'
 export default function RegularStudentRegister () {
   const [enterPassword, setEnterPassword] = useState(false)
   const [toggleShowPassword, setToggleShowPassword] = useState(false)
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [emailAddress, setEmailAddress] = useState('')
 
   return (
     <div className={rglrStudRegStyle.container}>

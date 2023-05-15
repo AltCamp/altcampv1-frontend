@@ -1,56 +1,110 @@
 import React from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import mainNavbarStyles from './MainNavbar.module.css'
-import { Container, Nav, Navbar } from 'react-bootstrap';
+import { HambergerMenu } from 'iconsax-react';
+import { useState } from 'react';
 
 const MainNavbar = () => {
-    return (                
-        <>
+    const [openRegisterOptions, setOpenRegisterOptions] = useState(false)
 
-                    <Navbar bg="lt" expand="lg" style={{padding:'0'}}>
-                        <Container>
-                    <nav className={mainNavbarStyles['main-nav']}>
-                        <div className={mainNavbarStyles['brand-logo']}>
-                            <Navbar.Brand href="#home">
-                                <img src="src\assets\general\Authlogo.png" alt="" />
-                            </Navbar.Brand>
-                        </div>
-                        <div className={mainNavbarStyles['nav-container']}>
-                            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                            <Navbar.Collapse id="basic-navbar-nav">
-                                <Nav className={mainNavbarStyles['nav-paths']}>
-                                    <Nav.Link href="#home">Home</Nav.Link>
-                                    <Nav.Link href="#link">About</Nav.Link>
-                                    <Nav.Link href="#link2">Features </Nav.Link>
-                                    <div href="#link3">
-                                        <button className={mainNavbarStyles['get-started-btn']}>
-                                            Get Started
-                                        </button>
-                                        <section className={mainNavbarStyles['register-options']}>
-                                        <ul>
-                                            <li>
-                                                <NavLink>As an Altschooler</NavLink>
-                                            </li>
-                                            <li>
-                                                <NavLink>
-                                                    As an Instructor/Mentor
-                                                </NavLink>
-                                            </li>
-                                            <li>
-                                                <NavLink>As a Regular Student</NavLink>
-                                            </li>
-                                        </ul>
-                                    </section>
-                                    </div>
-    
-                                </Nav>
-                            </Navbar.Collapse>
-                        </div>
-                    </nav>
-                    </Container>
-                </Navbar>
-         </>
-        );
+
+    return (
+        <>
+            <nav className={mainNavbarStyles['main-nav']}>
+                <NavLink href="">
+                    <img src="../src/assets/general/Authlogo.png" alt="logo" />
+                </NavLink>
+                <ul className={mainNavbarStyles['nav-paths']}>
+                    <li><NavLink href="#">Home</NavLink></li>
+                    <li><NavLink href="#">About</NavLink></li>
+                    <li><NavLink href="#">Features</NavLink></li>
+                    <button className={mainNavbarStyles['get-started-btn']}><NavLink href="#">Get Started</NavLink></button>
+                    <section className={`${mainNavbarStyles['register-options']} ${openRegisterOptions ? mainNavbarStyles['open'] : ''} `}>
+                        <ul>
+                            <li>
+                                <NavLink>As an Altschooler</NavLink>
+                            </li>
+                            <li>
+                                <NavLink>
+                                    As an Instructor/Mentor
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink>As a Regular Student</NavLink>
+                            </li>
+                        </ul>
+                    </section>
+                    <section className={`${mainNavbarStyles['nav-options']} ${openRegisterOptions ? mainNavbarStyles['open'] : ''} `}>
+                        <ul>
+                            <li>
+                                <NavLink>Home</NavLink>
+                            </li>
+                            <li>
+                                <NavLink>About</NavLink>
+                            </li>
+                            <li>
+                                <NavLink>Features</NavLink>
+                            </li>
+                        </ul>
+                    </section>
+                </ul>
+                <div className={mainNavbarStyles['options-icon']} onClick={() => {
+                    console.log('clicked')
+                    setOpenRegisterOptions(prev => !prev)
+                }}>
+                    <HambergerMenu size="32" color="#fff" />
+                </div>
+
+            </nav>
+        </>
+    );
 }
 
 export default MainNavbar
+
+
+{/* <>
+
+<Navbar bg="lt" expand="lg" style={{ padding: '0' }}>
+    <Container>
+        <nav className={mainNavbarStyles['main-nav']}>
+            <div className={mainNavbarStyles['brand-logo']}>
+                <Navbar.Brand href="#home">
+                    <img src="src\assets\general\Authlogo.png" alt="" />
+                </Navbar.Brand>
+            </div>
+            <div className={mainNavbarStyles['nav-container']}>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className={mainNavbarStyles['nav-paths']}>
+                        <Nav.Link href="#home">Home</Nav.Link>
+                        <Nav.Link href="#link">About</Nav.Link>
+                        <Nav.Link href="#link2">Features </Nav.Link>
+                        <div href="#link3">
+                            <button className={mainNavbarStyles['get-started-btn']}>
+                                Get Started
+                            </button>
+                            <section className={mainNavbarStyles['register-options']}>
+                                <ul>
+                                    <li>
+                                        <NavLink>As an Altschooler</NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink>
+                                            As an Instructor/Mentor
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink>As a Regular Student</NavLink>
+                                    </li>
+                                </ul>
+                            </section>
+                        </div>
+
+                    </Nav>
+                </Navbar.Collapse>
+            </div>
+        </nav>
+    </Container>
+</Navbar>
+</> */}
