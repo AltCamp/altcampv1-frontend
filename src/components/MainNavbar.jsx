@@ -12,7 +12,7 @@ const MainNavbar = () => {
         <>
             <nav className={mainNavbarStyles['main-nav']}>
                 <NavLink href="">
-                    <img src="../src/assets/general/Authlogo.png" alt="logo" />
+                    <img src="../src/assets/general/AuthWhiteLogo.svg" alt="logo" />
                 </NavLink>
                 <ul className={mainNavbarStyles['nav-paths']}>
                     <li><NavLink href="#">Home</NavLink></li>
