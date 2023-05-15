@@ -24,7 +24,7 @@
   /* Neutral Colors */
   --neutral-clr-black: #000;
   --neutral-clr-white: #fff;
-
+  
   --neutral-clr-deep-grey: #212529;
   --neutral-clr-drkst-grey: #343a40;
   --neutral-clr-drker-grey: #495057;
@@ -35,6 +35,7 @@
   --neutral-clr-lter-grey: #e9ecef;
   --neutral-clr-ltest-grey: #f8f9fa;
 
+  
   /* Secondary Colors */
   --secondary-clr-deep-blue: #151631;
   --secondary-clr-drkst-blue: #232552;
