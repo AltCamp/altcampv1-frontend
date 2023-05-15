@@ -1,11 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 // import { motion, AnimatePresence } from 'framer-motion'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import userLoginStyle from './userLogin.module.css'
 import eyeIcon from '../../../../assets/general/eye.svg'
+import eyeClosedIcon from '../../../../assets/general/eyeclosed.svg'
 
 // import apiSLice hook
 import { useLoginMutation } from '../../../../app/slices/apiSlices/authSlice'
+
+import { useDispatch } from 'react-redux'
+
+import { setUser } from '../../../../app/slices/generalSlices/userSlice'
 
 export default function UserLogin () {
   const [showPassword, setShowPassword] = useState(false)
@@ -13,8 +18,14 @@ export default function UserLogin () {
   const parentPath = useLocation().pathname.split('/')[1]
   // console.log(parentPath)
 
+  const [errorText, setErrorText] = useState('')
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
+  const dispatch = useDispatch()
+
+  const navigate = useNavigate()
 
   // console.log(email, password)
   const [login, { isSuccess, isLoading, data, isError, error }] =
@@ -25,15 +36,18 @@ export default function UserLogin () {
     login({ email: email, password: password })
   }
 
-  console.log(email, password)
+  // console.log(email, password)
 
-  // useEffect(() => {
-  //   if(isSuccess) {
-  //     set
-  //   }
-  // }, [isSuccess, isError])
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(setUser(data?.data))
+      navigate('/dashboard')
+    } else if (isError) {
+      setErrorText(error.data.message)
+    }
+  }, [isSuccess, isError])
 
-  // console.log(data)
+  // console.log(data?.data)
   // console.log(error)
 
   return (
@@ -63,19 +77,27 @@ export default function UserLogin () {
               onChange={e => setPassword(e.target.value)}
             />
             <img
-              src={eyeIcon}
+              src={showPassword ? eyeClosedIcon : eyeIcon}
               alt='eye icon'
               className={userLoginStyle.showPasswordIcon}
               onClick={() => setShowPassword(!showPassword)}
             />
           </div>
         </div>
+
+        {/* error ui */}
+        {errorText && (
+          <div className={userLoginStyle.errorText}>
+            <p>{errorText}</p>
+          </div>
+        )}
+
         <button
           className={userLoginStyle.loginButton}
           type='submit'
           disabled={isLoading}
         >
-          {isLoading ? 'Unlocking the door' : 'Login'}
+          {isLoading ? 'Unlocking the door...' : 'Login'}
         </button>
         <Link
           to={`/${parentPath}/login/forgotpassword`}

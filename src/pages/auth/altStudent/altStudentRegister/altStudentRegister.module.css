@@ -23,7 +23,7 @@
   margin-top: 10px;
 }
 .registerForm form input,
-select {
+.select {
   font-weight: 400;
   width: 100%;
   height: 2.5rem;
