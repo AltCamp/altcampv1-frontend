@@ -1,5 +1,5 @@
 import landingPageStyles from './landing.module.css'
-import Navbar from '../../components/MainNavbar'
+import Navbar from '../../components/Navbar'
 import {
   Bubble,
   Convert3DCube,
@@ -51,6 +51,7 @@ const Landing = () => {
             className={`${landingPageStyles['decor-box']} ${landingPageStyles['decor-box-1']}`}
           ></div>
           <div className={landingPageStyles['about-us-image']}>
+            {/* <img src="/Team-demonstration.png" alt="" /> */}
             <img src={heroImage2} alt='' />
           </div>
           <div
@@ -163,10 +164,10 @@ const Landing = () => {
               to interact with your circle members as a group
             </p>
           </div>
-        </div>
           <button>
             <a href='/regularstudent/login'>Get Started</a>
           </button>
+        </div>
       </div>
       <div className={landingPageStyles['outro-area']}>
         <div className={landingPageStyles['icon-boxes-area']}>
