@@ -38,6 +38,9 @@ import Editprofile from './pages/dashboard/pages/account/profileEdit/editprofile
 import Resetpass from './pages/dashboard/pages/account/resetpassword/resetpass'
 import DeactivateAcc from './pages/dashboard/pages/account/deactivateaccount/deactivateAcc'
 
+//import error component
+import Error from './pages/error/error'
+
 // import dashboard pages from layout
 import {
   Community,
@@ -60,7 +63,9 @@ import {
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Landing />
+    element: <Landing />,
+    errorElement: <Error />,
+    
   },
   {
     path: '/altstudent',
