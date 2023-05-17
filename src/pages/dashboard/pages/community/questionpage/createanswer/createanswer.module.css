@@ -52,9 +52,9 @@
   transition: all 0.3s ease;
 }
 
-.form button:hover {
+/* .form button:hover {
   background-color: var(--secondary-clr-lttest-blue);
-}
+} */
 
 .form button:disabled {
   background-color: var(--neutral-clr-grey-2);
