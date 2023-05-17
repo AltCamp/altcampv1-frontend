@@ -8,7 +8,10 @@ export default function DeactivateAcc() {
             <p>Account Deactivation</p>
         </div>
         <div className={deactivateAcc['body']}>
-            
+            <p>
+            Deactivating your account means your details will be removed from this platform. This might not be reverseable.
+            </p>
+            <input type='submit' value='Deactivate Account'/>
         </div>
     </div>
   )

@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { createBrowserRouter, redirect, RouterProvider } from 'react-router-dom'
 import './index.css'
 
@@ -41,6 +42,9 @@ import Myprojects from './pages/dashboard/pages/account/myprojects/myprojects'
 import Picturechange from './pages/dashboard/pages/account/changeprofilepicture/picturechange'
 
 
+//import error component
+import Error from './pages/error/error'
+
 // import dashboard pages from layout
 import {
   Community,
@@ -65,7 +69,9 @@ import Updatebio from './pages/dashboard/pages/account/updatebio/updateBio'
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Landing />
+    element: <Landing />,
+    errorElement: <Error />,
+    
   },
   {
     path: '/altstudent',
