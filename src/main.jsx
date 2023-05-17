@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { createBrowserRouter, redirect, RouterProvider } from 'react-router-dom'
 import './index.css'
 
@@ -37,6 +38,9 @@ import Layout from './pages/dashboard/layout/layout'
 import Editprofile from './pages/dashboard/pages/account/profileEdit/editprofile'
 import Resetpass from './pages/dashboard/pages/account/resetpassword/resetpass'
 import DeactivateAcc from './pages/dashboard/pages/account/deactivateaccount/deactivateAcc'
+import Myprojects from './pages/dashboard/pages/account/myprojects/myprojects'
+import Picturechange from './pages/dashboard/pages/account/changeprofilepicture/picturechange'
+
 
 //import error component
 import Error from './pages/error/error'
@@ -58,6 +62,8 @@ import {
   Questionpage,
   AskQuestionPage
 } from './pages/dashboard/pages'
+import Updatebio from './pages/dashboard/pages/account/updatebio/updateBio'
+
 
 // set up router using createBrowserRouter
 const router = createBrowserRouter([
@@ -194,6 +200,10 @@ const router = createBrowserRouter([
         element: <Account />,
         children: [
           {
+            path: '/dashboard/account/myprojects',
+            element: <Myprojects />
+          },
+          {
             index: true,
             element: <Editprofile />
           },
@@ -204,9 +214,19 @@ const router = createBrowserRouter([
           {
             path: '/dashboard/account/deactivateaccount',
             element: <DeactivateAcc />
+          },
+          {
+            path: '/dashboard/account/updateprofilepicture',
+            element: <Picturechange />
+          },
+          {
+            path: '/dashboard/account/updatebio',
+            element: <Updatebio />
           }
-        ]
+        ],
+        
       },
+     
       {
         path: '/dashboard/contributors',
         element: <Contributors />
