@@ -18,7 +18,6 @@ export default function Answercard ({ answer }) {
     ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling']
   })
 
-  // console.log(answer)
   const { user } = useSelector(state => state?.user.user)
 
   const answerId = answer?._id
@@ -45,11 +44,15 @@ export default function Answercard ({ answer }) {
     downvoteAnswer(answerId)
   }
 
+
   return (
     <div className={answerCardStyles.container}>
       <div className={answerCardStyles.header}>
         <span className={answerCardStyles.name}>
-          {answer?.author?.firstname} {answer?.author?.lastname}
+          {answer?.author?.firstname} {answer?.author?.lastname}{' '}
+          {answer?.author?.accountType == 'Mentor' && (
+            <span className={answerCardStyles.mentor}>Instructor</span>
+          )}
         </span>
         <span className={answerCardStyles.divider}></span>
         <span className={answerCardStyles.timeAnswered}>
