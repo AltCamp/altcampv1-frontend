@@ -79,7 +79,8 @@ export default function MentorRegister() {
             />
           </div>
         </div>
-        <label htmlFor="track">Track</label>
+        <div className={mentorRegister.formGroup}>
+            <label htmlFor="track">Track</label>
         <select
           name="track"
           id="track"
@@ -99,6 +100,7 @@ export default function MentorRegister() {
           <option value="Producting Marketing">Producting Marketing</option>
         </select>
         
+      </div>
           <div className={mentorRegister.formGroup}>
         <label htmlFor="email">Email Address</label>
         <input
