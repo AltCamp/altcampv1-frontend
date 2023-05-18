@@ -126,14 +126,14 @@
   gap: 0.5rem;
   font-size: 14px;
   font-weight: 500;
-  color: var(--neutral-clr-drk-grey);
+  color: inherit;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
 
-.icon:hover {
+/* .icon:hover {
   color: var(--neutral-clr-drker-grey);
-}
+} */
 
 .upvotes {
   font-weight: 500;

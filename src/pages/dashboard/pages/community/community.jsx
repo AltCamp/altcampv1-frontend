@@ -41,7 +41,7 @@ export default function Community () {
   const handleNewPostCreated = () => {
     setNewPostCreated(!newPostCreated)
     // reload the page
-    window.location.reload()
+    // window.location.reload()
     navigate(location.pathname, { state: {} })
 
   }

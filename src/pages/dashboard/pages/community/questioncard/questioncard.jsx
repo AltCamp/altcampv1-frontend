@@ -8,7 +8,6 @@ import gravatar from '../../../../../assets/general/gravatar.png'
 import ReactTimeAgo from 'react-time-ago'
 
 export default function Questioncard ({ question }) {
-
   return (
     <div className={questionCardStyles.container}>
       <div className={questionCardStyles.header}>
@@ -28,23 +27,32 @@ export default function Questioncard ({ question }) {
         <div className={questionCardStyles.otherInfo}>
           <div className={questionCardStyles.info}>
             <span className={questionCardStyles.answerCount}>
-              {question.answer.length} Answers
+              {question.answer.length}
+              {question.answer.length > 1 ? ' Answers' : ' Answer'}
             </span>
             <span className={questionCardStyles.divider}>|</span>
             <span className={questionCardStyles.timePosted}>
-              <span className={questionCardStyles.requested}>
-                Requested{' '}
-              </span>
+              <span className={questionCardStyles.requested}>Requested </span>
               {<ReactTimeAgo date={question.createdAt} locale='en-US' />}
             </span>
           </div>
 
           <div className={questionCardStyles.votes}>
-            <div className={questionCardStyles.upvotes}>
+            <div
+              className={questionCardStyles.upvotes}
+              style={{
+                color: question?.upvotes > 0 ? '#0e8a1a' : '#343a40'
+              }}
+            >
               <ArrowUp size='19' className={questionCardStyles.icon} />
               {question.upvotes}
             </div>
-            <div className={questionCardStyles.downvotes}>
+            <div 
+            className={questionCardStyles.downvotes}
+            style={{
+              color: question?.downvotes > 0 ? '#dc3545' : '#343a40'
+            }}
+            >
               <ArrowDown size='19' className={questionCardStyles.icon} />
               {question.downvotes}
             </div>

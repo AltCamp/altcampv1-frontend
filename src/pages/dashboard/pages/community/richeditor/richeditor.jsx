@@ -1,15 +1,16 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 import { Editor } from '@tinymce/tinymce-react'
 
+export default function RichEditor ({ setBody, body, isSuccess }) {
 
-export default function RichEditor ({ setBody }) {
   return (
     <>
       <Editor
         apiKey='mk3t00giiyqt48pkpkk19x5es04efdg6r5b3ndaa4hz5if9k'
         // onInit={(evt, editor) => (editorRef.current = editor)}
-        initialValue=''
+        // initialValue={body}
+        value={body}
         init={{
           height: 500,
           menubar: false,
