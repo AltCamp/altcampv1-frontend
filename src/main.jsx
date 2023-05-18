@@ -56,10 +56,11 @@ import {
   Topics,
   Circle,
   Quiz,
-
+  Users,
   // subpages of community
   Questionpage,
-  AskQuestionPage
+  AskQuestionPage,
+  EditQuestionPage,
 } from './pages/dashboard/pages'
 import Updatebio from './pages/dashboard/pages/account/updatebio/updateBio'
 
@@ -191,6 +192,10 @@ const router = createBrowserRouter([
         element: <AskQuestionPage />
       },
       {
+        path: '/dashboard/community/editquestion',
+        element: <EditQuestionPage />
+      },
+      {
         path: '/dashboard/bookmarks',
         element: <Bookmarks />
       },
@@ -249,6 +254,10 @@ const router = createBrowserRouter([
       {
         path: '/dashboard/quiz',
         element: <Quiz />
+      },
+      {
+        path: '/dashboard/users',
+        element: <Users />
       }
     ]
   }
