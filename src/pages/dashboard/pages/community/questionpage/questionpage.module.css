@@ -74,19 +74,34 @@
   background-color: var(--primary-clr-pink-2);
 }
 
+.userLinks {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 14px;
+  font-weight: 500;
+}
+
 .author {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   color: var(--secondary-clr-drk-blue);
-  font-weight: 500;
-  font-size: 14px;
 }
 
 .authorImg img {
   width: 1.6rem;
   height: 1.6rem;
   border-radius: 50%;
+}
+
+.edit {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  color: var(--neutral-clr-drker-grey);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
 }
 
 .otherInfo {
@@ -131,9 +146,9 @@
   transition: all 0.2s ease-in-out;
 }
 
-/* .icon:hover {
-  color: var(--neutral-clr-drker-grey);
-} */
+.icon:hover {
+  color: var(--primary-clr-black);
+}
 
 .upvotes {
   font-weight: 500;
