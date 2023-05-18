@@ -5,6 +5,7 @@ import questionPageStyles from './questionpage.module.css'
 import { useParams, useNavigate, Link, useLocation } from 'react-router-dom'
 
 import gravatar from '../../../../../assets/general/gravatar.png'
+import caution from '../../../../../assets/general/deletecaution.svg'
 
 import {
   ArrowCircleLeft,
@@ -12,8 +13,10 @@ import {
   ArrowUp,
   ArrowDown,
   Edit,
-  Trash
+  Trash,
+  CloseCircle
 } from 'iconsax-react'
+
 import share from '../../../../../assets/icons/share.svg'
 
 // import answercard
@@ -30,6 +33,8 @@ import { useDownvoteQuestionMutation } from '../../../../../app/slices/apiSlices
 
 import { useGetAnswersQuery } from '../../../../../app/slices/apiSlices/communitySlices/answerSlice'
 
+import { useDeleteQuestionMutation } from '../../../../../app/slices/apiSlices/communitySlices/questionSlice'
+
 import ReactTimeAgo from 'react-time-ago'
 import DOMPurify from 'isomorphic-dompurify'
 
@@ -38,6 +43,7 @@ import { useSelector } from 'react-redux'
 export default function Questionpage () {
   const [questionId, setQuestionId] = useState()
   const [questionState, setQuestionState] = useState()
+  const [deleteQuestionModal, setDeleteQuestionModal] = useState(false)
   const { question } = useParams()
   const navigate = useNavigate()
 
@@ -117,8 +123,77 @@ export default function Questionpage () {
   const answers = answersData?.data
   // console.log(questionState)
 
+  const [
+    deleteQuestion,
+    {
+      data: deleteQuestionData,
+      isLoading: deleteQuestionLoading,
+      isSuccess: deleteQuestionSuccess,
+      isError: deleteQuestionError,
+      error: deleteQuestionErrors
+    }
+  ] = useDeleteQuestionMutation()
+
+  const handleDeleteQuestion = () => {
+    deleteQuestion(questionId)
+  }
+
+  useEffect(() => {
+    if (deleteQuestionSuccess) {
+      navigate('/dashboard/community', { state: { deleted: true } })
+    }
+  }, [deleteQuestionSuccess])
+
+  const handleDeleteModal = () => {
+    setDeleteQuestionModal(!deleteQuestionModal)
+  }
+
+  useEffect(() => {
+    if (deleteQuestionModal) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'auto'
+    }
+  }, [deleteQuestionModal])
+
   return (
     <>
+      {deleteQuestionModal && (
+        <div className={questionPageStyles.deleteWarningOverlay}>
+          <div className={questionPageStyles.deleteWarning}>
+            <CloseCircle
+              size='20'
+              className={questionPageStyles.closeIcon}
+              onClick={handleDeleteModal}
+            />
+            <div className={questionPageStyles.warningIcon}>
+              <img src={caution} alt='' className={questionPageStyles.check} />
+            </div>
+            <p className={questionPageStyles.warningText}>
+              You are about to delete this question. Do you want to proceed?
+            </p>
+            <div className={questionPageStyles.warningBtnGroup}>
+              <button
+                className={questionPageStyles.cancelBtn}
+                onClick={handleDeleteModal}
+              >
+                Cancel
+              </button>
+              <button
+                className={questionPageStyles.confirmBtn}
+                onClick={handleDeleteQuestion}
+                disabled={deleteQuestionLoading}
+                style={{
+                  backgroundColor: deleteQuestionLoading ? '#ccc' : '#FF5B5B',
+                  cursor: deleteQuestionLoading ? 'not-allowed' : 'pointer'
+                }}
+              >
+                {deleteQuestionLoading ? 'Deleting...' : 'Proceed'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       {questionLoading && (
         <div className={questionPageStyles.container}>
           <div className={questionPageStyles.loading}>
@@ -239,7 +314,11 @@ export default function Questionpage () {
                   </div>
                   <div className={questionPageStyles.icons}>
                     {user?._id === questionDetails?.author._id && (
-                      <Trash size='20' className={questionPageStyles.icon} />
+                      <Trash
+                        size='20'
+                        className={questionPageStyles.icon}
+                        onClick={handleDeleteModal}
+                      />
                     )}
                     <img
                       src={share}

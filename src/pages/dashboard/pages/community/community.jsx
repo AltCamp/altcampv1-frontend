@@ -8,14 +8,13 @@ import { Link, useNavigate, useLocation } from 'react-router-dom'
 
 import { useGetAllQuestionsQuery } from '../../../../app/slices/apiSlices/communitySlices/questionSlice'
 
-
 import { CloseCircle } from 'iconsax-react'
 
 import greenCheck from '../../../../assets/general/greencreatepostcheck.svg'
 
 export default function Community () {
   const [sortedQuestions, setSortedQuestions] = useState()
-  const [newPostCreated, setNewPostCreated] = useState(false)
+  const [createDeleteModal, setCreateDeleteModal] = useState(false)
 
   const { data, isLoading, isSuccess, isError, error } =
     useGetAllQuestionsQuery()
@@ -30,20 +29,19 @@ export default function Community () {
 
   useEffect(() => {
     if (location.state) {
-      if (location.state.created) {
-        setNewPostCreated(true)
+      if (location.state.created || location.state.deleted) {
+        setCreateDeleteModal(true)
       } else {
-        setNewPostCreated(false)
+        setCreateDeleteModal(false)
       }
     }
   }, [location])
 
-  const handleNewPostCreated = () => {
-    setNewPostCreated(!newPostCreated)
+  const handleCreateDeleteModal = () => {
+    setCreateDeleteModal(!createDeleteModal)
     // reload the page
     // window.location.reload()
     navigate(location.pathname, { state: {} })
-
   }
 
   // sort the questions by most recntly added
@@ -58,34 +56,37 @@ export default function Community () {
     }
   }, [questions])
 
-
   useEffect(() => {
-    if (newPostCreated) {
+    if (createDeleteModal) {
       document.body.style.overflow = 'hidden'
     } else {
       document.body.style.overflow = 'auto'
     }
-  }, [newPostCreated])
+  }, [createDeleteModal])
 
   return (
     <div className={communityStyle.container}>
-      {newPostCreated && (
+      {createDeleteModal && (
         <div className={communityStyle.creationSuccessOverlay}>
           <div className={communityStyle.creationSuccess}>
             <CloseCircle
               size='20'
               className={communityStyle.closeIcon}
-              onClick={handleNewPostCreated}
+              onClick={handleCreateDeleteModal}
             />
             <div className={communityStyle.successIcon}>
               <img src={greenCheck} alt='' className={communityStyle.check} />
             </div>
             <p className={communityStyle.successText}>
-              Your question has been submitted successfully.
+              {location.state.created
+                ? 'Your question has been submitted successfully.'
+                : location.state.deleted
+                ? 'Your question has been deleted successfully.'
+                : ''}
             </p>
             <button
               className={communityStyle.successBtn}
-              onClick={handleNewPostCreated}
+              onClick={handleCreateDeleteModal}
             >
               Done
             </button>
