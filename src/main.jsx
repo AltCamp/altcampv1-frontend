@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { createBrowserRouter, redirect, RouterProvider } from 'react-router-dom'
 import './index.css'
 
@@ -57,10 +56,11 @@ import {
   Topics,
   Circle,
   Quiz,
-
+  Users,
   // subpages of community
   Questionpage,
-  AskQuestionPage
+  AskQuestionPage,
+  EditQuestionPage,
 } from './pages/dashboard/pages'
 import Updatebio from './pages/dashboard/pages/account/updatebio/updateBio'
 
@@ -192,6 +192,10 @@ const router = createBrowserRouter([
         element: <AskQuestionPage />
       },
       {
+        path: '/dashboard/community/editquestion',
+        element: <EditQuestionPage />
+      },
+      {
         path: '/dashboard/bookmarks',
         element: <Bookmarks />
       },
@@ -250,6 +254,10 @@ const router = createBrowserRouter([
       {
         path: '/dashboard/quiz',
         element: <Quiz />
+      },
+      {
+        path: '/dashboard/users',
+        element: <Users />
       }
     ]
   }

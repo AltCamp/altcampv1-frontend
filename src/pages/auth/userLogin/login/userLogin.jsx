@@ -60,7 +60,7 @@ export default function UserLogin () {
             type='email'
             name='email'
             id='email'
-            placeholder='seun@studybuddy.com'
+            placeholder='seun@altcamp.com'
             className={userLoginStyle.email}
             onChange={e => setEmail(e.target.value)}
           />

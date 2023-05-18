@@ -11,7 +11,8 @@ import {
   ArchiveAdd,
   ArrowUp,
   ArrowDown,
-  Edit
+  Edit,
+  Trash
 } from 'iconsax-react'
 import share from '../../../../../assets/icons/share.svg'
 
@@ -27,8 +28,12 @@ import { useUpvoteQuestionMutation } from '../../../../../app/slices/apiSlices/c
 
 import { useDownvoteQuestionMutation } from '../../../../../app/slices/apiSlices/communitySlices/questionSlice'
 
+import { useGetAnswersQuery } from '../../../../../app/slices/apiSlices/communitySlices/answerSlice'
+
 import ReactTimeAgo from 'react-time-ago'
 import DOMPurify from 'isomorphic-dompurify'
+
+import { useSelector } from 'react-redux'
 
 export default function Questionpage () {
   const [questionId, setQuestionId] = useState()
@@ -37,6 +42,10 @@ export default function Questionpage () {
   const navigate = useNavigate()
 
   const location = useLocation()
+
+  const { user } = useSelector(state => state?.user.user)
+
+  // console.log(user)
 
   useEffect(() => {
     if (location.state) {
@@ -101,6 +110,12 @@ export default function Questionpage () {
     }
   }, [upvoteSuccess, downvoteSuccess, questionSuccess])
 
+  // logic for getting answers
+  const { data: answersData, isSuccess: answersSuccess } =
+    useGetAnswersQuery(questionId)
+
+  const answers = answersData?.data
+  // console.log(questionState)
 
   return (
     <>
@@ -130,7 +145,10 @@ export default function Questionpage () {
               <div className={questionPageStyles.titleGroup}>
                 <div className={questionPageStyles.titleHeader}>
                   <h3 className={questionPageStyles.title}>
-                    {questionState?.title}
+                    {/* if question has been edited, show edited title */}
+                    {questionDetails?.createdAt !== questionDetails?.updatedAt
+                      ? `Edited: ${questionDetails?.title}`
+                      : questionDetails?.title}
                   </h3>
                   <div className={questionPageStyles.tags}>
                     <span className={questionPageStyles.tag}>UI/UX</span>
@@ -138,64 +156,105 @@ export default function Questionpage () {
                   </div>
                 </div>
 
-                <div className={questionPageStyles.author}>
-                  <div className={questionPageStyles.authorImg}>
-                    <img src={gravatar} alt='' />
+                <div className={questionPageStyles.userLinks}>
+                  <div className={questionPageStyles.author}>
+                    <div className={questionPageStyles.authorImg}>
+                      <img src={gravatar} alt='' />
+                    </div>
+                    <div className={questionPageStyles.authorName}>
+                      {questionDetails?.author.firstname}{' '}
+                      {questionDetails?.author.lastname}
+                    </div>
                   </div>
-                  <div className={questionPageStyles.authorName}>
-                    {questionState?.author.firstname}{' '}
-                    {questionState?.author.lastname}
-                  </div>
+
+                  {user?._id === questionDetails?.author._id && (
+                    <Link
+                      to={`/dashboard/community/editquestion`}
+                      state={{
+                        question: questionDetails?._id,
+                        title: questionDetails?.title,
+                        body: questionDetails?.body
+                      }}
+                      className={questionPageStyles.edit}
+                    >
+                      <Edit size='19' />
+                      <p className={questionPageStyles.editText}>
+                        Edit Question
+                      </p>
+                    </Link>
+                  )}
                 </div>
 
                 <div className={questionPageStyles.otherInfo}>
                   <div className={questionPageStyles.info}>
                     <span className={questionPageStyles.timePosted}>
                       <span className={questionPageStyles.requested}>
-                        Request{' '}
+                        Requested{' '}
                       </span>
-                      {questionState &&
+                      {questionDetails &&
                         (questionSuccess ||
                           upvoteSuccess ||
                           downvoteSuccess) && (
                           <ReactTimeAgo
-                            date={questionState?.createdAt}
+                            date={questionDetails?.createdAt}
                             locale='en-US'
                           />
                         )}
                     </span>
                     <span className={questionPageStyles.divider}></span>
                     <span className={questionPageStyles.answerCount}>
-                      {questionState?.answer.length} Answers
+                      {questionDetails?.answer.length}
+                      {questionDetails?.answer.length > 1
+                        ? ' Answers'
+                        : ' Answer'}
                     </span>
                     <div
                       className={questionPageStyles.upvotes}
                       onClick={handleUpvoteQuestion}
+                      style={{
+                        color:
+                          questionDetails?.upvotes > 0 ? '#0e8a1a' : '#343a40'
+                      }}
                     >
                       <ArrowUp
                         size='19'
                         // className={questionPageStyles.icon}
                       />
-                      {questionState?.upvotes}
+                      {questionDetails?.upvotes}
                     </div>
                     <div
                       className={questionPageStyles.downvotes}
                       onClick={handleDownvoteQuestion}
+                      style={{
+                        color:
+                          questionDetails?.downvotes > 0 ? '#dc3545' : '#343a40'
+                      }}
                     >
                       <ArrowDown
                         size='19'
                         className={questionPageStyles.icon}
                       />
-                      {questionState?.downvotes}
+                      {questionDetails?.downvotes}
                     </div>
                   </div>
                   <div className={questionPageStyles.icons}>
+                    {user?._id === questionDetails?.author._id && (
+                      <Trash size='20' className={questionPageStyles.icon} />
+                    )}
                     <img
                       src={share}
                       alt=''
                       className={questionPageStyles.icon}
+                      style={{
+                        color: '#212529',
+                        width: '1rem'
+                      }}
                     />
-                    <ArchiveAdd size='20' className={questionPageStyles.icon} />
+                    <ArchiveAdd
+                      size='20'
+                      className={questionPageStyles.icon}
+                      color='#212529'
+                    />
                   </div>
                 </div>
               </div>
@@ -222,13 +281,14 @@ export default function Questionpage () {
                 Available Answers
               </h3>
               <div className={questionPageStyles.answerCards}>
-                {questionSuccess && questionState?.answer.length === 0 ? (
+                {questionSuccess && answersSuccess && answers.length === 0 ? (
                   <div className={questionPageStyles.noAnswer}>
                     No answers for this question yet. Do the honours
                   </div>
                 ) : (
                   questionSuccess &&
-                  questionState?.answer.map(answer => (
+                  answersSuccess &&
+                  answers?.map(answer => (
                     <Answercard key={answer._id} answer={answer} />
                   ))
                 )}
@@ -237,7 +297,7 @@ export default function Questionpage () {
           </div>
 
           <div className={questionPageStyles.createAnswer}>
-            <Createanswer />
+            <Createanswer questionId={questionId} />
           </div>
         </div>
       )}
