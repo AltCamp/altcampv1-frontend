@@ -1,7 +1,7 @@
 import React from "react";
 import errorStyle from "./error.module.css";
-import ErrorImg from "../../assets/general/error-img.png";
-import { Link, useRouteError } from "react-router-dom";
+import ErrorImg from "../../assets/general/page-not-found.png";
+import { useRouteError } from "react-router-dom";
 export default function Error() {
   const error = useRouteError();
   return (
@@ -9,10 +9,10 @@ export default function Error() {
       <div className={errorStyle.error}>
         <div className={errorStyle.errorImg}>
           <img src={ErrorImg} alt="error" />
-          <p>{error.message}</p>
+          {/* <p>Error {error.status}</p> */}
         </div>
         <div className={errorStyle.errorText}>
-          <p>Nothing to see here yet, this page is under construction.</p>
+          <p>Page not found.</p>
           Click{" "}
           <a
             className={errorStyle.errorLink}
