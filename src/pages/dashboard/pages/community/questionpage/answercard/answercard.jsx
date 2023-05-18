@@ -1,6 +1,6 @@
 import answerCardStyles from './answercard.module.css'
 
-import { ArrowDown, ArrowUp, ArchiveAdd } from 'iconsax-react'
+import { ArrowDown, ArrowUp, ArchiveAdd, Edit } from 'iconsax-react'
 
 import ReactTimeAgo from 'react-time-ago'
 import DOMPurify from 'isomorphic-dompurify'
@@ -10,6 +10,8 @@ import {
   useDownvoteAnswerMutation
 } from '../../../../../../app/slices/apiSlices/communitySlices/answerSlice'
 
+import { useSelector } from 'react-redux'
+
 export default function Answercard ({ answer }) {
   const clean = DOMPurify.sanitize(answer?.content, {
     ADD_TAGS: ['iframe'],
@@ -17,6 +19,7 @@ export default function Answercard ({ answer }) {
   })
 
   // console.log(answer)
+  const { user } = useSelector(state => state?.user.user)
 
   const answerId = answer?._id
 
@@ -90,6 +93,11 @@ export default function Answercard ({ answer }) {
         <div className={answerCardStyles.bookmark}>
           <ArchiveAdd size='19' className={answerCardStyles.icon} />
         </div>
+        {user?._id === answer?.author?._id && (
+          <div className={answerCardStyles.edit}>
+            <Edit size='19' className={answerCardStyles.icon} />
+          </div>
+        )}
       </div>
     </div>
   )

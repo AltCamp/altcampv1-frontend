@@ -7,8 +7,7 @@ import gravatar from '../../../../../assets/general/gravatar.png'
 
 import ReactTimeAgo from 'react-time-ago'
 
-export default function Questioncard ({ question }) {
-  return (
+export default function Questioncard ({ question }) {  return (
     <div className={questionCardStyles.container}>
       <div className={questionCardStyles.header}>
         <Link
