@@ -145,7 +145,10 @@ export default function Questionpage () {
               <div className={questionPageStyles.titleGroup}>
                 <div className={questionPageStyles.titleHeader}>
                   <h3 className={questionPageStyles.title}>
-                    {questionDetails?.title}
+                    {/* if question has been edited, show edited title */}
+                    {questionDetails?.createdAt !== questionDetails?.updatedAt
+                      ? `Edited: ${questionDetails?.title}`
+                      : questionDetails?.title}
                   </h3>
                   <div className={questionPageStyles.tags}>
                     <span className={questionPageStyles.tag}>UI/UX</span>
@@ -165,12 +168,20 @@ export default function Questionpage () {
                   </div>
 
                   {user?._id === questionDetails?.author._id && (
-                    <div className={questionPageStyles.edit}>
+                    <Link
+                      to={`/dashboard/community/editquestion`}
+                      state={{
+                        question: questionDetails?._id,
+                        title: questionDetails?.title,
+                        body: questionDetails?.body
+                      }}
+                      className={questionPageStyles.edit}
+                    >
                       <Edit size='19' />
                       <p className={questionPageStyles.editText}>
                         Edit Question
                       </p>
-                    </div>
+                    </Link>
                   )}
                 </div>
 

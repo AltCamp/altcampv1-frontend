@@ -59,7 +59,8 @@ import {
   Users,
   // subpages of community
   Questionpage,
-  AskQuestionPage
+  AskQuestionPage,
+  EditQuestionPage,
 } from './pages/dashboard/pages'
 import Updatebio from './pages/dashboard/pages/account/updatebio/updateBio'
 
@@ -189,6 +190,10 @@ const router = createBrowserRouter([
       {
         path: '/dashboard/community/ask/:question',
         element: <AskQuestionPage />
+      },
+      {
+        path: '/dashboard/community/editquestion',
+        element: <EditQuestionPage />
       },
       {
         path: '/dashboard/bookmarks',
