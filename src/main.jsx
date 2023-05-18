@@ -56,7 +56,7 @@ import {
   Topics,
   Circle,
   Quiz,
-
+  Users,
   // subpages of community
   Questionpage,
   AskQuestionPage
@@ -249,6 +249,10 @@ const router = createBrowserRouter([
       {
         path: '/dashboard/quiz',
         element: <Quiz />
+      },
+      {
+        path: '/dashboard/users',
+        element: <Users />
       }
     ]
   }

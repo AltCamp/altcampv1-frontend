@@ -8,6 +8,7 @@ export { default as Resources } from './resources/resources'
 export { default as Topics } from './topics/topics'
 export { default as Circle } from './circle/circle'
 export { default as Quiz } from './quiz/quiz'
+export {default as Users} from './users/users'
 
 // subpages
 export { default as Questionpage } from './community/questionpage/questionpage'
