@@ -1,14 +1,14 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithubAlt, faGoogle, faFacebook, faTwitter, faLinkedin, faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons'
 import { Facebook, Instagram, Twitch, Youtube } from 'iconsax-react'
-
+import altcamplogo from '../assets/general/AuthWhiteLogo.svg'
 import mainFooterStyles from './Footer.module.css'
 
 const Footer = () => {
     return (
         <footer className={mainFooterStyles['main-footer']}>
             <div className={mainFooterStyles['']}>
-                <img src="src\assets\general\Authlogo.png" alt="" />
+                <img src={altcamplogo} alt="" />
                 <div className={mainFooterStyles['sm-container']}>
                     <div className={mainFooterStyles['sm-link-container']}>
                         <Youtube size='12' variant="Bold" />
