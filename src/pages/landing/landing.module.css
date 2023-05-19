@@ -523,30 +523,38 @@ button:hover {
 @media screen and (max-width:600px) {
     .intro-area {
         height: max-content;
-        margin-bottom: 30px;
+        display: flex;
+        flex-direction: column;
     }
 
     .intro-area h1 {
         font-size: 32px;
+        padding: 15px 0;
+    }
+    .intro-area p {
+        padding: 10px 0;
     }
 
     .intro-text-area {
-        width: 65%;
+        width: 100%;
         padding: 1.5rem 15px;
         justify-content: space-between;
+        text-align: center;
     }
 
     .intro-image-area {
-        width: 35%;
+        width: 100%;
+        padding: 15px;
     }
 
     .intro-image-area img {
         width: 100%;
     }
 
-    .intro-area button {
-        padding: 14px 40px;
+    .intro-area a {
+        padding: 10px 29px;
         color: white;
+        margin: 0 auto;
     }
 
     .about-us-area {
@@ -628,7 +636,7 @@ button:hover {
         margin: 0 auto;
         margin-top: -250px;
         border-radius: 10px;
-        padding: 30px 50px;
+        padding: 30px 20px;
     }
 
     .tracks-area h2 {
@@ -650,7 +658,7 @@ button:hover {
 
     .tracks-container p {
         color: var(--neutral-clr-lt-grey);
-        font-size: 16px;
+        font-size: 14px;
         display: inline-block;
         vertical-align: middle;
         text-align: left;
@@ -663,7 +671,7 @@ button:hover {
     .track svg {
         color: #556AEB;
         /* background-color: white; */
-        margin: 0 20px;
+        margin: 0 10px;
     }
 
     .benefits-area {
@@ -697,7 +705,7 @@ button:hover {
         width: 309px;
         height: 442px;
         text-align: center;
-        padding: 30px;
+        padding: 30px 20px;
         box-shadow: 0px 2px 12px rgba(86, 86, 86, 0.15);
         border-radius: 10px;
         margin: 30px 0;
@@ -754,5 +762,19 @@ button:hover {
         font-size: 16px;
         font-family: inherit;
         margin: 20px 0;
+    }
+
+}
+
+@media (max-width:350px){
+    .benefit-card {
+        width: 100%;
+        height: max-content;
+        text-align: center;
+        padding: 30px 20px;
+        box-shadow: 0px 2px 12px rgba(86, 86, 86, 0.15);
+        border-radius: 10px;
+        margin: 30px 0;
+        /* margin: 40px; */
     }
 }

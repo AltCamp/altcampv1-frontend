@@ -145,9 +145,17 @@
         padding: 10px 0;
     }
 
+
     .main-footer-list h3 {
         font-size: 14px;
         font-weight: bold;
+        padding: 5px 0;
+    }
+    .main-footer>div:first-child {
+        margin-right: 0px;
+    }
+    .main-footer-list{
+        margin-right: 0;
     }
 }
 

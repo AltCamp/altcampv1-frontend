@@ -23,15 +23,15 @@ const MainNavbar = () => {
           <section className={`${mainNavbarStyles['register-options']} ${openRegisterOptions ? mainNavbarStyles['open'] : ''} `}>
             <ul>
               <li>
-                <NavLink>As an Altschooler</NavLink>
+                <NavLink to='/altstudent'>As an Altschooler</NavLink>
               </li>
               <li>
-                <NavLink>
+                <NavLink to='/mentor'>
                   As an Instructor/Mentor
                 </NavLink>
               </li>
               <li>
-                <NavLink>As a Regular Student</NavLink>
+                <NavLink to='/regularstudent'>As a Regular Student</NavLink>
               </li>
             </ul>
           </section>

@@ -22,7 +22,11 @@ const Landing = () => {
           <div className={landingPageStyles['intro-text-area']}>
             <h1>Transform your skills and learn the easy way</h1>
             <p>A community for Altschoolers that provides  easy access to  assistance from peers and mentors.</p>
-            <button>Get Started</button>
+            <a href='/regularstudent/login'>
+              <button>
+                Get Started
+              </button>
+            </a>
           </div>
           <div className={landingPageStyles['intro-image-area']}>
             <img src={heroImage} alt="" />
@@ -157,9 +161,11 @@ const Landing = () => {
             </p>
           </div>
         </div>
-        <button>
-          <a href='/regularstudent/login'>Get Started</a>
-        </button>
+        <a href='/regularstudent/login'>
+          <button>
+            Get Started
+          </button>
+        </a>
       </div>
       <div className={landingPageStyles['outro-area']}>
         <div className={landingPageStyles['icon-boxes-area']}>
@@ -176,9 +182,11 @@ const Landing = () => {
             Share what you know even as you learn what you do not know in the
             most convenient way.
           </p>
-          <button>
-            <a href='/regularstudent/login'>Get Started</a>
-          </button>
+          <a href='/regularstudent/login'>
+            <button>
+              Get Started
+            </button>
+          </a>
         </div>
       </div>
 
