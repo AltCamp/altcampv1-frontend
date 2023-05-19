@@ -7,11 +7,13 @@ import gravatar from '../../../../../assets/general/gravatar.png'
 
 import ReactTimeAgo from 'react-time-ago'
 
-export default function Questioncard ({ question }) {  return (
+export default function Questioncard ({ question }) {
+  // console.log(question)
+  return (
     <div className={questionCardStyles.container}>
       <div className={questionCardStyles.header}>
         <Link
-          to={`/dashboard/community/question/${question.title}`}
+          to={`/dashboard/community/question/${question.slug}`}
           state={{ question: question._id }}
         >
           <h3 className={questionCardStyles.title}>{question.title}</h3>
@@ -46,11 +48,11 @@ export default function Questioncard ({ question }) {  return (
               <ArrowUp size='19' className={questionCardStyles.icon} />
               {question.upvotes}
             </div>
-            <div 
-            className={questionCardStyles.downvotes}
-            style={{
-              color: question?.downvotes > 0 ? '#dc3545' : '#343a40'
-            }}
+            <div
+              className={questionCardStyles.downvotes}
+              style={{
+                color: question?.downvotes > 0 ? '#dc3545' : '#343a40'
+              }}
             >
               <ArrowDown size='19' className={questionCardStyles.icon} />
               {question.downvotes}
@@ -72,7 +74,7 @@ export default function Questioncard ({ question }) {  return (
           </div>
           <span className={questionCardStyles.authorDivider}>|</span>
           <Link
-            to={`/dashboard/community/question/${question.title}`}
+            to={`/dashboard/community/question/${question.slug}`}
             state={{ question: question._id }}
             className={questionCardStyles.answerBtn}
           >
