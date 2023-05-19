@@ -129,7 +129,7 @@ export default function Questionpage () {
     useGetAnswersQuery(questionId)
 
   const answers = answersData?.data
-  // console.log(questionState)
+  // console.log(answers)
 
   const [
     deleteQuestion,
@@ -289,8 +289,8 @@ export default function Questionpage () {
                       <img src={gravatar} alt='' />
                     </div>
                     <div className={questionPageStyles.authorName}>
-                      {questionDetails?.author.firstname}{' '}
-                      {questionDetails?.author.lastname}
+                      {questionDetails?.author.firstName}{' '}
+                      {questionDetails?.author.lastName}
                     </div>
                   </div>
 

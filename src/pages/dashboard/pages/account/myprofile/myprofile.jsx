@@ -53,11 +53,11 @@ export default function Myprofile({edit, picUpdate, updateBio}) {
           <section className={accountStyles["mainPanelBottom_profileDetails"]}>
             <div className={accountStyles["profileDetails_fName"]}>
               <span>First Name</span>
-              <span>{user?.firstname}</span>
+              <span>{user?.firstName}</span>
             </div>
             <div className={accountStyles["profileDetails_lName"]}>
               <span>Last Name</span>
-              <span>{user?.lastname}</span>
+              <span>{user?.lastName}</span>
             </div>
             {user?.owner?.matric && (
               <div className={accountStyles["profileDetails_sNum"]}>

@@ -26,6 +26,8 @@ export default function Topbar ({ toggleSideBar, handleSideBar }) {
     setShowSearch(!showSearch)
   }
 
+  // console.log(user)
+
   return (
     <div className={topbarStyles.container}>
       <div className={topbarStyles.hamburger} onClick={handleSideBar}>
@@ -73,7 +75,7 @@ export default function Topbar ({ toggleSideBar, handleSideBar }) {
           <img src={avatar} alt='' className='' />
         </div>
         <div className={topbarStyles.profileDetails}>
-          <p className={topbarStyles.profileName}>{user?.firstname}</p>
+          <p className={topbarStyles.profileName}>{user?.firstName}</p>
           <p className={topbarStyles.profileBadge}>{user?.accountType}</p>
         </div>
       </div>
