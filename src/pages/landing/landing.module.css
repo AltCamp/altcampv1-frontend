@@ -190,10 +190,10 @@ button:hover {
 }
 
 .track svg {
-    vertical-align: text-bottom;
+    vertical-align: middle;
     color: #556AEB;
     /* background-color: white; */
-    margin: 0 20px;
+    margin: 0 2px;
 }
 
 
@@ -379,7 +379,9 @@ button:hover {
         width: 100%;
     }
 
-    .about-us-image img{height: 90%;}
+    .about-us-image img {
+        height: 90%;
+    }
 
     .decor-box {
         width: 71%;
@@ -508,6 +510,16 @@ button:hover {
     }
 }
 
+@media (max-width:700px) and (min-width:600px){
+    .tracks-container p {
+        font-size: 13px;
+    }
+
+    .track svg{
+        width: 25px;
+    }
+}
+
 @media screen and (max-width:600px) {
     .intro-area {
         height: max-content;
@@ -524,7 +536,7 @@ button:hover {
         justify-content: space-between;
     }
 
-    .intro-image-area{
+    .intro-image-area {
         width: 35%;
     }
 
