@@ -10,57 +10,53 @@ import {
   RecordCircle
 } from 'iconsax-react'
 import Footer from '../../components/Footer'
-import heroImage from '../../assets/general/Students-reading.webp'
-import heroImage2 from '../../assets/general/Team-demonstration.webp'
-import codeIcon from '../../assets/icons/code.png'
-import figmaIcon from '../../assets/icons/figma.png'
-import notionIcon from '../../assets/icons/notion.png'
-import pieIcon from '../../assets/icons/pie.png'
-import pythonIcon from '../../assets/icons/python.png'
-
+import CommunityImage from '../../assets/general/CommunityImage.png'
 import IconSquare from '../../assets/general/iconsquare.webp'
-
+import heroImage from '../../assets/general/heroImage.svg'
 const Landing = () => {
   return (
     <>
       <Navbar />
       <div>
         <div className={landingPageStyles['intro-area']}>
-          <h1>Getting answers made easy for you</h1>
-          <p>
-            A community for Altschoolers that provides easy access to assistance
-            from peers and mentors to expand your knowledge.
-          </p>
-          <button>
-            <a href='/regularstudent/login'>Get Started</a>
-          </button>
+          <div className={landingPageStyles['intro-text-area']}>
+            <h1>Transform your skills and learn the easy way</h1>
+            <p>A community for Altschoolers that provides  easy access to  assistance from peers and mentors.</p>
+            <a href='/regularstudent/login'>
+              <button>
+                Get Started
+              </button>
+            </a>
+          </div>
+          <div className={landingPageStyles['intro-image-area']}>
+            <img src={heroImage} alt="" />
+          </div>
         </div>
       </div>
       <div className={landingPageStyles['about-us-area']}>
-        <div className={landingPageStyles['about-us-text']}>
-          <h2>About Us</h2>
-          <p>
-            Study Buddy is an online e-learning interactive platform that allows
-            Altschoolers post questions on the community, interact with other
-            community members and also receive feedbacks and responses from
-            other students, instructors and mentors
-          </p>
-        </div>
         <div className={landingPageStyles['about-us-image-area']}>
           <div
             className={`${landingPageStyles['decor-box']} ${landingPageStyles['decor-box-1']}`}
           ></div>
           <div className={landingPageStyles['about-us-image']}>
-            {/* <img src="/Team-demonstration.png" alt="" /> */}
-            <img src={heroImage2} alt='' />
+            <img src={CommunityImage} alt='' />
           </div>
           <div
             className={`${landingPageStyles['decor-box']} ${landingPageStyles['decor-box-2']}`}
           ></div>
         </div>
+        <div className={landingPageStyles['about-us-text']}>
+          <h2>About Us</h2>
+          <p>
+            AltCamp is an online e-learning interactive platform that allows
+            Altschoolers post questions on the community, interact with other
+            community members and also receive feedbacks and responses from
+            other students, instructors and mentors
+          </p>
+        </div>
       </div>
       <div className={landingPageStyles['tracks-area']}>
-        <h2>Tracks on StudyBuddy</h2>
+        <h2>Tracks on AltCamp</h2>
         <div className={landingPageStyles['tracks-container']}>
           <div className={landingPageStyles['track']}>
             <TickSquare size='32' variant='Bold' />
@@ -102,7 +98,7 @@ const Landing = () => {
       </div>
       <div className={landingPageStyles['benefits-area']}>
         <h5>WHY JOIN US</h5>
-        <h2>Benefits of joining Study Buddy</h2>
+        <h2>Features of AltCamp</h2>
         <div className={landingPageStyles['benefits-container']}>
           <div className={landingPageStyles['benefit-card']}>
             <div className={landingPageStyles['benefit-icon']}>
@@ -110,7 +106,7 @@ const Landing = () => {
             </div>
             <h3>Interactive Community</h3>
             <p>
-              Study Buddy allows you to meet and interact with people that are
+              AltCamp allows you to meet and interact with people that are
               into similar career and learn with and from them
             </p>
           </div>
@@ -130,7 +126,7 @@ const Landing = () => {
             </div>
             <h3>Access to Mentors</h3>
             <p>
-              Study Buddy has mentors that are knowledgeable in different tech
+              AltCamp has mentors that are knowledgeable in different tech
               careers and they give answers to any question you may have
             </p>
           </div>
@@ -160,14 +156,16 @@ const Landing = () => {
             </div>
             <h3>Learning Circle</h3>
             <p>
-              For Altschoolers who have learning circle, Study Buddy allows you
+              For Altschoolers who have learning circle, AltCamp allows you
               to interact with your circle members as a group
             </p>
           </div>
-          <button>
-            <a href='/regularstudent/login'>Get Started</a>
-          </button>
         </div>
+        <a href='/regularstudent/login'>
+          <button>
+            Get Started
+          </button>
+        </a>
       </div>
       <div className={landingPageStyles['outro-area']}>
         <div className={landingPageStyles['icon-boxes-area']}>
@@ -184,9 +182,11 @@ const Landing = () => {
             Share what you know even as you learn what you do not know in the
             most convenient way.
           </p>
-          <button>
-            <a href='/regularstudent/login'>Get Started</a>
-          </button>
+          <a href='/regularstudent/login'>
+            <button>
+              Get Started
+            </button>
+          </a>
         </div>
       </div>
 
