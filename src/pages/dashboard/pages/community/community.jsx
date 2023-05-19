@@ -12,6 +12,8 @@ import { CloseCircle } from 'iconsax-react'
 
 import greenCheck from '../../../../assets/general/greencreatepostcheck.svg'
 
+import { Helmet } from 'react-helmet-async'
+
 export default function Community () {
   const [sortedQuestions, setSortedQuestions] = useState()
   const [createDeleteModal, setCreateDeleteModal] = useState(false)
@@ -66,6 +68,14 @@ export default function Community () {
 
   return (
     <div className={communityStyle.container}>
+      <Helmet>
+        <title>{`AltCamp-Dashboard-Community`}</title>
+        <meta
+          name='description'
+          content={`A repository of questions and answers`}
+        />
+        <link rel='canonical' href={`dashboard/community`} />
+      </Helmet>
       {createDeleteModal && (
         <div className={communityStyle.creationSuccessOverlay}>
           <div className={communityStyle.creationSuccess}>

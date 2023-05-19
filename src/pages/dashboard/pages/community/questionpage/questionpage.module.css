@@ -150,6 +150,32 @@
   color: var(--primary-clr-black);
 }
 
+.share {
+  position: relative;
+}
+
+.shareModal {
+  position: absolute;
+  top: 2rem;
+  right: 0;
+  /* display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-radius: 4px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); */
+  z-index: 1;
+  animation: slideIn 0.2s ease-in-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
 .upvotes {
   font-weight: 500;
   color: #0e8a1a;
@@ -382,7 +408,7 @@
 }
 
 @media (max-width: 1200px) {
-  .question, 
+  .question,
   .answerCards {
     width: 70%;
   }
@@ -420,7 +446,8 @@
     font-size: 14px;
   }
 
-  .cancelBtn, .confirmBtn {
+  .cancelBtn,
+  .confirmBtn {
     padding: 0.5rem 1rem;
   }
 
@@ -453,14 +480,14 @@
     font-size: 12px;
   }
 
-  .cancelBtn, .confirmBtn {
+  .cancelBtn,
+  .confirmBtn {
     padding: 0.5rem 0.7rem;
   }
 
   .check {
     width: 3rem;
   }
-
 }
 
 @media (max-width: 350px) {
@@ -471,5 +498,9 @@
   }
   .info {
     width: 100%;
+  }
+  .shareModal {
+    top: 2rem;
+    left: 0;
   }
 }

@@ -19,6 +19,9 @@ import {
 
 import share from '../../../../../assets/icons/share.svg'
 
+import { Helmet } from 'react-helmet-async'
+import { ShareSocial } from 'react-share-social'
+
 // import answercard
 import Answercard from './answercard/answercard'
 
@@ -44,10 +47,15 @@ export default function Questionpage () {
   const [questionId, setQuestionId] = useState()
   const [questionState, setQuestionState] = useState()
   const [deleteQuestionModal, setDeleteQuestionModal] = useState(false)
+  const [shareModal, setShareModal] = useState(false)
+  const [screenWidthState, setScreenWidthState] = useState(false)
+
   const { question } = useParams()
   const navigate = useNavigate()
 
   const location = useLocation()
+  // get currnet page address
+  const shareLink = window.location.href
 
   const { user } = useSelector(state => state?.user.user)
 
@@ -156,8 +164,52 @@ export default function Questionpage () {
     }
   }, [deleteQuestionModal])
 
+  useEffect(() => {
+    const media = window.innerWidth
+    window.addEventListener('resize', () => {
+      setScreenWidthState(media < 500)
+    })
+  }, [])
+
+  // console.log(screenWidthState)
+
+  // style for share modal
+
+  const style = {
+    root: {
+      background: 'white',
+      borderRadius: 3,
+      border: 0,
+      boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+      color: 'black',
+      // fontFamily: 'Poppins',
+      height: 'auto',
+      width: `${screenWidthState ? '18rem' : '25rem'}`,
+      padding: '1rem',
+      maxWidth: '30rem',
+      display: 'flex',
+      flexDirection: 'column',
+      flexWrap: 'wrap',
+      // use inter from google as fontFamily
+      fontFamily: 'Inter'
+    },
+    copyContainer: {
+      border: '1px solid blue',
+      background: 'rgb(0,0,0,0.7)'
+    },
+    title: {
+      color: 'aquamarine',
+      fontStyle: 'italic'
+    }
+  }
+
   return (
     <>
+      <Helmet>
+        <title>{`${questionDetails?.title}`}</title>
+        <meta name='description' content={`${questionDetails?.body}`} />
+        <link rel='canonical' href={`/question/${questionDetails?.slug}`} />
+      </Helmet>
       {deleteQuestionModal && (
         <div className={questionPageStyles.deleteWarningOverlay}>
           <div className={questionPageStyles.deleteWarning}>
@@ -320,15 +372,36 @@ export default function Questionpage () {
                         onClick={handleDeleteModal}
                       />
                     )}
-                    <img
-                      src={share}
-                      alt=''
-                      className={questionPageStyles.icon}
-                      style={{
-                        color: '#212529',
-                        width: '1rem'
-                      }}
-                    />
+                    <div className={questionPageStyles.share}>
+                      <img
+                        src={share}
+                        alt=''
+                        className={questionPageStyles.icon}
+                        style={{
+                          color: '#212529',
+                          width: '1rem'
+                        }}
+                        onClick={() => setShareModal(!shareModal)}
+                      />
+                      {shareModal && (
+                        <div className={questionPageStyles.shareModal}>
+                          <ShareSocial
+                            title={questionDetails?.title}
+                            url={shareLink}
+                            socialTypes={[
+                              'facebook',
+                              'twitter',
+                              'reddit',
+                              'linkedin',
+                              'whatsapp',
+                              'email',
+                              'telegram'
+                            ]}
+                            style={style}
+                          />
+                        </div>
+                      )}
+                    </div>
                     <ArchiveAdd
                       size='20'
                       className={questionPageStyles.icon}
