@@ -31,6 +31,7 @@
     "react-paginate": "^8.1.5",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.7.0",
+    "react-share-social": "^0.1.55",
     "react-time-ago": "^7.2.1",
     "react18-input-otp": "^1.1.2"
   },

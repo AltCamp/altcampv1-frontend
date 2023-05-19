@@ -64,3 +64,54 @@
 .icon {
   cursor: pointer;
 }
+
+.bookmark, .edit {
+  display: flex;
+  align-items: center;
+}
+
+.editContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.editButtons {
+  display: flex;
+  justify-content: end;
+  width: 100%;
+  gap: 0.5rem;
+}
+
+.cancelButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  border-radius: 4px;
+  padding: 0.7rem 1.5rem;
+  background-color: var(--secondary-clr-ltester-blue);
+  color: var(--secondary-clr-drk-blue);
+  font-weight: 600;
+  outline: none;
+  border: none;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.updateButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  border-radius: 4px;
+  padding: 0.7rem 1.5rem;
+  background-color: var(--secondary-clr-lter-blue);
+  color: var(--neutral-clr-white);
+  font-weight: 600;
+  outline: none;
+  border: none;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
