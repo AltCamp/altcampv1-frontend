@@ -7,9 +7,8 @@ button:hover {
     transform: scale(0.98);
 }
 
-.intro-area {
+/* .intro-area {
     width: 100%;
-    /* height: 720px; */
     background-image: linear-gradient(rgba(0, 0, 0, 0.6),
             rgba(0, 0, 0, 0.6)),
         url('../../assets/general/Students-reading.webp');
@@ -18,29 +17,46 @@ button:hover {
     text-align: center;
     padding: 150px 300px 100px;
     position: relative;
+} */
+
+.intro-area {
+    color: var(--neutral-clr-deep-grey);
+    width: 100%;
+    display: flex;
+    margin-top: 80px;
+    background-color: var(--secondary-clr-lter-purple);
+}
+
+.intro-text-area {
+    /* background-color: yellow; */
+    width: 50%;
+    padding: 4.5rem 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.intro-image-area {
+    width: 50%;
+    /* background-color: purple; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .intro-area h1 {
-    color: white;
     font-size: 60px;
-    padding: 1rem 2rem;
     font-weight: bold;
     z-index: 10;
-    /* background-color: aqua; */
 }
 
 .intro-area p {
-    /* background-color: yellow; */
-    color: white;
     font-weight: 500;
-    padding: 1rem 3rem;
-    margin: 1.4rem 0;
     line-height: 2;
-    z-index: 10;
 }
 
 .intro-area button {
-    margin: 1.4rem;
     padding: 14px 40px;
     color: white;
     background-color: var(--secondary-clr-lt-blue);
@@ -50,7 +66,7 @@ button:hover {
     font-weight: bold;
     font-size: 16px;
     font-family: inherit;
-    z-index: 100;
+    z-index: 10;
 }
 
 .about-us-area {
@@ -90,7 +106,7 @@ button:hover {
 
 .about-us-image-area {
     /* background-color: orange; */
-    width: 53%;
+    width: 50%;
     position: relative;
     display: flex;
     justify-content: center;
@@ -99,8 +115,13 @@ button:hover {
 
 
 .about-us-image {
+    width: 100%;
+    height: 100%;
     position: absolute;
     z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .about-us-image img {
@@ -305,27 +326,28 @@ button:hover {
 @media screen and (min-width:601px) and (max-width:1024px) {
     .intro-area {
         height: max-content;
-        padding: 100px 100px 100px;
     }
 
     .intro-area h1 {
         font-size: 32px;
-        padding: 1rem 3rem;
     }
 
     .intro-area p {
-        padding: 1rem 4rem;
-        margin: 20px 0;
+        font-size: 16px;
     }
 
-    .intro-area button {
-        margin: 35px;
-        padding: 14px 40px;
+    .intro-text-area {
+        padding: 2rem;
+    }
+
+
+    .intro-image-area img {
+        width: 100%;
     }
 
     .about-us-area {
-        height: 514px;
-        padding: 60px 6% 150px;
+        height: 614px;
+        padding: 60px 6% 250px;
     }
 
     .about-us-text {
@@ -353,13 +375,11 @@ button:hover {
 
     .about-us-image {
         position: absolute;
-        padding-left: 60px;
-        margin-top: 36px;
-        left: 20px;
         z-index: 5;
-        margin: 0 auto;
-        width: 90%;
+        width: 100%;
     }
+
+    .about-us-image img{height: 90%;}
 
     .decor-box {
         width: 71%;
@@ -369,13 +389,13 @@ button:hover {
     }
 
     .decor-box-1 {
-        top: 40px;
+        top: 0px;
         right: 0px;
     }
 
     .decor-box-2 {
-        bottom: 40px;
-        left: 60px;
+        bottom: 0px;
+        left: 0px;
     }
 
     .tracks-area {
@@ -385,7 +405,7 @@ button:hover {
         padding: 30px 20px;
     }
 
-    .track svg{
+    .track svg {
         vertical-align: middle;
         margin: 0 2px;
     }
@@ -490,28 +510,36 @@ button:hover {
 
 @media screen and (max-width:600px) {
     .intro-area {
-        height: 448px;
-        padding: 80px 34px;
+        height: max-content;
+        margin-bottom: 30px;
     }
 
     .intro-area h1 {
         font-size: 32px;
-        padding: 30px ;
     }
 
-    .intro-area p {
-        padding: 5px;
-        margin: 10px 0;
+    .intro-text-area {
+        width: 65%;
+        padding: 1.5rem 15px;
+        justify-content: space-between;
+    }
+
+    .intro-image-area{
+        width: 35%;
+    }
+
+    .intro-image-area img {
+        width: 100%;
     }
 
     .intro-area button {
-        margin: 20px;
         padding: 14px 40px;
         color: white;
     }
 
     .about-us-area {
-        height: 1075px;
+        min-height: 1075px;
+        height: max-content;
         width: 100%;
         margin: 0 auto;
         padding: 56px 6% 428px;

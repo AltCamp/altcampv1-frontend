@@ -12,21 +12,21 @@ import {
 import Footer from '../../components/Footer'
 import CommunityImage from '../../assets/general/CommunityImage.png'
 import IconSquare from '../../assets/general/iconsquare.webp'
-
+import heroImage from '../../assets/general/heroImage.svg'
 const Landing = () => {
   return (
     <>
       <Navbar />
       <div>
         <div className={landingPageStyles['intro-area']}>
-          <h1>Getting answers made easy for you</h1>
-          <p>
-            A community for Altschoolers that provides easy access to assistance
-            from peers and mentors to expand your knowledge.
-          </p>
-          <button>
-            <a href='/regularstudent/login'>Get Started</a>
-          </button>
+          <div className={landingPageStyles['intro-text-area']}>
+            <h1>Transform your skills and learn the easy way</h1>
+            <p>A community for Altschoolers that provides  easy access to  assistance from peers and mentors.</p>
+            <button>Get Started</button>
+          </div>
+          <div className={landingPageStyles['intro-image-area']}>
+            <img src={heroImage} alt="" />
+          </div>
         </div>
       </div>
       <div className={landingPageStyles['about-us-area']}>
