@@ -19,6 +19,8 @@ import {
 
 import share from '../../../../../assets/icons/share.svg'
 
+import { Helmet } from 'react-helmet-async'
+
 // import answercard
 import Answercard from './answercard/answercard'
 
@@ -158,6 +160,11 @@ export default function Questionpage () {
 
   return (
     <>
+      <Helmet>
+        <title>{`${questionDetails?.title}`}</title>
+        <meta name='description' content={`${questionDetails?.body}`} />
+        <link rel='canonical' href={`/question/${questionDetails?.slug}`} />
+      </Helmet>
       {deleteQuestionModal && (
         <div className={questionPageStyles.deleteWarningOverlay}>
           <div className={questionPageStyles.deleteWarning}>

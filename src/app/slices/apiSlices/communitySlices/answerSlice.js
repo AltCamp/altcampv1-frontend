@@ -22,6 +22,14 @@ export const answerSlice = createApi({
       }),
       invalidatesTags: ["Answers"],
     }),
+    updateAnswer: builder.mutation({
+        query: ({answerId, body}) => ({
+            url: `/answers/${answerId}`,
+            method: 'PATCH',
+            body
+        }),
+        invalidatesTags: ['Answers']
+    }),
     upvoteAnswer: builder.mutation({
       query: (answerId) => ({
         url: `/answers/upvote/${answerId}`,
@@ -42,6 +50,7 @@ export const answerSlice = createApi({
 export const {
   useGetAnswersQuery,
   useCreateAnswerMutation,
+  useUpdateAnswerMutation,
   useUpvoteAnswerMutation,
   useDownvoteAnswerMutation,
 } = answerSlice;
