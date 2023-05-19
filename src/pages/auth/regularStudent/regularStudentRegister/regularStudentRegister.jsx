@@ -41,8 +41,8 @@ export default function RegularStudentRegister() {
     } else {
       setErrorText("");
       registerStudent({
-        firstname: firstName,
-        lastname: lastName,
+        firstName,
+        lastName,
         email,
         password,
         track,

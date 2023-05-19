@@ -64,17 +64,20 @@ export default function Answercard ({ answer }) {
   const handleUpdateAnswer = () => {
     updateAnswer({
       answerId,
-      body: content
+      body: {
+        content
+      }
     })
   }
 
-  useEffect(() => {
-    if (updateAnswerSuccess) {
-      setEditMode(false)
-    }
-  }, [updateAnswerSuccess])
+  // useEffect(() => {
+  //   if (updateAnswerSuccess) {
+  //     setEditMode(false)
+  //   }
+  // }, [updateAnswerSuccess])
 
-  // console.log(content)
+  // console.log(answer)
+
   return (
     <div className={answerCardStyles.container}>
       {editMode ? (
@@ -104,7 +107,7 @@ export default function Answercard ({ answer }) {
         <>
           <div className={answerCardStyles.header}>
             <span className={answerCardStyles.name}>
-              {answer?.author?.firstname} {answer?.author?.lastname}{' '}
+              {answer?.author?.firstName} {answer?.author?.lastName}{' '}
               {answer?.author?.accountType == 'Mentor' && (
                 <span className={answerCardStyles.mentor}>Instructor</span>
               )}

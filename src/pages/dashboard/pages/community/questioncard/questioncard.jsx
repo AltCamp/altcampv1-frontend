@@ -69,7 +69,7 @@ export default function Questioncard ({ question }) {
               <img src={gravatar} alt='' />
             </div>
             <div className={questionCardStyles.authorName}>
-              {question.author.firstname} {question.author.lastname}
+              {question.author.firstName} {question.author.lastName}
             </div>
           </div>
           <span className={questionCardStyles.authorDivider}>|</span>
