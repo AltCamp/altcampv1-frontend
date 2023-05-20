@@ -43,12 +43,19 @@ button:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+    /* padding: 6rem; */
 }
 
+.intro-image-area img{
+    height: 72%;
+}
+
+
 .intro-area h1 {
-    font-size: 60px;
+    font-size: 55px;
     font-weight: bold;
     z-index: 10;
+    /* background-color: green; */
 }
 
 .intro-area p {
@@ -296,7 +303,7 @@ button:hover {
 .call-to-action-area {
     width: 50%;
     /* background-color: green; */
-    padding: 152px 160px;
+    padding: 110px 100px;
 }
 
 .call-to-action-area h1 {
@@ -330,14 +337,16 @@ button:hover {
 
     .intro-area h1 {
         font-size: 32px;
+        margin: 10px 0;
     }
 
     .intro-area p {
         font-size: 16px;
+        margin: 10px 0;
     }
 
     .intro-text-area {
-        padding: 2rem;
+        padding:  3rem;
     }
 
 
@@ -407,6 +416,10 @@ button:hover {
         padding: 30px 20px;
     }
 
+    .tracks-area h2{
+        font-size: 30px;
+    }
+
     .track svg {
         vertical-align: middle;
         margin: 0 2px;
@@ -418,7 +431,7 @@ button:hover {
 
     .benefits-area {
         margin-top: 177px;
-        width: 88%;
+        width: 95%;
     }
 
     .benefits-area h5 {
@@ -436,6 +449,7 @@ button:hover {
     }
 
     .benefits-container {
+        /* background-color: teal; */
         margin: 0 auto;
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -444,10 +458,11 @@ button:hover {
     }
 
     .benefit-card {
-        width: 309px;
+        width: 90%;
+        max-width: 309px;
         height: 442px;
         text-align: center;
-        padding: 30px;
+        padding: 20px;
         box-shadow: 0px 2px 12px rgba(86, 86, 86, 0.15);
         border-radius: 10px;
         margin: 30px 0;
