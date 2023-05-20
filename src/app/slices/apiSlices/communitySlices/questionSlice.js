@@ -19,7 +19,7 @@ export const questionSlice = createApi({
         url: `/questions/${id}`,
         method: "GET",
       }),
-      invalidateTags: ["Questions"],
+      providesTags: ["Questions"],
     }),
     createQuestion: builder.mutation({
       query: (body) => ({

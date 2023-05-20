@@ -45,7 +45,6 @@ import { useSelector } from 'react-redux'
 
 export default function Questionpage () {
   const [questionId, setQuestionId] = useState()
-  const [questionState, setQuestionState] = useState()
   const [deleteQuestionModal, setDeleteQuestionModal] = useState(false)
   const [shareModal, setShareModal] = useState(false)
   const [screenWidthState, setScreenWidthState] = useState(false)
@@ -77,7 +76,7 @@ export default function Questionpage () {
 
   const questionDetails = questionData?.data
 
-  // console.log(questionDetails)
+  // console.log(questionId)
 
   const clean = DOMPurify.sanitize(questionDetails?.body, {
     ADD_TAGS: ['iframe'],
@@ -113,16 +112,6 @@ export default function Questionpage () {
   const handleDownvoteQuestion = () => {
     downvoteQuestion(questionId)
   }
-
-  useEffect(() => {
-    if (upvoteSuccess) {
-      setQuestionState(upvoteData?.data)
-    } else if (downvoteSuccess) {
-      setQuestionState(downvoteData?.data)
-    } else if (questionSuccess) {
-      setQuestionState(questionDetails)
-    }
-  }, [upvoteSuccess, downvoteSuccess, questionSuccess])
 
   // logic for getting answers
   const { data: answersData, isSuccess: answersSuccess } =
