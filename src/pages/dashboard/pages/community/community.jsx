@@ -68,14 +68,14 @@ export default function Community () {
 
   return (
     <div className={communityStyle.container}>
-      <Helmet>
+      {/* <Helmet>
         <title>{`AltCamp-Dashboard-Community`}</title>
         <meta
           name='description'
           content={`A repository of questions and answers`}
         />
         <link rel='canonical' href={`dashboard/community`} />
-      </Helmet>
+      </Helmet> */}
       {createDeleteModal && (
         <div className={communityStyle.creationSuccessOverlay}>
           <div className={communityStyle.creationSuccess}>
