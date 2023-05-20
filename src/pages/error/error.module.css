@@ -1,0 +1,53 @@
+.errorContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 8rem;
+}
+
+.errorImg {
+  position: relative;
+}
+
+.errorImg p {
+  position: absolute;
+  top: 5.25rem;
+  z-index: 1;
+  text-transform: uppercase;
+  font-family: var(--Inter);
+  font-size: 1.5rem;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 1.5rem;
+  color: var(--secondary-clr-lter-blue);
+}
+
+.errorText {
+  margin-top: 2rem;
+  font-family: var(--Inter);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.75rem;
+  text-align: center;
+  color: var(--neutral-clr-drker-grey);
+}
+
+.errorText .errorLink {
+  font-weight: bolder;
+  color: var(--neutral-clr-drker-grey);
+  text-decoration: underline;
+}
+
+@media (max-width: 320px) {
+    .errorImg p {
+    font-size: 1.25rem;
+left: 1.25rem;
+}
+}

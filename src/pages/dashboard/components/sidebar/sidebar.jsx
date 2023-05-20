@@ -15,7 +15,8 @@ import {
   Layer,
   Notification,
   People,
-  ProfileCircle
+  ProfileCircle,
+  Profile2User
 } from 'iconsax-react'
 
 import { useSelector, useDispatch } from 'react-redux'
@@ -161,6 +162,15 @@ export default function Sidebar ({ toggleSideBar, handleSideBar }) {
             >
               <Notification size='23' className={sidebarStyle.icon} />
               Notifications
+            </NavLink>
+            <NavLink
+              to='/dashboard/users'
+              className={sidebarStyle.link}
+              style={({ isActive }) => (isActive ? activeStyle : undefined)}
+              onClick={toggleWidth && handleSideBar}
+            >
+              <Profile2User size='23' className={sidebarStyle.icon} />
+              Users
             </NavLink>
             <button
               className={sidebarStyle.logout}

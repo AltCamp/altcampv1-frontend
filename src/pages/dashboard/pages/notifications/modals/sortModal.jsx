@@ -34,7 +34,7 @@ export default function sortModal() {
     },
   ];
   return (
-    <div ref={modal}>
+    <div ref={modal} className={sortStyles.modalParent}>
       <img
         src={sortIcon}
         alt="sort"

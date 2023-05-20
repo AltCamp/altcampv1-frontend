@@ -41,8 +41,8 @@ export default function RegularStudentRegister() {
     } else {
       setErrorText("");
       registerStudent({
-        firstname: firstName,
-        lastname: lastName,
+        firstName,
+        lastName,
         email,
         password,
         track,
@@ -139,7 +139,7 @@ export default function RegularStudentRegister() {
             type="email"
             name="email"
             id="email"
-            placeholder="seun@studybuddy.com"
+            placeholder="seun@altcamp.com"
             onChange={(e) => setEmail(e.target.value)}
             required
           />

@@ -158,7 +158,7 @@ export default function Notifications() {
 
           <div className={notificationsStyles.pagination}>
             <ReactPaginate
-              previousLabel={"previous"}
+              previousLabel={"prev"}
               nextLabel={"next"}
               pageRangeDisplayed={3}
               pageCount={Math.ceil(data.length / notificationsPerPage)}
@@ -177,9 +177,9 @@ export default function Notifications() {
             <button className={notificationsStyles.pageLink}>3</button>
 
             <button className={notificationsStyles.next}>Next</button> */}
-            <div className={notificationsStyles.pageCount}>
+             <div className={notificationsStyles.pageCount}>
               <span>1</span>/<span>60</span>
-            </div>
+            </div> 
           </div>
         </div>
       )}

@@ -2,10 +2,7 @@
   margin-top: 0px;
   margin-bottom: 15px;
 }
-/* .options hr {
-  border: 0 none;
-  border: 0.5px solid #ced4da;
-} */
+
 
 .horizontalLine{
   border: 1px solid var(--neutral-clr-lt-grey);
@@ -19,13 +16,16 @@
   cursor: pointer;
 }
 
+.modalParent{
+  position: relative;
+}
+
 .filterContent {
   position: absolute;
-  transform: translate(-50%, -50%);
-  top: 40%;
-  left: 87%;
-  /* box-sizing: border-box; */
 
+  top: 35px;
+  right:0px;
+  
   /* Auto layout */
 
   display: flex;
@@ -50,9 +50,6 @@
 .btnFilter {
   height: 25px;
   width: 25px;
-  /* left: 3px;
-  top: 6px; */
-  /* border-radius: 0px; */
 }
 
 .btnFilter:hover {

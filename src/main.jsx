@@ -1,12 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { createBrowserRouter, redirect, RouterProvider } from 'react-router-dom'
 import './index.css'
 
 // javascript-time-ago initialztion
 
 import TimeAgo from 'javascript-time-ago'
+
+import { Helmet, HelmetProvider } from 'react-helmet-async'
 
 import en from 'javascript-time-ago/locale/en.json'
 import ru from 'javascript-time-ago/locale/ru.json'
@@ -41,6 +42,8 @@ import DeactivateAcc from './pages/dashboard/pages/account/deactivateaccount/dea
 import Myprojects from './pages/dashboard/pages/account/myprojects/myprojects'
 import Picturechange from './pages/dashboard/pages/account/changeprofilepicture/picturechange'
 
+//import error component
+import Error from './pages/error/error'
 
 // import dashboard pages from layout
 import {
@@ -54,19 +57,20 @@ import {
   Topics,
   Circle,
   Quiz,
-
+  Users,
   // subpages of community
   Questionpage,
-  AskQuestionPage
+  AskQuestionPage,
+  EditQuestionPage
 } from './pages/dashboard/pages'
 import Updatebio from './pages/dashboard/pages/account/updatebio/updateBio'
-
 
 // set up router using createBrowserRouter
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Landing />
+    element: <Landing />,
+    errorElement: <Error />
   },
   {
     path: '/altstudent',
@@ -187,6 +191,10 @@ const router = createBrowserRouter([
         element: <AskQuestionPage />
       },
       {
+        path: '/dashboard/community/editquestion',
+        element: <EditQuestionPage />
+      },
+      {
         path: '/dashboard/bookmarks',
         element: <Bookmarks />
       },
@@ -218,10 +226,9 @@ const router = createBrowserRouter([
             path: '/dashboard/account/updatebio',
             element: <Updatebio />
           }
-        ],
-        
+        ]
       },
-     
+
       {
         path: '/dashboard/contributors',
         element: <Contributors />
@@ -245,6 +252,10 @@ const router = createBrowserRouter([
       {
         path: '/dashboard/quiz',
         element: <Quiz />
+      },
+      {
+        path: '/dashboard/users',
+        element: <Users />
       }
     ]
   }
@@ -253,7 +264,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <HelmetProvider>
+        <RouterProvider router={router} />
+      </HelmetProvider>
     </Provider>
   </React.StrictMode>
 )

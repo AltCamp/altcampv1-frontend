@@ -33,8 +33,8 @@ export default function MentorRegister() {
       registerMentor({
         email,
         password,
-        firstname: firstName,
-        lastname: lastName,
+        firstName,
+        lastName,
         track,
       });
     }

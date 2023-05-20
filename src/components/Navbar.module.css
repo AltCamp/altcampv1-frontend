@@ -61,7 +61,7 @@
     border-radius: 10px;
     position: absolute;
     background-color: var(--neutral-clr-white);
-    right: -100%;
+    right: -300%;
     top: 85px;
     transition: all 0.18s ease;
 }
@@ -114,7 +114,7 @@
     padding: 5px 0;
 }
 
-.register-options ul li a:hover {
+.register-options ul li a:hover,.nav-options ul li a:hover {
     color: var(--neutral-clr-grey-2);
 }
 

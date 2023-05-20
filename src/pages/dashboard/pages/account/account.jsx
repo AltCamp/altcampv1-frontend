@@ -66,7 +66,7 @@ export default function Account() {
                 <img src={img} alt="" />
               </div>
               <h1 className={accountStyles["sidePanel_profileName"]}>
-                {user?.firstname} {user?.lastname}
+                {user?.firstName} {user?.lastName}
               </h1>
             </div>
             <div className={accountStyles["links"]}>

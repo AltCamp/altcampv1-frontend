@@ -53,7 +53,7 @@
 /* spacing between Benefit and items below */
 
 body {
-  padding-top: 80px;
+  /* padding-top: 80px; */
   font-family: var(--Inter);
 }
 * {
