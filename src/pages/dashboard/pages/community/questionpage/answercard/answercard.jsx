@@ -70,11 +70,11 @@ export default function Answercard ({ answer }) {
     })
   }
 
-  // useEffect(() => {
-  //   if (updateAnswerSuccess) {
-  //     setEditMode(false)
-  //   }
-  // }, [updateAnswerSuccess])
+  useEffect(() => {
+    if (updateAnswerSuccess) {
+      setEditMode(false)
+    }
+  }, [updateAnswerSuccess])
 
   // console.log(answer)
 
