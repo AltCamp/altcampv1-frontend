@@ -82,24 +82,24 @@ button:hover {
     height: 968px;
     width: 100%;
     margin: 0 auto;
-    padding: 100px 8.5% 400px;
+    padding: 100px 8.5% 250px;
     display: flex;
     text-align: center;
 }
 
 .about-us-text {
     width: 50%;
+    max-height: 448px;
     text-align: left;
     padding: 1rem;
     padding-left: 3rem;
-    /* background-color: yellow; */
 }
 
 .about-us-text h2 {
     /* background-color: crimson; */
     font-size: 48px;
     padding-top: 0;
-    margin: 0 0 40px;
+    margin: 0 0 25px;
     color: var(--neutral-clr-drkst-grey);
 }
 
@@ -107,14 +107,16 @@ button:hover {
     color: var(--neutral-clr-drkst-grey);
     /* background-color: aqua; */
     font-size: 24px;
-    line-height: 2;
+    line-height: 1.75;
     /* width: 500px; */
 }
 
 .about-us-image-area {
     /* background-color: orange; */
     width: 50%;
-    position: relative;
+    height: max-content;
+    padding: 20px;
+    position: relative; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -122,9 +124,9 @@ button:hover {
 
 
 .about-us-image {
+    /* background-color: aqua; */
     width: 100%;
-    height: 100%;
-    position: absolute;
+    position: relative;
     z-index: 5;
     display: flex;
     justify-content: center;
@@ -132,10 +134,11 @@ button:hover {
 }
 
 .about-us-image img {
-    width: 88%;
+    width: 99%;
 }
 
 .decor-box {
+    /* display: none;    */
     width: 70%;
     height: 54%;
     border-radius: 10px;
@@ -383,7 +386,7 @@ button:hover {
 
 
     .about-us-image {
-        position: absolute;
+        /* position: absolute; */
         z-index: 5;
         width: 100%;
     }
@@ -488,9 +491,14 @@ button:hover {
     .outro-area {
         /* background-color: green; */
         height: 596px;
+        height: max-content;
         width: 100%;
-        padding: 122px 74px;
+        padding: 80px 54px;
         margin: 0 auto;
+    }
+
+    .icon-boxes-area img {
+        width: 100%;
     }
 
 
@@ -498,6 +506,7 @@ button:hover {
         width: 50%;
         /* background-color: palegoldenrod; */
         padding: 15px;
+
     }
 
     .call-to-action-area h1 {
@@ -508,7 +517,7 @@ button:hover {
     .call-to-action-area p {
         font-size: 16px;
         color: var(--neutral-clr-drk-grey);
-        margin: 20px 0;
+        margin: 40px 0;
     }
 
     .call-to-action-area button {
@@ -521,7 +530,7 @@ button:hover {
         font-weight: bold;
         font-size: 16px;
         font-family: inherit;
-        margin: 20px 0;
+        margin: 40px 0;
     }
 }
 
@@ -586,8 +595,9 @@ button:hover {
     .about-us-text {
         width: 100%;
         text-align: left;
+        max-height: max-content;
         padding: 0;
-        margin-bottom: 40px;
+        margin-bottom: 70px;
     }
 
     .about-us-text h2 {
@@ -600,14 +610,14 @@ button:hover {
     .about-us-text p {
         color: var(--neutral-clr-drkst-grey);
         font-size: 24px;
-        line-height: 2;
+        line-height: 1.7;
         /* width: 500px; */
     }
 
     .about-us-image-area {
         padding: 10px;
         width: 100%;
-        height: 216px;
+        height: max-content;
         position: relative;
         display: block;
     }
@@ -619,7 +629,8 @@ button:hover {
     }
 
     .about-us-image img {
-        height: 180px;
+        /* height: 100%; */
+        width: 100%;
     }
 
     .decor-box {
@@ -649,7 +660,7 @@ button:hover {
         height: 676px;
         background-color: var(--secondary-clr-deep-blue);
         margin: 0 auto;
-        margin-top: -250px;
+        margin-top: -270px;
         border-radius: 10px;
         padding: 30px 20px;
     }
@@ -728,7 +739,7 @@ button:hover {
     }
 
     .outro-area {
-        height: 984px;
+        height: max-content;
         width: 100%;
         background-color: var(--secondary-clr-ltester-blue);
         display: flex;
@@ -737,9 +748,8 @@ button:hover {
     }
 
     .icon-boxes-area {
-        /* background-color: yellow; */
-        padding: 0;
         width: 100%;
+        padding: 0;
         padding: 10px;
         height: 347px;
     }
