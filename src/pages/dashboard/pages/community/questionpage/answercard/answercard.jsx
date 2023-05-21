@@ -6,6 +6,7 @@ import { ArrowDown, ArrowUp, ArchiveAdd, Edit } from 'iconsax-react'
 
 import ReactTimeAgo from 'react-time-ago'
 import DOMPurify from 'isomorphic-dompurify'
+import { Tooltip } from 'react-tooltip'
 
 import {
   useUpvoteAnswerMutation,
@@ -117,6 +118,11 @@ export default function Answercard ({ answer }) {
               <ReactTimeAgo date={answer?.createdAt} locale='en-US' />
             </span>
           </div>
+          {answer?.createdAt !== answer?.updatedAt && (
+            <div className={answerCardStyles.edited}>
+              <span className={answerCardStyles.editedText}>edited</span>
+            </div>
+          )}
           <div className={answerCardStyles.content}>
             <div
               className={answerCardStyles.body}
@@ -131,10 +137,22 @@ export default function Answercard ({ answer }) {
                 color: answer?.upvotes > 0 ? '#0e8a1a' : '#343a40'
               }}
             >
+              <Tooltip
+                id='my-tooltip'
+                style={{
+                  backgroundColor: '#fff',
+                  color: '#000',
+                  borderRadius: '4px',
+                  padding: '2px'
+                }}
+              />
               <ArrowUp
                 size='19'
                 className={answerCardStyles.icon}
                 onClick={handleUpvoteAnswer}
+                data-tooltip-id='my-tooltip'
+                data-tooltip-content='upvote'
+                data-tooltip-place='top'
               />
               {answer?.upvotes}
             </div>
@@ -148,6 +166,9 @@ export default function Answercard ({ answer }) {
                 size='19'
                 className={answerCardStyles.icon}
                 onClick={handleDownvoteAnswer}
+                data-tooltip-id='my-tooltip'
+                data-tooltip-content='downvote'
+                data-tooltip-place='top'
               />
               {answer?.downvotes}
             </div>

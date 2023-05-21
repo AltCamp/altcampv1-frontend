@@ -259,6 +259,10 @@
   padding-bottom: 1.7rem;
 }
 
+.answers p {
+  overflow-x: auto;
+}
+
 .answerHeader {
   color: var(--secondary-clr-drk-blue);
 }

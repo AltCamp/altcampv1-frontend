@@ -24,7 +24,7 @@ export default function Account() {
 
   const nav = useNavigate();
   const location = useLocation();
-  // console.log(location.pathname)
+  // console.log(location)
 
   const edit = useRef(null);
   
