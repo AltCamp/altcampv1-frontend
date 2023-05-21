@@ -1,0 +1,68 @@
+.profileContainer{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 2%;
+}
+
+.back{
+    display: flex;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+.backText{
+    margin-left: 1rem; 
+    cursor: pointer;
+}
+
+.profileTop{
+    width: 85%;
+    margin: 0 auto;
+    height: 40%;
+    display: flex;
+    align-items: flex-start;
+    /* border: 1px solid  red; */
+    margin-bottom: 2rem;
+}
+
+.profileTopLeft img{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 10px solid var( --neutral-clr-grey-1);
+    margin-right: 4rem;
+}
+.profileTopRight{
+    width: 70%;
+}
+.profileTopRightTop{
+    margin-bottom: 3rem;
+}
+.profileTopRightTop b{
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: black;
+}
+.profileTopRightTop b:not(:last-child){
+    margin-right: 1.2rem;
+}
+.profileTopRightTop p{
+    margin-bottom: 1rem;
+    position: relative;
+    color: var(--neutral-clr-grey-1);
+}
+.profileTopRightTop p span{
+   position: absolute;
+   left: 170px;
+   color: black;
+}
+.profileBio{
+    margin-bottom: 1.5rem;
+
+}
+.profileBioText{
+    width: 60%;
+    height: 130px;
+    
+}

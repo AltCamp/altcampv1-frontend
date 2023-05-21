@@ -64,6 +64,7 @@ import {
   EditQuestionPage
 } from './pages/dashboard/pages'
 import Updatebio from './pages/dashboard/pages/account/updatebio/updateBio'
+import UserProfile from './pages/dashboard/pages/users/userProfile/userProfile'
 
 // set up router using createBrowserRouter
 const router = createBrowserRouter([
@@ -255,8 +256,12 @@ const router = createBrowserRouter([
       },
       {
         path: '/dashboard/users',
-        element: <Users />
-      }
+        element: <Users />,
+      },
+      {
+        path: '/dashboard/users/:userId',
+        element: <UserProfile />,
+      },
     ]
   }
 ])
