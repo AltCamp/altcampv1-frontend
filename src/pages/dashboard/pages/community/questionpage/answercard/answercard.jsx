@@ -118,6 +118,11 @@ export default function Answercard ({ answer }) {
               <ReactTimeAgo date={answer?.createdAt} locale='en-US' />
             </span>
           </div>
+          {answer?.createdAt !== answer?.updatedAt && (
+            <div className={answerCardStyles.edited}>
+              <span className={answerCardStyles.editedText}>edited</span>
+            </div>
+          )}
           <div className={answerCardStyles.content}>
             <div
               className={answerCardStyles.body}
