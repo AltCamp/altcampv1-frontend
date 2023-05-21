@@ -51,7 +51,7 @@ const Landing = () => {
             AltCamp is an online e-learning interactive platform that allows
             Altschoolers post questions on the community, interact with other
             community members and also receive feedbacks and responses from
-            other students, instructors and mentors
+            other students, instructors and mentors.
           </p>
         </div>
       </div>
