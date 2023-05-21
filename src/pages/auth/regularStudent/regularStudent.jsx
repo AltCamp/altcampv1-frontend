@@ -20,7 +20,7 @@ export default function RegularStudent() {
             <img src={altcampWhiteLogo} alt="studyBuddy Logo" className="" />
             <p className="">
               Learning made easy and interesting. Share what you know even as
-              you learn what you something new
+              you learn what you do not know
             </p>
           </div>
         </div>

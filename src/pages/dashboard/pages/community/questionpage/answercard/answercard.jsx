@@ -17,6 +17,10 @@ import {
 import { useSelector } from 'react-redux'
 import RichEditor from '../../richeditor/richeditor'
 
+// import prsims modules for code highlighting and sytyling
+// import Prism from 'prismjs'
+
+
 export default function Answercard ({ answer }) {
   const [content, setContent] = useState(answer?.content)
   const [editMode, setEditMode] = useState(false)
@@ -126,7 +130,7 @@ export default function Answercard ({ answer }) {
           <div className={answerCardStyles.content}>
             <div
               className={answerCardStyles.body}
-              dangerouslySetInnerHTML={{ __html: clean }}
+              dangerouslySetInnerHTML={{ __html: answer?.content }}
             />
           </div>
 
