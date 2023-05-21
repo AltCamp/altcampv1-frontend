@@ -6,7 +6,8 @@ import { questionSlice } from "./slices/apiSlices/communitySlices/questionSlice"
 
 import { userSlice } from "./slices/generalSlices/userSlice";
 import { answerSlice } from './slices/apiSlices/communitySlices/answerSlice';
-import { StudentsSlice } from "./slices/apiSlices/studentSlices/allStudentSlices";
+import { StudentsSlice } from "./slices/apiSlices/accountSlices/allStudentSlices";
+import { accountMutationSlice } from "./slices/apiSlices/accountSlices/accountMutationSlice";
 
 export const store = configureStore({
   reducer: {
@@ -15,6 +16,7 @@ export const store = configureStore({
     [questionSlice.reducerPath]: questionSlice.reducer,
     [answerSlice.reducerPath]: answerSlice.reducer,
     [StudentsSlice.reducerPath]: StudentsSlice.reducer,
+    [accountMutationSlice.reducerPath]: accountMutationSlice.reducer,
     user: userSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
@@ -23,5 +25,6 @@ export const store = configureStore({
       questionSlice.middleware,
       answerSlice.middleware,
       StudentsSlice.middleware,
+      accountMutationSlice.middleware,
     ]),
 });

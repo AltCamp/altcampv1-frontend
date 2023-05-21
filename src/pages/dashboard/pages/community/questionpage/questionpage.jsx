@@ -278,10 +278,13 @@ export default function Questionpage () {
                     <div className={questionPageStyles.authorImg}>
                       <img src={gravatar} alt='' />
                     </div>
-                    <div className={questionPageStyles.authorName}>
+                    <Link
+                      to={`/dashboard/users/${questionDetails?.author._id}`}
+                      className={questionPageStyles.authorName}
+                    >
                       {questionDetails?.author.firstName}{' '}
                       {questionDetails?.author.lastName}
-                    </div>
+                    </Link>
                   </div>
 
                   {user?._id === questionDetails?.author._id && (

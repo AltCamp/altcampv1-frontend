@@ -2,9 +2,7 @@
 import React, { useState, useEffect} from "react";
 import userStyles from "./users.module.css";
 import searchicon from "../../../../assets/icons/searchicon.png";
-import {
-  useGetAllStudentsQuery,
-} from "../../../../app/slices/apiSlices/studentSlices/allStudentSlices";
+import { useGetAllStudentsQuery } from "../../../../app/slices/apiSlices/accountSlices/allStudentSlices";
 import { ProfileCircle } from "iconsax-react";
 import { Link } from "react-router-dom";
 
