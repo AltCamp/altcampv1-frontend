@@ -26,6 +26,7 @@ export default function Community () {
   const navigate = useNavigate()
 
   const location = useLocation()
+ 
 
   // check location state for new post created and clear it after handleNewPostCreated is called
 

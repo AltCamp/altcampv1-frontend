@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const updateStudentSlice = createApi({
+export const updateStudentSlice = createApi({
   reducerPath: "updateStudentApi",
   baseQuery: fetchBaseQuery({ baseUrl: "https://the-altcamp.onrender.com" }),
   endpoints: (builder) => ({

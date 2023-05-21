@@ -5,6 +5,14 @@ export default function Updatebio() {
     const [bio, setBio] = useState("")
     const [count, setCount] = useState(0)
 
+    const handleText = (e)=>{
+        if(count >= 100){
+            setBio((prev)=> prev + '')
+        }else{
+            setBio(e.target.value)
+        }
+    }
+
     useEffect(() => {
         if(bio.trim().length === 0){
             setCount(0)
@@ -21,7 +29,8 @@ export default function Updatebio() {
     <section className={bioStyles["body_bio"]}>
              <textarea name="bio" id={bioStyles["textarea"]} placeholder='write your bio...'
              value={bio}
-             onChange={(e)=> setBio(e.target.value)}>
+             onChange={(e)=> handleText(e)}
+             >
              </textarea>
         <p className={bioStyles["count"]}> word count : {count} / 100 </p>
     </section>
