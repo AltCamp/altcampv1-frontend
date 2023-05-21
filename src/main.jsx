@@ -7,6 +7,8 @@ import './index.css'
 
 import TimeAgo from 'javascript-time-ago'
 
+import { Helmet, HelmetProvider } from 'react-helmet-async'
+
 import en from 'javascript-time-ago/locale/en.json'
 import ru from 'javascript-time-ago/locale/ru.json'
 
@@ -40,7 +42,6 @@ import DeactivateAcc from './pages/dashboard/pages/account/deactivateaccount/dea
 import Myprojects from './pages/dashboard/pages/account/myprojects/myprojects'
 import Picturechange from './pages/dashboard/pages/account/changeprofilepicture/picturechange'
 
-
 //import error component
 import Error from './pages/error/error'
 
@@ -60,18 +61,16 @@ import {
   // subpages of community
   Questionpage,
   AskQuestionPage,
-  EditQuestionPage,
+  EditQuestionPage
 } from './pages/dashboard/pages'
 import Updatebio from './pages/dashboard/pages/account/updatebio/updateBio'
-
 
 // set up router using createBrowserRouter
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Landing />,
-    errorElement: <Error />,
-    
+    errorElement: <Error />
   },
   {
     path: '/altstudent',
@@ -185,7 +184,10 @@ const router = createBrowserRouter([
       // dynamic route for for each question
       {
         path: '/dashboard/community/question/:question',
-        element: <Questionpage />
+        element: <Questionpage />,
+        // pass the question id as a prop to the component
+        // this is used to fetch the question from the backend
+        // and display it
       },
       {
         path: '/dashboard/community/ask/:question',
@@ -227,10 +229,9 @@ const router = createBrowserRouter([
             path: '/dashboard/account/updatebio',
             element: <Updatebio />
           }
-        ],
-        
+        ]
       },
-     
+
       {
         path: '/dashboard/contributors',
         element: <Contributors />
@@ -266,7 +267,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <HelmetProvider>
+        <RouterProvider router={router} />
+      </HelmetProvider>
     </Provider>
   </React.StrictMode>
 )
