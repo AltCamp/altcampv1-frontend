@@ -16,6 +16,7 @@ import {
 import { useSelector } from "react-redux";
 import Myprojects from "./myprojects/myprojects";
 
+
 export default function Account() {
   
   // const [track, setTrack] = useState("Frontend");
@@ -55,6 +56,7 @@ export default function Account() {
   const { user } = useSelector((state) => state?.user.user);
 
   // console.log(user)
+
 
   return (
     <>
