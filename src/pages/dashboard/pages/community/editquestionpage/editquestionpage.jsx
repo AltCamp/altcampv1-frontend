@@ -11,6 +11,7 @@ import { useUpdateQuestionMutation } from '../../../../../app/slices/apiSlices/c
 
 export default function EditQuestionPage () {
   const location = useLocation()
+  
 
   const editableQuestionState = location?.state
 
