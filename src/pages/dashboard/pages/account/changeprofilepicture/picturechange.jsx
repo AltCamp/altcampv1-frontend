@@ -53,7 +53,7 @@ export default function Picturechange () {
     }
   }, [isSuccess])
 
-  console.log(data, updatePictureError)
+  // console.log(data, updatePictureError)
 
   return (
     <div className={picUpdate['container']}>
