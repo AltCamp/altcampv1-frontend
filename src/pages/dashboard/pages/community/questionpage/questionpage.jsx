@@ -45,15 +45,16 @@ import DOMPurify from 'isomorphic-dompurify'
 import { useSelector } from 'react-redux'
 
 export default function Questionpage () {
-  const [questionId, setQuestionId] = useState()
+  // const [questionId, setQuestionId] = useState()
   const [deleteQuestionModal, setDeleteQuestionModal] = useState(false)
   const [shareModal, setShareModal] = useState(false)
   const [screenWidthState, setScreenWidthState] = useState(false)
 
-  const { question } = useParams()
   const navigate = useNavigate()
 
   const location = useLocation()
+  const { questionId } = useParams()
+
   // get currnet page address
   const shareLink = window.location.href
 
@@ -61,11 +62,11 @@ export default function Questionpage () {
 
   // console.log(user)
 
-  useEffect(() => {
-    if (location.state) {
-      setQuestionId(location.state.question)
-    }
-  }, [location])
+  // useEffect(() => {
+  //   if (location.state) {
+  //     setQuestionId(location.state.question)
+  //   }
+  // }, [location])
 
   const {
     data: questionData,

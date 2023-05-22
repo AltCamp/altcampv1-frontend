@@ -13,8 +13,8 @@ export default function Questioncard ({ question }) {
     <div className={questionCardStyles.container}>
       <div className={questionCardStyles.header}>
         <Link
-          to={`/dashboard/community/question/${question.slug}`}
-          state={{ question: question._id }}
+          to={`/dashboard/community/question/${question._id}/${question.slug}`}
+          // state={{ question: question._id }}
         >
           <h3 className={questionCardStyles.title}>{question.title}</h3>
         </Link>
@@ -77,8 +77,8 @@ export default function Questioncard ({ question }) {
           </div>
           <span className={questionCardStyles.authorDivider}>|</span>
           <Link
-            to={`/dashboard/community/question/${question.slug}`}
-            state={{ question: question._id }}
+            to={`/dashboard/community/question/${question._id}/${question.slug}`}
+            // state={{ question: question._id }}
             className={questionCardStyles.answerBtn}
           >
             <Edit size='17' className={questionCardStyles.editIcon} />
