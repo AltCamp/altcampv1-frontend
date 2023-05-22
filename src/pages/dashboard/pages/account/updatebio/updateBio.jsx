@@ -12,6 +12,11 @@ export default function Updatebio() {
             setBio(e.target.value)
         }
     }
+    const handleback = (e)=>{
+        if(e.keyCode === 8){
+            setCount((prev)=> prev - 1)
+        }
+    }
 
     useEffect(() => {
         if(bio.trim().length === 0){
@@ -30,6 +35,7 @@ export default function Updatebio() {
              <textarea name="bio" id={bioStyles["textarea"]} placeholder='write your bio...'
              value={bio}
              onChange={(e)=> handleText(e)}
+             onKeyDown={(e)=> handleback(e)}
              >
              </textarea>
         <p className={bioStyles["count"]}> word count : {count} / 100 </p>
