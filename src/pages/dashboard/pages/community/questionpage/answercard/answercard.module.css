@@ -13,6 +13,7 @@
 
 .name {
   font-weight: 500;
+  text-decoration: none;
 }
 
 .mentor {
@@ -35,6 +36,23 @@
 
 .timeAnswered {
   font-size: 14px;
+}
+
+.edited {
+  text-align: center;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  width: fit-content;
+  background-color: var(--primary-clr-pink-1);
+  color: var(--neutral-clr-deep-grey);
+  font-weight: 500;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.edited:hover {
+  background-color: var(--primary-clr-pink-2);
 }
 
 .content {
@@ -60,6 +78,7 @@
 .upvotes {
     color: #0E8A1A;
 }
+
 
 .icon {
   cursor: pointer;

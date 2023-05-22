@@ -68,9 +68,12 @@ export default function Questioncard ({ question }) {
             <div className={questionCardStyles.authorImg}>
               <img src={gravatar} alt='' />
             </div>
-            <div className={questionCardStyles.authorName}>
+            <Link
+              to={`/dashboard/users/${question?.author._id}`}
+              className={questionCardStyles.authorName}
+            >
               {question.author.firstName} {question.author.lastName}
-            </div>
+            </Link>
           </div>
           <span className={questionCardStyles.authorDivider}>|</span>
           <Link
