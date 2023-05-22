@@ -185,7 +185,7 @@ const router = createBrowserRouter([
       // dynamic route for for each question
       {
         path: '/dashboard/community/question/:questionId/:slug',
-        element: <Questionpage />,
+        element: <Questionpage />
         // pass the question id as a prop to the component
         // this is used to fetch the question from the backend
         // and display it
@@ -259,22 +259,22 @@ const router = createBrowserRouter([
       },
       {
         path: '/dashboard/users',
-        element: <Users />,
+        element: <Users />
       },
       {
         path: '/dashboard/users/:userId',
-        element: <UserProfile />,
-      },
+        element: <UserProfile />
+      }
     ]
   }
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Provider store={store}>
-      <HelmetProvider>
+    <HelmetProvider>
+      <Provider store={store}>
         <RouterProvider router={router} />
-      </HelmetProvider>
-    </Provider>
+      </Provider>
+    </HelmetProvider>
   </React.StrictMode>
 )
