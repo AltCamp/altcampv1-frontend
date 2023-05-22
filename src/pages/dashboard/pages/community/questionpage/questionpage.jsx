@@ -44,6 +44,8 @@ import DOMPurify from 'isomorphic-dompurify'
 
 import { useSelector } from 'react-redux'
 
+import altlogo from '../../../../../assets/general/Authlogo.png'
+
 export default function Questionpage () {
   // const [questionId, setQuestionId] = useState()
   const [deleteQuestionModal, setDeleteQuestionModal] = useState(false)
@@ -202,6 +204,16 @@ export default function Questionpage () {
         </title>
         <meta name='description' content={`${questionDetails?.body}`} />
         <link rel='canonical' href={`/question/${questionDetails?.slug}`} />
+        <meta property='og:title' content={questionDetails?.title} />
+        <meta property='og:description' content={questionDetails?.body} />
+        <meta property='og:url' content={shareLink} />
+        <meta property='og:type' content='website' />
+        <meta property='og:image' content={altlogo} />
+        <meta property='og:image:alt' content={questionDetails?.title} />
+        <meta property='og:image:width' content='1200' />
+        <meta property='og:image:height' content='630' />
+        <meta property='og:image:type' content='image/png' />
+        <meta property='og:site_name' content='AltCamp' />
       </Helmet>
       {deleteQuestionModal && (
         <div className={questionPageStyles.deleteWarningOverlay}>
