@@ -184,7 +184,7 @@ const router = createBrowserRouter([
       },
       // dynamic route for for each question
       {
-        path: '/dashboard/community/question/:question',
+        path: '/dashboard/community/question/:questionId/:slug',
         element: <Questionpage />,
         // pass the question id as a prop to the component
         // this is used to fetch the question from the backend
