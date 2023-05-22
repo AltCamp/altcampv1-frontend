@@ -176,7 +176,7 @@ export default function Sidebar ({ toggleSideBar, handleSideBar }) {
               className={sidebarStyle.logout}
               onClick={() => {
                 dispatch(removeUser())
-                navigate('/regularstudent/login')
+                navigate('/account/login')
               }}
             >
               Log Out

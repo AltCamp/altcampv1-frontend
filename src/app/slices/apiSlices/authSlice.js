@@ -11,26 +11,17 @@ export const authSlice = createApi({
         body,
       }),
     }),
-    registerStudent: builder.mutation({
+    register: builder.mutation({
       query: (body) => ({
-        url: "/auth/student",
+        url: "/auth/register",
         method: "POST",
         body,
       }),
-    }),
-    // mentor registration auth
-    registerMentor: builder.mutation({
-      query: (body) => ({
-        url: "/auth/mentor",
-        method: "POST",
-        body,
-      }),
-    }),
+    })
   }),
 });
 
 export const {
   useLoginMutation,
-  useRegisterMentorMutation,
-  useRegisterStudentMutation,
+  useRegisterMutation
 } = authSlice;
