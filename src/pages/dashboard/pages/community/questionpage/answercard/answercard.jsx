@@ -2,10 +2,13 @@ import { useState, useEffect } from 'react'
 
 import answerCardStyles from './answercard.module.css'
 
+import { Link } from 'react-router-dom'
+
 import { ArrowDown, ArrowUp, ArchiveAdd, Edit } from 'iconsax-react'
 
 import ReactTimeAgo from 'react-time-ago'
 import DOMPurify from 'isomorphic-dompurify'
+import { Tooltip } from 'react-tooltip'
 
 import {
   useUpvoteAnswerMutation,
@@ -15,6 +18,9 @@ import {
 
 import { useSelector } from 'react-redux'
 import RichEditor from '../../richeditor/richeditor'
+
+// import prsims modules for code highlighting and sytyling
+// import Prism from 'prismjs'
 
 export default function Answercard ({ answer }) {
   const [content, setContent] = useState(answer?.content)
@@ -106,21 +112,29 @@ export default function Answercard ({ answer }) {
       ) : (
         <>
           <div className={answerCardStyles.header}>
-            <span className={answerCardStyles.name}>
+            <Link
+              to={`/dashboard/users/${answer?.author?._id}`}
+              className={answerCardStyles.name}
+            >
               {answer?.author?.firstName} {answer?.author?.lastName}{' '}
               {answer?.author?.accountType == 'Mentor' && (
                 <span className={answerCardStyles.mentor}>Instructor</span>
               )}
-            </span>
+            </Link>
             <span className={answerCardStyles.divider}></span>
             <span className={answerCardStyles.timeAnswered}>
               <ReactTimeAgo date={answer?.createdAt} locale='en-US' />
             </span>
           </div>
+          {answer?.createdAt !== answer?.updatedAt && (
+            <div className={answerCardStyles.edited}>
+              <span className={answerCardStyles.editedText}>edited</span>
+            </div>
+          )}
           <div className={answerCardStyles.content}>
             <div
               className={answerCardStyles.body}
-              dangerouslySetInnerHTML={{ __html: clean }}
+              dangerouslySetInnerHTML={{ __html: answer?.content }}
             />
           </div>
 
@@ -131,10 +145,22 @@ export default function Answercard ({ answer }) {
                 color: answer?.upvotes > 0 ? '#0e8a1a' : '#343a40'
               }}
             >
+              <Tooltip
+                id='my-tooltip'
+                style={{
+                  backgroundColor: '#fff',
+                  color: '#000',
+                  borderRadius: '4px',
+                  padding: '2px'
+                }}
+              />
               <ArrowUp
                 size='19'
                 className={answerCardStyles.icon}
                 onClick={handleUpvoteAnswer}
+                data-tooltip-id='my-tooltip'
+                data-tooltip-content='upvote'
+                data-tooltip-place='top'
               />
               {answer?.upvotes}
             </div>
@@ -148,6 +174,9 @@ export default function Answercard ({ answer }) {
                 size='19'
                 className={answerCardStyles.icon}
                 onClick={handleDownvoteAnswer}
+                data-tooltip-id='my-tooltip'
+                data-tooltip-content='downvote'
+                data-tooltip-place='top'
               />
               {answer?.downvotes}
             </div>

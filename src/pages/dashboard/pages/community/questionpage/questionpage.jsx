@@ -21,6 +21,7 @@ import share from '../../../../../assets/icons/share.svg'
 
 import { Helmet } from 'react-helmet-async'
 import { ShareSocial } from 'react-share-social'
+import { Tooltip } from 'react-tooltip'
 
 // import answercard
 import Answercard from './answercard/answercard'
@@ -195,7 +196,9 @@ export default function Questionpage () {
   return (
     <>
       <Helmet>
-        <title>{`${questionDetails?.title}`}</title>
+        <title>
+          {questionDetails?.title ? questionDetails?.title : 'Community'}
+        </title>
         <meta name='description' content={`${questionDetails?.body}`} />
         <link rel='canonical' href={`/question/${questionDetails?.slug}`} />
       </Helmet>
@@ -277,10 +280,13 @@ export default function Questionpage () {
                     <div className={questionPageStyles.authorImg}>
                       <img src={gravatar} alt='' />
                     </div>
-                    <div className={questionPageStyles.authorName}>
+                    <Link
+                      to={`/dashboard/users/${questionDetails?.author._id}`}
+                      className={questionPageStyles.authorName}
+                    >
                       {questionDetails?.author.firstName}{' '}
                       {questionDetails?.author.lastName}
-                    </div>
+                    </Link>
                   </div>
 
                   {user?._id === questionDetails?.author._id && (
@@ -332,9 +338,21 @@ export default function Questionpage () {
                           questionDetails?.upvotes > 0 ? '#0e8a1a' : '#343a40'
                       }}
                     >
+                      <Tooltip
+                        id='my-tooltip'
+                        style={{
+                          backgroundColor: '#fff',
+                          color: '#000',
+                          borderRadius: '4px',
+                          padding: '2px'
+                        }}
+                      />
                       <ArrowUp
                         size='19'
                         // className={questionPageStyles.icon}
+                        data-tooltip-id='my-tooltip'
+                        data-tooltip-content='upvote'
+                        data-tooltip-place='top'
                       />
                       {questionDetails?.upvotes}
                     </div>
@@ -349,6 +367,9 @@ export default function Questionpage () {
                       <ArrowDown
                         size='19'
                         className={questionPageStyles.icon}
+                        data-tooltip-id='my-tooltip'
+                        data-tooltip-content='downvote'
+                        data-tooltip-place='top'
                       />
                       {questionDetails?.downvotes}
                     </div>
