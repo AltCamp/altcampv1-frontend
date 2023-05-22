@@ -4,6 +4,7 @@ import React, {useState} from "react";
 export const useImageHandler = () => {
     const [error, setError] = useState("");
     const [image, setImage] = useState("");
+    // const [newImage, setNewImage] = useState("");
     const [caption, setCaption] = useState("");
 
     const Handleimage = (file) => {
@@ -24,6 +25,8 @@ export const useImageHandler = () => {
         return false;
     }
 }
+    let img = new Image();
+    img.src = image;
     return {image, caption, error, Handleimage}
     };
     
