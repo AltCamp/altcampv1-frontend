@@ -196,7 +196,9 @@ export default function Questionpage () {
   return (
     <>
       <Helmet>
-        <title>{`${questionDetails?.title}`}</title>
+        <title>
+          {questionDetails?.title ? questionDetails?.title : 'Community'}
+        </title>
         <meta name='description' content={`${questionDetails?.body}`} />
         <link rel='canonical' href={`/question/${questionDetails?.slug}`} />
       </Helmet>

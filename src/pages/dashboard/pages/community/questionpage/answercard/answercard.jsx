@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 
 import answerCardStyles from './answercard.module.css'
 
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { ArrowDown, ArrowUp, ArchiveAdd, Edit } from 'iconsax-react'
 
@@ -21,7 +21,6 @@ import RichEditor from '../../richeditor/richeditor'
 
 // import prsims modules for code highlighting and sytyling
 // import Prism from 'prismjs'
-
 
 export default function Answercard ({ answer }) {
   const [content, setContent] = useState(answer?.content)
@@ -113,9 +112,10 @@ export default function Answercard ({ answer }) {
       ) : (
         <>
           <div className={answerCardStyles.header}>
-            <Link 
-            to={`/dashboard/users/${answer?.author?._id}`}
-            className={answerCardStyles.name}>
+            <Link
+              to={`/dashboard/users/${answer?.author?._id}`}
+              className={answerCardStyles.name}
+            >
               {answer?.author?.firstName} {answer?.author?.lastName}{' '}
               {answer?.author?.accountType == 'Mentor' && (
                 <span className={answerCardStyles.mentor}>Instructor</span>

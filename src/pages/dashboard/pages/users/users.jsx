@@ -24,7 +24,7 @@ export default function Users() {
       const info = userData.slice(start, end);
       setTotalPage(totalPage);
       setDisplay(info);
-      console.log(userData);
+      // console.log(userData);
     }
   }, [isSuccess, pageNo]);
 
