@@ -19,7 +19,7 @@ const MainNavbar = () => {
           <li><NavLink href="#">Home</NavLink></li>
           <li><NavLink href="#">About</NavLink></li>
           <li><NavLink href="#">Features</NavLink></li>
-          <button onClick={() => setShowRegisterOptions(prev => !prev)
+          <button onClick={() =>  setShowRegisterOptions(prev => !prev)
           } className={mainNavbarStyles['get-started-btn']}><NavLink href="#" >Get Started</NavLink></button>
           <section className={`${mainNavbarStyles['register-options']} ${showregisterOptions ? mainNavbarStyles['show'] : ''} `}>
             <ul>
