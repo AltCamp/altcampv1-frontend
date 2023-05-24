@@ -66,6 +66,10 @@
     transition: all 0.18s ease;
 }
 
+.register-options.show{
+    right: calc(10% + 35px);
+}
+
 .nav-options {
     border-radius: 10px;
     position: absolute;
@@ -76,13 +80,13 @@
 }
 
 
-.get-started-btn:hover~.register-options,
+/* .get-started-btn:hover~.register-options,
 .register-options:hover {
     position: absolute;
     display: block;
     top: 70px;
     right: calc(10% + 15px);
-}
+} */
 
 .register-options ul,
 .nav-options ul {

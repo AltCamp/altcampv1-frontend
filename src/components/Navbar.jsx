@@ -6,8 +6,8 @@ import { useState } from 'react';
 import altcamplogo from '../assets/general/AuthWhiteLogo.svg'
 
 const MainNavbar = () => {
-  const [openRegisterOptions, setOpenRegisterOptions] = useState(false)
-
+  const [openNavOptions, setOpenNavOptions] = useState(false)
+  const [showregisterOptions, setShowRegisterOptions] = useState(false)
 
   return (
     <>
@@ -19,8 +19,9 @@ const MainNavbar = () => {
           <li><NavLink href="#">Home</NavLink></li>
           <li><NavLink href="#">About</NavLink></li>
           <li><NavLink href="#">Features</NavLink></li>
-          <button className={mainNavbarStyles['get-started-btn']}><NavLink href="#">Get Started</NavLink></button>
-          <section className={`${mainNavbarStyles['register-options']} ${openRegisterOptions ? mainNavbarStyles['open'] : ''} `}>
+          <button onClick={() => setShowRegisterOptions(prev => !prev)
+          } className={mainNavbarStyles['get-started-btn']}><NavLink href="#" >Get Started</NavLink></button>
+          <section className={`${mainNavbarStyles['register-options']} ${showregisterOptions ? mainNavbarStyles['show'] : ''} `}>
             <ul>
               <li>
                 <NavLink to='/account'>As an Altschooler</NavLink>
@@ -35,7 +36,7 @@ const MainNavbar = () => {
               </li>
             </ul>
           </section>
-          <section className={`${mainNavbarStyles['nav-options']} ${openRegisterOptions ? mainNavbarStyles['open'] : ''} `}>
+          <section className={`${mainNavbarStyles['nav-options']} ${openNavOptions ? mainNavbarStyles['open'] : ''} `}>
             <ul>
               <li>
                 <NavLink>Home</NavLink>
@@ -50,7 +51,7 @@ const MainNavbar = () => {
           </section>
         </ul>
         <div className={mainNavbarStyles['options-icon']} onClick={() => {
-          setOpenRegisterOptions(prev => !prev)
+          setOpenNavOptions(prev => !prev)
         }}>
           <HambergerMenu size="32" color="#fff" />
         </div>
