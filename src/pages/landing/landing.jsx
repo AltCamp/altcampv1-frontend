@@ -22,7 +22,7 @@ const Landing = () => {
           <div className={landingPageStyles['intro-text-area']}>
             <h1>Transform your skills and learn the easy way</h1>
             <p>A community for Altschoolers that provides  easy access to  assistance from peers and mentors.</p>
-            <a href='/regularstudent/login'>
+            <a href='/account'>
               <button>
                 Get Started
               </button>
@@ -161,7 +161,7 @@ const Landing = () => {
             </p>
           </div>
         </div>
-        <a href='/regularstudent/login'>
+        <a href='/account'>
           <button>
             Get Started
           </button>
@@ -182,7 +182,7 @@ const Landing = () => {
             Share what you know even as you learn what you do not know in the
             most convenient way.
           </p>
-          <a href='/regularstudent/login'>
+          <a href='/account'>
             <button>
               Get Started
             </button>
