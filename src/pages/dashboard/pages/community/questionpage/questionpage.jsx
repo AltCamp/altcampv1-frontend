@@ -29,15 +29,15 @@ import Answercard from './answercard/answercard'
 // import createanswer
 import Createanswer from './createanswer/createanswer'
 
-import { useGetQuestionByIdQuery } from '../../../../../app/slices/apiSlices/communitySlices/questionSlice'
+import { useGetQuestionByIdQuery } from '../../../../../app/slices/apiSlices/communitySlice'
 
-import { useUpvoteQuestionMutation } from '../../../../../app/slices/apiSlices/communitySlices/questionSlice'
+import { useUpvoteQuestionMutation } from '../../../../../app/slices/apiSlices/communitySlice'
 
-import { useDownvoteQuestionMutation } from '../../../../../app/slices/apiSlices/communitySlices/questionSlice'
+import { useDownvoteQuestionMutation } from '../../../../../app/slices/apiSlices/communitySlice'
 
-import { useGetAnswersQuery } from '../../../../../app/slices/apiSlices/communitySlices/answerSlice'
+import { useGetAnswersQuery } from '../../../../../app/slices/apiSlices/communitySlice'
 
-import { useDeleteQuestionMutation } from '../../../../../app/slices/apiSlices/communitySlices/questionSlice'
+import { useDeleteQuestionMutation } from '../../../../../app/slices/apiSlices/communitySlice'
 
 import ReactTimeAgo from 'react-time-ago'
 import DOMPurify from 'isomorphic-dompurify'
@@ -326,15 +326,12 @@ export default function Questionpage () {
                       <span className={questionPageStyles.requested}>
                         Requested{' '}
                       </span>
-                      {questionDetails &&
-                        (questionSuccess ||
-                          upvoteSuccess ||
-                          downvoteSuccess) && (
-                          <ReactTimeAgo
-                            date={questionDetails?.createdAt}
-                            locale='en-US'
-                          />
-                        )}
+                      {questionDetails && (
+                        <ReactTimeAgo
+                          date={questionDetails?.createdAt}
+                          locale='en-US'
+                        />
+                      )}
                     </span>
                     <span className={questionPageStyles.divider}></span>
                     <span className={questionPageStyles.answerCount}>
@@ -353,16 +350,17 @@ export default function Questionpage () {
                     >
                       <Tooltip
                         id='my-tooltip'
-                        style={{
-                          backgroundColor: '#fff',
-                          color: '#000',
-                          borderRadius: '4px',
-                          padding: '2px'
-                        }}
+                        className='tooltip'
+                        // style={{
+                        //   backgroundColor: '#6a6ff5',
+                        //   color: '#fff',
+                        //   borderRadius: '4px',
+                        //   padding: '2px'
+                        // }}
                       />
                       <ArrowUp
                         size='19'
-                        // className={questionPageStyles.icon}
+                        className={questionPageStyles.icon}
                         data-tooltip-id='my-tooltip'
                         data-tooltip-content='upvote'
                         data-tooltip-place='top'

@@ -83,6 +83,7 @@
 
 .icon {
   cursor: pointer;
+  outline: none;
 }
 
 .bookmark, .edit {
