@@ -10,11 +10,12 @@ import ReactTimeAgo from 'react-time-ago'
 import DOMPurify from 'isomorphic-dompurify'
 import { Tooltip } from 'react-tooltip'
 
+
 import {
   useUpvoteAnswerMutation,
   useDownvoteAnswerMutation,
   useUpdateAnswerMutation
-} from '../../../../../../app/slices/apiSlices/communitySlices/answerSlice'
+} from '../../../../../../app/slices/apiSlices/communitySlice'
 
 import { useSelector } from 'react-redux'
 import RichEditor from '../../richeditor/richeditor'
@@ -147,12 +148,6 @@ export default function Answercard ({ answer }) {
             >
               <Tooltip
                 id='my-tooltip'
-                style={{
-                  backgroundColor: '#fff',
-                  color: '#000',
-                  borderRadius: '4px',
-                  padding: '2px'
-                }}
               />
               <ArrowUp
                 size='19'
