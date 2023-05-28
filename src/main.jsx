@@ -19,20 +19,10 @@ TimeAgo.addLocale(ru)
 import { store } from './app/store'
 import { Provider } from 'react-redux'
 
-// Import the pages routes
-import { AltStudent, Mentor, RegularStudent } from './pages'
 
-// import components from altStudent
-import { AltStudentRegister } from './pages/auth/altStudent'
+// import components for Authentication
+import { ForgotPassword, LoginGroup, UserLogin, Auth, Register } from './pages/auth'
 
-// import components from RegularStudent
-import { RegularStudentRegister } from './pages/auth/regularStudent'
-
-// import components for UserLogin
-import { ForgotPassword, LoginGroup, UserLogin } from './pages/auth/userLogin'
-
-// import components from Mentor
-import { MentorRegister } from './pages/auth/mentor'
 import Landing from './pages/landing/landing'
 
 import Layout from './pages/dashboard/layout/layout'
@@ -74,8 +64,8 @@ const router = createBrowserRouter([
     errorElement: <Error />
   },
   {
-    path: '/altstudent',
-    element: <AltStudent />,
+    path: '/account',
+    element: <Auth />,
     loader: () => {
       if (localStorage.getItem('user')) {
         return redirect('/dashboard')
@@ -84,7 +74,7 @@ const router = createBrowserRouter([
     },
     children: [
       {
-        path: '/altstudent/login',
+        path: '/account/login',
         element: <LoginGroup />,
         children: [
           {
@@ -92,75 +82,14 @@ const router = createBrowserRouter([
             element: <UserLogin />
           },
           {
-            path: '/altstudent/login/forgotpassword',
+            path: '/account/login/forgotpassword',
             element: <ForgotPassword />
           }
         ]
       },
       {
         index: true,
-        element: <AltStudentRegister />
-      }
-    ]
-  },
-  {
-    path: '/regularstudent',
-    element: <RegularStudent />,
-    loader: () => {
-      if (localStorage.getItem('user')) {
-        return redirect('/dashboard')
-      }
-      return null
-    },
-    children: [
-      {
-        path: '/regularstudent/login',
-        element: <LoginGroup />,
-        children: [
-          {
-            index: true,
-            element: <UserLogin />
-          },
-          {
-            path: '/regularstudent/login/forgotpassword',
-            element: <ForgotPassword />
-          }
-        ]
-      },
-      {
-        index: true,
-        element: <RegularStudentRegister />
-      }
-    ]
-  },
-  {
-    path: '/mentor',
-    element: <Mentor />,
-    loader: () => {
-      if (localStorage.getItem('user')) {
-        return redirect('/dashboard')
-      }
-      return null
-    },
-    children: [
-      {
-        path: '/mentor/login',
-        element: <LoginGroup />,
-        children: [
-          {
-            index: true,
-            element: <UserLogin />
-          },
-          {
-            path: '/mentor/login/forgotpassword',
-            element: <ForgotPassword />
-          }
-        ]
-      },
-
-      {
-        index: true,
-        element: <MentorRegister />
+        element: <Register />
       }
     ]
   },
@@ -169,7 +98,7 @@ const router = createBrowserRouter([
     element: <Layout />,
     loader: () => {
       if (!localStorage.getItem('user')) {
-        return redirect('/regularstudent/login')
+        return redirect('/account/login')
       }
       return null
     },
@@ -184,8 +113,8 @@ const router = createBrowserRouter([
       },
       // dynamic route for for each question
       {
-        path: '/dashboard/community/question/:question',
-        element: <Questionpage />,
+        path: '/dashboard/community/question/:questionId/:slug',
+        element: <Questionpage />
         // pass the question id as a prop to the component
         // this is used to fetch the question from the backend
         // and display it
@@ -259,22 +188,22 @@ const router = createBrowserRouter([
       },
       {
         path: '/dashboard/users',
-        element: <Users />,
+        element: <Users />
       },
       {
         path: '/dashboard/users/:userId',
-        element: <UserProfile />,
-      },
+        element: <UserProfile />
+      }
     ]
   }
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Provider store={store}>
-      <HelmetProvider>
+    <HelmetProvider>
+      <Provider store={store}>
         <RouterProvider router={router} />
-      </HelmetProvider>
-    </Provider>
+      </Provider>
+    </HelmetProvider>
   </React.StrictMode>
 )

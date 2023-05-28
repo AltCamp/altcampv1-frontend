@@ -7,7 +7,7 @@ import { ArrowCircleLeft } from 'iconsax-react'
 import { useParams, useNavigate, Link, useLocation } from 'react-router-dom'
 import RichEditor from '../richeditor/richeditor'
 
-import { useUpdateQuestionMutation } from '../../../../../app/slices/apiSlices/communitySlices/questionSlice'
+import { useUpdateQuestionMutation } from '../../../../../app/slices/apiSlices/communitySlice'
 
 export default function EditQuestionPage () {
   const location = useLocation()
