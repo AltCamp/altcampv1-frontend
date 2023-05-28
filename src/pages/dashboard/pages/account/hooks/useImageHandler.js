@@ -1,16 +1,9 @@
 import React, { useState } from "react";
 
 export const useImageHandler = () => {
-<<<<<<< HEAD
     const [error, setError] = useState("");
     const [image, setImage] = useState("");
-    // const [newImage, setNewImage] = useState("");
     const [caption, setCaption] = useState("");
-=======
-  const [error, setError] = useState("");
-  const [image, setImage] = useState("");
-  const [caption, setCaption] = useState("");
->>>>>>> 760d24e0f9dc7ea046884ddc9c32687dc523b38e
 
   const Handleimage = (file) => {
     let files = file;
@@ -29,9 +22,7 @@ export const useImageHandler = () => {
       setError("Please upload either a JPEG or PNG format file");
       return false;
     }
-}
-    let img = new Image();
-    img.src = image;
-    return {image, caption, error, Handleimage}
+  };
+    return {image, caption, error, Handleimage, createFormData}
     };
     

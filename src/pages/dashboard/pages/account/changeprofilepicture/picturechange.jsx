@@ -12,7 +12,7 @@ export default function Picturechange () {
   const dropRef = useRef(null)
 
   // custom hook for uploading image
-  const { image, caption, error, Handleimage } = useImageHandler()
+  const { image, caption, error, Handleimage, createFormData } = useImageHandler()
 
   const navigate = useNavigate()
 
@@ -42,7 +42,7 @@ export default function Picturechange () {
   const handleUpdateProfilePicture = () => {
     updateProfilePicture({
       body: {
-        avatar: image
+        profilePicture: image
       }
     })
   }
@@ -53,7 +53,7 @@ export default function Picturechange () {
     }
   }, [isSuccess])
 
-  // console.log(data, updatePictureError)
+  console.log(data, updatePictureError)
 
   return (
     <div className={picUpdate['container']}>
@@ -78,6 +78,7 @@ export default function Picturechange () {
           </aside>
           <p className={picUpdate['group_desc']}>Drag and drop Picture</p>
           <p className={picUpdate['group_desc2']}>OR</p>
+          <form action="" encType="multipart/form-data">
           <label
             htmlFor='projectImage'
             onClick={() => chooseref.current.click()}
@@ -92,6 +93,7 @@ export default function Picturechange () {
             ref={chooseref}
             onChange={e => Handleimage(e.target.files[0])}
           />
+          </form>
         </section>
         <section className={picUpdate['upload_button']}>
           <button
