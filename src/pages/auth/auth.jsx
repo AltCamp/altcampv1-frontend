@@ -1,11 +1,11 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
-import authHeroImage from "../../../assets/general/AuthBackground.webp";
-import altcampWhiteLogo from "../../../assets/general/AuthWhiteLogo.svg";
-import rglrStudStyle from "./regularStudent.module.css";
-import mobileLogo from "./../../../assets/general/AuthBlackLogo.svg";
+import authHeroImage from "../../assets/general/AuthBackground.webp";
+import altcampWhiteLogo from "../../assets/general/AuthWhiteLogo.svg";
+import authStyles from "./auth.module.css";
+import mobileLogo from "./../../assets/general/AuthBlackLogo.svg";
 
-export default function RegularStudent() {
+export default function Auth() {
   let activeStyle = {
     color: "#6a6ff5",
     fontWeight: "700",
@@ -13,10 +13,10 @@ export default function RegularStudent() {
   };
 
   return (
-    <div className={rglrStudStyle.container}>
-      <div className={rglrStudStyle.hero}>
-        <div className={rglrStudStyle.heroOverlay}>
-          <div className={rglrStudStyle.heroContent}>
+    <div className={authStyles.container}>
+      <div className={authStyles.hero}>
+        <div className={authStyles.heroOverlay}>
+          <div className={authStyles.heroContent}>
             <img src={altcampWhiteLogo} alt="studyBuddy Logo" className="" />
             <p className="">
               Learning made easy and interesting. Share what you know even as
@@ -26,15 +26,15 @@ export default function RegularStudent() {
         </div>
         <img src={authHeroImage} alt="hero image of a student" className="" />
       </div>
-      <div className={rglrStudStyle.authSection}>
-        <div className={rglrStudStyle.mobileLogo}>
+      <div className={authStyles.authSection}>
+        <div className={authStyles.mobileLogo}>
           <img src={mobileLogo} alt="studybuddy mobile logo" className="" />
         </div>
 
-        <div className={rglrStudStyle.authContent}>
+        <div className={authStyles.authContent}>
           <nav className="">
             <NavLink
-              to="/regularstudent"
+              to="/account"
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
               className="a1"
               end
@@ -42,7 +42,7 @@ export default function RegularStudent() {
               REGISTER
             </NavLink>
             <NavLink
-              to="/regularstudent/login"
+              to="/account/login"
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
               className="a2"
             >

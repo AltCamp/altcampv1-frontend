@@ -46,7 +46,7 @@ export default function Sidebar ({ toggleSideBar, handleSideBar }) {
     if (user) {
       if (decode(user.token).exp < Date.now() / 1000) {
         dispatch(removeUser())
-        navigate('/regularstudent/login')
+        navigate('/account/login')
       }
     }
   }, [user])
@@ -176,7 +176,7 @@ export default function Sidebar ({ toggleSideBar, handleSideBar }) {
               className={sidebarStyle.logout}
               onClick={() => {
                 dispatch(removeUser())
-                navigate('/regularstudent/login')
+                navigate('/account/login')
               }}
             >
               Log Out

@@ -1,1 +1,0 @@
-export { default as RegularStudentRegister } from './regularStudentRegister/regularStudentRegister'

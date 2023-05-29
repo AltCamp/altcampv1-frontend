@@ -1,1 +1,0 @@
-export { default as MentorRegister } from './mentorRegister/mentorRegister';

@@ -29,31 +29,34 @@ import Answercard from './answercard/answercard'
 // import createanswer
 import Createanswer from './createanswer/createanswer'
 
-import { useGetQuestionByIdQuery } from '../../../../../app/slices/apiSlices/communitySlices/questionSlice'
+import { useGetQuestionByIdQuery } from '../../../../../app/slices/apiSlices/communitySlice'
 
-import { useUpvoteQuestionMutation } from '../../../../../app/slices/apiSlices/communitySlices/questionSlice'
+import { useUpvoteQuestionMutation } from '../../../../../app/slices/apiSlices/communitySlice'
 
-import { useDownvoteQuestionMutation } from '../../../../../app/slices/apiSlices/communitySlices/questionSlice'
+import { useDownvoteQuestionMutation } from '../../../../../app/slices/apiSlices/communitySlice'
 
-import { useGetAnswersQuery } from '../../../../../app/slices/apiSlices/communitySlices/answerSlice'
+import { useGetAnswersQuery } from '../../../../../app/slices/apiSlices/communitySlice'
 
-import { useDeleteQuestionMutation } from '../../../../../app/slices/apiSlices/communitySlices/questionSlice'
+import { useDeleteQuestionMutation } from '../../../../../app/slices/apiSlices/communitySlice'
 
 import ReactTimeAgo from 'react-time-ago'
 import DOMPurify from 'isomorphic-dompurify'
 
 import { useSelector } from 'react-redux'
 
+import altlogo from '../../../../../assets/general/Authlogo.png'
+
 export default function Questionpage () {
-  const [questionId, setQuestionId] = useState()
+  // const [questionId, setQuestionId] = useState()
   const [deleteQuestionModal, setDeleteQuestionModal] = useState(false)
   const [shareModal, setShareModal] = useState(false)
   const [screenWidthState, setScreenWidthState] = useState(false)
 
-  const { question } = useParams()
   const navigate = useNavigate()
 
   const location = useLocation()
+  const { questionId } = useParams()
+
   // get currnet page address
   const shareLink = window.location.href
 
@@ -61,11 +64,11 @@ export default function Questionpage () {
 
   // console.log(user)
 
-  useEffect(() => {
-    if (location.state) {
-      setQuestionId(location.state.question)
-    }
-  }, [location])
+  // useEffect(() => {
+  //   if (location.state) {
+  //     setQuestionId(location.state.question)
+  //   }
+  // }, [location])
 
   const {
     data: questionData,
@@ -196,9 +199,21 @@ export default function Questionpage () {
   return (
     <>
       <Helmet>
-        <title>{`${questionDetails?.title}`}</title>
+        <title>
+          {questionDetails?.title ? questionDetails?.title : 'Community'}
+        </title>
         <meta name='description' content={`${questionDetails?.body}`} />
         <link rel='canonical' href={`/question/${questionDetails?.slug}`} />
+        <meta property='og:title' content={questionDetails?.title} />
+        <meta property='og:description' content={questionDetails?.body} />
+        <meta property='og:url' content={shareLink} />
+        <meta property='og:type' content='website' />
+        <meta property='og:image' content={altlogo} />
+        <meta property='og:image:alt' content={questionDetails?.title} />
+        <meta property='og:image:width' content='1200' />
+        <meta property='og:image:height' content='630' />
+        <meta property='og:image:type' content='image/png' />
+        <meta property='og:site_name' content='AltCamp' />
       </Helmet>
       {deleteQuestionModal && (
         <div className={questionPageStyles.deleteWarningOverlay}>
@@ -311,15 +326,12 @@ export default function Questionpage () {
                       <span className={questionPageStyles.requested}>
                         Requested{' '}
                       </span>
-                      {questionDetails &&
-                        (questionSuccess ||
-                          upvoteSuccess ||
-                          downvoteSuccess) && (
-                          <ReactTimeAgo
-                            date={questionDetails?.createdAt}
-                            locale='en-US'
-                          />
-                        )}
+                      {questionDetails && (
+                        <ReactTimeAgo
+                          date={questionDetails?.createdAt}
+                          locale='en-US'
+                        />
+                      )}
                     </span>
                     <span className={questionPageStyles.divider}></span>
                     <span className={questionPageStyles.answerCount}>
@@ -338,16 +350,17 @@ export default function Questionpage () {
                     >
                       <Tooltip
                         id='my-tooltip'
-                        style={{
-                          backgroundColor: '#fff',
-                          color: '#000',
-                          borderRadius: '4px',
-                          padding: '2px'
-                        }}
+                        className='tooltip'
+                        // style={{
+                        //   backgroundColor: '#6a6ff5',
+                        //   color: '#fff',
+                        //   borderRadius: '4px',
+                        //   padding: '2px'
+                        // }}
                       />
                       <ArrowUp
                         size='19'
-                        // className={questionPageStyles.icon}
+                        className={questionPageStyles.icon}
                         data-tooltip-id='my-tooltip'
                         data-tooltip-content='upvote'
                         data-tooltip-place='top'
