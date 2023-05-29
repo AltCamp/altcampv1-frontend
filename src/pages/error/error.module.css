@@ -16,38 +16,54 @@
   position: relative;
 }
 
-.errorImg p {
+.errorImg .errorStatus {
   position: absolute;
-  top: 5.25rem;
+  text-align: center;
+  top: 4rem;
+  left: 4.75rem;
   z-index: 1;
   text-transform: uppercase;
-  font-family: var(--Inter);
-  font-size: 1.5rem;
-  font-style: italic;
-  font-weight: 700;
+  color: #407BFF;
+}
+
+.errorStatus .errorName {
+  font-weight: 500;
+  font-size: 1.25rem;
   line-height: 1.5rem;
-  color: var(--secondary-clr-lter-blue);
+  margin-bottom: .5rem;
+}
+
+.errorStatus .errorCode {
+font-weight: 600;
+font-size: 2rem;
+line-height: 1.25rem;
 }
 
 .errorText {
   margin-top: 2rem;
   font-family: var(--Inter);
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 400;
   line-height: 1.75rem;
   text-align: center;
   color: var(--neutral-clr-drker-grey);
 }
 
-.errorText .errorLink {
-  font-weight: bolder;
+.errorLink {
+  font-weight: 700;
   color: var(--neutral-clr-drker-grey);
-  text-decoration: underline;
+  border-bottom: 2px solid var(--neutral-clr-drker-grey);
 }
 
-@media (max-width: 320px) {
-    .errorImg p {
-    font-size: 1.25rem;
-left: 1.25rem;
+@media (max-width:350px) {
+  .errorText {
+    font-size: .9rem;
+  }
 }
+
+
+@media (max-width: 300px) {
+  .errorText {
+    font-size: .8rem;
+  }
 }
