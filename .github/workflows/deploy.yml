@@ -1,32 +1,32 @@
-name: Deploy to Droplet
-
+name: Deploy App
 on:
   push:
     branches:
       - dev
-
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
+      - uses: actions/checkout@v2
       - name: Install dependencies
         run: npm install
-
-      - name: Build production bundle
+      - name: Build app
         run: npm run build
-
-      - name: Deploy to Droplet
-        uses: appleboy/ssh-action@master
+      - name: Deploy to droplet
+        uses: digitalocean/action-droplet@v2
         with:
-          host: ${{ secrets.DROPLET_IP }}
-          username: ${{ secrets.DROPLET_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            cd /path/to/your/react/app
-            rm -rf *
-            cp -R /path/to/your/react/app/build/* .
-
+          droplet_name: ${{ secrets.DROPLET_USERNAME }}
+          ssh_key_id: ${{ secrets.SSH_PRIVATE_KEY }}
+          region: default-fra1
+          image: "ubuntu-20.04"
+          size: "s-1vcpu-1gb"
+          action: "create"
+          wait: true
+          commands:
+            - echo "Installing nginx..."
+            - apt-get update
+            - apt-get install -y nginx
+            - echo "Copying React app to /var/www/html..."
+            - rsync -a ./build/ /var/www/html
+            - echo "Restarting nginx..."
+            - service nginx restart
