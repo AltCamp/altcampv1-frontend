@@ -23,10 +23,10 @@ jobs:
           action: "create"
           wait: true
           commands:
-            - echo "Installing nginx..."
-            - apt-get update
-            - apt-get install -y nginx
-            - echo "Copying React app to /var/www/html..."
-            - rsync -a ./build/ /var/www/html
-            - echo "Restarting nginx..."
-            - service nginx restart
+            - run: echo "Installing nginx..."
+            - run: apt-get update
+            - run: apt-get install -y nginx
+            - run: echo "Copying React app to /var/www/html..."
+            - run: rsync -a ./build/ /var/www/html
+            - run: echo "Restarting nginx..."
+            - run: service nginx restart
