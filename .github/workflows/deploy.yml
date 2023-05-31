@@ -1,17 +1,29 @@
-name: Node.js CI
+name: CI/CD for React App
 
 on:
   push:
-    branches: [ dev ]
-  pull_request:
-    branches: [ dev ]
+    branches:
+      - dev
 
 jobs:
   build:
-    runs-on: self-hosted
-  
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - run: |
-        npm install
-        npm run build
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: npm install
+      - name: Build app
+        run: npm run build
+      - name: Deploy to Droplet
+        uses: digitalocean/action-droplet@v2
+        with:
+          droplet_name: altcamp
+          region: us-west-2
+          image: ubuntu-20.04
+          ssh_key: ${{ secrets.DROPLET_SSH_KEY }}
+          files:
+            - build/:/var/www/altcampfrontend/_work/altcampv1-frontend/altcampv1-frontend
+    finally:
+      - name: Clean up
+        run: |
+          sudo rm -rf build
