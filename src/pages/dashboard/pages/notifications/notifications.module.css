@@ -91,7 +91,7 @@
 }
 
 .pagination {
-    list-style: none;
+  list-style: none;
   display: flex;
   justify-content: end;
   align-items: center;
@@ -116,7 +116,7 @@
 }
 
 .paginate {
-      display: flex;
+  display: flex;
   justify-content: end;
   list-style: none;
   text-align: center;
@@ -128,9 +128,9 @@
   gap: 0.5rem;
 }
 
-.pageLink:hover{
-    background-color: var(--secondary-clr-lter-blue);
-    border: 2px solid var(--secondary-clr-lter-blue);
+.pageLink:hover {
+  background-color: var(--secondary-clr-lter-blue);
+  border: 2px solid var(--secondary-clr-lter-blue);
 }
 
 .prev:hover,
@@ -139,7 +139,6 @@
   color: var(--neutral-clr-white);
   border: 2px solid var(--secondary-clr-lter-blue);
 }
-
 
 .pageCount {
   margin-right: 4rem;
@@ -150,17 +149,17 @@
   padding: 0.5rem 0.7rem;
 }
 
-.modalSection{
-    display: flex;
-    flex-direction: row;
-    /* border: 2px solid red; */
-    justify-content:space-around;
-    width: 80px;
-    padding: 0;
-    margin: 0;
+.modalSection {
+  display: flex;
+  flex-direction: row;
+  /* border: 2px solid red; */
+  justify-content: space-around;
+  width: 80px;
+  padding: 0;
+  margin: 0;
 }
 
-.verticalLine{
+.verticalLine {
   /* border: none; */
   border-right: 1px solid black;
   /* margin: 1.5rem; */
@@ -171,11 +170,25 @@
 
 @media (min-width: 280px) and (max-width: 600px) {
   .notificationHeader {
-    margin: 2rem 1rem 4rem 1rem;
+    /* margin: 2rem 1rem 4rem 1rem; */
+    margin: 2rem 1rem 0 1rem;
   }
 
   .notification {
     margin: 2rem 1rem 0 1rem;
+  }
+
+  .message {
+    padding: 0.5rem;
+  }
+
+  .message h2 {
+    font-size: 1rem;
+  }
+
+  .details {
+    font-weight: 400;
+    font-size: 0.8rem;
   }
 
   .pagination {
@@ -186,7 +199,7 @@
   }
 
   .pageCount {
-    margin: 0;
+    margin: 0 auto;
     padding: 0.5rem;
   }
 
