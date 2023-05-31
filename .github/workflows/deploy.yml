@@ -1,33 +1,21 @@
-name: CI/CD to DigitalOcean Droplet
+name: Node.js CI
 
 on:
   push:
-    branches:
-      - dev
+    branches: [ dev ]
+  pull_request:
+    branches: [ dev ]
 
 jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-
+  build:
+    runs-on: self-hosted
+  
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build React app
-        run: npm run build
-
-      - name: Deploy to Droplet
-        uses: appleboy/ssh-action@v0.19.0
-        with:
-          host: ${{ secrets.DROPLET_HOST }}
-          username: altcamp
-          key: ${{ secrets.DROPLET_PRIVATE_KEY }}
-          script: |
-            cd /var/www/altcampfrontend/_work/altcampv1-frontend/altcampv1-frontend
-            git pull origin dev
-            npm ci
-            npm run build
-            sudo systemctl restart your-app-service
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: |
+        npm i
+        npm run build
