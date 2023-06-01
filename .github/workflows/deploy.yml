@@ -27,6 +27,6 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /var/www/altcampfrontend/_work/altcampv1-frontend/altcampv1-frontend
-            git pull origin main
+            git pull origin dev
             # Any other deployment steps you need
 
