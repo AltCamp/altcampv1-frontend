@@ -23,7 +23,7 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.DROPLET_IP }}
-          username: root
+          username: altcamp
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /var/www/altcampfrontend/_work/altcampv1-frontend/altcampv1-frontend
