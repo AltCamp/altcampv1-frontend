@@ -35,7 +35,7 @@ export default function UserLogin () {
     e.preventDefault()
     login({ email: email, password: password })
   }
-
+// console.log(data)
   // console.log(email, password)
 
   useEffect(() => {
@@ -46,6 +46,8 @@ export default function UserLogin () {
       setErrorText(error.data.message)
     }
   }, [isSuccess, isError])
+
+ 
 
   // console.log(data?.data)
   // console.log(error)

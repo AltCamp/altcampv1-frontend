@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 
 export const useImageHandler = () => {
-  const [error, setError] = useState("");
-  const [image, setImage] = useState("");
-  const [caption, setCaption] = useState("");
+    const [error, setError] = useState("");
+    const [image, setImage] = useState("");
+    const [caption, setCaption] = useState("");
 
   const Handleimage = (file) => {
     let files = file;
@@ -23,5 +23,6 @@ export const useImageHandler = () => {
       return false;
     }
   };
-  return { image, caption, error, Handleimage };
-};
+    return {image, caption, error, Handleimage}
+    };
+    
