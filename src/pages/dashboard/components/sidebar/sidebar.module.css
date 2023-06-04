@@ -70,6 +70,9 @@
   font-weight: 600;
   align-self: flex-start;
 }
+.accountLinks{
+  display: none !important;
+}
 
 @media (max-width: 1000px) {
   .container {
@@ -131,5 +134,14 @@
 
   .link .icon {
     width: 1rem;
+  }
+  .accountLinks {
+    display: block !important;
+  }
+}
+
+@media (max-width: 450px) {
+  .accountLinks {
+    display: inline-flex !important;
   }
 }

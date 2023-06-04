@@ -2,17 +2,16 @@
 import React, { useState, useEffect} from "react";
 import userStyles from "./users.module.css";
 import searchicon from "../../../../assets/icons/searchicon.png";
-import { useGetAllStudentsQuery } from "../../../../app/slices/apiSlices/accountSlices/allStudentSlices";
+import { useGetAllAccountsQuery } from "../../../../app/slices/apiSlices/accountSlices/accountMutationSlice";
 import { ProfileCircle } from "iconsax-react";
 import { Link } from "react-router-dom";
 
 export default function Users() {
   const [display, setDisplay] = useState("");
-  // const [page, setPage] = useState(0);
   const [totalpage, setTotalPage] = useState(0);
   const [pageNo, setPageNo] = useState(1);
   const { data, isLoading, isSuccess, isError, error } =
-    useGetAllStudentsQuery();
+  useGetAllAccountsQuery();
 
   useEffect(() => {
     if (isSuccess) {
@@ -82,8 +81,7 @@ export default function Users() {
                 
                 <div className={userStyles.user} key={index}>
                   <div className={userStyles.userImg}>
-                    {/* <img src={user.image} alt="" /> */}
-                    <ProfileCircle size={45} color="#555555" />
+                    {user.profilePicture ? <img src={user.profilePicture} alt="" /> : <ProfileCircle size={45} color="#555555" />}
                   </div>
                   <div className={userStyles.userDetails}>
                   <Link className={userStyles.profileLink}

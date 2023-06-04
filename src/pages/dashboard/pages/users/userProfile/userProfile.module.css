@@ -28,7 +28,9 @@
 
 .profileTopLeft img{
     width: 150px;
+    min-width: 150px;
     height: 150px;
+    min-height: 150px;
     border-radius: 50%;
     border: 10px solid var( --neutral-clr-grey-1);
     margin-right: 4rem;
@@ -65,4 +67,7 @@
     width: 60%;
     height: 130px;
     
+}
+.profileBioNoText{
+    opacity: 0.5;
 }

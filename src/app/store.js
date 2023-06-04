@@ -4,7 +4,7 @@ import { authSlice } from "./slices/apiSlices/authSlice";
 
 import { communitySlice } from "./slices/apiSlices/communitySlice";
 import { userSlice } from "./slices/generalSlices/userSlice";
-import { StudentsSlice } from "./slices/apiSlices/accountSlices/allStudentSlices";
+
 import { accountMutationSlice } from "./slices/apiSlices/accountSlices/accountMutationSlice";
 
 export const store = configureStore({
@@ -12,7 +12,6 @@ export const store = configureStore({
     // Add your reducers here
     [authSlice.reducerPath]: authSlice.reducer,
     [communitySlice.reducerPath]: communitySlice.reducer,
-    [StudentsSlice.reducerPath]: StudentsSlice.reducer,
     [accountMutationSlice.reducerPath]: accountMutationSlice.reducer,
     user: userSlice.reducer,
   },
@@ -20,7 +19,6 @@ export const store = configureStore({
     getDefaultMiddleware().concat([
       authSlice.middleware,
       communitySlice.middleware,
-      StudentsSlice.middleware,
       accountMutationSlice.middleware,
     ]),
 });

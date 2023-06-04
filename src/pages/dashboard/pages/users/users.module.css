@@ -144,6 +144,13 @@
   .userImg{
     margin-right: 0.5rem;
   }
+  .userImg img{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+  }
   .userName{
     font-size: 13px;
     margin-bottom: 0.2rem;

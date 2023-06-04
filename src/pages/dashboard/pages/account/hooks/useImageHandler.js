@@ -23,6 +23,6 @@ export const useImageHandler = () => {
       return false;
     }
   };
-    return {image, caption, error, Handleimage, createFormData}
+    return {image, caption, error, Handleimage}
     };
     
