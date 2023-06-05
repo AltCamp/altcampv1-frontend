@@ -140,7 +140,7 @@ const router = createBrowserRouter([
             element: <Myprojects />
           },
           {
-            index: true,
+            path: '/dashboard/account/editprofile',
             element: <Editprofile />
           },
           {

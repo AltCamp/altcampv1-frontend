@@ -1,6 +1,6 @@
 import accountStyles from "./account.module.css";
 import React, { useState, useRef } from "react";
-import profileimage from "../../../../assets/general/profileimage.png";
+// import profileimage from "../../../../assets/general/profileimage.png";
 import { NavLink, useNavigate, useLocation, Outlet } from "react-router-dom";
 import Myprofile from "./myprofile/myprofile";
 
@@ -21,7 +21,6 @@ export default function Account() {
   
   // const [track, setTrack] = useState("Frontend");
   const [lCircle, setLCircle] = useState(25);
-  const [img, setimg] = useState(profileimage);
 
   const nav = useNavigate();
   const location = useLocation();
@@ -33,13 +32,17 @@ export default function Account() {
     edit.current.style.display = "block";
   };
 
+  const handleEditProfile = () => {
+    handleEdit();
+    nav("/dashboard/account/editprofile");
+  }
   const updateProfilePicture = () => {
-    edit.current.style.display = "block";
+    handleEdit();
     nav("/dashboard/account/updateprofilepicture");
   };
 
   const updateBio = () => {
-    edit.current.style.display = "block";
+    handleEdit();
     nav("/dashboard/account/updatebio");
   }
 
@@ -65,7 +68,7 @@ export default function Account() {
           <article>
             <div className={accountStyles["sidePanel_top"]}>
               <div className={accountStyles["sidePanel_image"]}>
-                <img src={img} alt="" />
+                <img src={user.profilePicture} alt="display image" />
               </div>
               <h1 className={accountStyles["sidePanel_profileName"]}>
                 {user?.firstName} {user?.lastName}
@@ -101,7 +104,6 @@ export default function Account() {
               </NavLink>
               <NavLink
                 className={accountStyles.link}
-                onClick={handleEdit}
                 to="/dashboard/account/resetpassword"
                 style={({ isActive }) => (isActive ? activeStyle : undefined)}
               >
@@ -115,7 +117,6 @@ export default function Account() {
               </NavLink>
               <NavLink
                 className={accountStyles.link}
-                onClick={handleEdit}
                 to="/dashboard/account/deactivateaccount"
                 style={({ isActive }) => (isActive ? activeStyle : undefined)}
               >
@@ -134,7 +135,7 @@ export default function Account() {
           {location.pathname === "/dashboard/account/myprojects" ? (
             <Myprojects />
           ) : (
-            <Myprofile edit={handleEdit} picUpdate={updateProfilePicture} updateBio = {updateBio}/>
+            <Myprofile edit={handleEditProfile} picUpdate={updateProfilePicture} updateBio = {updateBio}/>
           )}
         </section>
       </main>
@@ -143,7 +144,7 @@ export default function Account() {
           <CloseCircle size={30} />
         </span>
         <div className={accountStyles["full_panel_right"]}>
-          <Outlet />
+          <Outlet context={[handleEdit, handleCancel]}/>
         </div>
       </div>
     </>

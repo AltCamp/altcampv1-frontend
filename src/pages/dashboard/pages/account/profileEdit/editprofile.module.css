@@ -44,3 +44,6 @@
   background: var(--secondary-clr-lter-blue);
   color: var(--neutral-clr-white);
 }
+.form input[type="submit"]:disabled{
+  opacity: 0.5;
+}

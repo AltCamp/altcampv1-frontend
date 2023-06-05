@@ -88,7 +88,7 @@
   overflow: hidden;
 }
 
-.profileInfo .profileImg img {
+.profileInfo .profileImg img, .avatar {
   width: 100%;
   height: 100%;
   object-fit: cover;

@@ -208,7 +208,8 @@
     display: none;
     height: 100%;
     width: 100vw;
-    position: absolute;
+    position: fixed;
+    overflow-y: hidden !important;
     z-index: 999;
     top: 0;
     right: 0;
@@ -227,3 +228,51 @@
     float: right;
     background: var( --neutral-clr-white);
 }
+@media screen and (max-width: 850px) {
+    .full_panel_right{
+        width: 60%;
+    }
+    .full_panel span{
+        right: 61%;
+    }
+}
+@media screen and (max-width: 450px) {
+    .full_panel_right{
+        width: 100%;
+        height: 100%;
+    }
+  
+    .mainPanelTop{
+        display: block;
+        height: max-content;
+        padding: 1rem;
+        width: 100%;
+    }
+    .mainPanelTop_profileImage{
+        margin: 0 0 2rem 0;
+    }
+    .full_panel span{
+        right: 90%;
+        top: 1%;
+        color: black;
+    }
+    .sidePanel{
+        display: none;
+    }
+    .mainPanelTop_bio{
+        margin-bottom: 1rem;
+    }
+    .main{
+        margin-bottom: 1rem;
+    }
+    .profileTop_link{
+        width: 150px;
+    }
+    .mainPanelBottom{
+        flex-direction: column;
+    }
+    .edit{
+        margin-top: 2rem;
+    }
+}
+    

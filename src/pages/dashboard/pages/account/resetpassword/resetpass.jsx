@@ -1,7 +1,12 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import resetStyles from './resetpass.module.css'
+import { useOutletContext } from 'react-router-dom'
 
 export default function Resetpass() {
+  const [handleEdit] = useOutletContext()
+  useEffect(() => {
+    return handleEdit()
+  },[])
   return (
     <div className={resetStyles['container']}>
         <div className={resetStyles['header']}>
