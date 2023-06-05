@@ -3,6 +3,7 @@ import React, { useState, useRef } from "react";
 // import profileimage from "../../../../assets/general/profileimage.png";
 import { NavLink, useNavigate, useLocation, Outlet } from "react-router-dom";
 import Myprofile from "./myprofile/myprofile";
+import { ProfileCircle } from 'iconsax-react'
 
 import {
   InfoCircle,
@@ -68,7 +69,7 @@ export default function Account() {
           <article>
             <div className={accountStyles["sidePanel_top"]}>
               <div className={accountStyles["sidePanel_image"]}>
-                <img src={user.profilePicture} alt="display image" />
+                {user.profilePicture ? <img src={user.profilePicture} alt="display image" />: <ProfileCircle size={50} />} 
               </div>
               <h1 className={accountStyles["sidePanel_profileName"]}>
                 {user?.firstName} {user?.lastName}
