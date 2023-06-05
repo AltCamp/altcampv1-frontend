@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
 import topbarStyles from './topbar.module.css'
+import { ProfileCircle } from 'iconsax-react'
 
-import avatar from '../../../../assets/general/avatar.png'
 
 import {
   SearchNormal1,
@@ -72,7 +72,11 @@ export default function Topbar ({ toggleSideBar, handleSideBar }) {
           <Notification size='23' className={topbarStyles.icons} />
         </div>
         <div className={topbarStyles.profileImg}>
-          <img src={avatar} alt='' className='' />
+          {user?.profilePicture ? (
+            <img src={user.profilePicture} alt='' />
+          ) : (
+            <ProfileCircle size={45} color='#555555' className={topbarStyles.avatar} />
+          )}
         </div>
         <div className={topbarStyles.profileDetails}>
           <p className={topbarStyles.profileName}>{user?.firstName}</p>
