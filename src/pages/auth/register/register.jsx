@@ -167,8 +167,9 @@ export default function Register () {
                 type='text'
                 name='matric'
                 id='matric'
-                placeholder='ALT/NIN/2220'
+                placeholder='ALT/SOP/022/0001'
                 onChange={e => setAltSchoolId(e.target.value)}
+                pattern="^ALT/SO[EPD]/02[2-9]/[0-9]{0,4}$"
                 required
               />
             </motion.div>
