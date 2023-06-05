@@ -3,6 +3,7 @@ import accountStyles from "../account.module.css";
 import { GalleryEdit, Edit, Link21 } from "iconsax-react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { ProfileCircle } from "iconsax-react";
 
 export default function Myprofile({edit, picUpdate, updateBio}) {
   const nav = useNavigate()
@@ -23,7 +24,7 @@ export default function Myprofile({edit, picUpdate, updateBio}) {
         <div className={accountStyles["mainPanelTop"]}>
             
           <div className={accountStyles["mainPanelTop_profileImage"]}>
-            <img src={user.profilePicture} alt="display image"/>
+          {user.profilePicture ? <img src={user.profilePicture} alt="display image" />: <ProfileCircle size={165} />} 
             <span>
               <GalleryEdit
                 size={25}

@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import userProfileStyle from './userProfile.module.css'
 import userStyles from '../users.module.css'
 import { ArrowCircleLeft } from 'iconsax-react'
-
+import { ProfileCircle } from 'iconsax-react'
 import { useGetAccountByIdQuery } from '../../../../../app/slices/apiSlices/accountSlices/accountMutationSlice'
 import Empty from '../../../empty/empty'
 
@@ -36,7 +36,7 @@ export default function UserProfile () {
       {isSuccess && (
         <section className={userProfileStyle.profileTop}>
           <div className={userProfileStyle.profileTopLeft}>
-            <img src={user.profilePicture} alt='display image' />
+          {user.profilePicture ? <img src={user.profilePicture} alt="display image" />: <span><ProfileCircle size={150} /></span>} 
           </div>
           <div className={userProfileStyle.profileTopRight}>
             <aside className={userProfileStyle.profileTopRightTop}>
