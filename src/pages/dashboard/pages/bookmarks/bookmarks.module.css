@@ -2,6 +2,7 @@
 .bookmarkContainer {
   width: 100%;
   height: 100%;
+  max-width: 100%;
   padding: 2rem;
 }
 
@@ -438,4 +439,187 @@
   border: 2px solid #e9ebec;
   border-radius: 0.25rem;
   padding: 0.5rem 0.7rem;
+}
+
+/* Media Query */
+
+@media (max-width: 1326px) {
+  .search input {
+    width: 32rem;
+  }
+
+  .bookmarkHeader .checkbox {
+    width: 2.8rem;
+    max-width: 2.8rem;
+  }
+  .tableData .checkbox {
+    width: 3.5rem;
+    max-width: 3.5rem;
+  }
+
+  .tableData .topic {
+    width: 11.5rem;
+    max-width: 11.5rem;
+  }
+
+  .bookmarkHeader .topic {
+    width: 11rem;
+    max-width: 11rem;
+  }
+
+  .bookmarkHeader .datePosted {
+    width: 8.8rem;
+    max-width: 8.8rem;
+  }
+
+  .bookmarkHeader .comments {
+    width: 5rem;
+    max-width: 5rem;
+  }
+
+  .tableData .comments {
+    width: 5.5rem;
+    max-width: 5.5rem;
+  }
+
+  .bookmarkHeader .likes {
+    width: 3.25rem;
+    max-width: 3.25rem;
+  }
+
+  .tableData .likes {
+    width: 4rem;
+    max-width: 4rem;
+  }
+
+  .bookmarkHeader .tags {
+    width: 4.5rem;
+    max-width: 4.5rem;
+  }
+
+  .tableData .tags {
+    width: 5rem;
+    max-width: 5rem;
+  }
+}
+
+@media (max-width: 1236px) {
+  .search input {
+    width: 28rem;
+  }
+
+  .bookmarkHeader th {
+    font-size: 0.7rem;
+  }
+
+  .tableData td {
+    font-size: 0.75rem;
+  }
+
+  .timePosted {
+    font-size: 0.7rem;
+  }
+  .tableData .topic {
+    width: 10rem;
+    max-width: 10rem;
+  }
+
+  .bookmarkHeader .topic {
+    width: 9.5rem;
+    max-width: 9.5rem;
+  }
+
+  .bookmarkHeader .postedBy {
+    width: 6.5rem;
+    max-width: 6.5rem;
+  }
+
+  .tableData .postedBy {
+    width: 7.25rem;
+    max-width: 7.25rem;
+  }
+
+  .bookmarkHeader .datePosted {
+    width: 7.75rem;
+    max-width: 7.75rem;
+  }
+
+  .tableData .datePosted {
+    width: 8.5rem;
+    max-width: 8.5rem;
+  }
+}
+
+@media (max-width: 1100px) {
+  .search input {
+    width: 22.5rem;
+  }
+  .tableData td {
+    font-size: 0.7rem;
+  }
+
+  .bookmarkHeader .topic{
+    width: 8.5rem;
+    max-width:8.5rem;
+  }
+
+  .tableData .topic {
+    width: 9rem;
+    max-width: 9rem;
+  }
+
+  .bookmarkHeader .postedBy {
+    width: 5.75rem;
+    max-width: 5.75rem;
+  }
+
+  .tableData .postedBy {
+    width: 6.5rem;
+    max-width: 6.5rem;
+  }
+
+  .bookmarkHeader .datePosted {
+    width: 6rem;
+    max-width: 6rem;
+  }
+
+  .tableData .datePosted {
+    width: 6.7rem;
+    max-width: 6.7rem;
+  }
+
+  .timePosted {
+    font-size: .5rem;
+  }
+
+  .bookmarkHeader .comments {
+    width: 4.5rem;
+    max-width: 4.5rem;
+  }
+
+  .tableData .comments {
+    width: 5rem;
+    max-width: 5rem;
+  }
+
+  .bookmarkHeader .tags{
+    width: 3.15rem;
+    max-width: 3.15rem;
+  }
+   
+  .tableData .tags {
+    width: 3.75rem;
+    max-width: 3.75rem;
+  }
+
+  .previousBtn,
+  .nextBtn {
+    padding: 0.5rem 1rem;
+  }
+  .pageBtn {
+    padding: 0.5rem 0.7rem;
+  }
+  .pageCount {
+    padding: 0.5rem 0.7rem;
+  }
 }
