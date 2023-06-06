@@ -39,8 +39,11 @@
   cursor: pointer;
 }
 
+.bookButton span {
+  margin-top: 0.1rem;
+}
+
 .btnMenu {
-  display: none;
   min-width: 9.375rem;
   position: absolute;
   z-index: 1;
@@ -49,6 +52,7 @@
   font-weight: 500;
   font-size: 0.75rem;
   line-height: 1.25rem;
+  margin-top: 0.25rem;
 }
 
 .btnMenu a {
@@ -58,16 +62,9 @@
   display: block;
   border: 1px solid #c7c3ed;
 }
+
 .lastMenu {
   border-radius: 0 0 0.688rem 0;
-}
-
-.select:hover .btnMenu {
-  display: block;
-}
-
-.select:focus-within .btnMenu {
-  display: block;
 }
 
 .search input {
@@ -146,6 +143,7 @@
 .tableData {
   border: 1px solid #f3f3f9;
   margin-bottom: 0.5rem;
+  transition: all 0.2s ease-in-out;
 }
 
 .tableData tr {
@@ -175,6 +173,11 @@
   padding-top: 0 !important;
   display: flex;
   justify-content: center;
+}
+
+.topicLink {
+  text-decoration: none;
+  color: inherit;
 }
 
 .tableData .topic {
@@ -226,7 +229,6 @@
 .tableData .comments {
   width: 7.5rem;
   max-width: 7.5rem;
-  padding-left: 1.5rem;
 }
 .bookmarkHeader .likes {
   width: 5.7rem;
@@ -265,11 +267,13 @@
 .tableBody {
   background: #f7f7f7;
   font-family: "Segoe UI", sans-serif;
+  transition: all 0.2s ease-in-out;
 }
 
 .bodyHeader {
   padding: 0.875rem 1.438rem 0.875rem 4.125rem;
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
 }
 
 .bodyHeaderLeft {
@@ -328,16 +332,19 @@
   display: flex;
   gap: 0.25rem;
   align-items: center;
-  justify-content: center;
   color: #636466;
   cursor: pointer;
 }
 
+.accordionLink {
+  text-decoration: none;
+  color: inherit;
+}
 .bodyButton:hover {
   color: #2e69ff;
 }
 
-.bodyIcon {
+.bodyIcons {
   color: inherit;
 }
 
@@ -354,7 +361,6 @@
   justify-content: end;
   align-items: center;
   gap: 0.5rem;
-  width: 86%;
   font-family: var(--Poppins);
   margin-top: 1rem;
   padding-right: 0.75rem;
@@ -428,7 +434,7 @@
 
 .pageCount {
   color: #bfbfbf;
-  font-size: .875rem;
+  font-size: 0.875rem;
   border: 2px solid #e9ebec;
   border-radius: 0.25rem;
   padding: 0.5rem 0.7rem;
