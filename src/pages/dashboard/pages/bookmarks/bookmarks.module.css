@@ -12,7 +12,7 @@
   font-family: var(--Inter);
   margin-bottom: 1.75rem;
   color: var(--neutral-clr-drkst-grey);
-}
+  }
 
 /* Navbar */
 .bookmarkNav {
@@ -432,4 +432,8 @@
   border: 2px solid #e9ebec;
   border-radius: 0.25rem;
   padding: 0.5rem 0.7rem;
+}
+
+@media screen and (max-width: 1100px ) {
+
 }
