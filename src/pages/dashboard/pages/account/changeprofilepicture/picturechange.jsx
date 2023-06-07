@@ -14,7 +14,8 @@ export default function Picturechange () {
   const [handleEdit, handleCancel] = useOutletContext()
 
   // custom hook for uploading image
-  const { image, caption, error, Handleimage, createFormData } = useImageHandler()
+  const { image, caption, error, Handleimage, createFormData } =
+    useImageHandler()
 
   // style format for drag and drop
   const handleStyleEnter = e => {
@@ -36,23 +37,23 @@ export default function Picturechange () {
     Handleimage(e.dataTransfer.files[0])
   }
 
-  const [updateProfilePicture, { data, isSuccess, isLoading, isError, error: updatePictureError }] =
-    useUpdateProfilePictureMutation()
+  const [
+    updateProfilePicture,
+    { data, isSuccess, isLoading, isError, error: updatePictureError }
+  ] = useUpdateProfilePictureMutation()
 
   const handleUpdateProfilePicture = () => {
     updateProfilePicture({
-        profilePicture: image
+      profilePicture: image
     })
   }
 
   useEffect(() => {
     if (isSuccess) {
-      dispatch(setProfilePicture(data.data.profilePicture));
-      handleCancel();
+      dispatch(setProfilePicture(data.data.profilePicture))
+      handleCancel()
     }
   }, [isSuccess])
-
-
 
   return (
     <div className={picUpdate['container']}>
@@ -77,21 +78,21 @@ export default function Picturechange () {
           </aside>
           <p className={picUpdate['group_desc']}>Drag and drop Picture</p>
           <p className={picUpdate['group_desc2']}>OR</p>
-          <form action="" encType="multipart/form-data">
-          <label
-            htmlFor='projectImage'
-            onClick={() => chooseref.current.click()}
-          >
-            Select from computer
-          </label>
-          <input
-            type='file'
-            name='projectImage'
-            id={picUpdate['projectImage']}
-            accept='image/jpeg, image/png'
-            ref={chooseref}
-            onChange={e => Handleimage(e.target.files[0])}
-          />
+          <form action='' encType='multipart/form-data'>
+            <label
+              htmlFor='projectImage'
+              onClick={() => chooseref.current.click()}
+            >
+              Select from computer
+            </label>
+            <input
+              type='file'
+              name='projectImage'
+              id={picUpdate['projectImage']}
+              accept='image/jpeg, image/png'
+              ref={chooseref}
+              onChange={e => Handleimage(e.target.files[0])}
+            />
           </form>
         </section>
         <section className={picUpdate['upload_button']}>

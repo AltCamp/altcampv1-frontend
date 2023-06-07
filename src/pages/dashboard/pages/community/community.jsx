@@ -113,7 +113,7 @@ export default function Community () {
             </p>
           </div>
           <Link
-            to={'/dashboard/community/ask/:question'}
+            to={'/dashboard/community/ask'}
             className={communityStyle.questionCta}
           >
             Ask Question
