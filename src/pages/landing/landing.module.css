@@ -30,7 +30,7 @@ button:hover {
 .intro-text-area {
     /* background-color: yellow; */
     width: 50%;
-    padding: 4.5rem 5rem;
+    padding: 4.5rem 6%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -52,7 +52,7 @@ button:hover {
 
 
 .intro-area h1 {
-    font-size: 55px;
+    font-size: 50px;
     font-weight: bold;
     z-index: 10;
     /* background-color: green; */
@@ -74,6 +74,7 @@ button:hover {
     font-size: 16px;
     font-family: inherit;
     z-index: 10;
+    cursor: pointer;
 }
 
 .about-us-area {
@@ -234,7 +235,6 @@ button:hover {
 .benefits-container {
     width: 100%;
     margin: 0 auto;
-    /* background-color: red; */
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
@@ -289,6 +289,7 @@ button:hover {
     font-family: inherit;
     display: block;
     margin: 20px auto 100px;
+    cursor: pointer;
 }
 
 .outro-area {
@@ -335,6 +336,7 @@ button:hover {
     font-size: 16px;
     font-family: inherit;
     margin: 20px 0;
+    cursor: pointer;
 }
 
 @media screen and (min-width:601px) and (max-width:1024px) {
@@ -353,7 +355,7 @@ button:hover {
     }
 
     .intro-text-area {
-        padding: 3rem;
+        padding: 3rem 6%;
     }
 
 
@@ -565,7 +567,7 @@ button:hover {
 
     .intro-text-area {
         width: 100%;
-        padding: 1.5rem 15px;
+        padding: 1.5rem 6%;
         justify-content: space-between;
         text-align: center;
     }
@@ -759,11 +761,11 @@ button:hover {
         width: 100%;
         padding: 0;
         padding: 10px;
-        height: 347px;
+        height: max-content;
     }
 
     .icon-boxes-area img {
-        width: 100%;
+        width: 50%;
     }
 
 
