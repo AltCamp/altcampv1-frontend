@@ -11,7 +11,7 @@ import Postcard from './postcard/postcard'
 import { useGetAllPostsQuery } from '../../../../app/slices/apiSlices/feedSlice'
 
 export default function Feed () {
-  const [posts, setPosts] = useState()
+  // const [posts, setPosts] = useState()
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -19,14 +19,12 @@ export default function Feed () {
 
   const [sortedPosts, setSortedPosts] = useState([])
 
-  // const posts = data?.data
+  const posts = data?.data
 
   
-  useEffect(() => {
-    if (data && isSuccess) {
-      setPosts(data?.data)
-    }
-  }, [data, isSuccess])
+  // useEffect(() => {
+  //   setPosts(data?.data)
+  // }, [data, isSuccess])
 
   useEffect(() => {
     if (posts) {
