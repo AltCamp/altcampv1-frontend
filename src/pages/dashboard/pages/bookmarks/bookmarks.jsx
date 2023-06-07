@@ -5,10 +5,21 @@ import { AiOutlineLike } from "react-icons/ai";
 import { LuEdit } from "react-icons/lu";
 import { BiComment } from "react-icons/bi";
 import { RiShareForwardLine, RiArrowDownSLine } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
 export default function Bookmarks() {
   const [unread, setUnread] = useState(true);
+  const [isActionOpen, setActionOpen] = useState(false);
+  const [isFilterOpen, setFilterOpen] = useState(false);
   const [isActive, setIsActive] = useState(null);
+
+  const handleToggleAction = () => {
+    setActionOpen(!isActionOpen);
+  };
+
+  const handleToggleFilter = () => {
+    setFilterOpen(!isFilterOpen);
+  };
 
   const handleActive = (index) => {
     setIsActive(index === isActive ? null : index);
@@ -154,17 +165,27 @@ export default function Bookmarks() {
       {/* NavBar */}
       <div className={bookmarksStyles.bookmarkNav}>
         <div className={bookmarksStyles.select}>
-          <button className={bookmarksStyles.bookButton}>
-            Actions <RiArrowDownSLine size="20" color="#fff" />
+          <button
+            className={bookmarksStyles.bookButton}
+            onClick={handleToggleAction}
+          >
+            <span> Actions</span>{" "}
+            <RiArrowDownSLine
+              className={bookmarksStyles.bookIcon}
+              size="20"
+              color="#fff"
+            />
           </button>
-          <div className={bookmarksStyles.btnMenu}>
-            <a href="#">Remove Bookmark</a>
-            <a href="#">Mark as Unread</a>
-            <a href="#">Forward</a>
-            <a className={bookmarksStyles.lastMenu} href="#">
-              Expand
-            </a>
-          </div>
+          {isActionOpen && (
+            <div className={bookmarksStyles.btnMenu}>
+              <a href="#">Remove Bookmark</a>
+              <a href="#">Mark as Unread</a>
+              <a href="#">Forward</a>
+              <a className={bookmarksStyles.lastMenu} href="#">
+                Expand
+              </a>
+            </div>
+          )}
         </div>
         <div className={bookmarksStyles.search}>
           <input
@@ -176,18 +197,28 @@ export default function Bookmarks() {
         </div>
         <div className={bookmarksStyles.filter}>
           <div className={bookmarksStyles.select}>
-            <button className={bookmarksStyles.bookButton}>
-              Filter <RiArrowDownSLine size="20" color="#fff" />
+            <button
+              className={bookmarksStyles.bookButton}
+              onClick={handleToggleFilter}
+            >
+              <span>Filter</span>{" "}
+              <RiArrowDownSLine
+                className={bookmarksStyles.bookIcon}
+                size="20"
+                color="#fff"
+              />
             </button>
-            <div className={bookmarksStyles.btnMenu}>
-              <a href="#">All Bookmarks</a>
-              <a href="#">Recent Bookmarks</a>
-              <a href="#">Older Bookmarks</a>
-              <a href="#">Highest Comments</a>
-              <a className={bookmarksStyles.lastMenu} href="#">
-                Highest Likes
-              </a>
-            </div>
+            {isFilterOpen && (
+              <div className={bookmarksStyles.btnMenu}>
+                <a href="#">All Bookmarks</a>
+                <a href="#">Recent Bookmarks</a>
+                <a href="#">Older Bookmarks</a>
+                <a href="#">Highest Comments</a>
+                <a className={bookmarksStyles.lastMenu} href="#">
+                  Highest Likes
+                </a>
+              </div>
+            )}
           </div>
           <button className={bookmarksStyles.allButton}>All</button>
         </div>
@@ -227,7 +258,15 @@ export default function Bookmarks() {
                       onClick={() => handleActive(index)}
                       className={bookmarksStyles.tableContent}
                     >
-                      <td className={bookmarksStyles.topic}> {item.topic} </td>
+                      <td className={bookmarksStyles.topic}>
+                        {" "}
+                        <Link
+                          to="/dashboard/community/question"
+                          className={bookmarksStyles.topicLink}
+                        >
+                          {item.topic}{" "}
+                        </Link>
+                      </td>
                       <td className={bookmarksStyles.postedBy}>
                         {" "}
                         {item.postedBy}{" "}
@@ -288,38 +327,41 @@ export default function Bookmarks() {
                         <div className={bookmarksStyles.bottomIcons}>
                           <div className={bookmarksStyles.buttonContainer}>
                             <div className={bookmarksStyles.bodyButton}>
-                              <LuEdit
-                                className={bookmarksStyles.bodyIcons}
-                                size="16"
-                              />{" "}
-                              Reply
+                              <Link className={bookmarksStyles.accordionLink} 
+                          to="/dashboard/community/question">
+                                <span 
+                                  className={bookmarksStyles.bodyIcons}><LuEdit
+                                  size="16"
+                                /></span>{" "}
+                                Reply
+                              </Link>
                             </div>
                             <div className={bookmarksStyles.bodyButton}>
-                              <BiComment
-                                className={bookmarksStyles.bodyIcons}
-                                size="16"
-                              />
-                              <span>
-                                {" "}
-                                Comments{" "}
-                                <span className={bookmarksStyles.numbers}>
-                                  {item.comments}
-                                </span>
-                              </span>
-                            </div>
-                            <div className={bookmarksStyles.bodyButton}>
-                              <AiOutlineLike
-                                className={bookmarksStyles.bodyIcons}
-                                size="16"
-                              />
-
-                              <span>
-                                Likes{" "}
-                                <span className={bookmarksStyles.numbers}>
+                                <BiComment
+                                  className={bookmarksStyles.bodyIcons}
+                                  size="16"
+                                />
+                                <span>
                                   {" "}
-                                  {item.likes}
+                                  Comments{" "}
+                                  <span className={bookmarksStyles.numbers}>
+                                    {item.comments}
+                                  </span>
                                 </span>
-                              </span>
+                            </div>
+                            <div className={bookmarksStyles.bodyButton}>
+                                <AiOutlineLike
+                                  className={bookmarksStyles.bodyIcons}
+                                  size="16"
+                                />
+
+                                <span>
+                                  Likes{" "}
+                                  <span className={bookmarksStyles.numbers}>
+                                    {" "}
+                                    {item.likes}
+                                  </span>
+                                </span>
                             </div>
                           </div>
 
@@ -349,23 +391,23 @@ export default function Bookmarks() {
               );
             })}
           </tbody>
+          {/* Pagination */}
+          <div className={bookmarksStyles.pagination}>
+            <button className={bookmarksStyles.previousBtn}>Previous</button>
+            <button className={bookmarksStyles[("pageBtn", "btnActive")]}>
+              1
+            </button>
+            <button className={bookmarksStyles.pageBtn}>2</button>
+            <button className={bookmarksStyles.pageBtn}>3</button>
+            <button className={bookmarksStyles.nextBtn}>Next</button>
+            <div className={bookmarksStyles.pageCount}>
+              <span className={bookmarksStyles.currentPage}>1</span>
+              <span className={bookmarksStyles.divider}>/</span>
+              <span className={bookmarksStyles.totalPage}>60</span>
+            </div>
+          </div>
         </table>
-              {/* Pagination */}
-      <div className={bookmarksStyles.pagination}>
-        <button className={bookmarksStyles.previousBtn}>Previous</button>
-        <button className={bookmarksStyles[("pageBtn", "btnActive")]}>1</button>
-        <button className={bookmarksStyles.pageBtn}>2</button>
-        <button className={bookmarksStyles.pageBtn}>3</button>
-        <button className={bookmarksStyles.nextBtn}>Next</button>
-        <div className={bookmarksStyles.pageCount}>
-          <span className={bookmarksStyles.currentPage}>1</span>
-          <span className={bookmarksStyles.divider}>/</span>
-          <span className={bookmarksStyles.totalPage}>60</span>
-        </div>
       </div>
-      </div>
-
-
     </div>
   );
 }

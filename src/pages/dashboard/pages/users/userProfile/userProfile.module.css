@@ -35,6 +35,9 @@
     border: 10px solid var( --neutral-clr-grey-1);
     margin-right: 4rem;
 }
+.profileTopLeft span{
+    margin-right: 4rem;
+}
 .profileTopRight{
     width: 70%;
 }
