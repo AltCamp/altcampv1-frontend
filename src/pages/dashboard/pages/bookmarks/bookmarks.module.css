@@ -440,6 +440,8 @@
   padding: 0.5rem 0.7rem;
 }
 
-@media screen and (max-width: 1100px ) {
-
+@media screen and (max-width: 900px ) {
+  .bookmarkContainer h2 {
+    font-weight: 500;
+    font-size: 1.100rem;}
 }
