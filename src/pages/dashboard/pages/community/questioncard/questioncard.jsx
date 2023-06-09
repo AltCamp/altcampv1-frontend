@@ -69,7 +69,10 @@ export default function Questioncard ({ question }) {
 
         <div className={questionCardStyles.authorAnswerLink}>
           <div className={questionCardStyles.author}>
-            <div className={questionCardStyles.authorImg}>
+            <Link
+              to={`/dashboard/users/${question?.author._id}`}
+              className={questionCardStyles.authorImg}
+            >
               {question?.author?.profilePicture ? (
                 <img
                   src={question?.author?.profilePicture}
@@ -82,7 +85,7 @@ export default function Questioncard ({ question }) {
                   className={questionCardStyles.img}
                 />
               )}
-            </div>
+            </Link>
             <Link
               to={`/dashboard/users/${question?.author._id}`}
               className={questionCardStyles.authorName}

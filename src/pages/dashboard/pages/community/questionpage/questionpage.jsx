@@ -363,12 +363,6 @@ export default function Questionpage () {
                       <Tooltip
                         id='my-tooltip'
                         className='tooltip'
-                        // style={{
-                        //   backgroundColor: '#6a6ff5',
-                        //   color: '#fff',
-                        //   borderRadius: '4px',
-                        //   padding: '2px'
-                        // }}
                       />
                       <ArrowUp
                         size='19'

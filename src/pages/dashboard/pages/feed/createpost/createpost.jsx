@@ -6,14 +6,19 @@ import { useNavigate } from 'react-router-dom'
 
 import { LuShare } from 'react-icons/lu'
 
-import { ArrowRotateLeft } from 'iconsax-react'
+import { ArrowRotateLeft, ProfileCircle } from 'iconsax-react'
 
 import { useImageHandler } from '../../account/hooks/useImageHandler'
 
 import { useCreatePostMutation } from '../../../../../app/slices/apiSlices/feedSlice'
 
-export default function Createpost ({}) {
+import { useSelector } from 'react-redux'
+
+export default function Createpost ({ setToggleCreatePost }) {
   const [content, setContent] = useState(false)
+
+  const { user } = useSelector(state => state?.user?.user)
+
   const chooseref = useRef(null)
   const dropRef = useRef(null)
 
@@ -56,7 +61,7 @@ export default function Createpost ({}) {
 
   useEffect(() => {
     if (isSuccess) {
-      navigate('/dashboard', { state: { created: true } })
+      setToggleCreatePost(false)
     }
   }, [isSuccess])
 
@@ -70,6 +75,27 @@ export default function Createpost ({}) {
         </p>
       </div>
 
+      <div className={createPostStyles.userBadge}>
+        <div className={createPostStyles.avatar}>
+          {user?.profilePicture ? (
+            <img
+              src={user?.profilePicture}
+              alt=''
+              className={createPostStyles.img}
+            />
+          ) : (
+            <ProfileCircle
+              size={45}
+              color='#555555'
+              className={createPostStyles.iconAvatar}
+            />
+          )}
+        </div>
+        <div className={createPostStyles.names}>
+          {user?.firstName} {user?.lastName}
+        </div>
+      </div>
+
       <form
         action=''
         className={createPostStyles.formContainer}
@@ -78,6 +104,17 @@ export default function Createpost ({}) {
           handleCreatePost()
         }}
       >
+        <div className={createPostStyles.text}>
+          <textarea
+            name='text'
+            id='text'
+            cols='30'
+            rows='10'
+            placeholder='Write something...'
+            className={createPostStyles.textarea}
+            onChange={e => setContent(e.target.value)}
+          ></textarea>
+        </div>
         <div
           className={createPostStyles.uploadMedia}
           ref={dropRef}
@@ -122,25 +159,14 @@ export default function Createpost ({}) {
             </div>
           )}
         </div>
-        <div className={createPostStyles.divider}></div>
-        <div className={createPostStyles.text}>
-          <textarea
-            name='text'
-            id='text'
-            cols='30'
-            rows='10'
-            placeholder='Write something...'
-            className={createPostStyles.textarea}
-            onChange={e => setContent(e.target.value)}
-          ></textarea>
-          <button
-            type='submit'
-            className={createPostStyles.postBtn}
-            disabled={isLoading}
-          >
-            {isLoading ? 'Posting...' : 'Post'}
-          </button>
-        </div>
+
+        <button
+          type='submit'
+          className={createPostStyles.postBtn}
+          disabled={isLoading}
+        >
+          {isLoading ? 'Posting...' : 'Post'}
+        </button>
       </form>
     </div>
   )
