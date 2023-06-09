@@ -19,7 +19,7 @@ export const feedSlice = createApi({
         url: `/posts/${id}`,
         method: "GET",
       }),
-      // providesTags: ["Posts"],
+      providesTags: ["Posts"],
     }),
     createPost: builder.mutation({
       query: (body) => ({

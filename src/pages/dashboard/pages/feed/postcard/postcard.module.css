@@ -91,3 +91,29 @@
   color: var(--neutral-clr-drk-grey);
   font-weight: 500;
 }
+
+.likeAnimation {
+  animation: like 1s;
+}
+
+@keyframes like {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.5);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  75% {
+    transform: scale(1.4);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+
+

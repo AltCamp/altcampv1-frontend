@@ -11,20 +11,25 @@ import Postcard from './postcard/postcard'
 import { useGetAllPostsQuery } from '../../../../app/slices/apiSlices/feedSlice'
 
 export default function Feed () {
-  // const [posts, setPosts] = useState()
   const navigate = useNavigate()
   const location = useLocation()
 
   const { data, isLoading, isSuccess, isError, error } = useGetAllPostsQuery()
 
   const [sortedPosts, setSortedPosts] = useState([])
+  const [posts, setPosts] = useState(data?.data)
 
-  const posts = data?.data
+  // const posts = data?.data
 
-  
-  // useEffect(() => {
-  //   setPosts(data?.data)
-  // }, [data, isSuccess])
+  useEffect(() => {
+    setPosts(data?.data)
+  }, [isSuccess, isLoading, data])
+
+  // console.log({
+  //   data: data,
+  //   isLoading: isLoading,
+  //   isSuccess: isSuccess
+  // })
 
   useEffect(() => {
     if (posts) {
@@ -61,9 +66,9 @@ export default function Feed () {
               <div className={feedStyle.loader}></div>
             </div>
           )}
-          {sortedPosts?.map(post => (
-            <Postcard key={post._id} post={post} />
-          ))}
+          {posts &&
+            !isLoading &&
+            sortedPosts?.map(post => <Postcard key={post._id} post={post} />)}
         </div>
       </div>
     </div>
