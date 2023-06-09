@@ -6,7 +6,7 @@ import Questioncard from './questioncard/questioncard'
 
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 
-import { useGetAllQuestionsQuery } from '../../../../app/slices/apiSlices/communitySlices/questionSlice'
+import { useGetAllQuestionsQuery } from '../../../../app/slices/apiSlices/communitySlice'
 
 import { CloseCircle } from 'iconsax-react'
 
@@ -113,7 +113,7 @@ export default function Community () {
             </p>
           </div>
           <Link
-            to={'/dashboard/community/ask/:question'}
+            to={'/dashboard/community/ask'}
             className={communityStyle.questionCta}
           >
             Ask Question

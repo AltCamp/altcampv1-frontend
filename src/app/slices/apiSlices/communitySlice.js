@@ -1,11 +1,11 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
 
-import { baseQuery } from "../../../constants/api";
+import { baseQuery } from "../../constants/api";
 
-export const questionSlice = createApi({
-  reducerPath: "questionApi",
+export const communitySlice = createApi({
+  reducerPath: "communityApi",
   baseQuery,
-  tagTypes: ["Questions"],
+  tagTypes: ["Questions", "Answers"],
   endpoints: (builder) => ({
     getAllQuestions: builder.query({
       query: () => ({
@@ -58,6 +58,45 @@ export const questionSlice = createApi({
       }),
       invalidatesTags: ["Questions"],
     }),
+
+    // Answers
+    getAnswers: builder.query({
+      query: (questionId) => ({
+        url: `/answers?questionId=${questionId}`,
+        method: "GET",
+      }),
+      providesTags: ["Answers"],
+    }),
+    createAnswer: builder.mutation({
+      query: (body) => ({
+        url: `/answers`,
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["Answers", "Questions"],
+    }),
+    updateAnswer: builder.mutation({
+      query: ({ answerId, body }) => ({
+        url: `/answers/${answerId}`,
+        method: "PATCH",
+        body,
+      }),
+      invalidatesTags: ["Answers"],
+    }),
+    upvoteAnswer: builder.mutation({
+      query: (answerId) => ({
+        url: `/answers/upvote/${answerId}`,
+        method: "PATCH",
+      }),
+      invalidatesTags: ["Answers"],
+    }),
+    downvoteAnswer: builder.mutation({
+      query: (answerId) => ({
+        url: `/answers/downvote/${answerId}`,
+        method: "PATCH",
+      }),
+      invalidatesTags: ["Answers"],
+    }),
   }),
 });
 
@@ -69,4 +108,9 @@ export const {
   useDeleteQuestionMutation,
   useUpvoteQuestionMutation,
   useDownvoteQuestionMutation,
-} = questionSlice;
+  useGetAnswersQuery,
+  useCreateAnswerMutation,
+  useUpdateAnswerMutation,
+  useUpvoteAnswerMutation,
+  useDownvoteAnswerMutation,
+} = communitySlice;

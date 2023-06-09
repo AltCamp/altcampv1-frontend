@@ -1,16 +1,14 @@
 import React, {useState} from "react";
 import accountStyles from "../account.module.css";
-import profileimage from "../../../../../assets/general/profileimage.png";
 import { GalleryEdit, Edit, Link21 } from "iconsax-react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { ProfileCircle } from "iconsax-react";
 
 export default function Myprofile({edit, picUpdate, updateBio}) {
-  const [img, setimg] = useState(profileimage);
   const nav = useNavigate()
 
- 
-//   console.log(handleEdit)
+
   const {user } = useSelector(state => state?.user.user)
   return (
     <>
@@ -26,7 +24,7 @@ export default function Myprofile({edit, picUpdate, updateBio}) {
         <div className={accountStyles["mainPanelTop"]}>
             
           <div className={accountStyles["mainPanelTop_profileImage"]}>
-            <img src={img} alt=""/>
+          {user.profilePicture ? <img src={user.profilePicture} alt="display image" />: <ProfileCircle size={165} />} 
             <span>
               <GalleryEdit
                 size={25}
@@ -43,9 +41,7 @@ export default function Myprofile({edit, picUpdate, updateBio}) {
               </span>
             </h1>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure quo
-              tempora provident architecto explicabo sint voluptatibus quae eum
-              corrupti unde necessitatibus
+              {user?.bio ? user?.bio : "Add a bio to your profile."}
             </p>
           </div>
         </div>
@@ -59,10 +55,10 @@ export default function Myprofile({edit, picUpdate, updateBio}) {
               <span>Last Name</span>
               <span>{user?.lastName}</span>
             </div>
-            {user?.owner?.matric && (
+            {user?.owner?.altSchoolId && (
               <div className={accountStyles["profileDetails_sNum"]}>
                 <span>Student Number</span>
-                <span>{user?.owner.matric}</span>
+                <span>{user?.owner.altSchoolId}</span>
               </div>
             )}
             <div className={accountStyles["profileDetails_rank"]}>

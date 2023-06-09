@@ -16,7 +16,12 @@ import {
   Notification,
   People,
   ProfileCircle,
-  Profile2User
+  Profile2User,
+  InfoCircle,
+  ArrowRight2,
+  KeySquare,
+  ProfileRemove,
+  ColorSwatch,
 } from 'iconsax-react'
 
 import { useSelector, useDispatch } from 'react-redux'
@@ -46,7 +51,7 @@ export default function Sidebar ({ toggleSideBar, handleSideBar }) {
     if (user) {
       if (decode(user.token).exp < Date.now() / 1000) {
         dispatch(removeUser())
-        navigate('/regularstudent/login')
+        navigate('/account/login')
       }
     }
   }, [user])
@@ -145,6 +150,7 @@ export default function Sidebar ({ toggleSideBar, handleSideBar }) {
         <div className={sidebarStyle.navGroup}>
           <h2>PERSONAL</h2>
           <div className=''>
+              {/* links for all accounts in mobile media query */}
             <NavLink
               to='/dashboard/account'
               className={sidebarStyle.link}
@@ -154,6 +160,61 @@ export default function Sidebar ({ toggleSideBar, handleSideBar }) {
               <ProfileCircle size='23' className={sidebarStyle.icon} />
               Account
             </NavLink>
+            <div className={sidebarStyle.accountLinks}>
+              <NavLink
+                to="/dashboard/account"
+                className={sidebarStyle.link}
+                style={({ isActive }) => (isActive ? activeStyle : undefined)}
+                end
+              >
+                <span>
+                  <InfoCircle size={20} />
+                </span>
+                <span> My Profile </span>
+                <span>
+                  <ArrowRight2 size={20} />
+                </span>
+              </NavLink>
+              <NavLink
+                to="/dashboard/account/myprojects"
+                className={sidebarStyle.link}
+                style={({ isActive }) => (isActive ? activeStyle : undefined)}
+              >
+                <span>
+                  <ColorSwatch size={20} />
+                </span>
+                <span> My Project </span>
+                <span>
+                  <ArrowRight2 size={20} />
+                </span>
+              </NavLink>
+              <NavLink
+                className={sidebarStyle.link}
+                to="/dashboard/account/resetpassword"
+                style={({ isActive }) => (isActive ? activeStyle : undefined)}
+              >
+                <span>
+                  <KeySquare size={20} />
+                </span>
+                <span> Reset Password </span>
+                <span>
+                  <ArrowRight2 size={20} />
+                </span>
+              </NavLink>
+              <NavLink
+                className={sidebarStyle.link}
+                to="/dashboard/account/deactivateaccount"
+                style={({ isActive }) => (isActive ? activeStyle : undefined)}
+              >
+                <span>
+                  <ProfileRemove size={20} />
+                </span>
+                <span> Deactivate Account </span>
+                <span>
+                  <ArrowRight2 size={20} />
+                </span>
+              </NavLink>
+            </div>
             <NavLink
               to='/dashboard/notifications'
               className={sidebarStyle.link}

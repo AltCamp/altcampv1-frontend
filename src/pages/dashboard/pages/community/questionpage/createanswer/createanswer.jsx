@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import createAnswerStyles from './createanswer.module.css'
 import RichEditor from './../../richeditor/richeditor'
 
-import { useCreateAnswerMutation } from '../../../../../../app/slices/apiSlices/communitySlices/answerSlice'
+import { useCreateAnswerMutation } from '../../../../../../app/slices/apiSlices/communitySlice'
 
 export default function Createanswer ({ questionId }) {
   const [content, setContent] = useState('')
@@ -20,6 +20,10 @@ export default function Createanswer ({ questionId }) {
   useEffect(() => {
     if (isSuccess) {
       setContent('')
+      window.scrollBy({
+        top: -100,
+        behavior: 'smooth'
+      })
     }
   }, [isSuccess])
 

@@ -5,11 +5,15 @@
     left: 0;
     width: 100%;
     height: 80px;
-    padding: 18px 10%;
+    padding: 18px 6%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     z-index: 100;
+}
+
+.main-nav button {
+    cursor: pointer;
 }
 
 .main-nav img {

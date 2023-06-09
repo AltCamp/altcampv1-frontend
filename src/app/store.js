@@ -2,29 +2,28 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import { authSlice } from "./slices/apiSlices/authSlice";
 
-import { questionSlice } from "./slices/apiSlices/communitySlices/questionSlice";
+import { communitySlice } from "./slices/apiSlices/communitySlice";
 
 import { userSlice } from "./slices/generalSlices/userSlice";
-import { answerSlice } from './slices/apiSlices/communitySlices/answerSlice';
-import { StudentsSlice } from "./slices/apiSlices/accountSlices/allStudentSlices";
+
 import { accountMutationSlice } from "./slices/apiSlices/accountSlices/accountMutationSlice";
+
+import { feedSlice } from './slices/apiSlices/feedSlice';
 
 export const store = configureStore({
   reducer: {
     // Add your reducers here
     [authSlice.reducerPath]: authSlice.reducer,
-    [questionSlice.reducerPath]: questionSlice.reducer,
-    [answerSlice.reducerPath]: answerSlice.reducer,
-    [StudentsSlice.reducerPath]: StudentsSlice.reducer,
+    [communitySlice.reducerPath]: communitySlice.reducer,
+    [feedSlice.reducerPath]: feedSlice.reducer,
     [accountMutationSlice.reducerPath]: accountMutationSlice.reducer,
     user: userSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat([
       authSlice.middleware,
-      questionSlice.middleware,
-      answerSlice.middleware,
-      StudentsSlice.middleware,
+      communitySlice.middleware,
+      feedSlice.middleware,
       accountMutationSlice.middleware,
     ]),
 });

@@ -13,6 +13,8 @@ import Footer from '../../components/Footer'
 import CommunityImage from '../../assets/general/CommunityImage.png'
 import IconSquare from '../../assets/general/iconsquare.webp'
 import heroImage from '../../assets/general/heroImage.svg'
+import AboutUsImage from '../../assets/general/AboutusImage.png'
+
 const Landing = () => {
   return (
     <>
@@ -39,7 +41,8 @@ const Landing = () => {
             className={`${landingPageStyles['decor-box']} ${landingPageStyles['decor-box-1']}`}
           ></div>
           <div className={landingPageStyles['about-us-image']}>
-            <img src={CommunityImage} alt='' />
+            <img src={CommunityImage} alt='about us image' />
+            <img className={landingPageStyles['about-us-image-lg']} src={AboutUsImage} alt="about us image" />
           </div>
           <div
             className={`${landingPageStyles['decor-box']} ${landingPageStyles['decor-box-2']}`}

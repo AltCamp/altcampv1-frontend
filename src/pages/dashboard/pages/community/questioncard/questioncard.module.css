@@ -117,10 +117,21 @@
   font-weight: 500;
 }
 
-.authorImg img {
+.author a {
+  color: inherit;
+}
+
+.authorImg {
   width: 1.8rem;
   height: 1.8rem;
   border-radius: 50%;
+  overflow: hidden;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .answerBtn {
@@ -142,7 +153,6 @@
   background-color: var(--secondary-clr-lter-blue);
   color: var(--neutral-clr-white);
 }
-
 
 @media (max-width: 600px) {
   .container {

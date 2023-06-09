@@ -9,7 +9,7 @@ export const useImageHandler = () => {
     let files = file;
     let fileType = files.type;
     let filename = files.name;
-    let validExtension = ["image/png", "image/jpeg"];
+    let validExtension = ["image/png", "image/jpeg", "image/webp"];
 
     if (validExtension.includes(fileType)) {
       let fileReader = new FileReader();

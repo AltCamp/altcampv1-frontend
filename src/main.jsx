@@ -51,7 +51,10 @@ import {
   // subpages of community
   Questionpage,
   AskQuestionPage,
-  EditQuestionPage
+  EditQuestionPage,
+
+  // subpages of feed
+  Createpost,
 } from './pages/dashboard/pages'
 import Updatebio from './pages/dashboard/pages/account/updatebio/updateBio'
 import UserProfile from './pages/dashboard/pages/users/userProfile/userProfile'
@@ -108,6 +111,10 @@ const router = createBrowserRouter([
         element: <Feed />
       },
       {
+        path: '/dashboard/createpost',
+        element: <Createpost />
+      },
+      {
         path: '/dashboard/community',
         element: <Community />
       },
@@ -120,7 +127,7 @@ const router = createBrowserRouter([
         // and display it
       },
       {
-        path: '/dashboard/community/ask/:question',
+        path: '/dashboard/community/ask',
         element: <AskQuestionPage />
       },
       {
@@ -140,7 +147,7 @@ const router = createBrowserRouter([
             element: <Myprojects />
           },
           {
-            index: true,
+            path: '/dashboard/account/editprofile',
             element: <Editprofile />
           },
           {
