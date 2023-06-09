@@ -5,7 +5,7 @@ import { baseQuery } from "../../constants/api";
 export const feedSlice = createApi({
   reducerPath: "feedApi",
   baseQuery,
-  tagTypes: ["Posts", "Comments"],
+  tagTypes: ["Posts", "Post", "Comments"],
   endpoints: (builder) => ({
     getAllPosts: builder.query({
       query: () => ({
@@ -19,7 +19,7 @@ export const feedSlice = createApi({
         url: `/posts/${id}`,
         method: "GET",
       }),
-      // providesTags: ["Posts"],
+      providesTags: ["Post"],
     }),
     createPost: builder.mutation({
       query: (body) => ({
@@ -29,21 +29,6 @@ export const feedSlice = createApi({
       }),
       invalidatesTags: ["Posts"],
     }),
-    // updatePost: builder.mutation({
-    //     query: ({ id, body }) => ({
-    //         url: `/posts/${id}`,
-    //         method: "PATCH",
-    //         body,
-    //     }),
-    //     invalidatesTags: ["Posts"],
-    // }),
-    // deletePost: builder.mutation({
-    //     query: (id) => ({
-    //         url: `/posts/${id}`,
-    //         method: "DELETE",
-    //     }),
-    //     invalidatesTags: ["Posts"],
-    // }),
     likePost: builder.mutation({
       query: (id) => ({
         url: `/posts/${id}/upvote`,
@@ -52,32 +37,27 @@ export const feedSlice = createApi({
       invalidatesTags: ["Posts"],
     }),
     getAllComments: builder.query({
-      query: () => ({
-        url: "/comments",
+      query: (postId) => ({
+        url: `/comments?postId=${postId}`,
         method: "GET",
       }),
-      invalidatesTags: ["Comments", "Posts"],
-    }),
-    getCommentById: builder.query({
-      query: (id) => ({
-        url: `/comments/${id}`,
-        method: "GET",
-      }),
+      providesTags: ["Comments"],
     }),
     createComment: builder.mutation({
       query: (body) => ({
-        url: "/comments",
+        url: `/comments`,
         method: "POST",
         body,
       }),
-      invalidatesTags: ["Comments", "Posts"],
+      invalidatesTags: ["Comments", "Post", "Posts"],
+
     }),
     likeComment: builder.mutation({
       query: (id) => ({
         url: `/comments/${id}/upvote`,
         method: "PATCH",
       }),
-      invalidatesTags: ["Comments", "Posts"],
+      invalidatesTags: ["Comments"],
     }),
   }),
 });
@@ -86,8 +66,6 @@ export const {
   useGetAllPostsQuery,
   useGetPostByIdQuery,
   useCreatePostMutation,
-  // useUpdatePostMutation,
-  // useDeletePostMutation,
   useLikePostMutation,
   useGetAllCommentsQuery,
   useGetCommentByIdQuery,

@@ -102,6 +102,10 @@
   object-fit: cover;
 }
 
+.authorName {
+  color: var(--neutral-clr-deep-grey);
+}
+
 .edit {
   display: flex;
   align-items: center;
