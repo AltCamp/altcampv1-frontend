@@ -50,7 +50,9 @@ export default function Postcard ({ post }) {
     <div className={postCardStyles.container}>
       <div className={postCardStyles.content}>
         <div className={postCardStyles.header}>
-          <div className={postCardStyles.avatar}>
+          <Link 
+          to={`/dashboard/users/${latestPost?.author._id}`}
+          className={postCardStyles.avatar}>
             {latestPost?.author?.profilePicture ? (
               <img
                 src={latestPost?.author?.profilePicture}
@@ -64,7 +66,7 @@ export default function Postcard ({ post }) {
                 className={postCardStyles.iconAvatar}
               />
             )}
-          </div>
+          </Link>
           <div className={postCardStyles.info}>
             <Link
               to={`/dashboard/users/${latestPost?.author._id}`}
