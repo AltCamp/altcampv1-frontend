@@ -89,10 +89,21 @@
   color: var(--secondary-clr-drk-blue);
 }
 
-.authorImg img {
+.authorImg {
   width: 1.6rem;
   height: 1.6rem;
   border-radius: 50%;
+  overflow: hidden;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.authorName {
+  color: var(--neutral-clr-deep-grey);
 }
 
 .edit {
