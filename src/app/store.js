@@ -10,7 +10,7 @@ import { accountMutationSlice } from "./slices/apiSlices/accountSlices/accountMu
 
 import { feedSlice } from './slices/apiSlices/feedSlice';
 
-import { bookmarkSlice } from "./slices/apiSlices/bookmarkSlice/bookmarkSlice";
+import { bookmarkSlice } from "./slices/apiSlices/bookmarkSlice";
 
 export const store = configureStore({
   reducer: {

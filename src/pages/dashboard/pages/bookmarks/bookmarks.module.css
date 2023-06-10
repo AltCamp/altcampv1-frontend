@@ -13,7 +13,7 @@
   font-family: var(--Inter);
   margin-bottom: 1.75rem;
   color: var(--neutral-clr-drkst-grey);
-  }
+}
 
 /* Navbar */
 .bookmarkNav {
@@ -123,9 +123,17 @@
 }
 
 /* Table */
-.bookmarkMain { overflow-x: auto;
-  white-space: normal;
+.bookmarkMain {
+  overflow-x: auto;
+  /* display: grid; */
 }
+
+.table {
+  width: max-content;
+  /* border-collapse: collapse;    */
+}
+
+
 
 .bookmarkHeader {
   display: flex;
@@ -157,6 +165,7 @@
   cursor: pointer;
 }
 
+
 .tableData td {
   font-family: var(--Poppins);
   font-weight: 500;
@@ -164,7 +173,7 @@
   line-height: 1.25rem;
   color: var(--secondary-clr-deep-blue);
   height: 3.5rem;
-  padding-top: 0.5rem;
+  /* padding-top: 0.5rem; */
 }
 
 .bookmarkHeader .checkbox {
@@ -193,6 +202,7 @@
   max-width: 12rem;
 }
 
+
 .bookmarkHeader .topic {
   width: 11.25rem;
   max-width: 11.5rem;
@@ -215,7 +225,7 @@
 .tableData .datePosted {
   width: 9.5rem;
   max-width: 9.5rem;
-}
+} 
 
 .timePosted {
   font-family: var(--Poppins);
@@ -226,7 +236,7 @@
   color: var(--neutral-clr-drk-grey);
 }
 
-.bookmarkHeader .comments {
+/* .bookmarkHeader .comments {
   width: 6.75rem;
   max-width: 6.75rem;
 }
@@ -244,11 +254,14 @@
   width: 6.25rem;
   max-width: 6.25rem;
 }
+ */
 
+ 
 .bookmarkHeader .tags {
   width: 3.8rem;
   max-width: 4rem;
 }
+
 .tableData .tags {
   text-overflow: ellipsis;
   overflow: hidden;
@@ -256,7 +269,7 @@
   width: 4.5rem;
   max-width: 4.5rem;
 }
-.status {
+/* .status {
   width: 3.5rem;
   max-width: 3.5rem;
   text-align: right;
@@ -266,7 +279,7 @@
   position: relative;
   left: 55%;
   top: 20%;
-}
+} */
 
 /* Accordion section  */
 .tableBody {
@@ -457,7 +470,7 @@
     white-space: normal;
   
   } */
-   .bookmarkHeader .checkbox {
+  .bookmarkHeader .checkbox {
     width: 2.8rem;
     max-width: 2.8rem;
   }
@@ -466,7 +479,7 @@
     max-width: 3.5rem;
   }
 
-  .tableData .topic {
+  /* .tableData .topic {
     width: 11.5rem;
     max-width: 11.5rem;
   }
@@ -509,7 +522,7 @@
   .tableData .tags {
     width: 5rem;
     max-width: 5rem;
-  } 
+  } */
 }
 
 @media (max-width: 1236px) {
@@ -527,8 +540,7 @@
     font-size: 0.75rem;
   }
 
-
-  .tableData .topic {
+  /* .tableData .topic {
     width: 10rem;
     max-width: 10rem;
   }
@@ -556,7 +568,7 @@
   .tableData .datePosted {
     width: 8.5rem;
     max-width: 8.5rem;
-  }
+  } */
 }
 
 @media (max-width: 1100px) {
@@ -567,9 +579,9 @@
     font-size: 0.7rem;
   }
 
-  .bookmarkHeader .topic{
+  /* .bookmarkHeader .topic {
     width: 8.5rem;
-    max-width:8.5rem;
+    max-width: 8.5rem;
   }
 
   .tableData .topic {
@@ -597,8 +609,6 @@
     max-width: 6.7rem;
   }
 
-  
-
   .bookmarkHeader .comments {
     width: 4.5rem;
     max-width: 4.5rem;
@@ -609,18 +619,18 @@
     max-width: 5rem;
   }
 
-  .bookmarkHeader .tags{
+  .bookmarkHeader .tags {
     width: 3.15rem;
     max-width: 3.15rem;
   }
-   
+
   .tableData .tags {
     width: 3.75rem;
     max-width: 3.75rem;
-  }
+  } */
 
-.timePosted {
-    font-size: .5rem;
+  .timePosted {
+    font-size: 0.5rem;
   }
   .previousBtn,
   .nextBtn {
@@ -634,48 +644,46 @@
   }
 }
 
-@media (max-width: 1030px){
+@media (max-width: 1030px) {
+  .bookmarkContainer {
+    padding: 0.5rem;
+    justify-content: center;
+  }
 
-.bookmarkContainer {
-padding: 0.5rem;
-justify-content: center;
-}
+  .bookmarkContainer h2 {
+    font-weight: 450;
+    padding-right: 1rem;
+  }
 
-.bookmarkContainer h2 {
-  font-weight: 450;
-  padding-right: 1rem;
-}
+  .bookButton {
+    font-size: 0.65rem;
+  }
 
-.bookButton {
-font-size: 0.65rem;
-}
+  .tableData td {
+    font-size: 0.7rem;
+    font-weight: 450;
+    padding-top: 0.2rem;
+  }
 
-.tableData td {
-  font-size: 0.7rem;
-  font-weight: 450;
-  padding-top: 0.2rem;
+  .pagination {
+    justify-content: center;
+    height: 3rem;
+  }
 }
-
-.pagination{
-  justify-content: center;
-  height: 3.0rem;
-}
-
-}
-@media (max-width: 1015px) and (min-width: 950px){
-.bookmarkContainer {
-  padding: 0.2rem;
-  justify-content: center;
-}
+@media (max-width: 1015px) and (min-width: 950px) {
+  .bookmarkContainer {
+    padding: 0.2rem;
+    justify-content: center;
+  }
 }
 
-@media (max-width: 720){
-.bookmarkContainer{
-  width: 100%;
-  padding: 0%;
-}
+@media (max-width: 720) {
+  .bookmarkContainer {
+    width: 100%;
+    padding: 0%;
+  }
 
-/*.bookmarkHeader .topic{
+  /*.bookmarkHeader .topic{
   width: 3.5rem;
   max-width:3.5rem;
 }
@@ -694,5 +702,4 @@ font-size: 0.65rem;
   text-align: center;
   padding-right: 2rem;
 }*/
-
 }

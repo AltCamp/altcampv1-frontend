@@ -15,6 +15,7 @@ import {
 import ReactTimeAgo from 'react-time-ago'
 
 import { useLikePostMutation } from '../../../../../app/slices/apiSlices/feedSlice'
+import { useCreateBookmarkMutation } from '../../../../../app/slices/apiSlices/bookmarkSlice'
 
 import { useSelector } from 'react-redux'
 import { useEffect } from 'react'
@@ -22,6 +23,7 @@ import { useEffect } from 'react'
 export default function Postcard ({ post }) {
   const [latestPost, setLatestPost] = useState(post)
   const [likeAnimation, setLikeAnimation] = useState(false)
+  const [title, setTitle] = useState('Bookmark 1')
   // console.log(post)
 
   const { user } = useSelector(state => state?.user?.user)
@@ -45,6 +47,13 @@ export default function Postcard ({ post }) {
   }, [isSuccess])
 
   // console.log(data?.data)
+
+  const [createBookmark, { data: bookmarkData, isLoading: bookmarkIsLoading, isSuccess: bookmarkIsSuccess, isError: bookmarkIsError, error: bookmarkError }] = useCreateBookmarkMutation();
+  
+  const handleCreateBookmark = () => {
+    createBookmark({ title, postId: post._id, postType: "Post" })
+  }
+  // console.log(bookmarkIsSuccess, bookmarkData?.data)
 
   return (
     <Link
@@ -147,13 +156,16 @@ export default function Postcard ({ post }) {
             </div>
           </div>
           <div className={postCardStyles.right}>
-            <div className={postCardStyles.bookmark}>
+            <Link to="/dashboard" className={postCardStyles.bookmark}
+            onClick={handleCreateBookmark}
+            >
               <ArchiveAdd
+                
                 size={20}
                 color='#555555'
                 className={postCardStyles.icon}
               />
-            </div>
+            </Link>
           </div>
         </div>
       </div>

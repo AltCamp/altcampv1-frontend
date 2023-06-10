@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useGetAllBookmarksQuery } from "../../../../app/slices/apiSlices/bookmarkSlice/bookmarkSlice";
+import { useGetAllBookmarksQuery } from "../../../../app/slices/apiSlices/bookmarkSlice";
 import bookmarksStyles from "./bookmarks.module.css";
 import { HiStar } from "react-icons/hi";
 import { AiOutlineLike } from "react-icons/ai";
@@ -14,9 +14,14 @@ export default function Bookmarks() {
   const [isFilterOpen, setFilterOpen] = useState(false);
   const [isActive, setIsActive] = useState(null);
 
+  const {
+    data: bookmark,
+    isLoading,
+    error,
+    isSuccess,
+  } = useGetAllBookmarksQuery();
 
-  const { data: bookmark, isLoading, error, isSuccess } = useGetAllBookmarksQuery();
-  console.log(bookmark, 'bookmark');
+  console.log(bookmark, "bookmark");
 
   const handleToggleAction = () => {
     setActionOpen(!isActionOpen);
@@ -165,7 +170,7 @@ export default function Bookmarks() {
 
   return (
     <div className={bookmarksStyles.bookmarkContainer}>
-      <h2>Bookmarks</h2>    
+      <h2>Bookmarks</h2>
 
       {/* NavBar */}
       <div className={bookmarksStyles.bookmarkNav}>
@@ -232,17 +237,17 @@ export default function Bookmarks() {
 
       {/* Table */}
       <div className={bookmarksStyles.bookmarkMain}>
-        <table>
+        <table className={bookmarksStyles.table}>
           <thead>
             <tr className={bookmarksStyles.bookmarkHeader}>
               <th className={bookmarksStyles.checkbox}></th>
               <th className={bookmarksStyles.topic}>Topic</th>
               <th className={bookmarksStyles.postedBy}>Posted By</th>
               <th className={bookmarksStyles.datePosted}>Date Posted</th>
-              <th className={bookmarksStyles.comments}>Comments</th>
-              <th className={bookmarksStyles.likes}>Likes</th>
+              {/* <th className={bookmarksStyles.comments}>Comments</th>
+              <th className={bookmarksStyles.likes}>Likes</th> */}
               <th className={bookmarksStyles.tags}>Tags</th>
-              <th className={bookmarksStyles.status}>Unread Status</th>
+              {/* <th className={bookmarksStyles.status}>Unread Status</th> */}
             </tr>
           </thead>
 
@@ -283,13 +288,13 @@ export default function Bookmarks() {
                           {item.datePosted[1]}
                         </span>
                       </td>
-                      <td className={bookmarksStyles.comments}>
+                      {/* <td className={bookmarksStyles.comments}>
                         {" "}
                         {item.comments}{" "}
                       </td>
-                      <td className={bookmarksStyles.likes}> {item.likes} </td>
+                      <td className={bookmarksStyles.likes}> {item.likes} </td> */}
                       <td className={bookmarksStyles.tags}> {item.tags} </td>
-                      <td>
+                      {/* <td>
                         <span className={bookmarksStyles.statSpan}>
                           {item.unreadStatus && unread ? (
                             <HiStar
@@ -305,7 +310,7 @@ export default function Bookmarks() {
                             />
                           )}
                         </span>
-                      </td>
+                      </td> */}
                     </div>
                   </tr>
 
@@ -332,41 +337,42 @@ export default function Bookmarks() {
                         <div className={bookmarksStyles.bottomIcons}>
                           <div className={bookmarksStyles.buttonContainer}>
                             <div className={bookmarksStyles.bodyButton}>
-                              <Link className={bookmarksStyles.accordionLink} 
-                          to="/dashboard/community/question">
-                                <span 
-                                  className={bookmarksStyles.bodyIcons}><LuEdit
-                                  size="16"
-                                /></span>{" "}
+                              <Link
+                                className={bookmarksStyles.accordionLink}
+                                to="/dashboard/community/question"
+                              >
+                                <span className={bookmarksStyles.bodyIcons}>
+                                  <LuEdit size="16" />
+                                </span>{" "}
                                 Reply
                               </Link>
                             </div>
                             <div className={bookmarksStyles.bodyButton}>
-                                <BiComment
-                                  className={bookmarksStyles.bodyIcons}
-                                  size="16"
-                                />
-                                <span>
-                                  {" "}
-                                  Comments{" "}
-                                  <span className={bookmarksStyles.numbers}>
-                                    {item.comments}
-                                  </span>
+                              <BiComment
+                                className={bookmarksStyles.bodyIcons}
+                                size="16"
+                              />
+                              <span>
+                                {" "}
+                                Comments{" "}
+                                <span className={bookmarksStyles.numbers}>
+                                  {item.comments}
                                 </span>
+                              </span>
                             </div>
                             <div className={bookmarksStyles.bodyButton}>
-                                <AiOutlineLike
-                                  className={bookmarksStyles.bodyIcons}
-                                  size="16"
-                                />
+                              <AiOutlineLike
+                                className={bookmarksStyles.bodyIcons}
+                                size="16"
+                              />
 
-                                <span>
-                                  Likes{" "}
-                                  <span className={bookmarksStyles.numbers}>
-                                    {" "}
-                                    {item.likes}
-                                  </span>
+                              <span>
+                                Likes{" "}
+                                <span className={bookmarksStyles.numbers}>
+                                  {" "}
+                                  {item.likes}
                                 </span>
+                              </span>
                             </div>
                           </div>
 

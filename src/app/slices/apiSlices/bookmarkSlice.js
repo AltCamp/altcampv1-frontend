@@ -1,15 +1,17 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { baseQuery } from "../../../constants/api";
+import { baseQuery } from "../../constants/api";
 
 export const bookmarkSlice = createApi({
   reducerPath: "bookmarkApi",
   baseQuery,
+  tagTypes: ["Bookmark"],
   endpoints: (builder) => ({
     getAllBookmarks: builder.query({
       query: () => ({
         url: "/bookmarks",
         method: "GET",
       }),
+      providesTags: ["Bookmark"],
     }),
     getBookmarkById: builder.query({
       query: (bookmarkId) => ({
@@ -23,6 +25,7 @@ export const bookmarkSlice = createApi({
         method: "POST",
         body,
       }),
+      invalidatesTags: ["Bookmark"],
     }),
     updateBookmark: builder.mutation({
       query: ({ bookmarkId, ...body }) => ({
@@ -36,6 +39,7 @@ export const bookmarkSlice = createApi({
         url: `/bookmarks/${bookmarkId}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["Bookmark"],
     }),
   }),
 });
