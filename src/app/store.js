@@ -7,6 +7,8 @@ import { userSlice } from "./slices/generalSlices/userSlice";
 
 import { accountMutationSlice } from "./slices/apiSlices/accountSlices/accountMutationSlice";
 
+import { bookmarkSlice } from "./slices/apiSlices/bookmarkSlice/bookmarkSlice";
+
 export const store = configureStore({
   reducer: {
     // Add your reducers here
@@ -14,11 +16,13 @@ export const store = configureStore({
     [communitySlice.reducerPath]: communitySlice.reducer,
     [accountMutationSlice.reducerPath]: accountMutationSlice.reducer,
     user: userSlice.reducer,
+    [bookmarkSlice.reducerPath]: bookmarkSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat([
       authSlice.middleware,
       communitySlice.middleware,
       accountMutationSlice.middleware,
+      bookmarkSlice.middleware,
     ]),
 });

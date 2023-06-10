@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useGetAllBookmarksQuery } from "../../../../app/slices/apiSlices/bookmarkSlice/bookmarkSlice";
 import bookmarksStyles from "./bookmarks.module.css";
 import { HiStar } from "react-icons/hi";
 import { AiOutlineLike } from "react-icons/ai";
@@ -12,6 +13,10 @@ export default function Bookmarks() {
   const [isActionOpen, setActionOpen] = useState(false);
   const [isFilterOpen, setFilterOpen] = useState(false);
   const [isActive, setIsActive] = useState(null);
+
+
+  const { data: bookmark, isLoading, error, isSuccess } = useGetAllBookmarksQuery();
+  console.log(bookmark, 'bookmark');
 
   const handleToggleAction = () => {
     setActionOpen(!isActionOpen);

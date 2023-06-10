@@ -123,6 +123,10 @@
 }
 
 /* Table */
+.bookmarkMain { overflow-x: auto;
+  white-space: normal;
+}
+
 .bookmarkHeader {
   display: flex;
   gap: 0.75rem;
@@ -443,12 +447,17 @@
 
 /* Media Query */
 
-@media (max-width: 1326px) {
+@media (max-width: 1330px) {
   .search input {
     width: 32rem;
   }
 
-  .bookmarkHeader .checkbox {
+  /* .bookmarkMain {
+    overflow-x: initial;
+    white-space: normal;
+  
+  } */
+   .bookmarkHeader .checkbox {
     width: 2.8rem;
     max-width: 2.8rem;
   }
@@ -500,14 +509,16 @@
   .tableData .tags {
     width: 5rem;
     max-width: 5rem;
-  }
+  } 
 }
 
 @media (max-width: 1236px) {
   .search input {
     width: 28rem;
   }
-
+  .timePosted {
+    font-size: 0.7rem;
+  }
   .bookmarkHeader th {
     font-size: 0.7rem;
   }
@@ -516,9 +527,7 @@
     font-size: 0.75rem;
   }
 
-  .timePosted {
-    font-size: 0.7rem;
-  }
+
   .tableData .topic {
     width: 10rem;
     max-width: 10rem;
@@ -588,9 +597,7 @@
     max-width: 6.7rem;
   }
 
-  .timePosted {
-    font-size: .5rem;
-  }
+  
 
   .bookmarkHeader .comments {
     width: 4.5rem;
@@ -612,6 +619,9 @@
     max-width: 3.75rem;
   }
 
+.timePosted {
+    font-size: .5rem;
+  }
   .previousBtn,
   .nextBtn {
     padding: 0.5rem 1rem;
