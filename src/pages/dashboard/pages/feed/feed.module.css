@@ -51,6 +51,20 @@
   color: var(--neutral-clr-drk-grey);
 }
 
+.avatar {
+  width: 2.9rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.iconAvatar,
+.img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
 .inputField {
   width: 100%;
   height: 100%;
