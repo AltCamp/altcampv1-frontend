@@ -165,7 +165,7 @@ export default function Bookmarks() {
 
   return (
     <div className={bookmarksStyles.bookmarkContainer}>
-      <h2>Bookmarks</h2>
+      <h2>Bookmarks</h2>    
 
       {/* NavBar */}
       <div className={bookmarksStyles.bookmarkNav}>

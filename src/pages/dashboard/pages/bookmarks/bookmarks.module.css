@@ -13,7 +13,7 @@
   font-family: var(--Inter);
   margin-bottom: 1.75rem;
   color: var(--neutral-clr-drkst-grey);
-}
+  }
 
 /* Navbar */
 .bookmarkNav {
@@ -632,4 +632,67 @@
   .pageCount {
     padding: 0.5rem 0.7rem;
   }
+}
+
+@media (max-width: 1030px){
+
+.bookmarkContainer {
+padding: 0.5rem;
+justify-content: center;
+}
+
+.bookmarkContainer h2 {
+  font-weight: 450;
+  padding-right: 1rem;
+}
+
+.bookButton {
+font-size: 0.65rem;
+}
+
+.tableData td {
+  font-size: 0.7rem;
+  font-weight: 450;
+  padding-top: 0.2rem;
+}
+
+.pagination{
+  justify-content: center;
+  height: 3.0rem;
+}
+
+}
+@media (max-width: 1015px) and (min-width: 950px){
+.bookmarkContainer {
+  padding: 0.2rem;
+  justify-content: center;
+}
+}
+
+@media (max-width: 720){
+.bookmarkContainer{
+  width: 100%;
+  padding: 0%;
+}
+
+/*.bookmarkHeader .topic{
+  width: 3.5rem;
+  max-width:3.5rem;
+}
+.bookmarkHeader .postedBy {
+  width: 3.75rem;
+  max-width: 3.75rem;}
+
+.bookmarkHeader .datePosted {
+  width: 3rem;
+  max-width: 3rem; 
+}
+
+.status {
+  width: 2.5rem;
+  max-width: 2.5rem;
+  text-align: center;
+  padding-right: 2rem;
+}*/
+
 }
