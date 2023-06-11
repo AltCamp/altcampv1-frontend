@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import registerStyles from './register.module.css'
 import eyeIcon from '../../../assets/general/eye.svg'
 import eyeClosedIcon from '../../../assets/general/eyeclosed.svg'
+import Toaster from '../../../components/Toaster/Toaster'
 
 import { setUser } from '../../../app/slices/generalSlices/userSlice'
 
@@ -230,11 +231,7 @@ export default function Register () {
         </div>
 
         {/* error ui */}
-        {errorText && (
-          <div className={registerStyles.errorText}>
-            <p>{errorText}</p>
-          </div>
-        )}
+        <Toaster show={!!errorText} type="error" message={errorText}/>
 
         <button
           type='submit'
