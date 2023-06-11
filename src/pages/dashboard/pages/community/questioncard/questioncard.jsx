@@ -1,9 +1,13 @@
 import { Link } from 'react-router-dom'
 
 import questionCardStyles from './questioncard.module.css'
-import { ArrowDown, ArrowUp, ArchiveAdd, Edit } from 'iconsax-react'
-
-import gravatar from '../../../../../assets/general/gravatar.png'
+import {
+  ArrowDown,
+  ArrowUp,
+  ArchiveAdd,
+  Edit,
+  ProfileCircle
+} from 'iconsax-react'
 
 import ReactTimeAgo from 'react-time-ago'
 
@@ -65,9 +69,23 @@ export default function Questioncard ({ question }) {
 
         <div className={questionCardStyles.authorAnswerLink}>
           <div className={questionCardStyles.author}>
-            <div className={questionCardStyles.authorImg}>
-              <img src={gravatar} alt='' />
-            </div>
+            <Link
+              to={`/dashboard/users/${question?.author._id}`}
+              className={questionCardStyles.authorImg}
+            >
+              {question?.author?.profilePicture ? (
+                <img
+                  src={question?.author?.profilePicture}
+                  alt=''
+                  className={questionCardStyles.img}
+                />
+              ) : (
+                <ProfileCircle
+                  color='#555555'
+                  className={questionCardStyles.img}
+                />
+              )}
+            </Link>
             <Link
               to={`/dashboard/users/${question?.author._id}`}
               className={questionCardStyles.authorName}

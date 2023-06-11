@@ -19,7 +19,8 @@ const MainNavbar = () => {
           <li><NavLink href="#">Home</NavLink></li>
           <li><NavLink href="#">About</NavLink></li>
           <li><NavLink href="#">Features</NavLink></li>
-          <button className={mainNavbarStyles['get-started-btn']}><NavLink href="#">Get Started</NavLink></button>
+          <NavLink to="/account">
+            <button className={mainNavbarStyles['get-started-btn']}>Get Started</button></NavLink>
           <section className={`${mainNavbarStyles['register-options']} ${openRegisterOptions ? mainNavbarStyles['open'] : ''} `}>
             <ul>
               <li>

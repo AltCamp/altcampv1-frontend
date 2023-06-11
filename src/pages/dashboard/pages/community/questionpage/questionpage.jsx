@@ -14,7 +14,8 @@ import {
   ArrowDown,
   Edit,
   Trash,
-  CloseCircle
+  CloseCircle,
+  ProfileCircle
 } from 'iconsax-react'
 
 import share from '../../../../../assets/icons/share.svg'
@@ -291,7 +292,18 @@ export default function Questionpage () {
                 <div className={questionPageStyles.userLinks}>
                   <div className={questionPageStyles.author}>
                     <div className={questionPageStyles.authorImg}>
-                      <img src={gravatar} alt='' />
+                      {questionDetails?.author?.profilePicture ? (
+                        <img
+                          src={questionDetails?.author?.profilePicture}
+                          alt=''
+                          className={questionPageStyles.img}
+                        />
+                      ) : (
+                        <ProfileCircle
+                          color='#555555'
+                          className={questionPageStyles.img}
+                        />
+                      )}
                     </div>
                     <Link
                       to={`/dashboard/users/${questionDetails?.author._id}`}
@@ -351,12 +363,6 @@ export default function Questionpage () {
                       <Tooltip
                         id='my-tooltip'
                         className='tooltip'
-                        // style={{
-                        //   backgroundColor: '#6a6ff5',
-                        //   color: '#fff',
-                        //   borderRadius: '4px',
-                        //   padding: '2px'
-                        // }}
                       />
                       <ArrowUp
                         size='19'

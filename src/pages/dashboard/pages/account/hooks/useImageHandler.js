@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 
 export const useImageHandler = () => {
-    const [error, setError] = useState("");
-    const [image, setImage] = useState("");
-    const [caption, setCaption] = useState("");
+  const [error, setError] = useState("");
+  const [image, setImage] = useState("");
+  const [caption, setCaption] = useState("");
 
   const Handleimage = (file) => {
     let files = file;
     let fileType = files.type;
     let filename = files.name;
-    let validExtension = ["image/png", "image/jpeg"];
+    let validExtension = ["image/png", "image/jpeg", "image/webp"];
 
     if (validExtension.includes(fileType)) {
       let fileReader = new FileReader();
@@ -23,6 +23,5 @@ export const useImageHandler = () => {
       return false;
     }
   };
-    return {image, caption, error, Handleimage}
-    };
-    
+  return { image, caption, error, Handleimage };
+};
