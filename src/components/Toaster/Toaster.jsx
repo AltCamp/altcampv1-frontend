@@ -9,6 +9,7 @@ function Toaster({type, message, show }) {
         warning : <WarningIcon/>,
         success : <SuccessIcon/>,
     }
+    
     return (
         <>
          {show && <div className={(style.toast, style[type])} >
