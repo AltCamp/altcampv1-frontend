@@ -202,6 +202,7 @@
 @media (max-width: 500px) {
   .toggleCreate {
     width: 85%;
+    height: auto;
     padding: 1rem;
   }
   .closeIcon {
