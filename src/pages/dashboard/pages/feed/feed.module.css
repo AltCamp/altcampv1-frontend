@@ -200,6 +200,11 @@
 }
 
 @media (max-width: 500px) {
+  .toggleCreateOverlay {
+    align-items: flex-start;
+    padding-top: 3rem;
+    overflow: scroll;
+  }
   .toggleCreate {
     width: 85%;
     height: auto;

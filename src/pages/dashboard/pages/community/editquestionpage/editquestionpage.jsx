@@ -11,7 +11,6 @@ import { useUpdateQuestionMutation } from '../../../../../app/slices/apiSlices/c
 
 export default function EditQuestionPage () {
   const location = useLocation()
-  
 
   const editableQuestionState = location?.state
 
@@ -33,7 +32,7 @@ export default function EditQuestionPage () {
     updateQuestion({
       id: editableQuestionState?.question,
       body: {
-        title,
+        title: `Edited: ${title}`,
         body
         // tags: ['react', 'javascript', 'nodejs', 'express']
       }
@@ -92,9 +91,7 @@ export default function EditQuestionPage () {
               type='text'
               placeholder=''
               className={editQuestionPageStyles.inputField}
-              value={
-                editableQuestionState ? editableQuestionState.title : title
-              }
+              value={title}
               onChange={e => {
                 setTitle(e.target.value)
                 setEmptyTitle(false)

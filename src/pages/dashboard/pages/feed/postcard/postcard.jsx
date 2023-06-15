@@ -48,10 +48,19 @@ export default function Postcard ({ post }) {
 
   // console.log(data?.data)
 
-  const [createBookmark, { data: bookmarkData, isLoading: bookmarkIsLoading, isSuccess: bookmarkIsSuccess, isError: bookmarkIsError, error: bookmarkError }] = useCreateBookmarkMutation();
-  
+  const [
+    createBookmark,
+    {
+      data: bookmarkData,
+      isLoading: bookmarkIsLoading,
+      isSuccess: bookmarkIsSuccess,
+      isError: bookmarkIsError,
+      error: bookmarkError
+    }
+  ] = useCreateBookmarkMutation()
+
   const handleCreateBookmark = () => {
-    createBookmark({ title, postId: post._id, postType: "Post" })
+    createBookmark({ title, postId: post._id, postType: 'Post' })
   }
   // console.log(bookmarkIsSuccess, bookmarkData?.data)
 
@@ -63,7 +72,11 @@ export default function Postcard ({ post }) {
       <div className={postCardStyles.content}>
         <div className={postCardStyles.header}>
           <Link
-            to={`/dashboard/users/${latestPost?.author._id}`}
+            to={
+              user?._id === latestPost?.author?._id
+                ? `/dashboard/account`
+                : `/dashboard/users/${latestPost?.author._id}`
+            }
             className={postCardStyles.avatar}
           >
             {latestPost?.author?.profilePicture ? (
@@ -82,7 +95,11 @@ export default function Postcard ({ post }) {
           </Link>
           <div className={postCardStyles.info}>
             <Link
-              to={`/dashboard/users/${latestPost?.author._id}`}
+              to={
+                user?._id === latestPost?.author?._id
+                  ? `/dashboard/account`
+                  : `/dashboard/users/${latestPost?.author._id}`
+              }
               className={postCardStyles.name}
             >
               {latestPost.author.firstName} {latestPost.author.lastName}
@@ -156,11 +173,12 @@ export default function Postcard ({ post }) {
             </div>
           </div>
           <div className={postCardStyles.right}>
-            <Link to="/dashboard" className={postCardStyles.bookmark}
-            onClick={handleCreateBookmark}
+            <Link
+              to='/dashboard'
+              className={postCardStyles.bookmark}
+              onClick={handleCreateBookmark}
             >
               <ArchiveAdd
-                
                 size={20}
                 color='#555555'
                 className={postCardStyles.icon}
