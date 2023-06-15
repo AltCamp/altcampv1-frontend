@@ -11,8 +11,12 @@ import {
 
 import ReactTimeAgo from 'react-time-ago'
 
+import { useSelector } from 'react-redux'
+
 export default function Questioncard ({ question }) {
   // console.log(question)
+  const { user } = useSelector(state => state?.user?.user)
+
   return (
     <div className={questionCardStyles.container}>
       <div className={questionCardStyles.header}>
@@ -70,7 +74,11 @@ export default function Questioncard ({ question }) {
         <div className={questionCardStyles.authorAnswerLink}>
           <div className={questionCardStyles.author}>
             <Link
-              to={`/dashboard/users/${question?.author._id}`}
+              to={
+                user?._id === question?.author?._id
+                  ? `/dashboard/account`
+                  : `/dashboard/users/${question?.author._id}`
+              }
               className={questionCardStyles.authorImg}
             >
               {question?.author?.profilePicture ? (
@@ -87,7 +95,11 @@ export default function Questioncard ({ question }) {
               )}
             </Link>
             <Link
-              to={`/dashboard/users/${question?.author._id}`}
+              to={
+                user?._id === question?.author?._id
+                  ? `/dashboard/account`
+                  : `/dashboard/users/${question?.author._id}`
+              }
               className={questionCardStyles.authorName}
             >
               {question.author.firstName} {question.author.lastName}

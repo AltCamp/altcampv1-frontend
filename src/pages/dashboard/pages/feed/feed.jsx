@@ -81,7 +81,7 @@ export default function Feed () {
 
         <div className={feedStyle.createPostInput}>
           <Link
-            to={`/dashboard/users/${user?._id}`}
+            to={`/dashboard/account`}
             className={feedStyle.avatar}
           >
             {user?.profilePicture ? (
