@@ -34,7 +34,7 @@ export default function Topbar ({ toggleSideBar, handleSideBar }) {
       <div className={topbarStyles.hamburger} onClick={handleSideBar}>
         <HambergerMenu size='32' className={topbarStyles.icons} />
       </div>
-      <Link to='/dashboard/feed' className={topbarStyles.logo}>
+      <Link to='/dashboard' className={topbarStyles.logo}>
         <img src={darkLogo} alt='' className={topbarStyles.img} />
         <img src={iconLogo} alt='' className={topbarStyles.imgSmallScreen} />
       </Link>
