@@ -91,7 +91,7 @@ export default function Postpage () {
     }
   ] = useCreateCommentMutation()
 
-  const handleCreateComment = (e) => {
+  const handleCreateComment = e => {
     e.preventDefault()
     createComment({ content, postId })
   }
@@ -103,6 +103,8 @@ export default function Postpage () {
   }, [createCommentSuccess])
 
   const post = singlePost?.data
+
+  // console.log(post)
 
   return (
     <div className={postPageStyles.container}>

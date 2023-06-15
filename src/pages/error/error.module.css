@@ -49,6 +49,13 @@ line-height: 1.25rem;
   color: var(--neutral-clr-drker-grey);
 }
 
+.errorText span {
+  font-weight: 700;
+  color: var(--neutral-clr-drker-grey);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .errorLink {
   font-weight: 700;
   color: var(--neutral-clr-drker-grey);
