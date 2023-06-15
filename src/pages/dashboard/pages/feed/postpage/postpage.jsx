@@ -91,7 +91,7 @@ export default function Postpage () {
     }
   ] = useCreateCommentMutation()
 
-  const handleCreateComment = (e) => {
+  const handleCreateComment = e => {
     e.preventDefault()
     createComment({ content, postId })
   }
@@ -103,6 +103,8 @@ export default function Postpage () {
   }, [createCommentSuccess])
 
   const post = singlePost?.data
+
+  // console.log(post)
 
   return (
     <div className={postPageStyles.container}>
@@ -124,7 +126,11 @@ export default function Postpage () {
             <div className={postPageStyles.content}>
               <div className={postPageStyles.header}>
                 <Link
-                  to={`/dashboard/users/${post?.author._id}`}
+                  to={
+                    post?.author?._id === user?._id
+                      ? '/dashboard/account'
+                      : `/dashboard/users/${post?.author._id}`
+                  }
                   className={postPageStyles.avatar}
                 >
                   {post?.author?.profilePicture ? (
@@ -143,7 +149,11 @@ export default function Postpage () {
                 </Link>
                 <div className={postPageStyles.info}>
                   <Link
-                    to={`/dashboard/users/${post?.author._id}`}
+                    to={
+                      post?.author?._id === user?._id
+                        ? '/dashboard/account'
+                        : `/dashboard/users/${post?.author._id}`
+                    }
                     className={postPageStyles.name}
                   >
                     {post?.author.firstName} {post?.author.lastName}

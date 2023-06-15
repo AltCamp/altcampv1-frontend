@@ -10,7 +10,6 @@ import ReactTimeAgo from 'react-time-ago'
 import DOMPurify from 'isomorphic-dompurify'
 import { Tooltip } from 'react-tooltip'
 
-
 import {
   useUpvoteAnswerMutation,
   useDownvoteAnswerMutation,
@@ -72,7 +71,7 @@ export default function Answercard ({ answer }) {
     updateAnswer({
       answerId,
       body: {
-        content
+        content: `Edited: ${content}`
       }
     })
   }
@@ -114,7 +113,11 @@ export default function Answercard ({ answer }) {
         <>
           <div className={answerCardStyles.header}>
             <Link
-              to={`/dashboard/users/${answer?.author?._id}`}
+              to={
+                user?._id === answer?.author?._id
+                  ? '/dashboard/account'
+                  : `/dashboard/users/${answer?.author?._id}`
+              }
               className={answerCardStyles.name}
             >
               {answer?.author?.firstName} {answer?.author?.lastName}{' '}
@@ -127,11 +130,6 @@ export default function Answercard ({ answer }) {
               <ReactTimeAgo date={answer?.createdAt} locale='en-US' />
             </span>
           </div>
-          {answer?.createdAt !== answer?.updatedAt && (
-            <div className={answerCardStyles.edited}>
-              <span className={answerCardStyles.editedText}>edited</span>
-            </div>
-          )}
           <div className={answerCardStyles.content}>
             <div
               className={answerCardStyles.body}
@@ -146,9 +144,7 @@ export default function Answercard ({ answer }) {
                 color: answer?.upvotes > 0 ? '#0e8a1a' : '#343a40'
               }}
             >
-              <Tooltip
-                id='my-tooltip'
-              />
+              <Tooltip id='my-tooltip' />
               <ArrowUp
                 size='19'
                 className={answerCardStyles.icon}
