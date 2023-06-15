@@ -33,12 +33,12 @@ export default function Feed () {
     if (posts) {
       // create a copy of the posts array
       const copyPosts = [...posts]
-      const thePosts = copyPosts.sort(
+      copyPosts.sort(
         (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
       )
-      setSortedPosts(thePosts)
+      setSortedPosts(copyPosts)
     }
-  }, [isSuccess])
+  }, [posts])
 
 
   const handleToggleCreatePost = () => {
@@ -53,7 +53,6 @@ export default function Feed () {
     }
   }, [toggleCreatePost])
 
-  // console.log(toggleCreatePost)
 
   return (
     <div className={feedStyle.container}>

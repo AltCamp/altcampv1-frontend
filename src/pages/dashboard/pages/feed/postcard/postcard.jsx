@@ -62,7 +62,9 @@ export default function Postcard ({ post }) {
   const handleCreateBookmark = () => {
     createBookmark({ title, postId: post._id, postType: 'Post' })
   }
-  // console.log(bookmarkIsSuccess, bookmarkData?.data)
+
+
+  // log the recently added post
 
   return (
     <Link
