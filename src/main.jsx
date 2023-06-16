@@ -111,7 +111,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Feed />
+        element: <Feed />,
       },
       {
         path: '/dashboard/post/:postId',

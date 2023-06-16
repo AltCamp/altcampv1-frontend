@@ -132,7 +132,7 @@ export default function Community () {
         </div>
 
         {/* pagination */}
-        {isSuccess && (
+        {sortedQuestions && (
           <div className={communityStyle.pagination}>
             <button className={communityStyle.previousBtn}>Previous</button>
             <button className={communityStyle[('pageBtn', 'active')]}>1</button>
