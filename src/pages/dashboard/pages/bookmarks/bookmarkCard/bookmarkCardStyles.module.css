@@ -1,0 +1,91 @@
+.tableBody {
+  font-family: "Segoe UI", sans-serif;
+  transition: all 0.2s ease-in-out;
+  width: 100%;
+  border: 1px solid #f3f3f9;
+  margin-top: 1rem;
+}
+
+.bodyHeader {
+  padding: 0.875rem 1.438rem 0.875rem 4.125rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.bodyHeaderLeft {
+  margin-bottom: 1.25rem;
+}
+
+.bodyHeaderLeft h3{
+  color: #282829;
+  font-weight: 700;
+  font-size: 0.88rem;
+  line-height: 1.25rem;
+}
+
+.bodyHeaderLeft h5{
+  color: #939598;
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 1.188rem;
+}
+
+.posted {
+  font-size: 0.715rem;
+  line-height: 1.125rem;
+  color: #939598;
+  margin-bottom: 0.5rem;
+}
+.poster {
+  font-weight: 700;
+  margin-right: 0.813rem;
+}
+
+.dated {
+  font-weight: 400;
+}
+
+.bottomIcons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 1rem;
+}
+
+.buttonContainer {
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.188rem;
+  color: #636466;
+}
+
+.buttonContainer .numbers {
+  font-size: 0.688rem;
+  line-height: 1rem;
+}
+
+.bodyButton {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+  color: #636466;
+}
+
+.cardLink {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+.cardLink:hover {
+  color: #2e69ff;
+}
+
+.bodyIcons {
+  color: inherit;
+  cursor: pointer;
+}
+
+.bodyIcons:hover {
+  color: #2e69ff;}
