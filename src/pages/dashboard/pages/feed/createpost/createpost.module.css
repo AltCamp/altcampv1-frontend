@@ -196,6 +196,9 @@
 }
 
 @media (max-width: 500px) {
+  .uploadMedia {
+    height: auto;
+  }
   .uploadMediaContent {
     width: 95%;
     padding: 1rem;

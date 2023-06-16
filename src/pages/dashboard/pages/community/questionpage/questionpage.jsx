@@ -63,14 +63,6 @@ export default function Questionpage () {
 
   const { user } = useSelector(state => state?.user.user)
 
-  // console.log(user)
-
-  // useEffect(() => {
-  //   if (location.state) {
-  //     setQuestionId(location.state.question)
-  //   }
-  // }, [location])
-
   const {
     data: questionData,
     isLoading: questionLoading,
@@ -278,10 +270,7 @@ export default function Questionpage () {
               <div className={questionPageStyles.titleGroup}>
                 <div className={questionPageStyles.titleHeader}>
                   <h3 className={questionPageStyles.title}>
-                    {/* if question has been edited, show edited title */}
-                    {questionDetails?.createdAt !== questionDetails?.updatedAt
-                      ? `Edited: ${questionDetails?.title}`
-                      : questionDetails?.title}
+                    {questionDetails?.title}
                   </h3>
                   <div className={questionPageStyles.tags}>
                     <span className={questionPageStyles.tag}>UI/UX</span>
@@ -306,7 +295,11 @@ export default function Questionpage () {
                       )}
                     </div>
                     <Link
-                      to={`/dashboard/users/${questionDetails?.author._id}`}
+                      to={
+                        user?._id === questionDetails?.author._id
+                        ? `/dashboard/account`
+                        : `/dashboard/users/${questionDetails?.author._id}`
+                      }
                       className={questionPageStyles.authorName}
                     >
                       {questionDetails?.author.firstName}{' '}

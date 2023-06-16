@@ -155,6 +155,11 @@
   background-color: var(--secondary-clr-drk-blue);
 }
 
+.submitButton:disabled {
+  background-color: var(--neutral-clr-grey-2);
+  cursor: not-allowed;
+}
+
 .errorText {
   grid-column: 1/3;
   font-family: var(--Inter);

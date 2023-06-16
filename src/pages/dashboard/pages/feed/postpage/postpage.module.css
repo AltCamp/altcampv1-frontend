@@ -10,7 +10,7 @@
 }
 
 .back {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .loading {
@@ -168,7 +168,6 @@
   background-color: var(--neutral-clr-grey-2);
 }
 
-
 .commentInput {
   position: sticky;
   bottom: 2rem;
@@ -227,3 +226,10 @@
     width: 100%;
   }
 }
+
+@media (max-width: 500px) {
+  .content {
+    margin-top: 1rem;
+  }
+}
+

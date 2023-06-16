@@ -3,6 +3,7 @@ import { useState } from 'react'
 import topbarStyles from './topbar.module.css'
 import { ProfileCircle } from 'iconsax-react'
 
+import { Link } from 'react-router-dom'
 
 import {
   SearchNormal1,
@@ -33,10 +34,10 @@ export default function Topbar ({ toggleSideBar, handleSideBar }) {
       <div className={topbarStyles.hamburger} onClick={handleSideBar}>
         <HambergerMenu size='32' className={topbarStyles.icons} />
       </div>
-      <div className={topbarStyles.logo}>
+      <Link to='/dashboard' className={topbarStyles.logo}>
         <img src={darkLogo} alt='' className={topbarStyles.img} />
         <img src={iconLogo} alt='' className={topbarStyles.imgSmallScreen} />
-      </div>
+      </Link>
       <div className={topbarStyles.notifyDesktop}>
         <Notification size='23' className={topbarStyles.icons} />
       </div>
@@ -71,13 +72,17 @@ export default function Topbar ({ toggleSideBar, handleSideBar }) {
         <div className={topbarStyles.notifyMobile}>
           <Notification size='23' className={topbarStyles.icons} />
         </div>
-        <div className={topbarStyles.profileImg}>
+        <Link to={`/dashboard/account`} className={topbarStyles.profileImg}>
           {user?.profilePicture ? (
             <img src={user.profilePicture} alt='' />
           ) : (
-            <ProfileCircle size={45} color='#555555' className={topbarStyles.avatar} />
+            <ProfileCircle
+              size={45}
+              color='#555555'
+              className={topbarStyles.avatar}
+            />
           )}
-        </div>
+        </Link>
         <div className={topbarStyles.profileDetails}>
           <p className={topbarStyles.profileName}>{user?.firstName}</p>
           <p className={topbarStyles.profileBadge}>{user?.accountType}</p>
