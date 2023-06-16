@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import BookmarkCard from './bookmarkCard/bookmarkCard'
 import bookmarksStyles from './bookmarks.module.css'
 import { RiArrowDownSLine } from 'react-icons/ri'
@@ -7,6 +7,8 @@ import { useGetAllBookmarksQuery } from '../../../../app/slices/apiSlices/bookma
 export default function Bookmarks () {
   const [isActionOpen, setActionOpen] = useState(false)
   const [isFilterOpen, setFilterOpen] = useState(false)
+  const [sortedBookmarks, setSortedBookmarks] = useState()
+
   const { data, isLoading, error, isSuccess } = useGetAllBookmarksQuery()
 
   const bookmarks = data?.data
@@ -18,6 +20,17 @@ export default function Bookmarks () {
   const handleToggleFilter = () => {
     setFilterOpen(!isFilterOpen)
   }
+
+  useEffect(() => {
+    if (bookmarks) {
+      // create a copy of the questions array
+      const copyBookmarks = [...bookmarks]
+      const theBookmarks = copyBookmarks.sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      )
+      setSortedBookmarks(theBookmarks)
+    }
+  }, [bookmarks])
 
   return (
     <div className={bookmarksStyles.bookmarkContainer}>
@@ -87,7 +100,7 @@ export default function Bookmarks () {
         {/* Card */}
         <div className={bookmarksStyles.bookmarkMain}>
           {isSuccess &&
-            bookmarks?.map(bookmark => (
+            sortedBookmarks?.map(bookmark => (
               <BookmarkCard
                 bookmark={bookmark}
                 index={bookmark._id}
@@ -96,7 +109,7 @@ export default function Bookmarks () {
             ))}
         </div>
         {/* Pagination */}
-        {bookmarks && bookmarks.length > 0 && (
+        {sortedBookmarks && sortedBookmarks.length > 0 && (
           <div className={bookmarksStyles.pagination}>
             <button className={bookmarksStyles.previousBtn}>Previous</button>
             <button className={bookmarksStyles[('pageBtn', 'btnActive')]}>
