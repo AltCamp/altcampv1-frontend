@@ -14,6 +14,49 @@
   color: var(--neutral-clr-drkst-grey);
 }
 
+/* empty bookmark */
+
+.noBookmarkHeader {
+  font-weight: 600;
+  font-size: 1.375rem;
+  line-height: 1.75rem;
+  margin: 2.5rem 0 0 1.8rem;
+  color: var(--neutral-clr-drkst-grey);
+}
+.noBookmark {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 6rem;
+}
+
+.noBookmark p {
+  width: 421px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.125rem;
+  line-height: 2.125rem;
+  color: var(--neutral-clr-drkst-grey);
+}
+
+.noBookmark span {
+  font-weight: normal;
+}
+
+.noBookmarkHeader {
+  display: flex;
+  justify-content: space-between;
+  margin: 2.5rem 1.8rem 4rem 1.8rem;
+}
+
+.noBookmarkHeader h2 {
+  font-weight: 600;
+  font-size: 1.375rem;
+  line-height: 1.75rem;
+  color: var(--neutral-clr-drkst-grey);
+}
+
 .bookmarkContent {
   width: 90%;
 }

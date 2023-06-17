@@ -16,7 +16,8 @@ const bookmarkCard = ({ bookmark }) => {
             <Link to={`/dashboard/post/${bookmark?._id}`}>
               <h3>{bookmark.title}</h3>
             </Link>
-            <h5>Tag</h5>
+                      <span className={bookmarkCardStyles.tag}>UI/UX</span>
+
           </div>
           <div className={bookmarkCardStyles.posted}>
             <p>

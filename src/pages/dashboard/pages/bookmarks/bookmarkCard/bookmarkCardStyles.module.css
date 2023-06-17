@@ -22,12 +22,22 @@
   line-height: 1.25rem;
 }
 
-.bodyHeaderLeft h5{
-  color: #939598;
-  font-weight: 400;
-  font-size: 0.75rem;
-  line-height: 1.188rem;
+.tag {
+  text-align: center;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  background-color: var(--primary-clr-pink-1);
+  color: var(--neutral-clr-deep-grey);
+  font-weight: 500;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
 }
+
+.tag:hover {
+  background-color: var(--primary-clr-pink-2);
+}
+
 
 .posted {
   font-size: 0.715rem;
