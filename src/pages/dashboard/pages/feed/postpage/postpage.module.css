@@ -6,7 +6,7 @@
   padding: 2rem 3rem;
   padding-bottom: 3rem;
   font-family: var(--Inter);
-  position: relative;
+  /* position: relative; */
 }
 
 .back {
