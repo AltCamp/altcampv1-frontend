@@ -104,7 +104,8 @@ export default function Picturechange () {
               opacity: isLoading || !image ? '0.7' : '1'
             }}
           >
-            Upload Photo
+            
+            {isLoading ? 'Uploading...' : 'Upload Photo'}
           </button>
         </section>
       </div>
