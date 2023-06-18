@@ -34,6 +34,12 @@ export const accountMutationSlice = createApi({
           method: "GET",
       }),
   }),
+  getAccountsByCategory: builder.query({
+    query: (accountType)=> ({
+      url: `/accounts/category=${accountType}`,
+      method: 'GET',
+    })
+  }),
   getAccountById: builder.query({
       query: (accountId) => ({
           url: `/accounts/${accountId}`,
@@ -50,4 +56,5 @@ export const accountMutationSlice = createApi({
   }),
 });
 
-export const { useUpdateProfilePictureMutation, useUpdateBioMutation, useGetAllAccountsQuery, useGetAccountByIdQuery, useUpdateDetailsMutation } = accountMutationSlice;
+export const { useUpdateProfilePictureMutation, useUpdateBioMutation, useGetAllAccountsQuery, useGetAccountByIdQuery, useUpdateDetailsMutation, 
+useGetAccountsByCategoryQuery } = accountMutationSlice;

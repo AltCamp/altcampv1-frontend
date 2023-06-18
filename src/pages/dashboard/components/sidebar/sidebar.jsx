@@ -171,9 +171,6 @@ export default function Sidebar ({ toggleSideBar, handleSideBar }) {
                   <InfoCircle size={20} />
                 </span>
                 <span> My Profile </span>
-                <span>
-                  <ArrowRight2 size={20} />
-                </span>
               </NavLink>
               <NavLink
                 to="/dashboard/account/myprojects"
@@ -184,9 +181,6 @@ export default function Sidebar ({ toggleSideBar, handleSideBar }) {
                   <ColorSwatch size={20} />
                 </span>
                 <span> My Project </span>
-                <span>
-                  <ArrowRight2 size={20} />
-                </span>
               </NavLink>
               <NavLink
                 className={sidebarStyle.link}
@@ -197,9 +191,6 @@ export default function Sidebar ({ toggleSideBar, handleSideBar }) {
                   <KeySquare size={20} />
                 </span>
                 <span> Reset Password </span>
-                <span>
-                  <ArrowRight2 size={20} />
-                </span>
               </NavLink>
               <NavLink
                 className={sidebarStyle.link}
@@ -210,9 +201,6 @@ export default function Sidebar ({ toggleSideBar, handleSideBar }) {
                   <ProfileRemove size={20} />
                 </span>
                 <span> Deactivate Account </span>
-                <span>
-                  <ArrowRight2 size={20} />
-                </span>
               </NavLink>
             </div>
             <NavLink

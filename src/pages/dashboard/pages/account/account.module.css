@@ -214,6 +214,7 @@
     top: 0;
     right: 0;
     background: rgba(35, 37, 82, 0.6);
+    animation: slideIn 0.5s ease-in-out;
 }
 .full_panel span{
     position: absolute;
@@ -222,12 +223,29 @@
     color: var( --neutral-clr-white);
     cursor: pointer;
 }
+.full_panel span:hover{
+    transform: scale(1.2);
+}
+
 .full_panel_right{
     height: 100%;
     width: 30%;
     float: right;
     background: var( --neutral-clr-white);
 }
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+    }
+    50% { 
+        opacity: 0.5; 
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 @media screen and (max-width: 850px) {
     .full_panel_right{
         width: 60%;
@@ -241,7 +259,9 @@
         width: 100%;
         height: 100%;
     }
-  
+    .full_panel{
+        animation: none;
+    }
     .mainPanelTop{
         display: block;
         height: max-content;

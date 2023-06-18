@@ -62,7 +62,7 @@ export default function Updatebio() {
         <p className={bioStyles["count"]}> word count : {count} / 100 </p>
     </section>
     <aside className={bioStyles["save_button"]}>
-        <button disabled={count <= 0 || isLoading} onClick={handleUpdateBio}> Save </button>
+        <button disabled={count <= 0 || isLoading} onClick={handleUpdateBio}> {isLoading? "saving...": "save"} </button>
     </aside>
     </div>
 </div>
