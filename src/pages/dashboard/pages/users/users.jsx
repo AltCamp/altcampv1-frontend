@@ -1,34 +1,34 @@
 // import Empty from '../../empty/empty'
-import React, { useState, useEffect} from "react";
-import userStyles from "./users.module.css";
-import searchicon from "../../../../assets/icons/searchicon.png";
-import { useGetAllAccountsQuery } from "../../../../app/slices/apiSlices/accountSlices/accountMutationSlice";
-import { ProfileCircle } from "iconsax-react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react'
+import userStyles from './users.module.css'
+import searchicon from '../../../../assets/icons/searchicon.png'
+import { useGetAllAccountsQuery } from '../../../../app/slices/apiSlices/accountSlices/accountMutationSlice'
+import { ProfileCircle } from 'iconsax-react'
+import { Link } from 'react-router-dom'
 
-export default function Users() {
-  const [display, setDisplay] = useState("");
-  const [totalpage, setTotalPage] = useState(0);
-  const [pageNo, setPageNo] = useState(1);
+export default function Users () {
+  const [display, setDisplay] = useState('')
+  const [totalpage, setTotalPage] = useState(0)
+  const [pageNo, setPageNo] = useState(1)
   const { data, isLoading, isSuccess, isError, error } =
-  useGetAllAccountsQuery();
+    useGetAllAccountsQuery()
 
   useEffect(() => {
     if (isSuccess) {
-      const userData = data?.data;
-      const totalPage = Math.ceil(userData.length / 16);
-      const user_per_page = 16;
-      const start = (pageNo - 1) * user_per_page;
-      const end = start + user_per_page;
-      const info = userData.slice(start, end);
-      setTotalPage(totalPage);
-      setDisplay(info);
+      const userData = data?.data
+      const totalPage = Math.ceil(userData.length / 16)
+      const user_per_page = 16
+      const start = (pageNo - 1) * user_per_page
+      const end = start + user_per_page
+      const info = userData.slice(start, end)
+      setTotalPage(totalPage)
+      setDisplay(info)
     }
-  }, [isSuccess, pageNo]);
+  }, [isSuccess, pageNo])
 
-  const btn = [];
+  const btn = []
   for (let i = 1; i < totalpage + 1; i++) {
-    btn.push(i);
+    btn.push(i)
   }
 
   return (
@@ -41,9 +41,9 @@ export default function Users() {
         <div className={userStyles.line}></div>
         <aside className={userStyles.filter}>
           <div className={userStyles.search}>
-            <input type="text" placeholder="search users" />
+            <input type='text' placeholder='search users' />
             <span className={userStyles.searchicon}>
-              <img src={searchicon} alt="" />
+              <img src={searchicon} alt='' />
             </span>
           </div>
           <div className={userStyles.filterList}>
@@ -78,24 +78,28 @@ export default function Users() {
             display &&
             display.map((user, index) => {
               return (
-                
                 <div className={userStyles.user} key={index}>
                   <div className={userStyles.userImg}>
-                    {user.profilePicture ? <img src={user.profilePicture} alt="" /> : <ProfileCircle size={45} color="#555555" />}
+                    {user.profilePicture ? (
+                      <img src={user.profilePicture} alt='' />
+                    ) : (
+                      <ProfileCircle size={45} color='#555555' />
+                    )}
                   </div>
                   <div className={userStyles.userDetails}>
-                  <Link className={userStyles.profileLink}
-                  to={`/dashboard/users/${user._id}`}>
-                    <p className={userStyles.userName}>
-                      {user.firstName} {user.lastName}
-                    </p>
+                    <Link
+                      className={userStyles.profileLink}
+                      to={`/dashboard/users/${user._id}`}
+                    >
+                      <p className={userStyles.userName}>
+                        {user.firstName} {user.lastName}
+                      </p>
                     </Link>
                     <p className={userStyles.userLocation}>Lagos, Nigeria</p>
                     <p className={userStyles.track}>{user.track}</p>
                   </div>
                 </div>
-                
-              );
+              )
             })}
         </aside>
       </section>
@@ -121,7 +125,7 @@ export default function Users() {
                   >
                     {item}
                   </button>
-                );
+                )
               })}
             <button
               className={userStyles.nextBtn}
@@ -139,5 +143,5 @@ export default function Users() {
         )}
       </section>
     </main>
-  );
+  )
 }

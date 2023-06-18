@@ -26,7 +26,6 @@ export default function Community () {
   const navigate = useNavigate()
 
   const location = useLocation()
- 
 
   // check location state for new post created and clear it after handleNewPostCreated is called
 
@@ -113,7 +112,7 @@ export default function Community () {
             </p>
           </div>
           <Link
-            to={'/dashboard/community/ask/:question'}
+            to={'/dashboard/community/ask'}
             className={communityStyle.questionCta}
           >
             Ask Question
@@ -132,7 +131,7 @@ export default function Community () {
         </div>
 
         {/* pagination */}
-        {isSuccess && (
+        {sortedQuestions && sortedQuestions.length > 0 && (
           <div className={communityStyle.pagination}>
             <button className={communityStyle.previousBtn}>Previous</button>
             <button className={communityStyle[('pageBtn', 'active')]}>1</button>

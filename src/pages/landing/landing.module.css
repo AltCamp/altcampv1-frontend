@@ -30,7 +30,7 @@ button:hover {
 .intro-text-area {
     /* background-color: yellow; */
     width: 50%;
-    padding: 4.5rem 5rem;
+    padding: 4.5rem 6%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -46,13 +46,13 @@ button:hover {
     /* padding: 6rem; */
 }
 
-.intro-image-area img{
+.intro-image-area img {
     height: 72%;
 }
 
 
 .intro-area h1 {
-    font-size: 55px;
+    font-size: 50px;
     font-weight: bold;
     z-index: 10;
     /* background-color: green; */
@@ -74,6 +74,7 @@ button:hover {
     font-size: 16px;
     font-family: inherit;
     z-index: 10;
+    cursor: pointer;
 }
 
 .about-us-area {
@@ -116,7 +117,7 @@ button:hover {
     width: 50%;
     height: max-content;
     padding: 20px;
-    position: relative; 
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -137,8 +138,11 @@ button:hover {
     width: 99%;
 }
 
+.about-us-image-lg {
+    display: none;
+}
+
 .decor-box {
-    /* display: none;    */
     width: 70%;
     height: 54%;
     border-radius: 10px;
@@ -231,7 +235,6 @@ button:hover {
 .benefits-container {
     width: 100%;
     margin: 0 auto;
-    /* background-color: red; */
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
@@ -241,7 +244,7 @@ button:hover {
 .benefit-card {
     /* width: 384px; */
     height: 442px;
-    text-align: center;
+    text-align: left;
     padding: 21px;
     box-shadow: 0px 2px 12px rgba(86, 86, 86, 0.15);
     border-radius: 10px;
@@ -250,7 +253,8 @@ button:hover {
 }
 
 .benefit-icon {
-    margin: 20px auto;
+    text-align: center;
+    margin: 20px 0;
     width: 84px;
     height: 84px;
     border-radius: 50%;
@@ -285,6 +289,7 @@ button:hover {
     font-family: inherit;
     display: block;
     margin: 20px auto 100px;
+    cursor: pointer;
 }
 
 .outro-area {
@@ -331,6 +336,7 @@ button:hover {
     font-size: 16px;
     font-family: inherit;
     margin: 20px 0;
+    cursor: pointer;
 }
 
 @media screen and (min-width:601px) and (max-width:1024px) {
@@ -349,7 +355,7 @@ button:hover {
     }
 
     .intro-text-area {
-        padding:  3rem;
+        padding: 3rem 6%;
     }
 
 
@@ -419,7 +425,7 @@ button:hover {
         padding: 30px 20px;
     }
 
-    .tracks-area h2{
+    .tracks-area h2 {
         font-size: 30px;
     }
 
@@ -464,7 +470,6 @@ button:hover {
         width: 90%;
         max-width: 309px;
         height: 442px;
-        text-align: center;
         padding: 20px;
         box-shadow: 0px 2px 12px rgba(86, 86, 86, 0.15);
         border-radius: 10px;
@@ -534,17 +539,17 @@ button:hover {
     }
 }
 
-@media (max-width:700px) and (min-width:600px){
+@media (max-width:700px) and (min-width:600px) {
     .tracks-container p {
         font-size: 13px;
     }
 
-    .track svg{
+    .track svg {
         width: 25px;
     }
 }
 
-@media screen and (max-width:600px) {
+@media screen and (max-width:800px) {
     .intro-area {
         height: max-content;
         display: flex;
@@ -555,13 +560,14 @@ button:hover {
         font-size: 32px;
         padding: 15px 0;
     }
+
     .intro-area p {
         padding: 10px 0;
     }
 
     .intro-text-area {
         width: 100%;
-        padding: 1.5rem 15px;
+        padding: 1.5rem 6%;
         justify-content: space-between;
         text-align: center;
     }
@@ -572,7 +578,7 @@ button:hover {
     }
 
     .intro-image-area img {
-        width: 100%;
+        width: 80%;
     }
 
     .intro-area a {
@@ -738,6 +744,10 @@ button:hover {
         /* margin: 40px; */
     }
 
+    .benefit-icon {
+        margin: 20px auto;
+    }
+
     .outro-area {
         height: max-content;
         width: 100%;
@@ -751,11 +761,11 @@ button:hover {
         width: 100%;
         padding: 0;
         padding: 10px;
-        height: 347px;
+        height: max-content;
     }
 
     .icon-boxes-area img {
-        width: 100%;
+        width: 50%;
     }
 
 
@@ -791,7 +801,7 @@ button:hover {
 
 }
 
-@media (max-width:350px){
+@media (max-width:350px) {
     .benefit-card {
         width: 100%;
         height: max-content;
@@ -802,4 +812,38 @@ button:hover {
         margin: 30px 0;
         /* margin: 40px; */
     }
+}
+
+@media (min-width: 1920px) {
+    .about-us-image-area {
+        /* background-color: orange; */
+        width: 50%;
+        height: 600px;
+        padding: 30px;
+    }
+
+
+    .about-us-image {
+        /* background-color: aqua; */
+        width: 100%;
+        height: 90%;
+    }
+
+    .about-us-image-lg {
+        display: block;
+    }
+
+    .about-us-image img:first-child {
+        display: none;
+    }
+
+    .about-us-image img {
+        width: 55%;
+        height: 100%;
+    }
+
+    .decor-box {
+        display: none;
+    }
+
 }

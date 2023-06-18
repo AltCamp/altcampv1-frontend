@@ -1,7 +1,7 @@
 /* container */
 .bookmarkContainer {
   width: 100%;
-  height: 100%;
+  max-width: 100%;
   padding: 2rem;
 }
 
@@ -12,6 +12,10 @@
   font-family: var(--Inter);
   margin-bottom: 1.75rem;
   color: var(--neutral-clr-drkst-grey);
+}
+
+.bookmarkContent {
+  width: 90%;
 }
 
 /* Navbar */
@@ -33,14 +37,17 @@
   display: flex;
   font-family: var(--Poppins);
   color: var(--neutral-clr-white);
-  background: var(--secondary-clr-deep-blue);
+  background: var(--secondary-clr-lt-blue);
   border-radius: 0.205rem;
   border: none;
   cursor: pointer;
 }
 
+.bookButton span {
+  margin-top: 0.1rem;
+}
+
 .btnMenu {
-  display: none;
   min-width: 9.375rem;
   position: absolute;
   z-index: 1;
@@ -49,6 +56,7 @@
   font-weight: 500;
   font-size: 0.75rem;
   line-height: 1.25rem;
+  margin-top: 0.25rem;
 }
 
 .btnMenu a {
@@ -58,16 +66,9 @@
   display: block;
   border: 1px solid #c7c3ed;
 }
+
 .lastMenu {
   border-radius: 0 0 0.688rem 0;
-}
-
-.select:hover .btnMenu {
-  display: block;
-}
-
-.select:focus-within .btnMenu {
-  display: block;
 }
 
 .search input {
@@ -77,12 +78,13 @@
   gap: 4.256rem;
   box-shadow: 0 0.125rem 0.75rem rgba(86, 86, 86, 0.15);
   border-radius: 0.25rem;
-  width: 38rem;
+  width: 45rem;
   outline: none;
   font-weight: 400;
   font-size: 0.667rem;
   line-height: 1rem;
   color: #a7a7a7;
+  font-family: var(--Poppins);
 }
 
 .search input::placeholder {
@@ -90,7 +92,7 @@
   font-size: 0.667rem;
   line-height: 1rem;
   color: #a7a7a7;
-  font-family: var(--Poppins);
+  font-family: inherit;
 }
 
 .filter {
@@ -112,238 +114,10 @@
   border-radius: 0.205rem;
 }
 
-.settings {
-  padding: 0.438rem;
-  background: var(--neutral-clr-white);
-  border: 1px solid var(--secondary-clr-deep-blue);
-  border-radius: 0.205rem;
-  font-family: var(--Poppins);
-  color: var(--secondary-clr-deep-blue);
-  font-size: 0.75rem;
-  font-weight: 500;
-  line-height: 1rem;
-}
-
-/* Table */
-.bookmarkHeader {
-  display: flex;
-  gap: 0.75rem;
-  margin-top: 0.5rem 0;
+/* Card */
+.bookmarkMain {
+  overflow-x: auto;
   width: 100%;
-}
-
-.bookmarkHeader th {
-  font-family: var(--Poppins);
-  font-weight: 500;
-  font-size: 0.75rem;
-  line-height: 1rem;
-  color: var(--secondary-clr-deep-blue);
-  height: 1.9rem;
-  display: flex;
-  align-items: center;
-}
-
-.tableData {
-  border: 1px solid #f3f3f9;
-  margin-bottom: 0.5rem;
-}
-
-.tableData tr {
-  width: 100%;
-  display: flex;
-  cursor: pointer;
-}
-
-.tableData td {
-  font-family: var(--Poppins);
-  font-weight: 500;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  color: var(--secondary-clr-deep-blue);
-  height: 3.5rem;
-  padding-top: 0.5rem;
-}
-
-.bookmarkHeader .checkbox {
-  width: 6.9rem;
-  max-width: 5.5rem;
-}
-
-.tableData .checkbox {
-  width: 6.25rem;
-  max-width: 6.25rem;
-  padding-top: 0 !important;
-  display: flex;
-  justify-content: center;
-}
-
-.tableData .topic {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  width: 11.75rem;
-  max-width: 12rem;
-}
-
-.bookmarkHeader .topic {
-  width: 11.25rem;
-  max-width: 11.5rem;
-}
-
-.bookmarkHeader .postedBy {
-  width: 8rem;
-  max-width: 8rem;
-}
-.tableData .postedBy {
-  width: 8.75rem;
-  max-width: 8.75rem;
-}
-
-.bookmarkHeader .datePosted {
-  width: 8.5rem;
-  max-width: 8.5rem;
-}
-
-.tableData .datePosted {
-  width: 9.5rem;
-  max-width: 9.5rem;
-}
-
-.timePosted {
-  font-family: var(--Poppins);
-  font-weight: 500;
-  font-size: 0.75rem;
-  line-height: 1rem;
-  text-align: center;
-  color: var(--neutral-clr-drk-grey);
-}
-
-.bookmarkHeader .comments {
-  width: 6.75rem;
-  max-width: 6.75rem;
-}
-
-.tableData .comments {
-  width: 7.5rem;
-  max-width: 7.5rem;
-  padding-left: 1.5rem;
-}
-.bookmarkHeader .likes {
-  width: 5.7rem;
-  max-width: 5.9rem;
-}
-
-.tableData .likes {
-  width: 6.25rem;
-  max-width: 6.25rem;
-}
-
-.bookmarkHeader .tags {
-  width: 3.8rem;
-  max-width: 4rem;
-}
-.tableData .tags {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  width: 4.5rem;
-  max-width: 4.5rem;
-}
-.status {
-  width: 3.5rem;
-  max-width: 3.5rem;
-  text-align: right;
-}
-
-.statSpan {
-  position: relative;
-  left: 55%;
-  top: 20%;
-}
-
-/* Accordion section  */
-.tableBody {
-  background: #f7f7f7;
-  font-family: "Segoe UI", sans-serif;
-}
-
-.bodyHeader {
-  padding: 0.875rem 1.438rem 0.875rem 4.125rem;
-  cursor: pointer;
-}
-
-.bodyHeaderLeft {
-  color: #282829;
-  font-weight: 700;
-  font-size: 0.88rem;
-  line-height: 1.25rem;
-  margin-bottom: 1.25rem;
-}
-
-.posted {
-  font-size: 0.715rem;
-  line-height: 1.125rem;
-  color: #939598;
-  margin-bottom: 0.5rem;
-}
-.poster {
-  font-weight: 700;
-  margin-right: 0.813rem;
-}
-
-.dated {
-  font-weight: 400;
-}
-
-.checkbox .active {
-  display: none;
-}
-
-.tableData .active {
-  display: none;
-}
-.bottomIcons {
-  display: flex;
-  justify-content: space-between;
-}
-
-.buttonContainer {
-  display: flex;
-  gap: 1rem;
-}
-
-.buttonContainer {
-  font-size: 0.75rem;
-  font-weight: 400;
-  line-height: 1.188rem;
-  color: #636466;
-}
-
-.buttonContainer .numbers {
-  font-size: 0.688rem;
-  line-height: 1rem;
-}
-
-.bodyButton {
-  display: flex;
-  gap: 0.25rem;
-  align-items: center;
-  justify-content: center;
-  color: #636466;
-  cursor: pointer;
-}
-
-.bodyButton:hover {
-  color: #2e69ff;
-}
-
-.bodyIcon {
-  color: inherit;
-}
-
-.shareContainer {
-  display: flex;
-  gap: 0.25rem;
 }
 
 /* Pagination */
@@ -354,7 +128,6 @@
   justify-content: end;
   align-items: center;
   gap: 0.5rem;
-  width: 86%;
   font-family: var(--Poppins);
   margin-top: 1rem;
   padding-right: 0.75rem;
@@ -379,15 +152,15 @@
 
 .previousBtn:hover,
 .nextBtn:hover {
-  background-color: var(--secondary-clr-deep-blue);
+  background-color: var(--secondary-clr-lt-blue);
   color: var(--neutral-clr-white);
-  border: 2px solid var(--secondary-clr-deep-blue);
+  border: 2px solid var(--secondary-clr-lt-blue);
 }
 
 .btnActive {
-  background-color: var(--secondary-clr-deep-blue);
+  background-color: var(--secondary-clr-lt-blue);
   color: var(--neutral-clr-white);
-  border: 2px solid #405189;
+  border: 2px solid var(--secondary-clr-lt-blue);
   border-radius: 0.25rem;
   padding: 0.5rem 1rem;
   width: fit-content;
@@ -428,8 +201,70 @@
 
 .pageCount {
   color: #bfbfbf;
-  font-size: .875rem;
+  font-size: 0.875rem;
   border: 2px solid #e9ebec;
   border-radius: 0.25rem;
   padding: 0.5rem 0.7rem;
+}
+
+/* Media Query */
+
+@media (max-width: 1330px) {
+  .search input {
+    width: 32rem;
+  }
+}
+
+@media (max-width: 1236px) {
+  .search input {
+    width: 28rem;
+  }
+}
+
+@media (max-width: 1100px) {
+  .search input {
+    width: 22.5rem;
+  }
+
+  .previousBtn,
+  .nextBtn {
+    padding: 0.5rem 1rem;
+  }
+  .pageBtn {
+    padding: 0.5rem 0.7rem;
+  }
+  .pageCount {
+    padding: 0.5rem 0.7rem;
+  }
+}
+
+@media (max-width: 1030px) {
+  .bookmarkContainer {
+    justify-content: center;
+  }
+
+  .bookmarkContainer h2 {
+    font-weight: 450;
+    padding-right: 1rem;
+  }
+
+  .bookButton {
+    font-size: 0.65rem;
+  }
+
+  .pagination {
+    justify-content: center;
+    height: 3rem;
+  }
+}
+@media (max-width: 1015px) and (min-width: 950px) {
+  .bookmarkContainer {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 720) {
+  .bookmarkContainer {
+    width: 100%;
+  }
 }
