@@ -1,11 +1,11 @@
 import React, { useRef, useEffect } from 'react'
 import picUpdate from './picturechange.module.css'
 import { ProfileCircle } from 'iconsax-react'
-import { useImageHandler } from '../hooks/useImageHandler'
 import { useDispatch } from 'react-redux'
 import { useOutletContext } from 'react-router-dom'
 import { setProfilePicture } from '../../../../../app/slices/generalSlices/userSlice'
 import { useUpdateProfilePictureMutation } from '../../../../../app/slices/apiSlices/accountSlices/accountMutationSlice'
+import { useMediaHandler } from './../hooks/useMediaHandler';
 
 export default function Picturechange () {
   const chooseref = useRef(null)
@@ -14,8 +14,8 @@ export default function Picturechange () {
   const [handleEdit, handleCancel] = useOutletContext()
 
   // custom hook for uploading image
-  const { image, caption, error, Handleimage, createFormData } =
-    useImageHandler()
+  const { image, caption, error, handleMedia, createFormData } =
+    useMediaHandler()
 
   // style format for drag and drop
   const handleStyleEnter = e => {
@@ -34,7 +34,7 @@ export default function Picturechange () {
     e.preventDefault()
     e.stopPropagation()
     dropRef.current.style.border = '1px solid var(--secondary-clr-lter-purple)'
-    Handleimage(e.dataTransfer.files[0])
+    handleMedia(e.dataTransfer.files[0])
   }
 
   const [
@@ -91,7 +91,7 @@ export default function Picturechange () {
               id={picUpdate['projectImage']}
               accept='image/jpeg, image/png'
               ref={chooseref}
-              onChange={e => Handleimage(e.target.files[0])}
+              onChange={e => handleMedia(e.target.files[0])}
             />
           </form>
         </section>
@@ -104,7 +104,7 @@ export default function Picturechange () {
               opacity: isLoading || !image ? '0.7' : '1'
             }}
           >
-            Upload Photo
+            {isLoading ? 'Uploading...' : 'Upload Photo'}
           </button>
         </section>
       </div>

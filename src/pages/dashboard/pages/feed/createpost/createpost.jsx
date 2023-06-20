@@ -8,7 +8,7 @@ import { LuShare } from 'react-icons/lu'
 
 import { ArrowRotateLeft, ProfileCircle } from 'iconsax-react'
 
-import { useImageHandler } from '../../account/hooks/useImageHandler'
+import { useMediaHandler } from '../../account/hooks/useMediaHandler'
 
 import { useCreatePostMutation } from '../../../../../app/slices/apiSlices/feedSlice'
 
@@ -24,8 +24,8 @@ export default function Createpost ({ setToggleCreatePost }) {
 
   const navigate = useNavigate()
   // custom hook for uploading image
-  const { image, caption, error, Handleimage, createFormData } =
-    useImageHandler()
+  const { image, video, caption, error, handleMedia, createFormData } =
+    useMediaHandler()
 
   // style format for drag and drop
   const handleStyleEnter = e => {
@@ -44,7 +44,7 @@ export default function Createpost ({ setToggleCreatePost }) {
     e.preventDefault()
     e.stopPropagation()
     dropRef.current.style.border = '1px solid var(--secondary-clr-lter-purple)'
-    Handleimage(e.dataTransfer.files[0])
+    handleMedia(e.dataTransfer.files[0])
   }
 
   const [
@@ -64,6 +64,8 @@ export default function Createpost ({ setToggleCreatePost }) {
       setToggleCreatePost(false)
     }
   }, [isSuccess])
+
+  // console.log(video)
 
   return (
     <div className={createPostStyles.container}>
@@ -133,10 +135,34 @@ export default function Createpost ({ setToggleCreatePost }) {
                 name='media'
                 id='media'
                 ref={chooseref}
-                onChange={e => Handleimage(e.target.files[0])}
+                onChange={e => handleMedia(e.target.files[0])}
                 className={createPostStyles.fileInput}
               />
               <img src={image} alt='media' className={createPostStyles.media} />
+            </div>
+          ) : video ? (
+            <div className={createPostStyles.mediaDisplay}>
+              <label for='media' className={createPostStyles.change}>
+                Change <ArrowRotateLeft size='18' color='#585DCC' />
+              </label>
+              <input
+                type='file'
+                name='media'
+                id='media'
+                ref={chooseref}
+                onChange={e => handleMedia(e.target.files[0])}
+                className={createPostStyles.fileInput}
+              />
+              {/* <img src={image} alt='media' className={createPostStyles.media} /> */}
+              <video className={createPostStyles.media} controls width='250'>
+                {/* <source src='/media/cc0-videos/flower.webm' type='video/webm' /> */}
+                <source src={video} type='video/*' />
+                {/* Download the
+                <a href='/media/cc0-videos/flower.webm'>WEBM</a>
+                or
+                <a href='/media/cc0-videos/flower.mp4'>MP4</a>
+                video. */}
+              </video>
             </div>
           ) : (
             <div className={createPostStyles.uploadMediaContent}>
@@ -153,7 +179,7 @@ export default function Createpost ({ setToggleCreatePost }) {
                 name='media'
                 id='media'
                 ref={chooseref}
-                onChange={e => Handleimage(e.target.files[0])}
+                onChange={e => handleMedia(e.target.files[0])}
                 className={createPostStyles.fileInput}
               />
             </div>

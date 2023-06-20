@@ -72,6 +72,10 @@
   align-items: center;
 }
 
+.bookmark {
+  width: fit-content;
+}
+
 .icon {
   cursor: pointer;
 }
@@ -116,3 +120,4 @@
     transform: scale(1);
   }
 }
+
