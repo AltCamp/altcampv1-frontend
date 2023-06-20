@@ -29,6 +29,7 @@
   right: 50px;
   top: 50px;
   width: 400px;
+  z-index: 120;
   animation: slideIn 500ms ease-in-out;
 }
 
