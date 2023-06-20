@@ -56,6 +56,7 @@ export default function Postcard ({ post }) {
           handleToggleBookmarkModal={handleToggleBookmarkModal}
           postId={post?._id}
           postType={`Post`}
+          postTitle={post?.content}
         />
       )}
       <Link

@@ -62,6 +62,7 @@ export default function Postcomment ({ comment }) {
           handleToggleBookmarkModal={handleToggleBookmarkModal}
           postId={comment?._id}
           postType={`Comment`}
+          postTitle={comment?.content}
         />
       )}
       <div className={postCommentStyles.container}>

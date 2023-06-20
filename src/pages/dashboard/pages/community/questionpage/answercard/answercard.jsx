@@ -97,6 +97,7 @@ export default function Answercard ({ answer }) {
           handleToggleBookmarkModal={handleToggleBookmarkModal}
           postId={answer._id}
           postType={`Answer`}
+          postTitle={answer?.content}
         />
       )}
       <div className={answerCardStyles.container}>
