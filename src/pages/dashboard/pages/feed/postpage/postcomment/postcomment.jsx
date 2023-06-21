@@ -64,7 +64,7 @@ export default function Postcomment ({ comment }) {
           postType={`Comment`}
         />
       )}
-      <div className={postCommentStyles.container}>
+      <div className={postCommentStyles.container} id={comment?._id}>
         <div className={postCommentStyles.header}>
           <Link
             to={
