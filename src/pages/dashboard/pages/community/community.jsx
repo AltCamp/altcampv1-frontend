@@ -26,7 +26,7 @@ export default function Community () {
 
   const [searchParams, setSearchParams] = useSearchParams()
 
-  console.log(searchParams.get('page'))
+  // console.log(searchParams.get('page'))
 
   const { data, isLoading, isSuccess, isError, error } =
     useGetAllQuestionsQuery({
