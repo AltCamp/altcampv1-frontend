@@ -8,7 +8,6 @@ import { useParams, useNavigate, Link } from 'react-router-dom'
 import RichEditor from './../richeditor/richeditor'
 
 import { useCreateQuestionMutation } from '../../../../../app/slices/apiSlices/communitySlice'
-import Toaster from '../../../../../components/Toaster/Toaster'
 
 
 export default function AskQuestionPage () {
@@ -155,7 +154,11 @@ export default function AskQuestionPage () {
         </div>
 
         {/* error message ui */}
-        <Toaster show={!!errorText} type="error" message={errorText}/>
+        {errorText && (
+          <div className={askQuestionPageStyles.errorBody}>
+            <p className={askQuestionPageStyles.errorText}>{errorText}</p>
+          </div>
+        )}
 
         {/* succesful message */}
         {isSuccess && (

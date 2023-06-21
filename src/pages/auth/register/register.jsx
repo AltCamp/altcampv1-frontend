@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion'
 import registerStyles from './register.module.css'
 import eyeIcon from '../../../assets/general/eye.svg'
 import eyeClosedIcon from '../../../assets/general/eyeclosed.svg'
-import Toaster from '../../../components/Toaster/Toaster'
 
 import { AiFillCheckSquare } from 'react-icons/ai'
 
@@ -346,7 +345,11 @@ export default function Register () {
         </div> */}
 
         {/* error ui */}
-        <Toaster show={!!errorText} type="error" message={errorText}/>
+        {errorText && (
+          <div className={registerStyles.errorText}>
+            <p>{errorText}</p>
+          </div>
+        )}
 
         <button
           type='submit'
