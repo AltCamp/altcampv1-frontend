@@ -20,26 +20,17 @@ export default function Feed () {
 
   const { user } = useSelector(state => state?.user?.user)
 
-  const { data, isLoading, isSuccess, isError, error } = useGetAllPostsQuery()
+  const [page, setPage] = useState(1)
 
-  const [sortedPosts, setSortedPosts] = useState([])
-  // const [posts, setPosts] = useState(data?.data)
- 
+  const { data, isLoading, isSuccess, isError, error } = useGetAllPostsQuery({
+    page
+  })
+
   const posts = data?.data
 
-  // const [latestPosts, setLatestPosts] = useState(posts)
+  const meta = data?.meta
 
-  useEffect(() => {
-    if (posts) {
-      // create a copy of the posts array
-      const copyPosts = [...posts]
-      copyPosts.sort(
-        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-      )
-      setSortedPosts(copyPosts)
-    }
-  }, [posts])
-
+  const [allPosts, setAllPosts] = useState(posts)
 
   const handleToggleCreatePost = () => {
     setToggleCreatePost(!toggleCreatePost)
@@ -52,7 +43,6 @@ export default function Feed () {
       document.body.style.overflow = 'auto'
     }
   }, [toggleCreatePost])
-
 
   return (
     <div className={feedStyle.container}>
@@ -79,10 +69,7 @@ export default function Feed () {
         </div>
 
         <div className={feedStyle.createPostInput}>
-          <Link
-            to={`/dashboard/account`}
-            className={feedStyle.avatar}
-          >
+          <Link to={`/dashboard/account`} className={feedStyle.avatar}>
             {user?.profilePicture ? (
               <img
                 src={user?.profilePicture}
@@ -116,7 +103,24 @@ export default function Feed () {
           )}
           {posts &&
             !isLoading &&
-            sortedPosts?.map(post => <Postcard key={post._id} post={post} />)}
+            allPosts?.map(post => <Postcard key={post._id} post={post} />)}
+        </div>
+
+        <div className={feedStyle.loadMore}>
+          <button
+            className={feedStyle.seeMoreBtn}
+            // onclick set page to current page + 1 and set allPosts to allPosts + posts
+            onClick={() => {
+              setPage(page + 1)
+              setAllPosts([...allPosts, ...posts])
+            }}
+            disabled={isLoading || page === meta?.totalPages}
+            style={{
+              display: page === meta?.totalPages ? 'none' : 'flex'
+            }}
+          >
+            Load More
+          </button>
         </div>
       </div>
     </div>
