@@ -1,30 +1,30 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
-import questionCardStyles from './questioncard.module.css'
+import questionCardStyles from "./questioncard.module.css";
 import {
   ArrowDown,
   ArrowUp,
   ArchiveAdd,
   Edit,
-  ProfileCircle
-} from 'iconsax-react'
+  ProfileCircle,
+} from "iconsax-react";
 
-import ReactTimeAgo from 'react-time-ago'
+import ReactTimeAgo from "react-time-ago";
 
-import { useSelector } from 'react-redux'
+import { useSelector } from "react-redux";
 
-import BookmarkModal from '../../../components/bookmarkmodal/bookmarkmodal'
+import BookmarkModal from "../../../components/bookmarkmodal/bookmarkmodal";
 
-export default function Questioncard ({ question }) {
+export default function Questioncard({ question }) {
   // console.log(question)
 
-  const [toggleBookmarkModal, setToggleBookmarkModal] = useState()
-  const { user } = useSelector(state => state?.user?.user)
+  const [toggleBookmarkModal, setToggleBookmarkModal] = useState();
+  const { user } = useSelector((state) => state?.user?.user);
 
   const handleToggleBookmarkModal = () => {
-    setToggleBookmarkModal(!toggleBookmarkModal)
-  }
+    setToggleBookmarkModal(!toggleBookmarkModal);
+  };
 
   return (
     <>
@@ -55,12 +55,12 @@ export default function Questioncard ({ question }) {
             <div className={questionCardStyles.info}>
               <span className={questionCardStyles.answerCount}>
                 {question.answer.length}
-                {question.answer.length > 1 ? ' Answers' : ' Answer'}
+                {question.answer.length > 1 ? " Answers" : " Answer"}
               </span>
               <span className={questionCardStyles.divider}>|</span>
               <span className={questionCardStyles.timePosted}>
                 <span className={questionCardStyles.requested}>Requested </span>
-                {<ReactTimeAgo date={question.createdAt} locale='en-US' />}
+                {<ReactTimeAgo date={question.createdAt} locale="en-US" />}
               </span>
             </div>
 
@@ -68,24 +68,24 @@ export default function Questioncard ({ question }) {
               <div
                 className={questionCardStyles.upvotes}
                 style={{
-                  color: question?.upvotes > 0 ? '#0e8a1a' : '#343a40'
+                  color: question?.upvotes > 0 ? "#0e8a1a" : "#343a40",
                 }}
               >
-                <ArrowUp size='19' className={questionCardStyles.icon} />
+                <ArrowUp size="19" className={questionCardStyles.icon} />
                 {question.upvotes}
               </div>
               <div
                 className={questionCardStyles.downvotes}
                 style={{
-                  color: question?.downvotes > 0 ? '#dc3545' : '#343a40'
+                  color: question?.downvotes > 0 ? "#dc3545" : "#343a40",
                 }}
               >
-                <ArrowDown size='19' className={questionCardStyles.icon} />
+                <ArrowDown size="19" className={questionCardStyles.icon} />
                 {question.downvotes}
               </div>
               <div className={questionCardStyles.bookmark}>
                 <ArchiveAdd
-                  size='19'
+                  size="19"
                   className={questionCardStyles.icon}
                   onClick={handleToggleBookmarkModal}
                 />
@@ -106,12 +106,12 @@ export default function Questioncard ({ question }) {
                 {question?.author?.profilePicture ? (
                   <img
                     src={question?.author?.profilePicture}
-                    alt=''
+                    alt=""
                     className={questionCardStyles.img}
                   />
                 ) : (
                   <ProfileCircle
-                    color='#555555'
+                    color="#555555"
                     className={questionCardStyles.img}
                   />
                 )}
@@ -133,12 +133,12 @@ export default function Questioncard ({ question }) {
               // state={{ question: question._id }}
               className={questionCardStyles.answerBtn}
             >
-              <Edit size='17' className={questionCardStyles.editIcon} />
+              <Edit size="17" className={questionCardStyles.editIcon} />
               Answer
             </Link>
           </div>
         </div>
       </div>
     </>
-  )
+  );
 }
