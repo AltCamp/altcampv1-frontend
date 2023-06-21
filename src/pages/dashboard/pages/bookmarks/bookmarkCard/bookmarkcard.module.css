@@ -1,32 +1,50 @@
 .tableBody {
   font-family: "Segoe UI", sans-serif;
-  transition: all 0.2s ease-in-out;
   width: 100%;
   border: 1px solid #f3f3f9;
   margin-top: 1rem;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
 }
 
 .bodyHeader {
-  padding: 0.875rem 1.438rem 0.875rem 4.125rem;
-  transition: all 0.2s ease-in-out;
+  padding: 0.875rem 1.438rem 0.875rem 1.438rem;
 }
 
 .bodyHeaderLeft {
   margin-bottom: 1.25rem;
 }
+.titleLink {
+  
+  width: fit-content;
+}
 
-.bodyHeaderLeft h3{
+.titleLink h3{
   color: #282829;
   font-weight: 700;
   font-size: 0.88rem;
   line-height: 1.25rem;
+  cursor: pointer;
 }
 
-.bodyHeaderLeft h5{
-  color: #939598;
-  font-weight: 400;
-  font-size: 0.75rem;
-  line-height: 1.188rem;
+.titleLink h3:hover{
+  color: #2e69ff;
+}
+
+.tag {
+  text-align: center;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  background-color: var(--primary-clr-pink-1);
+  color: var(--neutral-clr-deep-grey);
+  font-weight: 500;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.tag:hover {
+  background-color: var(--primary-clr-pink-2);
 }
 
 .posted {
