@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect,useRef } from 'react'
 
 import bookModalStyles from './bookmarkmodal.module.css'
 
@@ -26,6 +26,12 @@ export default function BookmarkModal ({
       handleToggleBookmarkModal()
     }
   }, [isSuccess])
+
+  const inputRef = useRef(null)
+
+  useEffect(() => {
+    inputRef.current.focus()
+  }, [])
 
   return (
     <div className={bookModalStyles.toggleCreateOverlay}>
@@ -63,6 +69,7 @@ export default function BookmarkModal ({
               name='title'
               id='title'
               placeholder='Give your bookmark a title'
+              ref={inputRef}
               value={title}
               onChange={e => setTitle(e.target.value)}
               className={bookModalStyles.input}
