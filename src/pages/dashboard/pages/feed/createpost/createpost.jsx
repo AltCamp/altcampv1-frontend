@@ -21,6 +21,11 @@ export default function Createpost ({ setToggleCreatePost }) {
 
   const chooseref = useRef(null)
   const dropRef = useRef(null)
+  const inputRef = useRef(null)
+
+  useEffect(() => {
+    inputRef.current.focus()
+  }, [])
 
   const navigate = useNavigate()
   // custom hook for uploading image
@@ -113,6 +118,7 @@ export default function Createpost ({ setToggleCreatePost }) {
             cols='30'
             rows='10'
             placeholder='Write something...'
+            ref={inputRef}
             className={createPostStyles.textarea}
             onChange={e => setContent(e.target.value)}
           ></textarea>
