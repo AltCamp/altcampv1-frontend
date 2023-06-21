@@ -4,6 +4,8 @@ import registerStyles from './register.module.css'
 import eyeIcon from '../../../assets/general/eye.svg'
 import eyeClosedIcon from '../../../assets/general/eyeclosed.svg'
 
+import { AiFillCheckSquare } from 'react-icons/ai'
+
 import { setUser } from '../../../app/slices/generalSlices/userSlice'
 
 import { useDispatch } from 'react-redux'
@@ -28,6 +30,13 @@ export default function Register () {
 
   const [errorText, setErrorText] = useState('')
 
+  // regex pattern states
+  const [charLength, setCharLength] = useState(false)
+  const [lowercase, setLowercase] = useState(false)
+  const [uppercase, setUppercase] = useState(false)
+  const [number, setNumber] = useState(false)
+  const [specialChar, setSpecialChar] = useState(false)
+
   const dispatch = useDispatch()
 
   const navigate = useNavigate()
@@ -37,31 +46,31 @@ export default function Register () {
 
   const handleStudentRegister = e => {
     e.preventDefault()
-    if (password !== confirmPassword) {
-      setErrorText('Passwords do not match')
+    // if (password !== confirmPassword) {
+    //   setErrorText('Passwords do not match')
+    // } else {
+    setErrorText('')
+    if (category === 'Student') {
+      register({
+        firstName,
+        lastName,
+        email,
+        password,
+        track,
+        category,
+        altSchoolId
+      })
     } else {
-      setErrorText('')
-      if (category === 'Student') {
-        register({
-          firstName,
-          lastName,
-          email,
-          password,
-          track,
-          category,
-          altSchoolId
-        })
-      } else {
-        register({
-          firstName,
-          lastName,
-          email,
-          password,
-          track,
-          category
-        })
-      }
+      register({
+        firstName,
+        lastName,
+        email,
+        password,
+        track,
+        category
+      })
     }
+    // }
   }
 
   useEffect(() => {
@@ -77,10 +86,60 @@ export default function Register () {
 
   useEffect(() => {
     const media = window.innerWidth
-    window.addEventListener('resize', () => {
-      setScreenWidthState(media < 600)
-    })
+    if (media < 600) {
+      setScreenWidthState(true)
+    }
   }, [])
+
+  const passwordPattern = new RegExp(
+    '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}'
+  )
+
+  useEffect(() => {
+    const eightormore = /.{8,}/
+    const oneLowercaseLetter = /(?=.*[a-z])/
+    const oneUppercaseLetter = /(?=.*[A-Z])/
+    const oneNumber = /(?=.*[0-9])/
+    const oneSpecialCharacter = /(?=.*[!@#$%^&*])/
+
+    if (eightormore.test(password)) {
+      setCharLength(true)
+    } else {
+      setCharLength(false)
+    }
+
+    if (oneLowercaseLetter.test(password)) {
+      setLowercase(true)
+    } else {
+      setLowercase(false)
+    }
+
+    if (oneUppercaseLetter.test(password)) {
+      setUppercase(true)
+    } else {
+      setUppercase(false)
+    }
+
+    if (oneNumber.test(password)) {
+      setNumber(true)
+    } else {
+      setNumber(false)
+    }
+
+    if (oneSpecialCharacter.test(password)) {
+      setSpecialChar(true)
+    } else {
+      setSpecialChar(false)
+    }
+
+    if (password === '') {
+      setCharLength(false)
+      setLowercase(false)
+      setUppercase(false)
+      setNumber(false)
+      setSpecialChar(false)
+    }
+  }, [password])
 
   return (
     <div className={registerStyles.container}>
@@ -119,10 +178,10 @@ export default function Register () {
         <div
           className={`${registerStyles.formGroup} ${registerStyles.category}`}
         >
-          <label htmlFor=''>Category</label>
+          <label htmlFor='category'>Category</label>
           <select
-            name=''
-            id=''
+            name='category'
+            id='category'
             value={category}
             onChange={e => setCategory(e.target.value)}
             required
@@ -133,13 +192,19 @@ export default function Register () {
         </div>
         <motion.div
           className={`${registerStyles.formGroup} ${registerStyles.track}`}
-          initial={{ gridColumn: '1 / 2' }}
-          animate={{ gridColumn: category == 'Student' ? '1 / 2' : '1 / 3' }}
+          style={{
+            gridColumn:
+              category == 'Student' && screenWidthState
+                ? '1 / span 2'
+                : category == 'Student' && !screenWidthState
+                ? '1 / span 1'
+                : '1 / span 2'
+          }}
         >
-          <label htmlFor=''>Track</label>
+          <label htmlFor='track'>Track</label>
           <select
-            name=''
-            id=''
+            name='track'
+            id='track'
             onChange={e => setTrack(e.target.value)}
             required
           >
@@ -159,7 +224,8 @@ export default function Register () {
           {category == 'Student' && (
             <motion.div
               className={`${registerStyles.formGroup} ${registerStyles.matric}`}
-              initial={{ opacity: 1 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
               <label htmlFor='matric'>Altschool Student Number</label>
@@ -169,7 +235,7 @@ export default function Register () {
                 id='matric'
                 placeholder='ALT/SOP/022/0001'
                 onChange={e => setAltSchoolId(e.target.value)}
-                pattern="^ALT/SO[EPD]/02[2-9]/[0-9]{0,4}$"
+                pattern='^ALT/SO[EPD]/02[2-9]/[0-9]{0,4}$'
                 required
               />
             </motion.div>
@@ -196,7 +262,9 @@ export default function Register () {
               name='password'
               id='password'
               placeholder=''
+              value={password}
               onChange={e => setPassword(e.target.value)}
+              pattern={passwordPattern}
               required
             />
             <img
@@ -206,8 +274,55 @@ export default function Register () {
               onClick={() => setToggleShowPassword(!toggleShowPassword)}
             />
           </div>
+          {/* { */}
+          <div className={registerStyles.guide}>
+            <span
+              style={{
+                color: charLength ? '#0E8A1A' : '#495057',
+                backgroundColor: charLength ? '#F1FEF6' : '#E9ECEF'
+              }}
+            >
+              <AiFillCheckSquare size={16} />8 or more characters
+            </span>
+            <span
+              style={{
+                color: lowercase ? '#0E8A1A' : '#495057',
+                backgroundColor: lowercase ? '#F1FEF6' : '#E9ECEF'
+              }}
+            >
+              <AiFillCheckSquare size={16} />
+              Lowercase letter
+            </span>
+            <span
+              style={{
+                color: uppercase ? '#0E8A1A' : '#495057',
+                backgroundColor: uppercase ? '#F1FEF6' : '#E9ECEF'
+              }}
+            >
+              <AiFillCheckSquare size={16} />
+              Uppercase letter
+            </span>
+            <span
+              style={{
+                color: number ? '#0E8A1A' : '#495057',
+                backgroundColor: number ? '#F1FEF6' : '#E9ECEF'
+              }}
+            >
+              <AiFillCheckSquare size={16} />
+              Number
+            </span>
+            <span
+              style={{
+                color: specialChar ? '#0E8A1A' : '#495057',
+                backgroundColor: specialChar ? '#F1FEF6' : '#E9ECEF'
+              }}
+            >
+              <AiFillCheckSquare size={16} />
+              Special character
+            </span>
+          </div>
         </div>
-        <div
+        {/* <div
           className={`${registerStyles.formGroup} ${registerStyles.confirmPassword}`}
         >
           <label htmlFor='confirmPassword'>Confirm Password</label>
@@ -227,7 +342,7 @@ export default function Register () {
               onClick={() => setToggleShowPassword(!toggleShowPassword)}
             />
           </div>
-        </div>
+        </div> */}
 
         {/* error ui */}
         {errorText && (

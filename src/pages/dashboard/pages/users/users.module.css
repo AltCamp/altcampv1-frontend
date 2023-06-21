@@ -129,8 +129,6 @@
 }
   .user{
     flex: 25%;
-    /* width: 15%; */
-    /* border: 1px solid black; */
     display: flex;
     align-items: center;
     margin-bottom: 5rem;
