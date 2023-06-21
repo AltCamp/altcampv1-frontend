@@ -18,7 +18,8 @@ export default function UserLogin () {
 
   const parentPath = useLocation().pathname.split('/')[1]
 
-  const [errorText, setErrorText] = useState('')
+  const [toastText, setToastText] = useState('')
+  const [toastType, setToastType] = useState("info")
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -33,21 +34,65 @@ export default function UserLogin () {
 
   const handleLogin = e => {
     e.preventDefault()
-    setErrorText('');
-    login({ email: email, password: password })
+    setToastText('');
+    validatePassword(password)
+    if (validatePassword(password) === "Password is valid.") {
+      login({ email: email, password: password })
+    } else {
+      setToastText(validatePassword(password))
+      setToastType("warning")
+    }
   }
 
 
   useEffect(() => {
     if (isSuccess) {
+      setToastText(data.message)
+      setToastType("success")
       dispatch(setUser(data?.data))
-      navigate('/dashboard')
+      setTimeout(() => navigate('/dashboard'), 3000)
+      // navigate('/dashboard')
     } else if (isError) {
-      setErrorText(error.data.message)
+      setToastText(error.data.message)
+      setToastType("error")
     }
   }, [isSuccess, isError])
 
- 
+  function validatePassword(password) {
+    // Check if password meets the minimum length requirement
+    if (password.length < 8) {
+      return "Password should be at least 8 characters long.";
+    }
+  
+    // Check if password contains at least one uppercase letter
+    if (!/[A-Z]/.test(password)) {
+      return "Password should contain at least one uppercase letter.";
+    }
+  
+    // Check if password contains at least one lowercase letter
+    if (!/[a-z]/.test(password)) {
+      return "Password should contain at least one lowercase letter.";
+    }
+  
+    // Check if password contains at least one number
+    if (!/[0-9]/.test(password)) {
+      return "Password should contain at least one number.";
+    }
+  
+    // Check if password contains at least one special character
+    if (!/[!@#$%^&*]/.test(password)) {
+      return "Password should contain at least one special character (!@#$%^&*).";
+    }
+  
+    // Password has passed all validation checks
+    return "Password is valid.";
+  }
+  
+  // Usage example
+  // const password = "MyPassword123!";
+  // const validationResult = validatePassword(password);
+  // console.log(validationResult);
+  
 
 
   return (
@@ -86,7 +131,7 @@ export default function UserLogin () {
         </div>
 
         {/* error ui */}
-       <Toaster show={!!errorText} type="error" message={errorText}/>
+       <Toaster show={!!toastText} type={toastType} message={toastText} onClick={() => setToastText('')}/>
   
         <button
           className={userLoginStyle.loginButton}

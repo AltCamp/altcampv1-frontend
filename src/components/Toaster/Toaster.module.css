@@ -18,9 +18,9 @@
   background-color: #fff;
   color: #6c757d;
   font-weight: 400;
-  border: solid 2px;
-  border-color: var(--color);
-  border-radius: 4px;
+  border-top: solid 4px var(--color);
+  box-shadow: 10px 10px 5px #adb5bd74;
+  border-radius: 2px;
   font-size: 14px;
   padding: 20px;
   display: flex;
@@ -34,10 +34,26 @@
 }
 
 .toastTitle {
-  font-size: 16px;
-  color: var(--color);
+  font-size: 18px;
+  color: black;
   text-transform: capitalize;
   margin-bottom: 12px;
+}
+
+.toastIcon {
+  color: var(--color);
+  font-size: 22px;
+}
+
+.toastCnt {
+  width: 100%;
+}
+
+.toastBtn {
+  border: none;
+  font-size: 30px;
+  color: var(--color);
+  background-color: #fff;
 }
 
 @keyframes slideIn {
