@@ -3,15 +3,24 @@ import React, { useState, useEffect } from 'react'
 import userStyles from './users.module.css'
 import searchicon from '../../../../assets/icons/searchicon.png'
 import { useGetAllAccountsQuery } from '../../../../app/slices/apiSlices/accountSlices/accountMutationSlice'
+import { useGetAccountsByCategoryQuery } from '../../../../app/slices/apiSlices/accountSlices/accountMutationSlice'
 import { ProfileCircle } from 'iconsax-react'
 import { Link } from 'react-router-dom'
 
 export default function Users () {
+
+  // const [filter, setFilter] = useState("")
+    // get all accounts
+    const { data, isLoading, isSuccess, isError, error } =
+    useGetAllAccountsQuery()
+
+  // get accounts by category(filter by category)
+  // const {data: category, isLoading: categoryLoading, isSuccess: categorySuccess, isError: categoryError, error: categoryErr} = useGetAccountsByCategoryQuery(filter)
+
   const [display, setDisplay] = useState('')
   const [totalpage, setTotalPage] = useState(0)
   const [pageNo, setPageNo] = useState(1)
-  const { data, isLoading, isSuccess, isError, error } =
-    useGetAllAccountsQuery()
+  // const [cat, setCat] = useState("")
 
   useEffect(() => {
     if (isSuccess) {
@@ -25,6 +34,18 @@ export default function Users () {
       setDisplay(info)
     }
   }, [isSuccess, pageNo])
+
+
+  // const handleFilter = (e) => {
+  //   e.preventDefault();
+  //   let filterTarget = e.target.innerText
+  //   if(filterTarget === 'All'){
+  //     return
+  //   }else {
+  //     setFilter(filterTarget)
+  //     setCat(category?.data)
+  //   }
+  // }
 
   const btn = []
   for (let i = 1; i < totalpage + 1; i++) {
@@ -48,9 +69,10 @@ export default function Users () {
           </div>
           <div className={userStyles.filterList}>
             <ul className={userStyles.filterItems}>
-              <li className={userStyles.filterItem}>Name</li>
-              <li className={userStyles.filterItem}>School</li>
-              <li className={userStyles.filterItem}>Location</li>
+              <li className={userStyles.filterItem}>All</li>
+              <li className={userStyles.filterItem}
+              onClick={(e) => handleFilter(e)}>Student</li>
+              <li className={userStyles.filterItem}>Mentor</li>
               <li className={userStyles.filterItem}>New users</li>
               <li className={userStyles.filterItem}>Moderations</li>
             </ul>
@@ -68,13 +90,13 @@ export default function Users () {
       </section>
       {/* list of users */}
       <section className={userStyles.middle}>
-        {isLoading && (
+        {(isLoading) && (
           <div className={userStyles.loading}>
             <div className={userStyles.loader}></div>
           </div>
         )}
         <aside className={userStyles.body}>
-          {isSuccess &&
+          { (isSuccess) &&
             display &&
             display.map((user, index) => {
               return (
@@ -95,7 +117,7 @@ export default function Users () {
                         {user.firstName} {user.lastName}
                       </p>
                     </Link>
-                    <p className={userStyles.userLocation}>Lagos, Nigeria</p>
+                    <p className={userStyles.userLocation}>{user.accountType}</p>
                     <p className={userStyles.track}>{user.track}</p>
                   </div>
                 </div>
