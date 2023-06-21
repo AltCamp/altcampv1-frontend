@@ -30,7 +30,13 @@ export default function Feed () {
 
   const meta = data?.meta
 
-  const [allPosts, setAllPosts] = useState(posts)
+  const [allPosts, setAllPosts] = useState()
+  
+  useEffect(() => {
+    if (data) {
+      setAllPosts(posts)
+    }
+  }, [data])
 
   const handleToggleCreatePost = () => {
     setToggleCreatePost(!toggleCreatePost)
@@ -106,22 +112,24 @@ export default function Feed () {
             allPosts?.map(post => <Postcard key={post._id} post={post} />)}
         </div>
 
-        <div className={feedStyle.loadMore}>
-          <button
-            className={feedStyle.seeMoreBtn}
-            // onclick set page to current page + 1 and set allPosts to allPosts + posts
-            onClick={() => {
-              setPage(page + 1)
-              setAllPosts([...allPosts, ...posts])
-            }}
-            disabled={isLoading || page === meta?.totalPages}
-            style={{
-              display: page === meta?.totalPages ? 'none' : 'flex'
-            }}
-          >
-            Load More
-          </button>
-        </div>
+        {posts && (
+          <div className={feedStyle.loadMore}>
+            <button
+              className={feedStyle.seeMoreBtn}
+              // onclick set page to current page + 1 and set allPosts to allPosts + posts
+              onClick={() => {
+                setPage(page + 1)
+                setAllPosts([...allPosts, ...posts])
+              }}
+              disabled={isLoading || page === meta?.totalPages}
+              style={{
+                display: page === meta?.totalPages ? 'none' : 'flex'
+              }}
+            >
+              Load More
+            </button>
+          </div>
+        )}
       </div>
     </div>
   )
