@@ -31,7 +31,8 @@
     "react-share-social": "^0.1.55",
     "react-time-ago": "^7.2.1",
     "react-tooltip": "^5.13.1",
-    "react18-input-otp": "^1.1.2"
+    "react18-input-otp": "^1.1.2",
+    "vite-plugin-svgr": "^3.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.26",

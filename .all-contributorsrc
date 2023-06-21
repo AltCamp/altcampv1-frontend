@@ -60,22 +60,12 @@
       "contributions": [
         "code"
       ]
-    },
-    {
-      "login": "Marvecodes",
-      "name": "Marvellous Chukueggu",
-      "avatar_url": "https://avatars.githubusercontent.com/u/107967184?v=4",
-      "profile": "https://github.com/Marvecodes",
-      "contributions": [
-        "code"
-      ]
     }
   ],
   "contributorsPerLine": 7,
   "skipCi": true,
   "repoType": "github",
   "repoHost": "https://github.com",
-  "projectName": "altcampv1-frontend",
-  "projectOwner": "AltCamp",
-  "commitType": "docs"
+  "projectName": "studybuddyv1-frontend",
+  "projectOwner": "StudyBuddyv1"
 }
