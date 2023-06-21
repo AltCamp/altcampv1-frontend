@@ -3,12 +3,15 @@ import profilestyles from './editprofile.module.css'
 import { useOutletContext } from 'react-router-dom'
 import { useUpdateDetailsMutation } from '../../../../../app/slices/apiSlices/accountSlices/accountMutationSlice';
 import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { setUpdateDetails } from '../../../../../app/slices/generalSlices/userSlice';
 
 export default function Editprofile () {
-  const [fName, setFName] = useState("");
-  const [lName, setLName] = useState("");
-  const [track, setTrack] = useState("");
+  const {user} = useSelector(state => state?.user.user);
+
+  const [fName, setFName] = useState(user.firstName);
+  const [lName, setLName] = useState(user.lastName);
+  const [track, setTrack] = useState(user.track);
   const [handleEdit, handleCancel] = useOutletContext();
   const dispatch = useDispatch();
 
@@ -43,18 +46,18 @@ useEffect(() => {
       <div className={profilestyles['form']}>
         <form action='' onSubmit={(e)=> handleSubmit(e)}>
           <label htmlFor='fName'>First Name</label>
-          <input type='text' name='fName' id='fName' placeholder='seun' value={fName} onChange={(e)=> setFName(e.target.value)} required/>
+          <input type='text' name='fName' id='fName' value={fName} onChange={(e)=> setFName(e.target.value)}/>
           <label htmlFor='lName'>Last Name</label>
-          <input type='text' name='lName' id='lName' placeholder='akingboye' value={lName} onChange={(e) => setLName(e.target.value)} required/>
+          <input type='text' name='lName' id='lName' value={lName} onChange={(e) => setLName(e.target.value)}/>
           <label htmlFor='track'>Track</label>
-          <select name='track' id='track' value={track} onChange={(e)=> setTrack(e.target.value)} className={profilestyles['select']} required>
+          <select name='track' id='track' value={track} onChange={(e)=> setTrack(e.target.value)} className={profilestyles['select']} >
             <option value='Frontend Engineering'>Frontend</option>
             <option value='Backend Engineering'>Backend</option>
             <option value='Product Design'>Product Design</option>
           </select>
           <label htmlFor='lCircle'>Learning Circle</label>
           <input type='text' name='lCircle' id='lCircle' />
-          <input  type='submit' value='Save Changes' disabled={isLoading}/>
+          <input  type='submit' value={isLoading? "saving changes...":'Save Changes'} disabled={isLoading}/>
         </form>
       </div>
     </div>

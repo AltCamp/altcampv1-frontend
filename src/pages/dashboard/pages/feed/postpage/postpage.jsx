@@ -120,6 +120,7 @@ export default function Postpage () {
           handleToggleBookmarkModal={handleToggleBookmarkModal}
           postId={post?._id}
           postType={`Post`}
+          postTitle={post?.content}
         />
       )}
       <div className={postPageStyles.container}>

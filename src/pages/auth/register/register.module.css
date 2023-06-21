@@ -36,6 +36,22 @@
   grid-column: 1 / 3;
 }
 
+.guide {
+  display: flex;
+  font-size: 11px;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.guide > span {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.2rem;
+  border-radius: 4px;
+  font-weight: 400;
+}
+
 .confirmPassword {
   grid-column: 1 / 3;
 }
@@ -188,7 +204,7 @@
     grid-column: 1/3;
   }
 
-  .track {
+  /* .track {
     grid-column: 1/3;
-  }
+  } */
 }
