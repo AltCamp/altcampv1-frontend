@@ -11,15 +11,14 @@ import { useLoginMutation } from '../../../../app/slices/apiSlices/authSlice'
 import { useDispatch } from 'react-redux'
 
 import { setUser } from '../../../../app/slices/generalSlices/userSlice'
-import Toaster from '../../../../components/Toaster/Toaster'
 
 export default function UserLogin () {
   const [showPassword, setShowPassword] = useState(false)
 
   const parentPath = useLocation().pathname.split('/')[1]
+  // console.log(parentPath)
 
-  const [toastText, setToastText] = useState('')
-  const [toastType, setToastType] = useState("info")
+  const [errorText, setErrorText] = useState('')
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -28,72 +27,30 @@ export default function UserLogin () {
 
   const navigate = useNavigate()
 
-  
+  // console.log(email, password)
   const [login, { isSuccess, isLoading, data, isError, error }] =
     useLoginMutation()
 
   const handleLogin = e => {
     e.preventDefault()
-    setToastText('');
-    validatePassword(password)
-    if (validatePassword(password) === "Password is valid.") {
-      login({ email: email, password: password })
-    } else {
-      setToastText(validatePassword(password))
-      setToastType("warning")
-    }
+    login({ email: email, password: password })
   }
-
+// console.log(data)
+  // console.log(email, password)
 
   useEffect(() => {
     if (isSuccess) {
-      setToastText(data.message)
-      setToastType("success")
       dispatch(setUser(data?.data))
-      setTimeout(() => navigate('/dashboard'), 3000)
-      // navigate('/dashboard')
+      navigate('/dashboard')
     } else if (isError) {
-      setToastText(error.data.message)
-      setToastType("error")
+      setErrorText(error.data.message)
     }
   }, [isSuccess, isError])
 
-  function validatePassword(password) {
-    // Check if password meets the minimum length requirement
-    if (password.length < 8) {
-      return "Password should be at least 8 characters long.";
-    }
-  
-    // Check if password contains at least one uppercase letter
-    if (!/[A-Z]/.test(password)) {
-      return "Password should contain at least one uppercase letter.";
-    }
-  
-    // Check if password contains at least one lowercase letter
-    if (!/[a-z]/.test(password)) {
-      return "Password should contain at least one lowercase letter.";
-    }
-  
-    // Check if password contains at least one number
-    if (!/[0-9]/.test(password)) {
-      return "Password should contain at least one number.";
-    }
-  
-    // Check if password contains at least one special character
-    if (!/[!@#$%^&*]/.test(password)) {
-      return "Password should contain at least one special character (!@#$%^&*).";
-    }
-  
-    // Password has passed all validation checks
-    return "Password is valid.";
-  }
-  
-  // Usage example
-  // const password = "MyPassword123!";
-  // const validationResult = validatePassword(password);
-  // console.log(validationResult);
-  
+ 
 
+  // console.log(data?.data)
+  // console.log(error)
 
   return (
     <div className={userLoginStyle.container}>
@@ -131,8 +88,12 @@ export default function UserLogin () {
         </div>
 
         {/* error ui */}
-       <Toaster show={!!toastText} type={toastType} message={toastText} onClick={() => setToastText('')}/>
-  
+        {errorText && (
+          <div className={userLoginStyle.errorText}>
+            <p>{errorText}</p>
+          </div>
+        )}
+
         <button
           className={userLoginStyle.loginButton}
           type='submit'
