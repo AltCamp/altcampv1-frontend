@@ -4,6 +4,7 @@
   height: 100%;
   max-width: 100%;
   padding: 2rem;
+  position: relative;
 }
 
 .bookmarkContainer h2 {
@@ -13,6 +14,81 @@
   font-family: var(--Inter);
   margin-bottom: 1.75rem;
   color: var(--neutral-clr-drkst-grey);
+}
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100%; */
+    margin-top: 1rem;
+    height: fit-content;
+    width: 100%;
+  }
+  
+  .loader {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid var(--secondary-clr-lter-blue);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+/* empty bookmark */
+
+.noBookmarkHeader {
+  font-weight: 600;
+  font-size: 1.375rem;
+  line-height: 1.75rem;
+  margin: 2.5rem 0 0 1.8rem;
+  color: var(--neutral-clr-drkst-grey);
+}
+.noBookmark {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 6rem;
+}
+
+.noBookmark p {
+  width: 421px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.125rem;
+  line-height: 2.125rem;
+  color: var(--neutral-clr-drkst-grey);
+}
+
+.noBookmark span {
+  font-weight: normal;
+}
+
+.noBookmarkHeader {
+  display: flex;
+  justify-content: space-between;
+  margin: 2.5rem 1.8rem 4rem 1.8rem;
+}
+
+.noBookmarkHeader h2 {
+  font-weight: 600;
+  font-size: 1.375rem;
+  line-height: 1.75rem;
+  color: var(--neutral-clr-drkst-grey);
+}
+
+.bookmarkContent {
+  width: 90%;
 }
 
 /* Navbar */
@@ -34,7 +110,7 @@
   display: flex;
   font-family: var(--Poppins);
   color: var(--neutral-clr-white);
-  background: var(--secondary-clr-deep-blue);
+  background: var(--secondary-clr-lt-blue);
   border-radius: 0.205rem;
   border: none;
   cursor: pointer;
@@ -75,12 +151,13 @@
   gap: 4.256rem;
   box-shadow: 0 0.125rem 0.75rem rgba(86, 86, 86, 0.15);
   border-radius: 0.25rem;
-  width: 38rem;
+  width: 45rem;
   outline: none;
   font-weight: 400;
   font-size: 0.667rem;
   line-height: 1rem;
   color: #a7a7a7;
+  font-family: var(--Poppins);
 }
 
 .search input::placeholder {
@@ -88,7 +165,7 @@
   font-size: 0.667rem;
   line-height: 1rem;
   color: #a7a7a7;
-  font-family: var(--Poppins);
+  font-family: inherit;
 }
 
 .filter {
@@ -110,253 +187,15 @@
   border-radius: 0.205rem;
 }
 
-.settings {
-  padding: 0.438rem;
-  background: var(--neutral-clr-white);
-  border: 1px solid var(--secondary-clr-deep-blue);
-  border-radius: 0.205rem;
-  font-family: var(--Poppins);
-  color: var(--secondary-clr-deep-blue);
-  font-size: 0.75rem;
-  font-weight: 500;
-  line-height: 1rem;
-}
-
-/* Table */
-.bookmarkHeader {
-  display: flex;
-  gap: 0.75rem;
-  margin-top: 0.5rem 0;
+/* Card */
+.bookmarkMain {
+  overflow-x: auto;
   width: 100%;
-}
-
-.bookmarkHeader th {
-  font-family: var(--Poppins);
-  font-weight: 500;
-  font-size: 0.75rem;
-  line-height: 1rem;
-  color: var(--secondary-clr-deep-blue);
-  height: 1.9rem;
-  display: flex;
-  align-items: center;
-}
-
-.tableData {
-  border: 1px solid #f3f3f9;
-  margin-bottom: 0.5rem;
-  transition: all 0.2s ease-in-out;
-}
-
-.tableData tr {
-  width: 100%;
-  display: flex;
-  cursor: pointer;
-}
-
-.tableData td {
-  font-family: var(--Poppins);
-  font-weight: 500;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  color: var(--secondary-clr-deep-blue);
-  height: 3.5rem;
-  padding-top: 0.5rem;
-}
-
-.bookmarkHeader .checkbox {
-  width: 6.9rem;
-  max-width: 5.5rem;
-}
-
-.tableData .checkbox {
-  width: 6.25rem;
-  max-width: 6.25rem;
-  padding-top: 0 !important;
-  display: flex;
-  justify-content: center;
-}
-
-.topicLink {
-  text-decoration: none;
-  color: inherit;
-}
-
-.tableData .topic {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  width: 11.75rem;
-  max-width: 12rem;
-}
-
-.bookmarkHeader .topic {
-  width: 11.25rem;
-  max-width: 11.5rem;
-}
-
-.bookmarkHeader .postedBy {
-  width: 8rem;
-  max-width: 8rem;
-}
-.tableData .postedBy {
-  width: 8.75rem;
-  max-width: 8.75rem;
-}
-
-.bookmarkHeader .datePosted {
-  width: 8.5rem;
-  max-width: 8.5rem;
-}
-
-.tableData .datePosted {
-  width: 9.5rem;
-  max-width: 9.5rem;
-}
-
-.timePosted {
-  font-family: var(--Poppins);
-  font-weight: 500;
-  font-size: 0.75rem;
-  line-height: 1rem;
-  text-align: center;
-  color: var(--neutral-clr-drk-grey);
-}
-
-.bookmarkHeader .comments {
-  width: 6.75rem;
-  max-width: 6.75rem;
-}
-
-.tableData .comments {
-  width: 7.5rem;
-  max-width: 7.5rem;
-}
-.bookmarkHeader .likes {
-  width: 5.7rem;
-  max-width: 5.9rem;
-}
-
-.tableData .likes {
-  width: 6.25rem;
-  max-width: 6.25rem;
-}
-
-.bookmarkHeader .tags {
-  width: 3.8rem;
-  max-width: 4rem;
-}
-.tableData .tags {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  width: 4.5rem;
-  max-width: 4.5rem;
-}
-.status {
-  width: 3.5rem;
-  max-width: 3.5rem;
-  text-align: right;
-}
-
-.statSpan {
-  position: relative;
-  left: 55%;
-  top: 20%;
-}
-
-/* Accordion section  */
-.tableBody {
-  background: #f7f7f7;
-  font-family: "Segoe UI", sans-serif;
-  transition: all 0.2s ease-in-out;
-}
-
-.bodyHeader {
-  padding: 0.875rem 1.438rem 0.875rem 4.125rem;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-}
-
-.bodyHeaderLeft {
-  color: #282829;
-  font-weight: 700;
-  font-size: 0.88rem;
-  line-height: 1.25rem;
-  margin-bottom: 1.25rem;
-}
-
-.posted {
-  font-size: 0.715rem;
-  line-height: 1.125rem;
-  color: #939598;
-  margin-bottom: 0.5rem;
-}
-.poster {
-  font-weight: 700;
-  margin-right: 0.813rem;
-}
-
-.dated {
-  font-weight: 400;
-}
-
-.checkbox .active {
-  display: none;
-}
-
-.tableData .active {
-  display: none;
-}
-.bottomIcons {
-  display: flex;
-  justify-content: space-between;
-}
-
-.buttonContainer {
-  display: flex;
-  gap: 1rem;
-}
-
-.buttonContainer {
-  font-size: 0.75rem;
-  font-weight: 400;
-  line-height: 1.188rem;
-  color: #636466;
-}
-
-.buttonContainer .numbers {
-  font-size: 0.688rem;
-  line-height: 1rem;
-}
-
-.bodyButton {
-  display: flex;
-  gap: 0.25rem;
-  align-items: center;
-  color: #636466;
-  cursor: pointer;
-}
-
-.accordionLink {
-  text-decoration: none;
-  color: inherit;
-}
-.bodyButton:hover {
-  color: #2e69ff;
-}
-
-.bodyIcons {
-  color: inherit;
-}
-
-.shareContainer {
-  display: flex;
-  gap: 0.25rem;
+  margin-bottom: 3rem;
 }
 
 /* Pagination */
 .pagination {
-  border: 1px solid #f3f3f9;
   height: 3.5rem;
   display: flex;
   justify-content: end;
@@ -365,6 +204,10 @@
   font-family: var(--Poppins);
   margin-top: 1rem;
   padding-right: 0.75rem;
+  position: absolute;
+  bottom: 10px;
+  right: 140px;
+
 }
 
 .previousBtn,
@@ -386,15 +229,15 @@
 
 .previousBtn:hover,
 .nextBtn:hover {
-  background-color: var(--secondary-clr-deep-blue);
+  background-color: var(--secondary-clr-lt-blue);
   color: var(--neutral-clr-white);
-  border: 2px solid var(--secondary-clr-deep-blue);
+  border: 2px solid var(--secondary-clr-lt-blue);
 }
 
 .btnActive {
-  background-color: var(--secondary-clr-deep-blue);
+  background-color: var(--secondary-clr-lt-blue);
   color: var(--neutral-clr-white);
-  border: 2px solid #405189;
+  border: 2px solid var(--secondary-clr-lt-blue);
   border-radius: 0.25rem;
   padding: 0.5rem 1rem;
   width: fit-content;
@@ -443,63 +286,9 @@
 
 /* Media Query */
 
-@media (max-width: 1326px) {
+@media (max-width: 1330px) {
   .search input {
     width: 32rem;
-  }
-
-  .bookmarkHeader .checkbox {
-    width: 2.8rem;
-    max-width: 2.8rem;
-  }
-  .tableData .checkbox {
-    width: 3.5rem;
-    max-width: 3.5rem;
-  }
-
-  .tableData .topic {
-    width: 11.5rem;
-    max-width: 11.5rem;
-  }
-
-  .bookmarkHeader .topic {
-    width: 11rem;
-    max-width: 11rem;
-  }
-
-  .bookmarkHeader .datePosted {
-    width: 8.8rem;
-    max-width: 8.8rem;
-  }
-
-  .bookmarkHeader .comments {
-    width: 5rem;
-    max-width: 5rem;
-  }
-
-  .tableData .comments {
-    width: 5.5rem;
-    max-width: 5.5rem;
-  }
-
-  .bookmarkHeader .likes {
-    width: 3.25rem;
-    max-width: 3.25rem;
-  }
-
-  .tableData .likes {
-    width: 4rem;
-    max-width: 4rem;
-  }
-
-  .bookmarkHeader .tags {
-    width: 4.5rem;
-    max-width: 4.5rem;
-  }
-
-  .tableData .tags {
-    width: 5rem;
-    max-width: 5rem;
   }
 }
 
@@ -507,109 +296,11 @@
   .search input {
     width: 28rem;
   }
-
-  .bookmarkHeader th {
-    font-size: 0.7rem;
-  }
-
-  .tableData td {
-    font-size: 0.75rem;
-  }
-
-  .timePosted {
-    font-size: 0.7rem;
-  }
-  .tableData .topic {
-    width: 10rem;
-    max-width: 10rem;
-  }
-
-  .bookmarkHeader .topic {
-    width: 9.5rem;
-    max-width: 9.5rem;
-  }
-
-  .bookmarkHeader .postedBy {
-    width: 6.5rem;
-    max-width: 6.5rem;
-  }
-
-  .tableData .postedBy {
-    width: 7.25rem;
-    max-width: 7.25rem;
-  }
-
-  .bookmarkHeader .datePosted {
-    width: 7.75rem;
-    max-width: 7.75rem;
-  }
-
-  .tableData .datePosted {
-    width: 8.5rem;
-    max-width: 8.5rem;
-  }
 }
 
 @media (max-width: 1100px) {
   .search input {
     width: 22.5rem;
-  }
-  .tableData td {
-    font-size: 0.7rem;
-  }
-
-  .bookmarkHeader .topic{
-    width: 8.5rem;
-    max-width:8.5rem;
-  }
-
-  .tableData .topic {
-    width: 9rem;
-    max-width: 9rem;
-  }
-
-  .bookmarkHeader .postedBy {
-    width: 5.75rem;
-    max-width: 5.75rem;
-  }
-
-  .tableData .postedBy {
-    width: 6.5rem;
-    max-width: 6.5rem;
-  }
-
-  .bookmarkHeader .datePosted {
-    width: 6rem;
-    max-width: 6rem;
-  }
-
-  .tableData .datePosted {
-    width: 6.7rem;
-    max-width: 6.7rem;
-  }
-
-  .timePosted {
-    font-size: .5rem;
-  }
-
-  .bookmarkHeader .comments {
-    width: 4.5rem;
-    max-width: 4.5rem;
-  }
-
-  .tableData .comments {
-    width: 5rem;
-    max-width: 5rem;
-  }
-
-  .bookmarkHeader .tags{
-    width: 3.15rem;
-    max-width: 3.15rem;
-  }
-   
-  .tableData .tags {
-    width: 3.75rem;
-    max-width: 3.75rem;
   }
 
   .previousBtn,
@@ -621,5 +312,36 @@
   }
   .pageCount {
     padding: 0.5rem 0.7rem;
+  }
+}
+
+@media (max-width: 1030px) {
+  .bookmarkContainer {
+    justify-content: center;
+  }
+
+  .bookmarkContainer h2 {
+    font-weight: 450;
+    padding-right: 1rem;
+  }
+
+  .bookButton {
+    font-size: 0.65rem;
+  }
+
+  .pagination {
+    justify-content: center;
+    height: 3rem;
+  }
+}
+@media (max-width: 1015px) and (min-width: 950px) {
+  .bookmarkContainer {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 720) {
+  .bookmarkContainer {
+    width: 100%;
   }
 }

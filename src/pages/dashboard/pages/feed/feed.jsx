@@ -4,43 +4,66 @@ import feedStyle from './feed.module.css'
 
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 
-import { Add } from 'iconsax-react'
+import { ProfileCircle, CloseCircle } from 'iconsax-react'
+
+import { RiImageLine } from 'react-icons/ri'
 
 import Postcard from './postcard/postcard'
 
 import { useGetAllPostsQuery } from '../../../../app/slices/apiSlices/feedSlice'
 
+import { useSelector } from 'react-redux'
+import Createpost from './createpost/createpost'
+
 export default function Feed () {
-  // const [posts, setPosts] = useState()
-  const navigate = useNavigate()
-  const location = useLocation()
+  const [toggleCreatePost, setToggleCreatePost] = useState(false)
 
-  const { data, isLoading, isSuccess, isError, error } = useGetAllPostsQuery()
+  const { user } = useSelector(state => state?.user?.user)
 
-  const [sortedPosts, setSortedPosts] = useState([])
+  const [page, setPage] = useState(1)
+
+  const { data, isLoading, isSuccess, isError, error } = useGetAllPostsQuery({
+    page
+  })
 
   const posts = data?.data
 
+  const meta = data?.meta
+
+  const [allPosts, setAllPosts] = useState()
   
-  // useEffect(() => {
-  //   setPosts(data?.data)
-  // }, [data, isSuccess])
+  useEffect(() => {
+    if (data) {
+      setAllPosts(posts)
+    }
+  }, [data])
+
+  const handleToggleCreatePost = () => {
+    setToggleCreatePost(!toggleCreatePost)
+  }
 
   useEffect(() => {
-    if (posts) {
-      // create a copy of the posts array
-      const copyPosts = [...posts]
-      const thePosts = copyPosts.sort(
-        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-      )
-      setSortedPosts(thePosts)
+    if (toggleCreatePost) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'auto'
     }
-  }, [isSuccess])
-
-  // console.log(sortedPosts)
+  }, [toggleCreatePost])
 
   return (
     <div className={feedStyle.container}>
+      {toggleCreatePost && (
+        <div className={feedStyle.toggleCreateOverlay}>
+          <div className={feedStyle.toggleCreate}>
+            <CloseCircle
+              size='20'
+              className={feedStyle.closeIcon}
+              onClick={handleToggleCreatePost}
+            />
+            <Createpost setToggleCreatePost={setToggleCreatePost} />
+          </div>
+        </div>
+      )}
       <div className={feedStyle.sectionOne}>
         <div className={feedStyle.header}>
           <div className={feedStyle.title}>
@@ -49,10 +72,33 @@ export default function Feed () {
               Explore and see what other people have posted
             </p>
           </div>
-          <Link to={'/dashboard/createpost'} className={feedStyle.postCta}>
-            <Add size='32' color='#FFFFFF' />
-            Add a post
+        </div>
+
+        <div className={feedStyle.createPostInput}>
+          <Link to={`/dashboard/account`} className={feedStyle.avatar}>
+            {user?.profilePicture ? (
+              <img
+                src={user?.profilePicture}
+                alt=''
+                className={feedStyle.img}
+              />
+            ) : (
+              <ProfileCircle
+                size={45}
+                color='#555555'
+                className={feedStyle.iconAvatar}
+              />
+            )}
           </Link>
+          <input
+            type='text'
+            placeholder="What's on your mind?"
+            className={feedStyle.inputField}
+            onFocus={handleToggleCreatePost}
+          />
+          <div className={feedStyle.media}>
+            <RiImageLine size='24' color='#555555' />
+          </div>
         </div>
 
         <div className={feedStyle.posts}>
@@ -61,10 +107,29 @@ export default function Feed () {
               <div className={feedStyle.loader}></div>
             </div>
           )}
-          {sortedPosts?.map(post => (
-            <Postcard key={post._id} post={post} />
-          ))}
+          {posts &&
+            !isLoading &&
+            allPosts?.map(post => <Postcard key={post._id} post={post} />)}
         </div>
+
+        {posts && (
+          <div className={feedStyle.loadMore}>
+            <button
+              className={feedStyle.seeMoreBtn}
+              // onclick set page to current page + 1 and set allPosts to allPosts + posts
+              onClick={() => {
+                setPage(page + 1)
+                setAllPosts([...allPosts, ...posts])
+              }}
+              disabled={isLoading || page === meta?.totalPages}
+              style={{
+                display: page === meta?.totalPages ? 'none' : 'flex'
+              }}
+            >
+              Load More
+            </button>
+          </div>
+        )}
       </div>
     </div>
   )

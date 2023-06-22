@@ -56,13 +56,13 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* gap: 2rem; */
 }
 
 .authContent {
   width: 70%;
   height: 95%;
   display: flex;
+  overflow-y: scroll;
   flex-direction: column;
 }
 
@@ -72,6 +72,7 @@
 
 .authContent nav {
   display: flex;
+  min-height: 3rem;
   height: 3rem;
   width: 100%;
   color: var(--neutral-clr-drkst-grey);

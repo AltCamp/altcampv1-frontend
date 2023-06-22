@@ -47,11 +47,12 @@ import { useSelector } from 'react-redux'
 
 import altlogo from '../../../../../assets/general/Authlogo.png'
 
+import BookmarkModal from '../../../components/bookmarkmodal/bookmarkmodal'
 export default function Questionpage () {
-  // const [questionId, setQuestionId] = useState()
   const [deleteQuestionModal, setDeleteQuestionModal] = useState(false)
   const [shareModal, setShareModal] = useState(false)
   const [screenWidthState, setScreenWidthState] = useState(false)
+  const [toggleBookmarkModal, setToggleBookmarkModal] = useState()
 
   const navigate = useNavigate()
 
@@ -62,14 +63,6 @@ export default function Questionpage () {
   const shareLink = window.location.href
 
   const { user } = useSelector(state => state?.user.user)
-
-  // console.log(user)
-
-  // useEffect(() => {
-  //   if (location.state) {
-  //     setQuestionId(location.state.question)
-  //   }
-  // }, [location])
 
   const {
     data: questionData,
@@ -197,6 +190,10 @@ export default function Questionpage () {
     }
   }
 
+  const handleToggleBookmarkModal = () => {
+    setToggleBookmarkModal(!toggleBookmarkModal)
+  }
+
   return (
     <>
       <Helmet>
@@ -216,6 +213,15 @@ export default function Questionpage () {
         <meta property='og:image:type' content='image/png' />
         <meta property='og:site_name' content='AltCamp' />
       </Helmet>
+
+      {toggleBookmarkModal && (
+        <BookmarkModal
+          handleToggleBookmarkModal={handleToggleBookmarkModal}
+          postId={questionDetails._id}
+          postType={`Question`}
+          postTitle={questionDetails.title}
+        />
+      )}
       {deleteQuestionModal && (
         <div className={questionPageStyles.deleteWarningOverlay}>
           <div className={questionPageStyles.deleteWarning}>
@@ -278,10 +284,7 @@ export default function Questionpage () {
               <div className={questionPageStyles.titleGroup}>
                 <div className={questionPageStyles.titleHeader}>
                   <h3 className={questionPageStyles.title}>
-                    {/* if question has been edited, show edited title */}
-                    {questionDetails?.createdAt !== questionDetails?.updatedAt
-                      ? `Edited: ${questionDetails?.title}`
-                      : questionDetails?.title}
+                    {questionDetails?.title}
                   </h3>
                   <div className={questionPageStyles.tags}>
                     <span className={questionPageStyles.tag}>UI/UX</span>
@@ -306,7 +309,11 @@ export default function Questionpage () {
                       )}
                     </div>
                     <Link
-                      to={`/dashboard/users/${questionDetails?.author._id}`}
+                      to={
+                        user?._id === questionDetails?.author._id
+                          ? `/dashboard/account`
+                          : `/dashboard/users/${questionDetails?.author._id}`
+                      }
                       className={questionPageStyles.authorName}
                     >
                       {questionDetails?.author.firstName}{' '}
@@ -360,16 +367,7 @@ export default function Questionpage () {
                           questionDetails?.upvotes > 0 ? '#0e8a1a' : '#343a40'
                       }}
                     >
-                      <Tooltip
-                        id='my-tooltip'
-                        className='tooltip'
-                        // style={{
-                        //   backgroundColor: '#6a6ff5',
-                        //   color: '#fff',
-                        //   borderRadius: '4px',
-                        //   padding: '2px'
-                        // }}
-                      />
+                      <Tooltip id='my-tooltip' className='tooltip' />
                       <ArrowUp
                         size='19'
                         className={questionPageStyles.icon}
@@ -439,6 +437,7 @@ export default function Questionpage () {
                       size='20'
                       className={questionPageStyles.icon}
                       color='#212529'
+                      onClick={handleToggleBookmarkModal}
                     />
                   </div>
                 </div>

@@ -1,13 +1,13 @@
 import React, { useRef, useState } from "react";
 import projectStyle from "../myprojects.module.css";
-import { useImageHandler } from "../../hooks/useImageHandler";
+import { useMediaHandler } from './../../hooks/useMediaHandler';
 
 export default function Uploadproject({ display }) {
   const chooseref = useRef(null);
   const dropRef = useRef(null);
 
   // custom hook for uploading image
-  const { image, caption, error, Handleimage } = useImageHandler();
+  const { image, caption, error, handleMedia } = useMediaHandler();
 
   // style format for drag and drop
   const handleStyleEnter = (e) => {
@@ -25,7 +25,7 @@ export default function Uploadproject({ display }) {
     e.preventDefault();
     e.stopPropagation();
     dropRef.current.style.border = "1px solid var(--secondary-clr-lter-purple)";
-    Handleimage(e.dataTransfer.files[0]);
+    handleMedia(e.dataTransfer.files[0]);
   };
 
   return (

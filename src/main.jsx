@@ -55,6 +55,7 @@ import {
 
   // subpages of feed
   Createpost,
+  Postpage,
 } from './pages/dashboard/pages'
 import Updatebio from './pages/dashboard/pages/account/updatebio/updateBio'
 import UserProfile from './pages/dashboard/pages/users/userProfile/userProfile'
@@ -79,6 +80,7 @@ const router = createBrowserRouter([
       {
         path: '/account/login',
         element: <LoginGroup />,
+        errorElement: <Error />,
         children: [
           {
             index: true,
@@ -99,6 +101,7 @@ const router = createBrowserRouter([
   {
     path: '/dashboard',
     element: <Layout />,
+    errorElement: <Error />,
     loader: () => {
       if (!localStorage.getItem('user')) {
         return redirect('/account/login')
@@ -108,11 +111,11 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Feed />
+        element: <Feed />,
       },
       {
-        path: '/dashboard/createpost',
-        element: <Createpost />
+        path: '/dashboard/post/:postId',
+        element: <Postpage />
       },
       {
         path: '/dashboard/community',
