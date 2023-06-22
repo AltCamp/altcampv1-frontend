@@ -43,6 +43,7 @@ export default function UserProfile () {
               <p className={userProfileStyle.profileTopName}>
                 <b>{user?.firstName}</b> <b>{user?.lastName}</b>
               </p>
+              <div className={userProfileStyle.profileTopdDetails}>
               <p className={userProfileStyle.profileTopTrack}>
                 Track <span>{user.track}</span>
               </p>
@@ -52,6 +53,7 @@ export default function UserProfile () {
               <p className={userProfileStyle.profileTopEmail}>
                 Email Address <span>{user.email}</span>
               </p>
+              </div>
             </aside>
             <aside className={userProfileStyle.profileTopRightBottom}>
               <h3 className={userProfileStyle.profileBio}>Bio</h3>

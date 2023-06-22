@@ -35,6 +35,7 @@
     border: 10px solid var( --neutral-clr-grey-1);
     margin-right: 4rem;
 }
+
 .profileTopLeft span{
     margin-right: 4rem;
 }
@@ -73,4 +74,150 @@
 }
 .profileBioNoText{
     opacity: 0.5;
+}
+/* Media Query */
+
+@media (min-width: 280px) and (max-width: 380px) {
+    .profileTop {
+      /* margin: 1rem 1rem 0 2rem; */
+      display: flex;
+      flex-direction: column;
+      /* margin: 0 auto; */
+      margin-top: -30px;
+      align-items: center;
+      /* border: 2px solid green; */
+      width: 100%;
+    }
+    .profileTopLeft img{
+        display: flex;
+        width: fit-content;
+        margin-right: 0px;
+    }
+
+    .profileTopLeft span{
+        /* border: 2px solid blue; */
+        display:flex;
+        /* align-items: center; */
+        margin: 0 auto;
+        width: fit-content;
+        /* margin-right: 0px; */ 
+    }
+
+    .profileTopRight{
+        /* border: 2px solid orangered; */
+        width: 100%
+    }
+
+    .profileTopName{
+        display: flex;
+        justify-content: center;
+        /* border: 2px solid pink; */
+        align-content: center;
+        margin-top: 30px;
+    }
+
+    .profileTopTrack{
+        display: flex;
+        /* border: 2px solid red; */
+        margin-top: 30px;
+        font-size: 0.9rem;
+    }
+
+    .profileTopRightTop p span{
+        position: absolute;
+        left: 105px;
+        color: black;
+     }
+
+     .profileTopEmail{
+        font-size: 0.9rem;
+     }
+
+     .profileTopEmail span{
+        width: 9rem;
+        flex-wrap: wrap;
+        /* border: 2px solid coral; */
+        overflow: auto;
+     }
+
+     .profileTopEmail span::-webkit-scrollbar{
+        display: none;
+     }
+
+     .profileBioText{
+        width: 100%;
+        /* overflow: auto; */
+        /* border: 2px solid red; */
+     }
+}
+
+
+@media (min-width: 381px) and (max-width: 699px) {
+    .profileTop {
+      display: flex;
+      flex-direction: column;
+      margin-top: -30px;
+      align-items: center;
+      width: 100%;
+    }
+    .profileTopLeft img{
+        display: flex;
+        width: fit-content;
+        margin-right: 0px;
+    }
+
+    .profileTopLeft span{
+        display:flex;
+        margin: 0 auto;
+        width: fit-content;
+    }
+
+    .profileTopRight{
+        width: 100%;
+    }
+
+    .profileTopName{
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+    }
+    
+    .profileTopdDetails{
+        padding: 0 10%;
+        font-size: 1rem
+    }
+
+    .profileTopTrack{
+        display:flex;
+        
+    }
+    .profileTopTrack span{
+        font-size: 1rem;
+        justify-content: center;
+    }
+
+    .profileTopRank span{
+        font-size: 1rem;
+    }
+
+    .profileTopRightTop p span{
+        position: absolute;
+        left: 120px;
+        color: black;
+     }
+
+
+     .profileTopEmail span{
+        width: 12rem;
+        overflow: auto;
+        font-size: 1rem;
+     }
+
+     .profileTopEmail span::-webkit-scrollbar{
+        display: none;
+     }
+
+     .profileBioText{
+        width: 100%;
+     }
 }

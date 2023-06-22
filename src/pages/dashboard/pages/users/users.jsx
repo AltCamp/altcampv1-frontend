@@ -36,7 +36,7 @@ export default function Users () {
       <section className={userStyles.top}>
         <h2 className={userStyles.head}>Users</h2>
         <p className={userStyles.desc}>
-          search and view other members of this platform
+          Search and view other members of this platform
         </p>
         <div className={userStyles.line}></div>
         <aside className={userStyles.filter}>
@@ -58,11 +58,11 @@ export default function Users () {
         </aside>
         <aside className={userStyles.filternav}>
           <ul className={userStyles.filternavItems}>
-            <li className={userStyles.filternavItem}>week</li>
-            <li className={userStyles.filternavItem}>month</li>
-            <li className={userStyles.filternavItem}>quater</li>
-            <li className={userStyles.filternavItem}>year</li>
-            <li className={userStyles.filternavItem}>all</li>
+            <li className={userStyles.filternavItem}>Week</li>
+            <li className={userStyles.filternavItem}>Month</li>
+            <li className={userStyles.filternavItem}>Quater</li>
+            <li className={userStyles.filternavItem}>Year</li>
+            <li className={userStyles.filternavItem}>All</li>
           </ul>
         </aside>
       </section>
@@ -113,7 +113,7 @@ export default function Users () {
               // onClick={setPageNo((prev) => prev - 1)}
               disabled={pageNo <= 1}
             >
-              Previous
+              Prev
             </button>
             {totalpage > 0 &&
               btn.map((item, index) => {
