@@ -11,15 +11,14 @@ import { useLoginMutation } from '../../../../app/slices/apiSlices/authSlice'
 import { useDispatch } from 'react-redux'
 
 import { setUser } from '../../../../app/slices/generalSlices/userSlice'
-import Toaster from '../../../../components/Toaster/Toaster'
 
 export default function UserLogin () {
   const [showPassword, setShowPassword] = useState(false)
 
   const parentPath = useLocation().pathname.split('/')[1]
+  // console.log(parentPath)
 
-  const [toastText, setToastText] = useState('')
-  const [toastType, setToastType] = useState("info")
+  const [errorText, setErrorText] = useState('')
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -28,7 +27,7 @@ export default function UserLogin () {
 
   const navigate = useNavigate()
 
-  
+  // console.log(email, password)
   const [login, { isSuccess, isLoading, data, isError, error }] =
     useLoginMutation()
 
@@ -39,16 +38,18 @@ export default function UserLogin () {
   
   useEffect(() => {
     if (isSuccess) {
-      setToastText(data.message)
-      setToastType("success")
       dispatch(setUser(data?.data))
       setTimeout(() => navigate('/dashboard'), 1000)
       // navigate('/dashboard')
     } else if (isError) {
-      setToastText(error.data.message)
-      setToastType("error")
+      setErrorText(error.data.message)
     }
   }, [isSuccess, isError])
+
+ 
+
+  // console.log(data?.data)
+  // console.log(error)
 
   return (
     <div className={userLoginStyle.container}>
@@ -86,8 +87,12 @@ export default function UserLogin () {
         </div>
 
         {/* error ui */}
-       <Toaster show={!!toastText} type={toastType} message={toastText} onClick={() => setToastText('')}/>
-  
+        {errorText && (
+          <div className={userLoginStyle.errorText}>
+            <p>{errorText}</p>
+          </div>
+        )}
+
         <button
           className={userLoginStyle.loginButton}
           type='submit'

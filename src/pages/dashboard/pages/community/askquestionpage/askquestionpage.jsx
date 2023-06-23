@@ -8,7 +8,6 @@ import { useParams, useNavigate, Link } from 'react-router-dom'
 import RichEditor from './../richeditor/richeditor'
 
 import { useCreateQuestionMutation } from '../../../../../app/slices/apiSlices/communitySlice'
-import Toaster from '../../../../../components/Toaster/Toaster'
 
 
 export default function AskQuestionPage () {
