@@ -32,68 +32,23 @@ export default function UserLogin () {
   const [login, { isSuccess, isLoading, data, isError, error }] =
     useLoginMutation()
 
-  const handleLogin = e => {
-    e.preventDefault()
-    setToastText('');
-    validatePassword(password)
-    if (validatePassword(password) === "Password is valid.") {
+    const handleLogin = e => {
+      e.preventDefault()
       login({ email: email, password: password })
-    } else {
-      setToastText(validatePassword(password))
-      setToastType("warning")
     }
-  }
-
-
+  
   useEffect(() => {
     if (isSuccess) {
       setToastText(data.message)
       setToastType("success")
       dispatch(setUser(data?.data))
-      setTimeout(() => navigate('/dashboard'), 3000)
+      setTimeout(() => navigate('/dashboard'), 1000)
       // navigate('/dashboard')
     } else if (isError) {
       setToastText(error.data.message)
       setToastType("error")
     }
   }, [isSuccess, isError])
-
-  function validatePassword(password) {
-    // Check if password meets the minimum length requirement
-    if (password.length < 8) {
-      return "Password should be at least 8 characters long.";
-    }
-  
-    // Check if password contains at least one uppercase letter
-    if (!/[A-Z]/.test(password)) {
-      return "Password should contain at least one uppercase letter.";
-    }
-  
-    // Check if password contains at least one lowercase letter
-    if (!/[a-z]/.test(password)) {
-      return "Password should contain at least one lowercase letter.";
-    }
-  
-    // Check if password contains at least one number
-    if (!/[0-9]/.test(password)) {
-      return "Password should contain at least one number.";
-    }
-  
-    // Check if password contains at least one special character
-    if (!/[!@#$%^&*]/.test(password)) {
-      return "Password should contain at least one special character (!@#$%^&*).";
-    }
-  
-    // Password has passed all validation checks
-    return "Password is valid.";
-  }
-  
-  // Usage example
-  // const password = "MyPassword123!";
-  // const validationResult = validatePassword(password);
-  // console.log(validationResult);
-  
-
 
   return (
     <div className={userLoginStyle.container}>

@@ -16,7 +16,7 @@ export default function AskQuestionPage () {
   const [body, setBody] = useState('')
   const [emptyTitle, setEmptyTitle] = useState(false)
 
-  const [errorText, setErrorText] = useState('')
+  const [toastText, setToastText] = useState('')
 
   const { question } = useParams()
   const navigate = useNavigate()
@@ -155,7 +155,7 @@ export default function AskQuestionPage () {
         </div>
 
         {/* error message ui */}
-        <Toaster show={!!errorText} type="error" message={errorText}/>
+        <Toaster show={!!toastText} type="error" message={toastText}/>
 
         {/* succesful message */}
         {isSuccess && (

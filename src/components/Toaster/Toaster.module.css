@@ -52,8 +52,16 @@
 .toastBtn {
   border: none;
   font-size: 30px;
-  color: var(--color);
   background-color: #fff;
+  cursor: pointer;
+}
+
+.toastBtn path:hover {
+  stroke: #6c757d;
+}
+
+.toastBtn path {
+  stroke: var(--color);
 }
 
 @keyframes slideIn {
