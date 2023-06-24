@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react'
 
 import answerCardStyles from './answercard.module.css'
 
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 import { ArrowDown, ArrowUp, ArchiveAdd, Edit } from 'iconsax-react'
+
+import { BsFillBookmarkFill, BsBookmarkPlus } from 'react-icons/bs'
 
 import ReactTimeAgo from 'react-time-ago'
 import DOMPurify from 'isomorphic-dompurify'
@@ -35,6 +37,10 @@ export default function Answercard ({ answer }) {
   })
 
   const { user } = useSelector(state => state?.user.user)
+
+  const location = useLocation()
+
+  const navigate = useNavigate()
 
   const answerId = answer?._id
 
@@ -90,6 +96,23 @@ export default function Answercard ({ answer }) {
     setToggleBookmarkModal(!toggleBookmarkModal)
   }
 
+  useEffect(() => {
+    if (location?.state?.postId) {
+      const postElement = document.getElementById(location?.state?.postId)
+      postElement?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      })
+
+      postElement?.classList.add(answerCardStyles.highlight)
+      setTimeout(() => {
+        postElement?.classList.remove(answerCardStyles.highlight)
+      }, 7000)
+    }
+    // remove the postId from the location state
+    navigate(location?.pathname, { replace: true })
+  }, [location?.state?.postId])
+
   return (
     <>
       {toggleBookmarkModal && (
@@ -100,7 +123,7 @@ export default function Answercard ({ answer }) {
           postTitle={answer?.content}
         />
       )}
-      <div className={answerCardStyles.container}>
+      <div className={answerCardStyles.container} id={answer?._id}>
         {editMode ? (
           <div className={answerCardStyles.editContainer}>
             <RichEditor setBody={setContent} body={content} />
@@ -187,7 +210,7 @@ export default function Answercard ({ answer }) {
                 {answer?.downvotes}
               </div>
               <div className={answerCardStyles.bookmark}>
-                <ArchiveAdd
+                <BsBookmarkPlus
                   size='19'
                   className={answerCardStyles.icon}
                   onClick={handleToggleBookmarkModal}

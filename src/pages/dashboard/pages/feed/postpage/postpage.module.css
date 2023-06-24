@@ -162,6 +162,10 @@
   }
 }
 
+.commentSection {
+  margin-bottom: 5rem;
+}
+
 .divider {
   height: 1px;
   width: 100%;
@@ -232,4 +236,3 @@
     margin-top: 1rem;
   }
 }
-

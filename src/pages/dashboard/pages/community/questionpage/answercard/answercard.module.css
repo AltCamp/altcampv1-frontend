@@ -136,3 +136,19 @@
   transition: all 0.2s ease-in-out;
   cursor: pointer;
 }
+
+.highlight {
+  background-color: var(--neutral-clr-grey-2);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  animation: highlights 10s;
+}
+
+@keyframes highlights {
+  0% {
+    background-color: var(--neutral-clr-grey-2);
+  }
+  100% {
+    background-color: var(--neutral-clr-white);
+  }
+}
