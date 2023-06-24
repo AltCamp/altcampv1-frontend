@@ -340,8 +340,11 @@
   }
 }
 
-@media (max-width: 720) {
-  .bookmarkContainer {
-    width: 100%;
-  }
+@media (max-width: 650px) {
+
+.bookButton {
+  flex-direction: column;
+  padding: 0.2rem;
+}
+
 }
