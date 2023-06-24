@@ -99,6 +99,32 @@
   width: 100%;
 }
 
+.loadMore {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.seeMoreBtn {
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  border-radius: 8px;
+  color: var(--secondary-clr-lter-blue);
+  outline: none;
+  border: 1px solid var(--secondary-clr-lter-blue);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.seeMoreBtn:hover {
+  background-color: var(--secondary-clr-lter-blue);
+  color: var(--neutral-clr-white);
+  border: none;
+}
+
 .loading {
   display: flex;
   justify-content: center;
