@@ -8,8 +8,8 @@ export const feedSlice = createApi({
   tagTypes: ["Posts", "Post", "Comments"],
   endpoints: (builder) => ({
     getAllPosts: builder.query({
-      query: () => ({
-        url: "/posts",
+      query: ({ page, limit = 15 }) => ({
+        url: `/posts?isPaginated=true&page=${page}&limit=${limit}`,
         method: "GET",
       }),
       providesTags: ["Posts"],

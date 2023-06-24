@@ -8,8 +8,8 @@ export const communitySlice = createApi({
   tagTypes: ["Questions", "Answers"],
   endpoints: (builder) => ({
     getAllQuestions: builder.query({
-      query: () => ({
-        url: "/questions",
+      query: ({ page, limit = 15 }) => ({
+        url: `/questions?isPaginated=true&page=${page}&limit=${limit}`,
         method: "GET",
       }),
       providesTags: ["Questions"],
