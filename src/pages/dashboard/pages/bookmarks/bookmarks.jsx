@@ -43,108 +43,102 @@ export default function Bookmarks() {
   return (
     <div className={bookmarksStyles.bookmarkContainer}>
       {isLoading && (
-          <div className={bookmarksStyles.loading}>
-            <div className={bookmarksStyles.loader}></div>
-          </div>
-        )}
-      {
-        isSuccess && bookmarks.length > 0 && (
-          <div className={bookmarksStyles.bookmarkContent}>
-            <h2>Bookmarks</h2>
+        <div className={bookmarksStyles.loading}>
+          <div className={bookmarksStyles.loader}></div>
+        </div>
+      )}
+      {isSuccess && bookmarks.length > 0 && (
+        <div className={bookmarksStyles.bookmarkContent}>
+          <h2>Bookmarks</h2>
 
-            {/* NavBar */}
-            <div className={bookmarksStyles.bookmarkNav}>
+          {/* NavBar */}
+          <div className={bookmarksStyles.bookmarkNav}>
+            <div className={bookmarksStyles.select}>
+              <button
+                className={bookmarksStyles.bookButton}
+                onClick={handleToggleAction}
+              >
+                <span>Action</span>{" "}
+                <RiArrowDownSLine
+                  className={bookmarksStyles.bookIcon}
+                  size="20"
+                  color="#fff"
+                />
+              </button>
+              {isActionOpen && (
+                <div className={bookmarksStyles.btnMenu}>
+                  <a href="#">Remove Bookmark</a>
+                  <a className={bookmarksStyles.lastMenu} href="#">
+                    Forward
+                  </a>
+                </div>
+              )}
+            </div>
+            <div className={bookmarksStyles.search}>
+              <input
+                type="text"
+                id="search"
+                name="search"
+                placeholder="Search bookmarks ..."
+              />
+            </div>
+            <div className={bookmarksStyles.filter}>
               <div className={bookmarksStyles.select}>
                 <button
                   className={bookmarksStyles.bookButton}
-                  onClick={handleToggleAction}
+                  onClick={handleToggleFilter}
                 >
-                  <span>Action</span>{" "}
+                  <span>Filter</span>{" "}
                   <RiArrowDownSLine
                     className={bookmarksStyles.bookIcon}
                     size="20"
                     color="#fff"
                   />
                 </button>
-                {isActionOpen && (
+                {isFilterOpen && (
                   <div className={bookmarksStyles.btnMenu}>
-                    <a href="#">Remove Bookmark</a>
+                    <a href="#">All Bookmarks</a>
+                    <a href="#">Recent Bookmarks</a>
+                    <a href="#">Older Bookmarks</a>
+                    <a href="#">Highest Comments</a>
                     <a className={bookmarksStyles.lastMenu} href="#">
-                      Forward
+                      Highest Likes
                     </a>
                   </div>
                 )}
               </div>
-              <div className={bookmarksStyles.search}>
-                <input
-                  type="text"
-                  id="search"
-                  name="search"
-                  placeholder="Search bookmarks ..."
-                />
-              </div>
-              <div className={bookmarksStyles.filter}>
-                <div className={bookmarksStyles.select}>
-                  <button
-                    className={bookmarksStyles.bookButton}
-                    onClick={handleToggleFilter}
-                  >
-                    <span>Filter</span>{" "}
-                    <RiArrowDownSLine
-                      className={bookmarksStyles.bookIcon}
-                      size="20"
-                      color="#fff"
-                    />
-                  </button>
-                  {isFilterOpen && (
-                    <div className={bookmarksStyles.btnMenu}>
-                      <a href="#">All Bookmarks</a>
-                      <a href="#">Recent Bookmarks</a>
-                      <a href="#">Older Bookmarks</a>
-                      <a href="#">Highest Comments</a>
-                      <a className={bookmarksStyles.lastMenu} href="#">
-                        Highest Likes
-                      </a>
-                    </div>
-                  )}
-                </div>
-                <button className={bookmarksStyles.allButton}>All</button>
-              </div>
-            </div>
-
-            {/* Card */}
-            <div className={bookmarksStyles.bookmarkMain}>
-              {sortedBookmarks.map((bookmark) => (
-                <BookmarkCard bookmark={bookmark} key={bookmark._id} />
-              ))}
-            </div>
-
-            {/* Pagination */}
-            <div className={bookmarksStyles.bottom}>
-              {sortedBookmarks.length > 0 && (
-                <div className={bookmarksStyles.pagination}>
-                  <button className={bookmarksStyles.previousBtn}>
-                    Previous
-                  </button>
-                  <button
-                    className={`${bookmarksStyles.pageBtn} ${bookmarksStyles.btnActive}`}
-                  >
-                    1
-                  </button>
-                  <button className={bookmarksStyles.pageBtn}>2</button>
-                  <button className={bookmarksStyles.pageBtn}>3</button>
-                  <button className={bookmarksStyles.nextBtn}>Next</button>
-                  <div className={bookmarksStyles.pageCount}>
-                    <span className={bookmarksStyles.currentPage}>1</span>
-                    <span className={bookmarksStyles.divider}>/</span>
-                    <span className={bookmarksStyles.totalPage}>60</span>
-                  </div>
-                </div>
-              )}
+              <button className={bookmarksStyles.allButton}>All</button>
             </div>
           </div>
-        )}
-      { emptyBookmark && !isLoading && (
+
+          {/* Card */}
+          <div className={bookmarksStyles.bookmarkMain}>
+            {sortedBookmarks.map((bookmark) => (
+              <BookmarkCard bookmark={bookmark} key={bookmark._id} />
+            ))}
+          </div>
+
+          {/* Pagination */}
+
+          {sortedBookmarks.length > 0 && (
+            <div className={bookmarksStyles.pagination}>
+              <button className={bookmarksStyles.previousBtn}>Previous</button>
+              <button className={bookmarksStyles[("pageBtn", "active")]}>
+                1
+              </button>
+              <button className={bookmarksStyles.pageBtn}>2</button>
+              <button className={bookmarksStyles.pageBtn}>3</button>
+              <button className={bookmarksStyles.nextBtn}>Next</button>
+              <div className={bookmarksStyles.pageCount}>
+                <span className={bookmarksStyles.currentPage}>1</span>
+                <span className={bookmarksStyles.divider}>/</span>
+                <span className={bookmarksStyles.totalPage}>60</span>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+      {emptyBookmark && !isLoading && (
         <div className={bookmarksStyles.emptyBookmark}>
           <div className={bookmarksStyles.noBookmarkHeader}>
             <h2>Bookmarks</h2>
@@ -157,7 +151,6 @@ export default function Bookmarks() {
             </p>
           </div>
         </div>
-        
       )}
     </div>
   );
