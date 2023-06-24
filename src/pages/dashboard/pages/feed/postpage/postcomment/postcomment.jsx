@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react'
 
 import postCommentStyles from './postcomment.module.css'
 
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 import { ArchiveAdd, ProfileCircle } from 'iconsax-react'
+
+import { BsFillBookmarkFill, BsBookmarkPlus } from 'react-icons/bs'
 
 import ReactTimeAgo from 'react-time-ago'
 
@@ -12,7 +14,7 @@ import { useSelector } from 'react-redux'
 
 import { useLikeCommentMutation } from '../../../../../../app/slices/apiSlices/feedSlice'
 
-import BookmarkModal from './../../../../components/bookmarkmodal/bookmarkmodal';
+import BookmarkModal from './../../../../components/bookmarkmodal/bookmarkmodal'
 
 export default function Postcomment ({ comment }) {
   // const [latestComment, setLatestComment] = useState(comment)
@@ -20,8 +22,11 @@ export default function Postcomment ({ comment }) {
   const [likeAnimation, setLikeAnimation] = useState(false)
   const [toggleBookmarkModal, setToggleBookmarkModal] = useState()
 
-
   const { user } = useSelector(state => state?.user?.user)
+
+  const location = useLocation()
+
+  const navigate = useNavigate()
 
   const [
     likeComment,
@@ -49,11 +54,27 @@ export default function Postcomment ({ comment }) {
     }
   }, [likeCommentIsSuccess])
 
-
   const handleToggleBookmarkModal = () => {
     setToggleBookmarkModal(!toggleBookmarkModal)
   }
 
+  // handle scroll to the comment
+  useEffect(() => {
+    if (location?.state?.postId) {
+      const postElement = document.getElementById(location?.state?.postId)
+      postElement?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      })
+
+      postElement?.classList.add(postCommentStyles.highlight)
+      setTimeout(() => {
+        postElement?.classList.remove(postCommentStyles.highlight)
+      }, 7000)
+    }
+    // remove the postId from the location state
+    navigate(location?.pathname, { replace: true })
+  }, [location?.state?.postId])
 
   return (
     <>
@@ -157,7 +178,7 @@ export default function Postcomment ({ comment }) {
             <div className={postCommentStyles.divider}></div>
 
             <div className={postCommentStyles.bookmark}>
-              <ArchiveAdd
+              <BsBookmarkPlus
                 size={20}
                 color='#555555'
                 className={postCommentStyles.icon}

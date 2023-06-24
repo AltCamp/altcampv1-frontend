@@ -68,17 +68,6 @@ export default function Community () {
     navigate(location.pathname, { state: {} })
   }
 
-  // sort the questions by most recntly added
-  // useEffect(() => {
-  //   if (questions) {
-  //     // create a copy of the questions array
-  //     const copyQuestions = [...questions]
-  //     const theQuestions = copyQuestions.sort(
-  //       (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-  //     )
-  //     setSortedQuestions(theQuestions)
-  //   }
-  // }, [questions])
 
   useEffect(() => {
     if (createDeleteModal) {
