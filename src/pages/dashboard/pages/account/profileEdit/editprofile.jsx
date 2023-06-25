@@ -51,9 +51,15 @@ useEffect(() => {
           <input type='text' name='lName' id='lName' value={lName} onChange={(e) => setLName(e.target.value)}/>
           <label htmlFor='track'>Track</label>
           <select name='track' id='track' value={track} onChange={(e)=> setTrack(e.target.value)} className={profilestyles['select']} >
-            <option value='Frontend Engineering'>Frontend</option>
-            <option value='Backend Engineering'>Backend</option>
+            <option value='Frontend Engineering'>Frontend Engineering</option>
+            <option value='Backend Engineering'>Backend Engineering</option>
+            <option value='Cloud Engineering'>Cloud Engineering</option>
             <option value='Product Design'>Product Design</option>
+            <option value='Product Management'>Product Management</option>
+            <option value='Product Marketing'>Product Marketing</option>
+            <option value='Data Science'>Data Science</option>
+            <option value='Data Engineering'>Data Engineering</option>
+            <option value='Data Analysis'>Data Analysis</option>  
           </select>
           <label htmlFor='lCircle'>Learning Circle</label>
           <input type='text' name='lCircle' id='lCircle' />

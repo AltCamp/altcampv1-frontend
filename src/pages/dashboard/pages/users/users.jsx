@@ -73,8 +73,6 @@ export default function Users () {
               <li className={userStyles.filterItem}
               onClick={(e) => handleFilter(e)}>Student</li>
               <li className={userStyles.filterItem}>Mentor</li>
-              <li className={userStyles.filterItem}>New users</li>
-              <li className={userStyles.filterItem}>Moderations</li>
             </ul>
           </div>
         </aside>

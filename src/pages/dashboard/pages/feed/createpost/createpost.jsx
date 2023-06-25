@@ -178,7 +178,7 @@ export default function Createpost ({ setToggleCreatePost }) {
                 PNG. For videos, use MP4 or MOV.
               </p>
               <label for='media' className={createPostStyles.inputLabel}>
-                Select from your computer
+                Select from your device
               </label>
               <input
                 type='file'

@@ -46,6 +46,12 @@ export default function Postpage () {
     error: singlePostError
   } = useGetPostByIdQuery(postId)
 
+  useEffect(() => {
+    if (singlePostError) {
+      navigate(-1)
+    }
+  }, [singlePostError])
+
   const [
     likePost,
     {
@@ -95,13 +101,15 @@ export default function Postpage () {
   ] = useCreateCommentMutation()
 
   const handleCreateComment = e => {
-    e.preventDefault()
+    // e.preventDefault()
     createComment({ content, postId })
   }
 
   useEffect(() => {
     if (createCommentSuccess) {
       setContent('')
+      // scroll to the botttom of the page
+      window.scrollTo(0, document.body.scrollHeight)
     }
   }, [createCommentSuccess])
 
@@ -292,6 +300,12 @@ export default function Postpage () {
                 value={content}
                 className={postPageStyles.inputField}
                 onChange={e => setContent(e.target.value)}
+                onKeyDown={e => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault()
+                    handleCreateComment()
+                  }
+                }}
                 disabled={createCommentLoading}
               />
               <div className={postPageStyles.send}>

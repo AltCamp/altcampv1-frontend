@@ -12,6 +12,8 @@ import {
   MessageText1
 } from 'iconsax-react'
 
+import { BsFillBookmarkFill, BsBookmarkPlus } from 'react-icons/bs'
+
 import ReactTimeAgo from 'react-time-ago'
 
 import { useLikePostMutation } from '../../../../../app/slices/apiSlices/feedSlice'
@@ -170,7 +172,7 @@ export default function Postcard ({ post }) {
             </div>
             <div className={postCardStyles.right}>
               <Link to={`/dashboard`} className={postCardStyles.bookmark}>
-                <ArchiveAdd
+                <BsBookmarkPlus
                   size={20}
                   color='#555555'
                   className={postCardStyles.icon}

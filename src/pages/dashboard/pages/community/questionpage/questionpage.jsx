@@ -18,6 +18,8 @@ import {
   ProfileCircle
 } from 'iconsax-react'
 
+import { BsFillBookmarkFill, BsBookmarkPlus } from 'react-icons/bs'
+
 import share from '../../../../../assets/icons/share.svg'
 
 import { Helmet } from 'react-helmet-async'
@@ -73,6 +75,12 @@ export default function Questionpage () {
   } = useGetQuestionByIdQuery(questionId)
 
   const questionDetails = questionData?.data
+
+  useEffect(() => {
+    if (questionIsError) {
+      navigate(-1)
+    }
+  }, [questionIsError])
 
   // console.log(questionId)
 
@@ -433,7 +441,7 @@ export default function Questionpage () {
                         </div>
                       )}
                     </div>
-                    <ArchiveAdd
+                    <BsBookmarkPlus
                       size='20'
                       className={questionPageStyles.icon}
                       color='#212529'
