@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import BookmarkCard from "./bookmarkCard/bookmarkCard";
 import bookmarksStyles from "./bookmarks.module.css";
 import { RiArrowDownSLine } from "react-icons/ri";
@@ -10,8 +11,12 @@ export default function Bookmarks() {
   const [isFilterOpen, setFilterOpen] = useState(false);
   const [sortedBookmarks, setSortedBookmarks] = useState([]);
   const [emptyBookmark, setEmptyBookmark] = useState(false);
+  const [page, setPage] = useState(1);
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const { data, isLoading, error, isSuccess } = useGetAllBookmarksQuery();
+  const { data, isLoading, error, isSuccess } = useGetAllBookmarksQuery({
+    page: searchParams.get("page") ? searchParams.get("page") : 1,
+  });
   const bookmarks = data?.data;
 
   const handleToggleAction = () => {
@@ -39,6 +44,14 @@ export default function Bookmarks() {
       setEmptyBookmark(false);
     }
   }, [sortedBookmarks]);
+
+  useEffect(() => {
+    if (data) {
+      window.scrollTo(0, 0);
+    }
+  }, [searchParams.get("page"), data]);
+
+  const navigate = useNavigate();
 
   return (
     <div className={bookmarksStyles.bookmarkContainer}>
@@ -122,22 +135,65 @@ export default function Bookmarks() {
 
           {sortedBookmarks.length > 0 && (
             <div className={bookmarksStyles.pagination}>
-              <button className={bookmarksStyles.previousBtn}>Previous</button>
-              <button className={bookmarksStyles[("pageBtn", "active")]}>
-                1
+              <button
+                className={bookmarksStyles.previousBtn}
+                onClick={() => setSearchParams({ page: page - 1 })}
+                disabled={page === 1}
+              >
+                Previous
               </button>
-              <button className={bookmarksStyles.pageBtn}>2</button>
-              <button className={bookmarksStyles.pageBtn}>3</button>
-              <button className={bookmarksStyles.nextBtn}>Next</button>
+              {[...Array(Math.ceil(data.total / data.limit)).keys()].map(
+                (number) => (
+                  <button
+                    key={number}
+                    className={
+                      page === number + 1
+                        ? bookmarksStyles.active
+                        : bookmarksStyles.pageeBtn
+                    }
+                    onClick={() => {
+                      setSearchParams({ page: number + 1 });
+                      setPage(number + 1);
+                    }}
+                  >
+                    {number + 1}
+                  </button>
+                )
+              )}
+              <button
+                className={bookmarksStyles.nextBtn}
+                onClick={() => setSearchParams({ page: page + 1 })}
+                disabled={page === Math.ceil(data.total / data.limit)}
+              >
+                Next
+              </button>
               <div className={bookmarksStyles.pageCount}>
-                <span className={bookmarksStyles.currentPage}>1</span>
-                <span className={bookmarksStyles.divider}>/</span>
-                <span className={bookmarksStyles.totalPage}>60</span>
+                <input
+                  type="number"
+                  className={bookmarksStyles.currentPage}
+                  value={page}
+                  onChange={(e) => setPage(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      setSearchParams({ page: page });
+                    }
+                  }}
+                  onKeyUp={(e) => {
+                    if (
+                      Number(e.target.value) >
+                      Math.ceil(data.total / data.limit)
+                    ) {
+                      setPage(Math.ceil(data.total / data.limit));
+                    }
+                  }}
+                />
+                <span>of {Math.ceil(data.total / data.limit)}</span>
               </div>
             </div>
           )}
         </div>
       )}
+
       {emptyBookmark && !isLoading && (
         <div className={bookmarksStyles.emptyBookmark}>
           <div className={bookmarksStyles.noBookmarkHeader}>
