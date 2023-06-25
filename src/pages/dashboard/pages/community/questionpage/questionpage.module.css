@@ -250,6 +250,7 @@
   flex-direction: column;
   gap: 1.5rem;
   width: 60%;
+  /* word-wrap: wrap; */
 }
 
 .question p {
@@ -257,7 +258,7 @@
   font-size: 16px;
   font-weight: 300;
   line-height: 1.5;
-  overflow-x: auto;
+  word-wrap: break-word;
 }
 
 .question code {

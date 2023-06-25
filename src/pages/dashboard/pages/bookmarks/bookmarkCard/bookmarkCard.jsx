@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import bookmarkCardStyles from "./bookmarkcard.module.css";
-import { RiShareForwardLine } from "react-icons/ri";
-import { CiBookmarkRemove } from "react-icons/ci";
-import { Link } from "react-router-dom";
-import ReactTimeAgo from "react-time-ago";
-import DeleteBookmarkModal from "../../../components/deletebookmarkmodal/deletebookmarkmodal";
+import React, { useState } from 'react'
+import bookmarkCardStyles from './bookmarkcard.module.css'
+import { RiShareForwardLine } from 'react-icons/ri'
+import { CiBookmarkRemove } from 'react-icons/ci'
+import { Link } from 'react-router-dom'
+import ReactTimeAgo from 'react-time-ago'
+import DeleteBookmarkModal from '../../../components/deletebookmarkmodal/deletebookmarkmodal'
 
 const bookmarkcard = ({ bookmark }) => {
-  const [showDeleteBookmarkModal, setShowDeleteBookmarkModal] = useState(false);
+  const [showDeleteBookmarkModal, setShowDeleteBookmarkModal] = useState(false)
 
   const handleToggleDeleteBookmarkModal = () => {
-    setShowDeleteBookmarkModal(!showDeleteBookmarkModal);
-  };
+    setShowDeleteBookmarkModal(!showDeleteBookmarkModal)
+  }
 
   return (
     <>
@@ -78,4 +78,4 @@ const bookmarkcard = ({ bookmark }) => {
   );
 };
 
-export default bookmarkcard;
+export default bookmarkcard
