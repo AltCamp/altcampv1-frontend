@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import bookmarkCardStyles from './bookmarkcard.module.css'
 import { RiShareForwardLine } from 'react-icons/ri'
-import { CiBookmarkRemove } from 'react-icons/ci'
+import { BsBookmarkDash } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
 import ReactTimeAgo from 'react-time-ago'
 import DeleteBookmarkModal from '../../../components/deletebookmarkmodal/deletebookmarkmodal'
@@ -60,7 +60,7 @@ const bookmarkcard = ({ bookmark }) => {
                 </p>
               </div>
               <div className={bookmarkCardStyles.shareContainer}>
-                <CiBookmarkRemove
+                <BsBookmarkDash
                   onClick={handleToggleDeleteBookmarkModal}
                   className={bookmarkCardStyles.bodyIcons}
                   size="20"

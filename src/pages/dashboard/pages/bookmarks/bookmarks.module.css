@@ -234,11 +234,12 @@
   border: 2px solid var(--secondary-clr-lt-blue);
 }
 
-.previousBtn:hover,
-.nextBtn:hover {
-  background-color: var(--secondary-clr-lter-blue);
-  color: var(--neutral-clr-white);
-  border: 2px solid var(--secondary-clr-lter-blue);
+.previousBtn:disabled,
+.nextBtn:disabled {
+  background-color: #e9ebec;
+  color: #878a99;
+  border: 2px solid #e9ebec;
+  cursor: not-allowed;
 }
 
 .active {
@@ -273,6 +274,19 @@
   background-color: var(--secondary-clr-lter-blue);
   color: var(--neutral-clr-white);
   border: 2px solid var(--secondary-clr-lter-blue);
+}
+
+.currentPage {
+  border: none;
+  outline: none;
+  width: 1rem;
+  color: #bfbfbf;
+}
+
+.pageCount input::-webkit-outer-spin-button,
+.pageCount input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .pageCount {

@@ -18,6 +18,7 @@ export default function Bookmarks() {
     page: searchParams.get("page") ? searchParams.get("page") : 1,
   });
   const bookmarks = data?.data;
+  const meta = data?.meta;
 
   const handleToggleAction = () => {
     setActionOpen(!isActionOpen);
@@ -137,33 +138,28 @@ export default function Bookmarks() {
             <div className={bookmarksStyles.pagination}>
               <button
                 className={bookmarksStyles.previousBtn}
-                onClick={() => setSearchParams({ page: page - 1 })}
-                disabled={page === 1}
+                onClick={() => setSearchParams({ page: meta?.currentPage - 1 })}
+                disabled={meta?.currentPage === 1}
               >
                 Previous
               </button>
-              {[...Array(Math.ceil(data.total / data.limit)).keys()].map(
-                (number) => (
-                  <button
-                    key={number}
-                    className={
-                      page === number + 1
-                        ? bookmarksStyles.active
-                        : bookmarksStyles.pageeBtn
-                    }
-                    onClick={() => {
-                      setSearchParams({ page: number + 1 });
-                      setPage(number + 1);
-                    }}
-                  >
-                    {number + 1}
-                  </button>
-                )
-              )}
+              {[...Array(meta?.totalPages)].map((_, index) => (
+                <button
+                  key={index}
+                  className={
+                    meta?.currentPage === index + 1
+                      ? bookmarksStyles.active
+                      : bookmarksStyles.pageBtn
+                  }
+                  onClick={() => setSearchParams({ page: index + 1 })}
+                >
+                  {index + 1}
+                </button>
+              ))}
               <button
                 className={bookmarksStyles.nextBtn}
-                onClick={() => setSearchParams({ page: page + 1 })}
-                disabled={page === Math.ceil(data.total / data.limit)}
+                onClick={() => setSearchParams({ page: meta?.currentPage + 1 })}
+                disabled={meta?.currentPage === meta?.totalPages}
               >
                 Next
               </button>
@@ -175,19 +171,17 @@ export default function Bookmarks() {
                   onChange={(e) => setPage(e.target.value)}
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
-                      setSearchParams({ page: page });
+                      setSearchParams({ page });
                     }
                   }}
-                  onKeyUp={(e) => {
-                    if (
-                      Number(e.target.value) >
-                      Math.ceil(data.total / data.limit)
-                    ) {
-                      setPage(Math.ceil(data.total / data.limit));
-                    }
-                  }}
+                    onKeyUp={e => {
+                  if (Number(e.target.value) > meta?.totalPages) {
+                    setPage(meta?.totalPages)
+                  }
+                }}
                 />
-                <span>of {Math.ceil(data.total / data.limit)}</span>
+                <span className={bookmarksStyles.divider}>/ {" "} </span>
+                <span className={bookmarksStyles.totalPage}>{meta?.totalPages}</span>
               </div>
             </div>
           )}
