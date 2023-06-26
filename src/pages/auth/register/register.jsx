@@ -29,10 +29,9 @@ export default function Register () {
   const [altSchoolId, setAltSchoolId] = useState('')
   const [track, setTrack] = useState('')
   const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
 
   const [toastText, setToastText] = useState('')
-  const [toastType, setToastType] = useState("info")
+  const [toastType, setToastType] = useState('info')
 
   // regex pattern states
   const [charLength, setCharLength] = useState(false)
@@ -48,22 +47,19 @@ export default function Register () {
   const [register, { data, isLoading, isSuccess, isError, error }] =
     useRegisterMutation()
 
-  const [verifyEmail, {
-    data: verifyEmailData,
-    isLoading: verifyIsLoading,
-    isSuccess: verifyIsSuccess,
-    isError: verifyIsError,
-    error: verifyError
-  }] =
-    useVerifyEmailMutation()
-
+  const [
+    verifyEmail,
+    {
+      data: verifyEmailData,
+      isLoading: verifyIsLoading,
+      isSuccess: verifyIsSuccess,
+      isError: verifyIsError,
+      error: verifyError
+    }
+  ] = useVerifyEmailMutation()
 
   const handleStudentRegister = e => {
     e.preventDefault()
-    // if (password !== confirmPassword) {
-    //   setErrorText('Passwords do not match')
-    // } else {
-    // setErrorText('')
     if (category === 'Student') {
       register({
         firstName,
@@ -91,15 +87,14 @@ export default function Register () {
     if (isSuccess) {
       // console.log(data)
       setToastText(data.message)
-      setToastType("success")
+      setToastType('success')
       dispatch(setUser(data?.data))
       verifyEmail()
       navigate('/account/verifyemail')
       setTimeout(() => navigate('/dashboard'), 3000)
-    }
-    else if (isError) {
+    } else if (isError) {
       setToastText(error.data.message)
-      setToastType("error")
+      setToastType('error')
       // setErrorText(error.data.message)
     }
   }, [isSuccess, isError])
@@ -342,30 +337,14 @@ export default function Register () {
             </span>
           </div>
         </div>
-        {/* <div
-          className={`${registerStyles.formGroup} ${registerStyles.confirmPassword}`}
-        >
-          <label htmlFor='confirmPassword'>Confirm Password</label>
-          <div className={registerStyles.inputGroup}>
-            <input
-              type={toggleShowPassword ? 'text' : 'password'}
-              name='confirmPassword'
-              id='confirmPassword'
-              placeholder=''
-              onChange={e => setConfirmPassword(e.target.value)}
-              required
-            />
-            <img
-              src={toggleShowPassword ? eyeClosedIcon : eyeIcon}
-              alt='showPassword'
-              className={registerStyles.showPasswordIcon}
-              onClick={() => setToggleShowPassword(!toggleShowPassword)}
-            />
-          </div>
-        </div> */}
 
         {/* error ui */}
-        <Toaster show={!!toastText} type={toastType} message={toastText} onClick={() => setToastText('')}/>
+        <Toaster
+          show={!!toastText}
+          type={toastType}
+          message={toastText}
+          onClick={() => setToastText('')}
+        />
 
         <button
           type='submit'
