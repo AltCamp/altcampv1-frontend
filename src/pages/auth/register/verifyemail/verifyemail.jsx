@@ -8,11 +8,18 @@ import mobileLogo from '../../../../assets/general/AuthBlackLogo.svg'
 import { useVerifyEmailMutation } from '../../../../app/slices/apiSlices/accountSlices/accountMutationSlice'
 
 import { useVerifyOtpMutation } from '../../../../app/slices/apiSlices/accountSlices/accountMutationSlice'
+import Toaster from '../../../../components/Toaster/Toaster'
+
+import { useNavigate } from 'react-router-dom'
 
 export default function VerifyEmail () {
   const [otp, setOtp] = useState('')
   const [otpSent, setOtpSent] = useState(false)
 
+  const [toastText, setToastText] = useState('')
+  const [toastType, setToastType] = useState('info')
+
+  const navigate = useNavigate()
   const handleSetOtp = otp => {
     setOtp(otp)
   }
@@ -32,10 +39,6 @@ export default function VerifyEmail () {
     setOtpSent(true)
   }
 
-  // useEffect(() => {
-  //   verifyEmail()
-  // }, [])
-
   const [
     verifyOtp,
     {
@@ -53,12 +56,18 @@ export default function VerifyEmail () {
 
   useEffect(() => {
     if (verifyOtpSuccess) {
-      window.location.href = '/dashboard'
+      setToastText(verifyOtpData.message)
+      setToastType('success')
+      setTimeout(() => {navigate('/dashboard')}, 2000)
     }
-  }, [verifyOtpSuccess])
+    if (verifyOtpError) {
+      setToastText(verifyOtpErrors?.data.message)
+      setToastType('error')
+    }
+  }, [verifyOtpSuccess, verifyOtpError])
 
     // console.log(otp)
-//   console.log(otpSent)
+  // console.log(verifyOtpErrors?.data.message)
 
   return (
     <div className={verifyEmailStyle.container}>
@@ -80,6 +89,12 @@ export default function VerifyEmail () {
             isInputNum={true}
           />
         </div>
+        <Toaster
+          show={!!toastText}
+          type={toastType}
+          message={toastText}
+          onClick={() => setToastText('')}
+        />
         <button
           className={verifyEmailStyle.submitButton}
           onClick={() => {
