@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import registerStyles from './register.module.css'
 import eyeIcon from '../../../assets/general/eye.svg'
 import eyeClosedIcon from '../../../assets/general/eyeclosed.svg'
+import Toaster from '../../../components/Toaster/Toaster'
 
 import { AiFillCheckSquare } from 'react-icons/ai'
 
@@ -30,7 +31,8 @@ export default function Register () {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
 
-  const [errorText, setErrorText] = useState('')
+  const [toastText, setToastText] = useState('')
+  const [toastType, setToastType] = useState("info")
 
   // regex pattern states
   const [charLength, setCharLength] = useState(false)
@@ -61,7 +63,7 @@ export default function Register () {
     // if (password !== confirmPassword) {
     //   setErrorText('Passwords do not match')
     // } else {
-    setErrorText('')
+    // setErrorText('')
     if (category === 'Student') {
       register({
         firstName,
@@ -88,12 +90,17 @@ export default function Register () {
   useEffect(() => {
     if (isSuccess) {
       // console.log(data)
+      setToastText(data.message)
+      setToastType("success")
       dispatch(setUser(data?.data))
       verifyEmail()
       navigate('/account/verifyemail')
+      setTimeout(() => navigate('/dashboard'), 3000)
     }
-    if (isError) {
-      setErrorText(error.data.message)
+    else if (isError) {
+      setToastText(error.data.message)
+      setToastType("error")
+      // setErrorText(error.data.message)
     }
   }, [isSuccess, isError])
 
@@ -277,6 +284,7 @@ export default function Register () {
               placeholder=''
               value={password}
               onChange={e => setPassword(e.target.value)}
+              // pattern={passwordPattern}
               required
             />
             <img
@@ -357,11 +365,7 @@ export default function Register () {
         </div> */}
 
         {/* error ui */}
-        {errorText && (
-          <div className={registerStyles.errorText}>
-            <p>{errorText}</p>
-          </div>
-        )}
+        <Toaster show={!!toastText} type={toastType} message={toastText} onClick={() => setToastText('')}/>
 
         <button
           type='submit'

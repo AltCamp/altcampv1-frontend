@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import BookmarkCard from "./bookmarkCard/bookmarkCard";
 import bookmarksStyles from "./bookmarks.module.css";
 import { RiArrowDownSLine } from "react-icons/ri";
@@ -10,9 +11,14 @@ export default function Bookmarks() {
   const [isFilterOpen, setFilterOpen] = useState(false);
   const [sortedBookmarks, setSortedBookmarks] = useState([]);
   const [emptyBookmark, setEmptyBookmark] = useState(false);
+  const [page, setPage] = useState(1);
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const { data, isLoading, error, isSuccess } = useGetAllBookmarksQuery();
+  const { data, isLoading, error, isSuccess } = useGetAllBookmarksQuery({
+    page: searchParams.get("page") ? searchParams.get("page") : 1,
+  });
   const bookmarks = data?.data;
+  const meta = data?.meta;
 
   const handleToggleAction = () => {
     setActionOpen(!isActionOpen);
@@ -39,6 +45,14 @@ export default function Bookmarks() {
       setEmptyBookmark(false);
     }
   }, [sortedBookmarks]);
+
+  useEffect(() => {
+    if (data) {
+      window.scrollTo(0, 0);
+    }
+  }, [searchParams.get("page"), data]);
+
+  const navigate = useNavigate();
 
   return (
     <div className={bookmarksStyles.bookmarkContainer}>
@@ -122,22 +136,58 @@ export default function Bookmarks() {
 
           {sortedBookmarks.length > 0 && (
             <div className={bookmarksStyles.pagination}>
-              <button className={bookmarksStyles.previousBtn}>Previous</button>
-              <button className={bookmarksStyles[("pageBtn", "active")]}>
-                1
+              <button
+                className={bookmarksStyles.previousBtn}
+                onClick={() => setSearchParams({ page: meta?.currentPage - 1 })}
+                disabled={meta?.currentPage === 1}
+              >
+                Previous
               </button>
-              <button className={bookmarksStyles.pageBtn}>2</button>
-              <button className={bookmarksStyles.pageBtn}>3</button>
-              <button className={bookmarksStyles.nextBtn}>Next</button>
+              {[...Array(meta?.totalPages)].map((_, index) => (
+                <button
+                  key={index}
+                  className={
+                    meta?.currentPage === index + 1
+                      ? bookmarksStyles.active
+                      : bookmarksStyles.pageBtn
+                  }
+                  onClick={() => setSearchParams({ page: index + 1 })}
+                >
+                  {index + 1}
+                </button>
+              ))}
+              <button
+                className={bookmarksStyles.nextBtn}
+                onClick={() => setSearchParams({ page: meta?.currentPage + 1 })}
+                disabled={meta?.currentPage === meta?.totalPages}
+              >
+                Next
+              </button>
               <div className={bookmarksStyles.pageCount}>
-                <span className={bookmarksStyles.currentPage}>1</span>
-                <span className={bookmarksStyles.divider}>/</span>
-                <span className={bookmarksStyles.totalPage}>60</span>
+                <input
+                  type="number"
+                  className={bookmarksStyles.currentPage}
+                  value={page}
+                  onChange={(e) => setPage(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      setSearchParams({ page });
+                    }
+                  }}
+                    onKeyUp={e => {
+                  if (Number(e.target.value) > meta?.totalPages) {
+                    setPage(meta?.totalPages)
+                  }
+                }}
+                />
+                <span className={bookmarksStyles.divider}>/ {" "} </span>
+                <span className={bookmarksStyles.totalPage}>{meta?.totalPages}</span>
               </div>
             </div>
           )}
         </div>
       )}
+
       {emptyBookmark && !isLoading && (
         <div className={bookmarksStyles.emptyBookmark}>
           <div className={bookmarksStyles.noBookmarkHeader}>

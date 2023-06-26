@@ -5,12 +5,14 @@ import userLoginStyle from './userLogin.module.css'
 import eyeIcon from '../../../../assets/general/eye.svg'
 import eyeClosedIcon from '../../../../assets/general/eyeclosed.svg'
 
+
 // import apiSLice hook
 import { useLoginMutation } from '../../../../app/slices/apiSlices/authSlice'
 
 import { useDispatch } from 'react-redux'
 
 import { setUser } from '../../../../app/slices/generalSlices/userSlice'
+import Toaster from '../../../../components/Toaster/Toaster'
 
 export default function UserLogin () {
   const [showPassword, setShowPassword] = useState(false)
@@ -18,7 +20,8 @@ export default function UserLogin () {
   const parentPath = useLocation().pathname.split('/')[1]
   // console.log(parentPath)
 
-  const [errorText, setErrorText] = useState('')
+  const [toastText, setToastText] = useState('')
+  const [toastType, setToastType] = useState("info")
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -31,21 +34,25 @@ export default function UserLogin () {
   const [login, { isSuccess, isLoading, data, isError, error }] =
     useLoginMutation()
 
-  const handleLogin = e => {
-    e.preventDefault()
-    login({ email: email, password: password })
-  }
-// console.log(data)
-  // console.log(email, password)
-
-  useEffect(() => {
-    if (isSuccess) {
-      dispatch(setUser(data?.data))
-      navigate('/dashboard')
-    } else if (isError) {
-      setErrorText(error.data.message)
+    const handleLogin = e => {
+      e.preventDefault()
+      login({ email: email, password: password })
     }
-  }, [isSuccess, isError])
+  
+    useEffect(() => {
+      if (isSuccess) {
+        setToastText(data.message)
+        setToastType("success")
+        dispatch(setUser(data?.data))
+        setTimeout(() => navigate('/dashboard'), 3000)
+        // navigate('/dashboard')
+        // navigate('/dashboard')
+      } else if (isError) {
+        setToastText(error.data.message)
+        setToastType("error")
+        // setErrorText(error.data.message)
+      }
+    }, [isSuccess, isError])
 
  
 
@@ -88,11 +95,7 @@ export default function UserLogin () {
         </div>
 
         {/* error ui */}
-        {errorText && (
-          <div className={userLoginStyle.errorText}>
-            <p>{errorText}</p>
-          </div>
-        )}
+        <Toaster show={!!toastText} type={toastType} message={toastText} onClick={() => setToastText('')}/>
 
         <button
           className={userLoginStyle.loginButton}

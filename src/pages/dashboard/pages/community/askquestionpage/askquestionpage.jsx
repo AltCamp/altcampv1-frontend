@@ -6,6 +6,7 @@ import { ArrowCircleLeft } from 'iconsax-react'
 
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import RichEditor from './../richeditor/richeditor'
+// import Toaster from '../../../../../components/Toaster'
 
 import { useCreateQuestionMutation } from '../../../../../app/slices/apiSlices/communitySlice'
 
@@ -15,7 +16,7 @@ export default function AskQuestionPage () {
   const [body, setBody] = useState('')
   const [emptyTitle, setEmptyTitle] = useState(false)
 
-  const [errorText, setErrorText] = useState('')
+  const [toastText, setToastText] = useState('')
 
   const { question } = useParams()
   const navigate = useNavigate()
@@ -154,11 +155,7 @@ export default function AskQuestionPage () {
         </div>
 
         {/* error message ui */}
-        {errorText && (
-          <div className={askQuestionPageStyles.errorBody}>
-            <p className={askQuestionPageStyles.errorText}>{errorText}</p>
-          </div>
-        )}
+        {/* <Toaster show={!!toastText} type="error" message={toastText}/> */}
 
         {/* succesful message */}
         {isSuccess && (

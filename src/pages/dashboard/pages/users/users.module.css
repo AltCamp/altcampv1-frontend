@@ -27,7 +27,8 @@
     justify-content: space-between;
 }
 .search{
-    width: 45%;
+  flex: 2;
+    /* width: 50%; */
    position: relative;
 }
 .searchicon{
@@ -46,7 +47,8 @@
 }
 .filterList{
     margin-bottom: 1rem;
-    width: 45%;
+    flex: 1;
+    margin-left: 5rem;
 }
 .filterItems{
     list-style-type: none;
@@ -60,7 +62,7 @@
 }
 .filterItem{
     height: 100%;
-    width: 20%;
+    flex: 1;
     font-size: 14px;
    display: inline-flex;
     justify-content: center;
@@ -77,7 +79,7 @@
 }
 .filternavItems{
     list-style-type: none;
-    width: 25%;
+    width: 35%;
     font-size: 13px;
     display: flex;
     justify-content: space-between;
