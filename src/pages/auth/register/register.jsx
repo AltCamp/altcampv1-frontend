@@ -12,6 +12,8 @@ import { useDispatch } from 'react-redux'
 
 import { useRegisterMutation } from '../../../app/slices/apiSlices/authSlice'
 
+import { useVerifyEmailMutation } from '../../../app/slices/apiSlices/accountSlices/accountMutationSlice'
+
 import { useNavigate } from 'react-router-dom'
 
 export default function Register () {
@@ -43,6 +45,16 @@ export default function Register () {
 
   const [register, { data, isLoading, isSuccess, isError, error }] =
     useRegisterMutation()
+
+  const [verifyEmail, {
+    data: verifyEmailData,
+    isLoading: verifyIsLoading,
+    isSuccess: verifyIsSuccess,
+    isError: verifyIsError,
+    error: verifyError
+  }] =
+    useVerifyEmailMutation()
+
 
   const handleStudentRegister = e => {
     e.preventDefault()
@@ -77,7 +89,8 @@ export default function Register () {
     if (isSuccess) {
       // console.log(data)
       dispatch(setUser(data?.data))
-      navigate('/dashboard')
+      verifyEmail()
+      navigate('/account/verifyemail')
     }
     if (isError) {
       setErrorText(error.data.message)
