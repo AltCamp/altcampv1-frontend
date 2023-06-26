@@ -112,7 +112,7 @@ export default function Feed () {
             allPosts?.map(post => <Postcard key={post._id} post={post} />)}
         </div>
 
-        {posts && (
+        {posts && allPosts && (
           <div className={feedStyle.loadMore}>
             <button
               className={feedStyle.seeMoreBtn}

@@ -265,7 +265,7 @@ export default function Register () {
               placeholder=''
               value={password}
               onChange={e => setPassword(e.target.value)}
-              // pattern={passwordPattern}
+              pattern={passwordPattern}
               required
             />
             <img
