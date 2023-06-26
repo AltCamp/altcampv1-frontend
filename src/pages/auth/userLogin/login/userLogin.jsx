@@ -4,7 +4,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom'
 import userLoginStyle from './userLogin.module.css'
 import eyeIcon from '../../../../assets/general/eye.svg'
 import eyeClosedIcon from '../../../../assets/general/eyeclosed.svg'
-import Toaster from '../../../components/Toaster/Toaster'
+
 
 // import apiSLice hook
 import { useLoginMutation } from '../../../../app/slices/apiSlices/authSlice'
@@ -12,6 +12,7 @@ import { useLoginMutation } from '../../../../app/slices/apiSlices/authSlice'
 import { useDispatch } from 'react-redux'
 
 import { setUser } from '../../../../app/slices/generalSlices/userSlice'
+import Toaster from '../../../../components/Toaster/Toaster'
 
 export default function UserLogin () {
   const [showPassword, setShowPassword] = useState(false)
@@ -45,11 +46,11 @@ export default function UserLogin () {
         dispatch(setUser(data?.data))
         setTimeout(() => navigate('/dashboard'), 3000)
         // navigate('/dashboard')
-        navigate('/dashboard')
+        // navigate('/dashboard')
       } else if (isError) {
         setToastText(error.data.message)
         setToastType("error")
-        setErrorText(error.data.message)
+        // setErrorText(error.data.message)
       }
     }, [isSuccess, isError])
 

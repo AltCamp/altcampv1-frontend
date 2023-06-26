@@ -29,7 +29,8 @@ export default function Register () {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
 
-  const [errorText, setErrorText] = useState('')
+  const [toastText, setToastText] = useState('')
+  const [toastType, setToastType] = useState("info")
 
   // regex pattern states
   const [charLength, setCharLength] = useState(false)
@@ -50,7 +51,7 @@ export default function Register () {
     // if (password !== confirmPassword) {
     //   setErrorText('Passwords do not match')
     // } else {
-    setErrorText('')
+    // setErrorText('')
     if (category === 'Student') {
       register({
         firstName,
@@ -77,11 +78,15 @@ export default function Register () {
   useEffect(() => {
     if (isSuccess) {
       // console.log(data)
+      setToastText(data.message)
+      setToastType("success")
       dispatch(setUser(data?.data))
-      navigate('/dashboard')
+      setTimeout(() => navigate('/dashboard'), 3000)
     }
-    if (isError) {
-      setErrorText(error.data.message)
+    else if (isError) {
+      setToastText(error.data.message)
+      setToastType("error")
+      // setErrorText(error.data.message)
     }
   }, [isSuccess, isError])
 
@@ -265,7 +270,7 @@ export default function Register () {
               placeholder=''
               value={password}
               onChange={e => setPassword(e.target.value)}
-              pattern={passwordPattern}
+              // pattern={passwordPattern}
               required
             />
             <img
@@ -346,7 +351,7 @@ export default function Register () {
         </div> */}
 
         {/* error ui */}
-        <Toaster show={!!errorText} type="error" message={errorText}/>
+        <Toaster show={!!toastText} type={toastType} message={toastText} onClick={() => setToastText('')}/>
 
         <button
           type='submit'
