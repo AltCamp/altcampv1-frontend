@@ -29,8 +29,8 @@ export const accountMutationSlice = createApi({
       }),
     }),
     getAllAccounts: builder.query({
-      query: () => ({
-          url: "/accounts",
+      query: (page, limit = 16) => ({
+          url: `/accounts?isPaginated=true&page=${page}&limit=${limit}`,
           method: "GET",
       }),
   }),
