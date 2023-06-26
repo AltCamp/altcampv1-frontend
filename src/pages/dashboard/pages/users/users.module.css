@@ -280,10 +280,12 @@
   
     .filterList {
       width: 100%;
+      /* border: 2px solid red; */
+      margin-left: 0rem;
     }
 
     .filterItem{
-      font-size: 8px;
+      font-size: 10px;
     }
 
     .filternav{
@@ -390,6 +392,7 @@
   
     .filterList {
       width: 100%;
+      margin-left: 0rem
     }
 
     .filterItem{
