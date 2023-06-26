@@ -51,6 +51,8 @@ export default function Postcard ({ post }) {
     setToggleBookmarkModal(!toggleBookmarkModal)
   }
 
+  // console.log(latestPost?.author?._id)
+
   return (
     <>
       {toggleBookmarkModal && (
@@ -71,7 +73,7 @@ export default function Postcard ({ post }) {
               to={
                 user?._id === latestPost?.author?._id
                   ? `/dashboard/account`
-                  : `/dashboard/users/${latestPost?.author._id}`
+                  : `/dashboard/users/${latestPost?.author?._id}`
               }
               className={postCardStyles.avatar}
             >
@@ -94,11 +96,11 @@ export default function Postcard ({ post }) {
                 to={
                   user?._id === latestPost?.author?._id
                     ? `/dashboard/account`
-                    : `/dashboard/users/${latestPost?.author._id}`
+                    : `/dashboard/users/${latestPost?.author?._id}`
                 }
                 className={postCardStyles.name}
               >
-                {latestPost.author.firstName} {latestPost.author.lastName}
+                {latestPost?.author?.firstName} {latestPost?.author?.lastName}
               </Link>
               <div className={postCardStyles.timePosted}>
                 {<ReactTimeAgo date={latestPost.createdAt} locale='en-US' />}
