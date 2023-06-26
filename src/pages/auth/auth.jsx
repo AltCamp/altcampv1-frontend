@@ -28,7 +28,7 @@ export default function Auth() {
       </div>
       <div className={authStyles.authSection}>
         <div className={authStyles.mobileLogo}>
-          <img src={mobileLogo} alt="studybuddy mobile logo" className="" />
+          <img src={mobileLogo} alt="altcamp mobile logo" className="" />
         </div>
 
         <div className={authStyles.authContent}>
