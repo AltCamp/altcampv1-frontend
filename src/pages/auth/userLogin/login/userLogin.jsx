@@ -4,6 +4,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom'
 import userLoginStyle from './userLogin.module.css'
 import eyeIcon from '../../../../assets/general/eye.svg'
 import eyeClosedIcon from '../../../../assets/general/eyeclosed.svg'
+import Toaster from '../../../components/Toaster/Toaster'
 
 // import apiSLice hook
 import { useLoginMutation } from '../../../../app/slices/apiSlices/authSlice'
@@ -18,7 +19,8 @@ export default function UserLogin () {
   const parentPath = useLocation().pathname.split('/')[1]
   // console.log(parentPath)
 
-  const [errorText, setErrorText] = useState('')
+  const [toastText, setToastText] = useState('')
+  const [toastType, setToastType] = useState("info")
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -36,15 +38,20 @@ export default function UserLogin () {
       login({ email: email, password: password })
     }
   
-  useEffect(() => {
-    if (isSuccess) {
-      dispatch(setUser(data?.data))
-      setTimeout(() => navigate('/dashboard'), 1000)
-      // navigate('/dashboard')
-    } else if (isError) {
-      setErrorText(error.data.message)
-    }
-  }, [isSuccess, isError])
+    useEffect(() => {
+      if (isSuccess) {
+        setToastText(data.message)
+        setToastType("success")
+        dispatch(setUser(data?.data))
+        setTimeout(() => navigate('/dashboard'), 3000)
+        // navigate('/dashboard')
+        navigate('/dashboard')
+      } else if (isError) {
+        setToastText(error.data.message)
+        setToastType("error")
+        setErrorText(error.data.message)
+      }
+    }, [isSuccess, isError])
 
  
 
@@ -87,11 +94,7 @@ export default function UserLogin () {
         </div>
 
         {/* error ui */}
-        {errorText && (
-          <div className={userLoginStyle.errorText}>
-            <p>{errorText}</p>
-          </div>
-        )}
+        <Toaster show={!!toastText} type={toastType} message={toastText} onClick={() => setToastText('')}/>
 
         <button
           className={userLoginStyle.loginButton}
