@@ -80,7 +80,6 @@ export default function Register () {
         category
       })
     }
-    // }
   }
 
   useEffect(() => {
@@ -90,7 +89,7 @@ export default function Register () {
       setToastType('success')
       dispatch(setUser(data?.data))
       verifyEmail()
-      setTimeout(() => navigate('/account/verifyemail'), 2000)
+      setTimeout(() => navigate('/dashboard'), 2000)
     } else if (isError) {
       setToastText(error.data.message)
       setToastType('error')
