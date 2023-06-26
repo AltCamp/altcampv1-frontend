@@ -49,6 +49,7 @@ export default function AskQuestionPage () {
     } else if (isError) {
       setToastText(error.data.message)
       setToastType('error')
+      setTimeout(() => setToastText(''), 4000)
     }
   }, [data, isLoading, isSuccess, isError, error])
 

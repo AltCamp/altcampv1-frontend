@@ -199,6 +199,10 @@
     color: var(--neutral-clr-white);
     border: 2px solid var(--secondary-clr-lter-blue);
   }
+  .previousBtn:disabled,.nextBtn:disabled{
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
   
   .active {
     background-color: var(--secondary-clr-lter-blue);
@@ -241,3 +245,23 @@
     border-radius: 4px;
     padding: 0.5rem 0.7rem;
   }
+  .currentPage{
+    color: inherit;
+    font-size: 15px;
+    border: none;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 15px;
+    padding: 0;
+    margin: 0;
+    background-color: inherit;
+  }
+  .currentPage::-webkit-outer-spin-button,
+.currentPage::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.currentPage:focus{
+  outline: none;
+}
