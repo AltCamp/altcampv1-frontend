@@ -111,7 +111,7 @@ export default function Questioncard ({ question }) {
                 to={
                   user?._id === question?.author?._id
                     ? `/dashboard/account`
-                    : `/dashboard/users/${question?.author._id}`
+                    : `/dashboard/users/${question?.author?._id}`
                 }
                 className={questionCardStyles.authorImg}
               >
@@ -132,11 +132,11 @@ export default function Questioncard ({ question }) {
                 to={
                   user?._id === question?.author?._id
                     ? `/dashboard/account`
-                    : `/dashboard/users/${question?.author._id}`
+                    : `/dashboard/users/${question?.author?._id}`
                 }
                 className={questionCardStyles.authorName}
               >
-                {question.author.firstName} {question.author.lastName}
+                {question.author?.firstName} {question.author?.lastName}
               </Link>
             </div>
             <span className={questionCardStyles.authorDivider}>|</span>

@@ -44,7 +44,7 @@ export default function UserLogin () {
         setToastText(data.message)
         setToastType("success")
         dispatch(setUser(data?.data))
-        setTimeout(() => navigate('/dashboard'), 3000)
+        setTimeout(() => navigate('/dashboard'), 2000)
         // navigate('/dashboard')
         // navigate('/dashboard')
       } else if (isError) {
