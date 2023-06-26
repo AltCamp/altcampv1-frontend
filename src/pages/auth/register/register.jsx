@@ -94,6 +94,7 @@ export default function Register () {
     } else if (isError) {
       setToastText(error.data.message)
       setToastType('error')
+      setTimeout(() => setToastText(''), 4000)
       // setErrorText(error.data.message)
     }
   }, [isSuccess, isError])
