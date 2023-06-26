@@ -5,7 +5,6 @@ import { NavLink, useNavigate } from 'react-router-dom'
 
 // import link icons
 
-import { useGetAllBookmarksQuery } from '../../../../app/slices/apiSlices/bookmarkSlice'
 
 import {
   Airdrop,
@@ -45,32 +44,6 @@ export default function Sidebar ({ toggleSideBar, handleSideBar }) {
   const user = useSelector(state => state?.user.user)
 
   // console.log(decode(user.token).exp)
-  console.log(JSON.parse(localStorage.getItem('user')).user.emailIsVerified)
-
-
-  const {
-    data: bookmarks,
-    isSuccess: bookmarksSuccess,
-    isLoading: bookmarksLoading,
-    isError: bookmarksError,
-    error: bookmarksErrors
-  } = useGetAllBookmarksQuery()
-
-  // store bookmarks in local storage on page load
-  useEffect(() => {
-    if (bookmarksSuccess) {
-      // save bookmarks to local storage
-      localStorage.setItem(
-        'bookmarks',
-        JSON.stringify(bookmarks?.data?.map(bookmark => {
-          return {
-            postId: bookmark.post._id,
-            bookmarkId: bookmark._id
-          }
-        }))
-      )
-    }
-  }, [bookmarksSuccess, bookmarks?.data?.map(bookmark => bookmark.post._id)])
 
   const toggleWidth = window.innerWidth < 950
 

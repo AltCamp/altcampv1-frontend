@@ -6,9 +6,9 @@ import { ArrowCircleLeft } from 'iconsax-react'
 
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import RichEditor from './../richeditor/richeditor'
-// import Toaster from '../../../../../components/Toaster'
 
 import { useCreateQuestionMutation } from '../../../../../app/slices/apiSlices/communitySlice'
+import Toaster from '../../../../../components/Toaster/Toaster'
 
 
 export default function AskQuestionPage () {
@@ -17,6 +17,7 @@ export default function AskQuestionPage () {
   const [emptyTitle, setEmptyTitle] = useState(false)
 
   const [toastText, setToastText] = useState('')
+  const [toastType, setToastType] = useState('info')
 
   const { question } = useParams()
   const navigate = useNavigate()
@@ -43,9 +44,11 @@ export default function AskQuestionPage () {
   useEffect(() => {
     if (isSuccess) {
       // console.log('data:', data)
-      setErrorText('')
+      setToastText(data.message)
+      setToastType('success')
     } else if (isError) {
-      setErrorText(error.data.message)
+      setToastText(error.data.message)
+      setToastType('error')
     }
   }, [data, isLoading, isSuccess, isError, error])
 
@@ -155,8 +158,12 @@ export default function AskQuestionPage () {
         </div>
 
         {/* error message ui */}
-        {/* <Toaster show={!!toastText} type="error" message={toastText}/> */}
-
+        <Toaster
+          show={!!toastText}
+          type={toastType}
+          message={toastText}
+          onClick={() => setToastText('')}
+        />
         {/* succesful message */}
         {isSuccess && (
           <div className={askQuestionPageStyles.successBody}>

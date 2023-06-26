@@ -30,7 +30,11 @@
   top: 50px;
   width: 400px;
   z-index: 120;
-  animation: slideIn 500ms ease-in-out;
+  animation-name: slideIn, slideOut;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0s, 4s;
 }
 
 .toastTitle {
@@ -70,5 +74,39 @@
   }
   to {
     transform: translateX(0px);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0px);
+  }
+  to {
+    transform: translateX(500px);
+  }
+}
+
+
+@media (max-width: 600px) {
+  .toast {
+    width: 300px;
+    right: 15px;
+    padding: 10px;
+  }
+
+  .toastTitle {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 400px) {
+  .toast {
+    width: 250px;
+    right: 15px;
+    padding: 10px;
+  }
+
+  .toastTitle {
+    font-size: 14px;
   }
 }
