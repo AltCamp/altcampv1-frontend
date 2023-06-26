@@ -52,6 +52,9 @@
   line-height: 1.125rem;
   color: #939598;
   margin-bottom: 0.5rem;
+  
+  display: flex;
+  justify-content: space-between;
 }
 .poster {
   font-weight: 700;
@@ -60,35 +63,6 @@
 
 .dated {
   font-weight: 400;
-}
-
-.bottomIcons {
-  display: flex;
-  justify-content: space-between;
-}
-
-.buttonContainer {
-  display: flex;
-  gap: 1rem;
-}
-
-.buttonContainer {
-  font-size: 0.75rem;
-  font-weight: 400;
-  line-height: 1.188rem;
-  color: #636466;
-}
-
-.buttonContainer .numbers {
-  font-size: 0.688rem;
-  line-height: 1rem;
-}
-
-.bodyButton {
-  display: flex;
-  gap: 0.25rem;
-  align-items: center;
-  color: #636466;
 }
 
 .cardLink {

@@ -318,18 +318,18 @@ export default function Questionpage () {
                     </div>
                     <Link
                       to={
-                        user?._id === questionDetails?.author._id
+                        user?._id === questionDetails?.author?._id
                           ? `/dashboard/account`
-                          : `/dashboard/users/${questionDetails?.author._id}`
+                          : `/dashboard/users/${questionDetails?.author?._id}`
                       }
                       className={questionPageStyles.authorName}
                     >
-                      {questionDetails?.author.firstName}{' '}
-                      {questionDetails?.author.lastName}
+                      {questionDetails?.author?.firstName}{' '}
+                      {questionDetails?.author?.lastName}
                     </Link>
                   </div>
 
-                  {user?._id === questionDetails?.author._id && (
+                  {user?._id === questionDetails?.author?._id && (
                     <Link
                       to={`/dashboard/community/editquestion`}
                       state={{
@@ -404,7 +404,7 @@ export default function Questionpage () {
                     </div>
                   </div>
                   <div className={questionPageStyles.icons}>
-                    {user?._id === questionDetails?.author._id && (
+                    {user?._id === questionDetails?.author?._id && (
                       <Trash
                         size='20'
                         className={questionPageStyles.icon}
