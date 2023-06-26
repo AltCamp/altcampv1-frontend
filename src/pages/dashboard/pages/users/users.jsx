@@ -1,56 +1,26 @@
 // import Empty from '../../empty/empty'
-import React, { useState, useEffect } from 'react'
-import userStyles from './users.module.css'
-import searchicon from '../../../../assets/icons/searchicon.png'
-import { useGetAllAccountsQuery } from '../../../../app/slices/apiSlices/accountSlices/accountMutationSlice'
-import { useGetAccountsByCategoryQuery } from '../../../../app/slices/apiSlices/accountSlices/accountMutationSlice'
-import { ProfileCircle } from 'iconsax-react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
+import userStyles from "./users.module.css";
+import searchicon from "../../../../assets/icons/searchicon.png";
+import { useGetAllAccountsQuery } from "../../../../app/slices/apiSlices/accountSlices/accountMutationSlice";
+import { useGetAccountsByCategoryQuery } from "../../../../app/slices/apiSlices/accountSlices/accountMutationSlice";
+import { ProfileCircle } from "iconsax-react";
+import { Link } from "react-router-dom";
 
-export default function Users () {
+export default function Users() {
+  const [pageNo, setPageNo] = useState(1);
 
-  // const [filter, setFilter] = useState("")
-    // get all accounts
-    const { data, isLoading, isSuccess, isError, error } =
-    useGetAllAccountsQuery()
+  const { data, isLoading, isSuccess, isError, error } =
+    useGetAllAccountsQuery(pageNo);
 
-  // get accounts by category(filter by category)
-  // const {data: category, isLoading: categoryLoading, isSuccess: categorySuccess, isError: categoryError, error: categoryErr} = useGetAccountsByCategoryQuery(filter)
+  const { meta, data: users } = data || [];
 
-  const [display, setDisplay] = useState('')
-  const [totalpage, setTotalPage] = useState(0)
-  const [pageNo, setPageNo] = useState(1)
-  // const [cat, setCat] = useState("")
+  const [pages, setPages] = useState(meta?.currentPage || 1);
 
   useEffect(() => {
-    if (isSuccess) {
-      const userData = data?.data
-      const totalPage = Math.ceil(userData.length / 16)
-      const user_per_page = 16
-      const start = (pageNo - 1) * user_per_page
-      const end = start + user_per_page
-      const info = userData.slice(start, end)
-      setTotalPage(totalPage)
-      setDisplay(info)
-    }
-  }, [isSuccess, pageNo])
-
-
-  // const handleFilter = (e) => {
-  //   e.preventDefault();
-  //   let filterTarget = e.target.innerText
-  //   if(filterTarget === 'All'){
-  //     return
-  //   }else {
-  //     setFilter(filterTarget)
-  //     setCat(category?.data)
-  //   }
-  // }
-
-  const btn = []
-  for (let i = 1; i < totalpage + 1; i++) {
-    btn.push(i)
-  }
+    setPages(meta?.currentPage);
+  }, [meta?.currentPage]);
 
   return (
     <main className={userStyles.container}>
@@ -62,16 +32,20 @@ export default function Users () {
         <div className={userStyles.line}></div>
         <aside className={userStyles.filter}>
           <div className={userStyles.search}>
-            <input type='text' placeholder='search users' />
+            <input type="text" placeholder="search users" />
             <span className={userStyles.searchicon}>
-              <img src={searchicon} alt='' />
+              <img src={searchicon} alt="" />
             </span>
           </div>
           <div className={userStyles.filterList}>
             <ul className={userStyles.filterItems}>
               <li className={userStyles.filterItem}>All</li>
-              <li className={userStyles.filterItem}
-              onClick={(e) => handleFilter(e)}>Student</li>
+              <li
+                className={userStyles.filterItem}
+                onClick={(e) => handleFilter(e)}
+              >
+                Student
+              </li>
               <li className={userStyles.filterItem}>Mentor</li>
             </ul>
           </div>
@@ -88,22 +62,21 @@ export default function Users () {
       </section>
       {/* list of users */}
       <section className={userStyles.middle}>
-        {(isLoading) && (
+        {isLoading && (
           <div className={userStyles.loading}>
             <div className={userStyles.loader}></div>
           </div>
         )}
         <aside className={userStyles.body}>
-          { (isSuccess) &&
-            display &&
-            display.map((user, index) => {
+          {isSuccess &&
+            users.map((user, index) => {
               return (
                 <div className={userStyles.user} key={index}>
                   <div className={userStyles.userImg}>
                     {user.profilePicture ? (
-                      <img src={user.profilePicture} alt='' />
+                      <img src={user.profilePicture} alt="" />
                     ) : (
-                      <ProfileCircle size={45} color='#555555' />
+                      <ProfileCircle size={45} color="#555555" />
                     )}
                   </div>
                   <div className={userStyles.userDetails}>
@@ -115,11 +88,13 @@ export default function Users () {
                         {user.firstName} {user.lastName}
                       </p>
                     </Link>
-                    <p className={userStyles.userLocation}>{user.accountType}</p>
+                    <p className={userStyles.userLocation}>
+                      {user.accountType}
+                    </p>
                     <p className={userStyles.track}>{user.track}</p>
                   </div>
                 </div>
-              )
+              );
             })}
         </aside>
       </section>
@@ -130,38 +105,56 @@ export default function Users () {
           <div className={userStyles.pagination}>
             <button
               className={userStyles.previousBtn}
-              // onClick={setPageNo((prev) => prev - 1)}
-              disabled={pageNo <= 1}
+              onClick={() => setPageNo((prev) => prev - 1)}
+              disabled={meta?.currentPage <= 1}
             >
               Previous
             </button>
-            {totalpage > 0 &&
-              btn.map((item, index) => {
-                return (
-                  <button
-                    className={userStyles.pageBtn}
-                    key={index}
-                    onClick={() => setPageNo(item)}
-                  >
-                    {item}
-                  </button>
-                )
-              })}
+            {[...Array(meta?.totalPages)].map((i, index) => {
+              return (
+                <button
+                  className={userStyles.pageBtn}
+                  key={index}
+                  style={{
+                    backgroundColor:
+                      meta?.currentPage === index + 1
+                        ? "var(--secondary-clr-lter-blue)"
+                        : "",
+                    color: meta?.currentPage === index + 1 ? "#FFFFFF" : "",
+                  }}
+                  onClick={() => setPageNo(index + 1)}
+                >
+                  {index + 1}
+                </button>
+              );
+            })}
             <button
               className={userStyles.nextBtn}
-              // onClick={setPageNo((prev) => prev + 1)}
-              disabled={pageNo >= totalpage}
+              onClick={() => setPageNo((prev) => prev + 1)}
+              disabled={meta?.currentPage === meta?.totalPages}
             >
               Next
             </button>
             <div className={userStyles.pageCount}>
-              <span className={userStyles.currentPage}>1</span>
+              <input
+                type="number"
+                className={userStyles.currentPage}
+                value={pages}
+                onChange={(e) => {
+                  setPages(e.target.value);
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    setPageNo(pages);
+                  }
+                }}
+              />
               <span className={userStyles.divider}>/</span>
-              <span className={userStyles.totalPage}>60</span>
+              <span className={userStyles.totalPage}>{meta?.totalPages}</span>
             </div>
           </div>
         )}
       </section>
     </main>
-  )
+  );
 }
