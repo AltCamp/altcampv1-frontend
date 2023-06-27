@@ -140,7 +140,7 @@
   }
 }
 
-@media (max-width: 450px) {
+@media (max-width: 500px) {
   .accountLinks {
     display: inline-flex !important;
   }

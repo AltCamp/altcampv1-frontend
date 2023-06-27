@@ -254,7 +254,7 @@
         right: 61%;
     }
 }
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 550px) {
     .full_panel_right{
         width: 100%;
         height: 100%;

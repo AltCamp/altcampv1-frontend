@@ -4,15 +4,32 @@ import { useSearchParams } from "react-router-dom";
 import userStyles from "./users.module.css";
 import searchicon from "../../../../assets/icons/searchicon.png";
 import { useGetAllAccountsQuery } from "../../../../app/slices/apiSlices/accountSlices/accountMutationSlice";
+import { useGetSearchedAccountsQuery } from "../../../../app/slices/apiSlices/accountSlices/accountMutationSlice";
 import { useGetAccountsByCategoryQuery } from "../../../../app/slices/apiSlices/accountSlices/accountMutationSlice";
 import { ProfileCircle } from "iconsax-react";
 import { Link } from "react-router-dom";
 
 export default function Users() {
-  const [pageNo, setPageNo] = useState(1);
+  const [page, setPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState('tobi');
+  const [accountType, setAccountType] = useState('Student')
 
   const { data, isLoading, isSuccess, isError, error } =
-    useGetAllAccountsQuery(pageNo);
+    useGetAllAccountsQuery({accountType, page});
+
+  const handleFilter = (e) => {
+    e.preventDefault();
+    if(e.target.innerText === 'All'){
+      setAccountType('');
+    }else{
+      setAccountType(e.target.innerText);
+    }
+    
+  }
+
+  // const { data: searchData, isLoading: searchLoading, isSuccess: searchSuccess, isError: searchError, error: searchErr } = useGetSearchedAccountsQuery(searchTerm)
+
+  // console.log(searchData)
 
   const { meta, data: users } = data || [];
 
@@ -39,14 +56,28 @@ export default function Users() {
           </div>
           <div className={userStyles.filterList}>
             <ul className={userStyles.filterItems}>
-              <li className={userStyles.filterItem}>All</li>
+              <li className={userStyles.filterItem}
+              style={{ backgroundColor: accountType === 'All' ? 'var(--primary-clr-black)' : '',
+              color: accountType === 'All' ? '#fff' : '',
+              border: accountType === 'All' ? '1px solid var(--primary-clr-black)' : '',
+            opacity: 0.3}}
+              // onClick={(e) => handleFilter(e)}
+              >All</li>
               <li
                 className={userStyles.filterItem}
-                onClick={(e) => handleFilter(e)}
+                style={{ backgroundColor: accountType === 'Student' ? 'var(--primary-clr-black)' : '',
+              color: accountType === 'Student' ? '#fff' : '',
+              border: accountType === 'Student' ? '1px solid var(--primary-clr-black)' : ''
+                }}
+              onClick={(e) => handleFilter(e)}
               >
                 Student
               </li>
-              <li className={userStyles.filterItem}>Mentor</li>
+              <li className={userStyles.filterItem}
+              style={{ backgroundColor: accountType === 'Mentor' ? 'var(--primary-clr-black)' : '',
+              color: accountType === 'Mentor' ? '#fff' : '',
+              border: accountType === 'Mentor' ? '1px solid var(--primary-clr-black)' : ''}}
+              onClick={(e) => handleFilter(e)}>Mentor</li>
             </ul>
           </div>
         </aside>
@@ -105,7 +136,7 @@ export default function Users() {
           <div className={userStyles.pagination}>
             <button
               className={userStyles.previousBtn}
-              onClick={() => setPageNo((prev) => prev - 1)}
+              onClick={() => setPage((prev) => prev - 1)}
               disabled={meta?.currentPage <= 1}
             >
               Previous
@@ -122,7 +153,7 @@ export default function Users() {
                         : "",
                     color: meta?.currentPage === index + 1 ? "#FFFFFF" : "",
                   }}
-                  onClick={() => setPageNo(index + 1)}
+                  onClick={() => setPage(index + 1)}
                 >
                   {index + 1}
                 </button>
@@ -130,7 +161,7 @@ export default function Users() {
             })}
             <button
               className={userStyles.nextBtn}
-              onClick={() => setPageNo((prev) => prev + 1)}
+              onClick={() => setPage((prev) => prev + 1)}
               disabled={meta?.currentPage === meta?.totalPages}
             >
               Next
@@ -145,7 +176,7 @@ export default function Users() {
                 }}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
-                    setPageNo(pages);
+                    setPage(pages);
                   }
                 }}
               />
