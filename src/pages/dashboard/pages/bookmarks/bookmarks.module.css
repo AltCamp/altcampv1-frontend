@@ -29,8 +29,8 @@
   border: 5px solid #f3f3f3;
   border-top: 5px solid var(--secondary-clr-lter-blue);
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 3.125rem;
+  height: 3.125rem;
   animation: spin 1s linear infinite;
 }
 
@@ -61,7 +61,7 @@
 }
 
 .noBookmark p {
-  width: 421px;
+  width: 26.313rem;
   text-align: center;
   font-weight: 600;
   font-size: 1.125rem;
@@ -385,7 +385,7 @@
   .previousBtn,
   .nextBtn {
     padding: 0.5rem 0.7rem;
-    font-size: 12px;
+    font-size: 0.75rem;
   }
 
   .pageBtn {
