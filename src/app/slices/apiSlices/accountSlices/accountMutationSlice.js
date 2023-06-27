@@ -29,11 +29,17 @@ export const accountMutationSlice = createApi({
       }),
     }),
     getAllAccounts: builder.query({
-      query: (page, limit = 16) => ({
-          url: `/accounts?isPaginated=true&page=${page}&limit=${limit}`,
+      query: ({accountType, page,limit = 16}) => ({
+          url: `/accounts?category=${accountType}&isPaginated=true&page=${page}&limit=${limit}`,
           method: "GET",
       }),
   }),
+  getSearchedAccounts: builder.query({
+    query: (searchTerm) => ({
+        url: `/accounts?searchTerm=${searchTerm}&isPaginated=true`,
+        method: "GET",
+  }),
+}),
   getAccountsByCategory: builder.query({
     query: (accountType)=> ({
       url: `/accounts/category=${accountType}`,
@@ -57,4 +63,4 @@ export const accountMutationSlice = createApi({
 });
 
 export const { useUpdateProfilePictureMutation, useUpdateBioMutation, useGetAllAccountsQuery, useGetAccountByIdQuery, useUpdateDetailsMutation, 
-useGetAccountsByCategoryQuery } = accountMutationSlice;
+useGetAccountsByCategoryQuery, useGetSearchedAccountsQuery } = accountMutationSlice;

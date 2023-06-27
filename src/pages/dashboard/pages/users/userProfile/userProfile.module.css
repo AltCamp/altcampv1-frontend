@@ -74,3 +74,54 @@
 .profileBioNoText{
     opacity: 0.5;
 }
+@media screen and (max-width: 600px) {
+    .profileTop{
+        flex-direction: column;
+        align-items: center;
+        width: 95%;
+    }
+    .profileTopName{
+        width: 100%;
+        display: inline-flex;
+        justify-content: center;
+    }
+    .profileTopLeft{
+        width: 100%;
+        display: inline-flex;
+        justify-content: center;
+        margin: 0 auto 1rem auto;
+        width: fit-content;
+    }
+    .profileTopLeft span{
+        width: fit-content;
+        margin: 0;
+    }
+    .profileTopLeft img{
+        width: fit-content;
+    }
+    .profileTopRight{
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        /* overflow-x: hidden; */
+    }
+    .profileTopRightTop{
+        width: 100%;
+        margin: 0 auto;
+        overflow-x: hidden;
+        
+}
+.profileTopRightTop p span{
+    left: 150px;
+}
+}
+@media (min-width: 601px) and (max-width: 700px){
+    .profileTop{
+        width: 100%;
+    }
+    .profileTopLeft span{
+        margin-right: 2rem;
+    }
+
+}
