@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { baseQuery } from "../../../constants/api";
 
+
 export const accountMutationSlice = createApi({
   reducerPath: "accountMutationApi",
   baseQuery,
@@ -21,7 +22,7 @@ export const accountMutationSlice = createApi({
       }),
     }),
     updateBio: builder.mutation({
-      query: (body) => ({
+      query: body => ({
         url: "/accounts/bio",
         method: "PUT",
         body,
@@ -32,7 +33,6 @@ export const accountMutationSlice = createApi({
           url: `/accounts?category=${accountType}&isPaginated=true&page=${page}&limit=${limit}`,
           method: "GET",
       }),
-<<<<<<< HEAD
   }),
   getSearchedAccounts: builder.query({
     query: (searchTerm) => ({
@@ -46,9 +46,6 @@ export const accountMutationSlice = createApi({
       method: 'GET',
     })
   }),
-  getAccountById: builder.query({
-=======
-    }),
     getAccountsByCategory: builder.query({
       query: (accountType) => ({
         url: `/accounts/category=${accountType}`,
@@ -56,19 +53,18 @@ export const accountMutationSlice = createApi({
       }),
     }),
     getAccountById: builder.query({
->>>>>>> ea51685944883d423e6218d7babefb419210de45
       query: (accountId) => ({
-        url: `/accounts/${accountId}`,
-        method: "GET",
+          url: `/accounts/${accountId}`,
+          method: "GET",
       }),
-    }),
-    updateDetails: builder.mutation({
+  }),
+  updateDetails: builder.mutation({
       query: (body) => ({
-        url: "/accounts",
-        method: "PUT",
-        body,
+          url: "/accounts",
+          method: "PUT",
+          body,
       }),
-    }),
+  }),
     verifyEmail: builder.mutation({
       query: (body) => ({
         url: "/auth/verify-email",
@@ -86,18 +82,7 @@ export const accountMutationSlice = createApi({
   }),
 });
 
-<<<<<<< HEAD
 export const { useUpdateProfilePictureMutation, useUpdateBioMutation, useGetAllAccountsQuery, useGetAccountByIdQuery, useUpdateDetailsMutation, 
-useGetAccountsByCategoryQuery, useGetSearchedAccountsQuery } = accountMutationSlice;
-=======
-export const {
-  useUpdateProfilePictureMutation,
-  useUpdateBioMutation,
-  useGetAllAccountsQuery,
-  useGetAccountByIdQuery,
-  useUpdateDetailsMutation,
-  useGetAccountsByCategoryQuery,
-  useVerifyEmailMutation,
-  useVerifyOtpMutation
-} = accountMutationSlice;
->>>>>>> ea51685944883d423e6218d7babefb419210de45
+useGetAccountsByCategoryQuery, useGetSearchedAccountsQuery, useVerifyEmailMutation,
+useVerifyOtpMutation } = accountMutationSlice;
+
