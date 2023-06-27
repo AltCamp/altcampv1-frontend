@@ -11,20 +11,28 @@ import { Link } from "react-router-dom";
 
 export default function Users() {
   const [page, setPage] = useState(1);
-  const [searchTerm, setSearchTerm] = useState('tobi');
-  const [accountType, setAccountType] = useState('Student')
+  const [searchTerm, setSearchTerm] = useState("");
+  const [accountType, setAccountType] = useState("");
 
-  const { data, isLoading, isSuccess, isError, error } =
-    useGetAllAccountsQuery({accountType, page});
+  const { data, isLoading, isSuccess, isError, error } = useGetAllAccountsQuery(
+    { accountType,searchTerm, page }
+  );
 
   const handleFilter = (e) => {
     e.preventDefault();
-    if(e.target.innerText === 'All'){
-      setAccountType('');
-    }else{
+    if (e.target.innerText === "All") {
+      setAccountType("");
+    } else {
       setAccountType(e.target.innerText);
     }
-    
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setSearchTerm(e.target.value);
+    // if(e.target.value === ""){
+    //   setAccountType("");
+    // }
   }
 
   // const { data: searchData, isLoading: searchLoading, isSuccess: searchSuccess, isError: searchError, error: searchErr } = useGetSearchedAccountsQuery(searchTerm)
@@ -49,39 +57,63 @@ export default function Users() {
         <div className={userStyles.line}></div>
         <aside className={userStyles.filter}>
           <div className={userStyles.search}>
-            <input type="text" placeholder="search users" />
+            <input type="text" placeholder="search users" value={searchTerm}
+            onChange={(e)=> handleSearch(e)}/>
             <span className={userStyles.searchicon}>
               <img src={searchicon} alt="" />
             </span>
           </div>
           <div className={userStyles.filterList}>
             <ul className={userStyles.filterItems}>
-              <li className={userStyles.filterItem}
-              style={{ backgroundColor: accountType === 'All' ? 'var(--primary-clr-black)' : '',
-              color: accountType === 'All' ? '#fff' : '',
-              border: accountType === 'All' ? '1px solid var(--primary-clr-black)' : '',
-            opacity: 0.3}}
-              // onClick={(e) => handleFilter(e)}
-              >All</li>
               <li
                 className={userStyles.filterItem}
-                style={{ backgroundColor: accountType === 'Student' ? 'var(--primary-clr-black)' : '',
-              color: accountType === 'Student' ? '#fff' : '',
-              border: accountType === 'Student' ? '1px solid var(--primary-clr-black)' : ''
+                style={{
+                  backgroundColor:
+                    accountType === "" ? "var(--primary-clr-black)" : "",
+                  color: accountType === "" ? "#fff" : "",
+                  border:
+                    accountType === ""
+                      ? "1px solid var(--primary-clr-black)"
+                      : "",
                 }}
-              onClick={(e) => handleFilter(e)}
+                onClick={(e) => handleFilter(e)}
+              >
+                All
+              </li>
+              <li
+                className={userStyles.filterItem}
+                style={{
+                  backgroundColor:
+                    accountType === "Student" ? "var(--primary-clr-black)" : "",
+                  color: accountType === "Student" ? "#fff" : "",
+                  border:
+                    accountType === "Student"
+                      ? "1px solid var(--primary-clr-black)"
+                      : "",
+                }}
+                onClick={(e) => handleFilter(e)}
               >
                 Student
               </li>
-              <li className={userStyles.filterItem}
-              style={{ backgroundColor: accountType === 'Mentor' ? 'var(--primary-clr-black)' : '',
-              color: accountType === 'Mentor' ? '#fff' : '',
-              border: accountType === 'Mentor' ? '1px solid var(--primary-clr-black)' : ''}}
-              onClick={(e) => handleFilter(e)}>Mentor</li>
+              <li
+                className={userStyles.filterItem}
+                style={{
+                  backgroundColor:
+                    accountType === "Mentor" ? "var(--primary-clr-black)" : "",
+                  color: accountType === "Mentor" ? "#fff" : "",
+                  border:
+                    accountType === "Mentor"
+                      ? "1px solid var(--primary-clr-black)"
+                      : "",
+                }}
+                onClick={(e) => handleFilter(e)}
+              >
+                Mentor
+              </li>
             </ul>
           </div>
         </aside>
-        <aside className={userStyles.filternav}>
+        {/* <aside className={userStyles.filternav}>
           <ul className={userStyles.filternavItems}>
             <li className={userStyles.filternavItem}>week</li>
             <li className={userStyles.filternavItem}>month</li>
@@ -89,7 +121,7 @@ export default function Users() {
             <li className={userStyles.filternavItem}>year</li>
             <li className={userStyles.filternavItem}>all</li>
           </ul>
-        </aside>
+        </aside> */}
       </section>
       {/* list of users */}
       <section className={userStyles.middle}>

@@ -29,8 +29,13 @@ export const accountMutationSlice = createApi({
       }),
     }),
     getAllAccounts: builder.query({
-      query: ({accountType, page,limit = 16}) => ({
-          url: `/accounts?category=${accountType}&isPaginated=true&page=${page}&limit=${limit}`,
+      query: ({accountType,searchTerm, page,limit = 16}) => ({
+          url: searchTerm && accountType ? `/accounts?category=${accountType}&searchTerm=${searchTerm}&isPaginated=true&page=${page}&limit=${limit}` :
+          !accountType && searchTerm ? `/accounts?searchTerm=${searchTerm}&isPaginated=true&page=${page}&limit=${limit}`: 
+          accountType && !searchTerm ? `/accounts?category=${accountType}&isPaginated=true&page=${page}&limit=${limit}`:
+          `/accounts?&isPaginated=true&page=${page}&limit=${limit}`
+          // url: `/accounts?category=${accountType}&searchTerm=${searchTerm}&isPaginated=true&page=${page}&limit=${limit}`,
+        ,
           method: "GET",
       }),
   }),
