@@ -7,8 +7,8 @@ export const bookmarkSlice = createApi({
   tagTypes: ["Bookmark"],
   endpoints: (builder) => ({
     getAllBookmarks: builder.query({
-      query: () => ({
-        url: "/bookmarks",
+      query: ({page, limit = 10}) => ({
+        url: `/bookmarks?isPaginated=true&page=${page}&limit=${limit}`,
         method: "GET",
       }),
       providesTags: ["Bookmark"],

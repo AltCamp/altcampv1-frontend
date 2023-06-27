@@ -5,6 +5,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 
 // import link icons
 
+
 import {
   Airdrop,
   Bookmark,
@@ -21,7 +22,7 @@ import {
   ArrowRight2,
   KeySquare,
   ProfileRemove,
-  ColorSwatch,
+  ColorSwatch
 } from 'iconsax-react'
 
 import { useSelector, useDispatch } from 'react-redux'
@@ -150,7 +151,7 @@ export default function Sidebar ({ toggleSideBar, handleSideBar }) {
         <div className={sidebarStyle.navGroup}>
           <h2>PERSONAL</h2>
           <div className=''>
-              {/* links for all accounts in mobile media query */}
+            {/* links for all accounts in mobile media query */}
             <NavLink
               to='/dashboard/account'
               className={sidebarStyle.link}
@@ -162,7 +163,7 @@ export default function Sidebar ({ toggleSideBar, handleSideBar }) {
             </NavLink>
             <div className={sidebarStyle.accountLinks}>
               <NavLink
-                to="/dashboard/account"
+                to='/dashboard/account'
                 className={sidebarStyle.link}
                 style={({ isActive }) => (isActive ? activeStyle : undefined)}
                 end
@@ -173,7 +174,7 @@ export default function Sidebar ({ toggleSideBar, handleSideBar }) {
                 <span> My Profile </span>
               </NavLink>
               <NavLink
-                to="/dashboard/account/myprojects"
+                to='/dashboard/account/myprojects'
                 className={sidebarStyle.link}
                 style={({ isActive }) => (isActive ? activeStyle : undefined)}
               >
@@ -184,7 +185,7 @@ export default function Sidebar ({ toggleSideBar, handleSideBar }) {
               </NavLink>
               <NavLink
                 className={sidebarStyle.link}
-                to="/dashboard/account/resetpassword"
+                to='/dashboard/account/resetpassword'
                 style={({ isActive }) => (isActive ? activeStyle : undefined)}
               >
                 <span>
@@ -194,7 +195,7 @@ export default function Sidebar ({ toggleSideBar, handleSideBar }) {
               </NavLink>
               <NavLink
                 className={sidebarStyle.link}
-                to="/dashboard/account/deactivateaccount"
+                to='/dashboard/account/deactivateaccount'
                 style={({ isActive }) => (isActive ? activeStyle : undefined)}
               >
                 <span>

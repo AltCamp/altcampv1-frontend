@@ -19,9 +19,15 @@ TimeAgo.addLocale(ru)
 import { store } from './app/store'
 import { Provider } from 'react-redux'
 
-
 // import components for Authentication
-import { ForgotPassword, LoginGroup, UserLogin, Auth, Register } from './pages/auth'
+import {
+  ForgotPassword,
+  LoginGroup,
+  UserLogin,
+  Auth,
+  Register,
+  VerifyEmail
+} from './pages/auth'
 
 import Landing from './pages/landing/landing'
 
@@ -55,7 +61,7 @@ import {
 
   // subpages of feed
   Createpost,
-  Postpage,
+  Postpage
 } from './pages/dashboard/pages'
 import Updatebio from './pages/dashboard/pages/account/updatebio/updateBio'
 import UserProfile from './pages/dashboard/pages/users/userProfile/userProfile'
@@ -70,12 +76,13 @@ const router = createBrowserRouter([
   {
     path: '/account',
     element: <Auth />,
-    loader: () => {
-      if (localStorage.getItem('user')) {
-        return redirect('/dashboard')
-      }
-      return null
-    },
+    // loader: () => {
+    //   if (JSON.parse(localStorage.getItem('user'))?.user.emailIsVerified) {
+    //     return redirect('/dashboard')
+    //   } else {
+    //     return redirect('/account/verifyemail')
+    //   }
+    // },
     children: [
       {
         path: '/account/login',
@@ -99,6 +106,10 @@ const router = createBrowserRouter([
     ]
   },
   {
+    path: '/account/verifyemail',
+    element: <VerifyEmail />
+  },
+  {
     path: '/dashboard',
     element: <Layout />,
     errorElement: <Error />,
@@ -111,7 +122,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Feed />,
+        element: <Feed />
       },
       {
         path: '/dashboard/post/:postId',
