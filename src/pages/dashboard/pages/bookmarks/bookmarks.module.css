@@ -29,8 +29,8 @@
   border: 5px solid #f3f3f3;
   border-top: 5px solid var(--secondary-clr-lter-blue);
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 3.125rem;
+  height: 3.125rem;
   animation: spin 1s linear infinite;
 }
 
@@ -61,7 +61,7 @@
 }
 
 .noBookmark p {
-  width: 421px;
+  width: 26.313rem;
   text-align: center;
   font-weight: 600;
   font-size: 1.125rem;
@@ -206,9 +206,9 @@
   width: 100%;
   font-family: var(--Poppins);
   margin-top: 1rem;
-   position: absolute;
-  bottom: 10px;
-  right: 140px;
+  position: absolute;
+  bottom: 0.625rem;
+  right: 8.75rem;
 }
 
 .previousBtn,
@@ -291,7 +291,7 @@
 
 .pageCount {
   color: #bfbfbf;
-  font-size: 14px;
+  font-size: 0.875rem;
   border: 2px solid #e9ebec;
   border-radius: 4px;
   padding: 0.5rem 0.7rem;
@@ -299,7 +299,7 @@
 
 /* Media Query */
 @media (max-width: 1100px) {
-   .previousBtn,
+  .previousBtn,
   .nextBtn {
     padding: 0.5rem 1rem;
   }
@@ -328,6 +328,7 @@
   .pagination {
     justify-content: center;
     height: 3rem;
+    right: 0;
   }
 }
 @media (max-width: 1015px) and (min-width: 950px) {
@@ -335,6 +336,7 @@
     justify-content: center;
   }
 }
+
 @media (max-width: 750px) {
   .pagination {
     justify-content: center;
@@ -351,16 +353,30 @@
   }
 }
 
-.previousBtn,
-.nextBtn,
-.pageBtn,
-.pageCount {
-  font-weight: 400;
-  font-size: 0.7rem;
-  line-height: 1rem;
-  border-radius: 0.1rem;
+@media (max-width: 600px) {
+  .bookmarkContent {
+    width: 100%;
+  }
+  .previousBtn,
+  .nextBtn,
+  .pageBtn,
+  .pageCount {
+    font-weight: 400;
+    font-size: 0.7rem;
+    line-height: 0.96rem;
+    border-radius: 0.1rem;
+  }
 }
-
+@media (max-width: 470px) {
+  .noBookmarkHeader {
+    margin: 0 0 0 0;
+  }
+  .noBookmark p {
+    font-size: 0.95rem;
+    width: fit-content;
+    font-weight: 700rem;
+  }
+}
 @media (max-width: 400px) {
   .pagination {
     gap: 0.5rem;
@@ -369,7 +385,7 @@
   .previousBtn,
   .nextBtn {
     padding: 0.5rem 0.7rem;
-    font-size: 12px;
+    font-size: 0.75rem;
   }
 
   .pageBtn {
@@ -379,4 +395,27 @@
   .pageCount {
     padding: 0.5rem 0.5rem;
   }
+}
+
+@media (max-width: 390px) {
+  .search input::placeholder {
+    font-size: 0.55rem;
+  }
+}
+@media (max-width: 330px) {
+  .previousBtn,
+  .nextBtn {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.62rem;
+  }
+  .active{
+    font-weight: 500;
+    padding: 0.3rem 0.8rem;
+  }
+  
+  .pageCount{
+    font-size: 0.62rem;
+    padding: 0.4rem 0.6rem;
+  }
+
 }
