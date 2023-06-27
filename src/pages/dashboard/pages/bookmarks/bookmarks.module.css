@@ -206,7 +206,7 @@
   width: 100%;
   font-family: var(--Poppins);
   margin-top: 1rem;
-  position: relative;
+  position: absolute;
   bottom: 0.625rem;
   right: 8.75rem;
 }
