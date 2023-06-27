@@ -90,8 +90,8 @@
     }
     .profileTopLeft img{
         display: flex;
-        width: fit-content;
         margin-right: 0px;
+        /* border-radius: 50%; */
     }
 
     .profileTopLeft span{
@@ -162,7 +162,6 @@
     }
     .profileTopLeft img{
         display: flex;
-        width: fit-content;
         margin-right: 0px;
     }
 
