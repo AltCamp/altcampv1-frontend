@@ -4,6 +4,38 @@
 
 We welcome and appreciate any contributions to this React project. Whether it's fixing a bug, improving performance, or adding new features, your help is valuable.
 
+### Development Setup
+
+1. Fork the repository and clone it to your local machine.
+
+```
+$ git clone https://github.com/YOUR_GITHUB_USERNAME/altcampv1-frontend.git
+```
+
+2. Navigate to the project directory.
+
+```
+$ cd altcampv1-frontend
+```
+
+3. Install the project dependencies.
+
+```
+$ npm install
+```
+
+4. Copy the contents of `example.env` to a new file called `.env` and fill in the required environment variables.
+
+```
+cp example.env .env
+```
+
+5. Start the development server.
+
+```
+$ npm run dev
+```
+
 ## Code of Conduct
 
 We expect all contributors to abide by our code of conduct. Please take a moment to read it before making any contributions.

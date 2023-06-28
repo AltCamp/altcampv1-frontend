@@ -7,7 +7,7 @@ export default function RichEditor ({ setBody, body, isSuccess }) {
   return (
     <>
       <Editor
-        apiKey='mk3t00giiyqt48pkpkk19x5es04efdg6r5b3ndaa4hz5if9k'
+        apiKey={import.meta.env.VITE_TINY_KEY}
         // onInit={(evt, editor) => (editorRef.current = editor)}
         // initialValue={body}
         value={body}
