@@ -421,35 +421,36 @@
   }
 
   .body {
-    display: grid;
-    gap: 5px;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
     margin-top: 1.5rem;
     width: 100%;
   }
 
   .user {
     margin-bottom: 2.5rem;
+    flex: 50%;
   }
 
   .bottom {
     display: flex;
     width: 100%;
+    margin-top: 5rem;
   }
 
   .pagination {
-    display: flex;
     margin: 0 auto;
-    position: relative;
-    top: 0rem;
-    bottom: 0rem;
+    position: absolute;
+    bottom: 1rem;
     right: 0rem;
-    width: fit-content;
-    gap: 0.3rem;
+    justify-content: center;
   }
 
   .previousBtn, .pageBtn, .nextBtn, .pageCount {
     padding: 0.3rem;
+  }
+  .pageBtn, .nextBtn, .pageCount {
+    padding: 0.3rem;
+  }
+  .pageBtn{
+    padding: 0.3rem 1rem;
   }
 }

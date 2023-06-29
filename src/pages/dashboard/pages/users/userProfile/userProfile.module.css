@@ -103,7 +103,6 @@
         margin: 0 auto;
         display: flex;
         flex-direction: column;
-        /* overflow-x: hidden; */
     }
     .profileTopRightTop{
         width: 100%;
@@ -113,6 +112,9 @@
 }
 .profileTopRightTop p span{
     left: 150px;
+}
+.profileBioText{
+    width: 100%;
 }
 }
 @media (min-width: 601px) and (max-width: 700px){
