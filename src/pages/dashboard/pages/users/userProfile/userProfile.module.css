@@ -113,6 +113,11 @@
 .profileTopRightTop p span{
     left: 150px;
 }
+
+.profileTopRightBottom{
+    margin-top: 2rem;
+}
+
 .profileBioText{
     width: 100%;
 }
