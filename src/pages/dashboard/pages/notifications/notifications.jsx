@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import notificationsStyles from "./notifications.module.css";
-import ReactPaginate from "react-paginate";
 import EmptyNotification from "../../../../assets/general/EmptyNotification.png";
 import { Link } from "react-router-dom";
 import FilterModal from "./modals/filterModal";
@@ -157,7 +156,7 @@ export default function Notifications() {
           </div>
 
           <div className={notificationsStyles.pagination}>
-            <ReactPaginate
+            {/* <ReactPaginate
               previousLabel={"prev"}
               nextLabel={"next"}
               pageRangeDisplayed={3}
@@ -168,7 +167,7 @@ export default function Notifications() {
               pageLinkClassName={notificationsStyles.pageLink}
               nextLinkClassName={notificationsStyles.pageLink}
               previousLinkClassName={notificationsStyles.pageLink}
-            />
+            /> */}
             {/* <button className={notificationsStyles.prev}>Previous</button>
             <button className={notificationsStyles[("pageLink", "active")]}>
               1
