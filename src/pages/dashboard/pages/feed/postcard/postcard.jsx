@@ -157,7 +157,7 @@ export default function Postcard ({ post }) {
                       : '#343A40'
                   }}
                 >
-                  {latestPost.upvotes}
+                  {latestPost.upvotedBy?.length}
                 </div>
               </Link>
               <div className={postCardStyles.divider}></div>
