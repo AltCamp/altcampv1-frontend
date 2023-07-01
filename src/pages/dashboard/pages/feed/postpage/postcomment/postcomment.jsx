@@ -172,7 +172,7 @@ export default function Postcomment ({ comment }) {
                     : '#343A40'
                 }}
               >
-                {comment?.upvotes}
+                {comment?.upvotedBy?.length}
               </div>
             </div>
             <div className={postCommentStyles.divider}></div>

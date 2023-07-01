@@ -237,7 +237,7 @@ export default function Postpage () {
                             : '#343A40'
                         }}
                       >
-                        {post?.upvotes}
+                        {post?.upvotedBy?.length}
                       </div>
                     </div>
                     <div className={postPageStyles.divider}></div>
