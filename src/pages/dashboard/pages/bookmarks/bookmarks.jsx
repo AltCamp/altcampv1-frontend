@@ -9,7 +9,6 @@ import EmptyBookmark from "../../../../assets/general/EmptyNotification.png";
 export default function Bookmarks() {
   const [isActionOpen, setActionOpen] = useState(false);
   const [isFilterOpen, setFilterOpen] = useState(false);
-  const [sortedBookmarks, setSortedBookmarks] = useState([]);
   const [emptyBookmark, setEmptyBookmark] = useState(false);
   const [page, setPage] = useState(1);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -28,23 +27,14 @@ export default function Bookmarks() {
     setFilterOpen(!isFilterOpen);
   };
 
-  useEffect(() => {
-    if (bookmarks) {
-      const copyBookmarks = [...bookmarks];
-      const theBookmarks = copyBookmarks.sort(
-        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-      );
-      setSortedBookmarks(theBookmarks);
-    }
-  }, [bookmarks]);
 
   useEffect(() => {
-    if (sortedBookmarks.length === 0) {
+    if (bookmarks.length === 0) {
       setEmptyBookmark(true);
     } else {
       setEmptyBookmark(false);
     }
-  }, [sortedBookmarks]);
+  }, [bookmarks]);
 
   useEffect(() => {
     if (data) {
@@ -127,14 +117,14 @@ export default function Bookmarks() {
 
           {/* Card */}
           <div className={bookmarksStyles.bookmarkMain}>
-            {sortedBookmarks.map((bookmark) => (
+            {bookmarks.map((bookmark) => (
               <BookmarkCard bookmark={bookmark} key={bookmark._id} />
             ))}
           </div>
 
           {/* Pagination */}
 
-          {sortedBookmarks.length > 0 && (
+          {bookmarks.length > 0 && (
             <div className={bookmarksStyles.pagination}>
               <button
                 className={bookmarksStyles.previousBtn}
