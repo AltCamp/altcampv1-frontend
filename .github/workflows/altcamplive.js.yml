@@ -18,4 +18,4 @@ jobs:
             npm i
         - run:
             npm run build
-            sudo service nginx restart
+
