@@ -15,6 +15,8 @@ import IconSquare from '../../assets/general/iconsquare.webp'
 import heroImage from '../../assets/general/heroImage.svg'
 import AboutUsImage from '../../assets/general/AboutusImage.png'
 
+import { Link } from 'react-router-dom'
+
 const Landing = () => {
   return (
     <>
@@ -23,15 +25,16 @@ const Landing = () => {
         <div className={landingPageStyles['intro-area']}>
           <div className={landingPageStyles['intro-text-area']}>
             <h1>Transform your skills and learn the easy way</h1>
-            <p>A community for Altschoolers that provides  easy access to  assistance from peers and mentors.</p>
-            <a href='/account'>
-              <button>
-                Get Started
-              </button>
-            </a>
+            <p>
+              A community for Altschoolers that provides easy access to
+              assistance from peers and mentors.
+            </p>
+            <Link to='/account'>
+              <button>Get Started</button>
+            </Link>
           </div>
           <div className={landingPageStyles['intro-image-area']}>
-            <img src={heroImage} alt="" />
+            <img src={heroImage} alt='' />
           </div>
         </div>
       </div>
@@ -42,7 +45,11 @@ const Landing = () => {
           ></div>
           <div className={landingPageStyles['about-us-image']}>
             <img src={CommunityImage} alt='about us image' />
-            <img className={landingPageStyles['about-us-image-lg']} src={AboutUsImage} alt="about us image" />
+            <img
+              className={landingPageStyles['about-us-image-lg']}
+              src={AboutUsImage}
+              alt='about us image'
+            />
           </div>
           <div
             className={`${landingPageStyles['decor-box']} ${landingPageStyles['decor-box-2']}`}
@@ -109,8 +116,8 @@ const Landing = () => {
             </div>
             <h3>Interactive Community</h3>
             <p>
-              AltCamp allows you to meet and interact with people that are
-              into similar career and learn with and from them
+              AltCamp allows you to meet and interact with people that are into
+              similar career and learn with and from them
             </p>
           </div>
           <div className={landingPageStyles['benefit-card']}>
@@ -159,16 +166,14 @@ const Landing = () => {
             </div>
             <h3>Learning Circle</h3>
             <p>
-              For Altschoolers who have learning circle, AltCamp allows you
-              to interact with your circle members as a group
+              For Altschoolers who have learning circle, AltCamp allows you to
+              interact with your circle members as a group
             </p>
           </div>
         </div>
-        <a href='/account'>
-          <button>
-            Get Started
-          </button>
-        </a>
+        <Link to='/account'>
+          <button>Get Started</button>
+        </Link>
       </div>
       <div className={landingPageStyles['outro-area']}>
         <div className={landingPageStyles['icon-boxes-area']}>
@@ -185,11 +190,9 @@ const Landing = () => {
             Share what you know even as you learn what you do not know in the
             most convenient way.
           </p>
-          <a href='/account'>
-            <button>
-              Get Started
-            </button>
-          </a>
+          <Link to='/account'>
+            <button>Get Started</button>
+          </Link>
         </div>
       </div>
 
