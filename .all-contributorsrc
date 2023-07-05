@@ -1,0 +1,81 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "Boye95",
+      "name": "Samuel Adeboye Folaranmi",
+      "avatar_url": "https://avatars.githubusercontent.com/u/74235313?v=4",
+      "profile": "https://boyei.tech/",
+      "contributions": [
+        "maintenance",
+        "code"
+      ]
+    },
+    {
+      "login": "Yinkajay",
+      "name": "Yínx",
+      "avatar_url": "https://avatars.githubusercontent.com/u/61986054?v=4",
+      "profile": "https://github.com/Yinkajay",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "vader-js",
+      "name": "Ayomide Shittu",
+      "avatar_url": "https://avatars.githubusercontent.com/u/100224192?v=4",
+      "profile": "https://github.com/vader-js",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Watermelon-Sugar",
+      "name": "Iyiola Oluwaseyi",
+      "avatar_url": "https://avatars.githubusercontent.com/u/60761852?v=4",
+      "profile": "https://github.com/Watermelon-Sugar",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "just-talis",
+      "name": "Esther Simon",
+      "avatar_url": "https://avatars.githubusercontent.com/u/93126974?v=4",
+      "profile": "https://github.com/just-talis",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Dozzy91",
+      "name": "Azu Chidozie",
+      "avatar_url": "https://avatars.githubusercontent.com/u/49005814?v=4",
+      "profile": "https://github.com/Dozzy91",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Marvecodes",
+      "name": "Marvellous Chukueggu",
+      "avatar_url": "https://avatars.githubusercontent.com/u/107967184?v=4",
+      "profile": "https://github.com/Marvecodes",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "skipCi": true,
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "projectName": "altcampv1-frontend",
+  "projectOwner": "AltCamp",
+  "commitType": "docs"
+}

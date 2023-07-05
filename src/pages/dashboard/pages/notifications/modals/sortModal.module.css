@@ -1,0 +1,59 @@
+.heading {
+  margin-top: 0px;
+  margin-bottom: 15px;
+}
+
+
+.options {
+  line-height: 40px;
+  font-size: 12px;
+}
+
+.option:hover{
+    cursor: pointer;
+}
+
+.modalParent{
+  position: relative;
+}
+
+.sortContent {
+  position: absolute;
+
+  top: 35px;
+  right: 0px;
+
+
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 16px 24px;
+  gap: 5px;
+
+  width: 212px;
+  height: 149px;
+
+  background: #ffffff;
+  /* Neutral/Neutral 300 */
+
+  border: 0.5px solid #dee2e6;
+  /* White Card Shadow 2 */
+
+  box-shadow: 0px 2px 12px rgba(86, 86, 86, 0.15);
+  border-radius: 6px;
+}
+
+.horizontalLine {
+  border: 1px solid var(--neutral-clr-lt-grey);
+}
+
+.btnSort {
+  height: 25px;
+  width: 25px;
+}
+
+.btnSort:hover {
+  cursor: pointer;
+}

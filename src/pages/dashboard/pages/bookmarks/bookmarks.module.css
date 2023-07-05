@@ -1,0 +1,421 @@
+/* container */
+.bookmarkContainer {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  padding: 2rem;
+  position: relative;
+}
+
+.bookmarkContainer h2 {
+  font-weight: 600;
+  font-size: 1.125rem;
+  line-height: 3rem;
+  font-family: var(--Inter);
+  margin-bottom: 1.75rem;
+  color: var(--neutral-clr-drkst-grey);
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  height: fit-content;
+  width: 100%;
+}
+
+.loader {
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid var(--secondary-clr-lter-blue);
+  border-radius: 50%;
+  width: 3.125rem;
+  height: 3.125rem;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* empty bookmark */
+
+.noBookmarkHeader {
+  font-weight: 600;
+  font-size: 1.375rem;
+  line-height: 1.75rem;
+  margin: 2.5rem 0 0 1.8rem;
+  color: var(--neutral-clr-drkst-grey);
+}
+.noBookmark {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 6rem;
+}
+
+.noBookmark p {
+  width: 26.313rem;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.125rem;
+  line-height: 2.125rem;
+  color: var(--neutral-clr-drkst-grey);
+}
+
+.noBookmark span {
+  font-weight: normal;
+}
+
+.noBookmarkHeader {
+  display: flex;
+  justify-content: space-between;
+  margin: 2.5rem 1.8rem 4rem 1.8rem;
+}
+
+.noBookmarkHeader h2 {
+  font-weight: 600;
+  font-size: 1.375rem;
+  line-height: 1.75rem;
+  color: var(--neutral-clr-drkst-grey);
+}
+
+.bookmarkContent {
+  width: 90%;
+}
+
+/* Navbar */
+.bookmarkNav {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 0.5rem;
+}
+
+.select {
+  width: fit-content;
+}
+
+.bookButton {
+  width: 100%;
+  padding: 0.438rem;
+  font-weight: 500;
+  line-height: 1rem;
+  font-size: 0.75rem;
+  display: flex;
+  font-family: var(--Poppins);
+  color: var(--neutral-clr-white);
+  background: var(--secondary-clr-lt-blue);
+  border-radius: 0.205rem;
+  border: none;
+  cursor: pointer;
+}
+
+.bookButton span {
+  margin-top: 0.1rem;
+}
+
+.btnMenu {
+  min-width: 9.375rem;
+  position: absolute;
+  z-index: 1;
+  background: #fafafa;
+  font-family: var(--Poppins);
+  font-weight: 500;
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+  margin-top: 0.25rem;
+}
+
+.btnMenu a {
+  padding: 0.563rem 0.563rem 0.563rem 0.5rem;
+  color: #565883;
+  text-decoration: none;
+  display: block;
+  border: 1px solid #c7c3ed;
+}
+
+.lastMenu {
+  border-radius: 0 0 0.688rem 0;
+}
+
+.search {
+  width: 100%;
+}
+
+.search input {
+  background: var(--neutral-clr-white);
+  border: 0.051rem solid #c1c1c1;
+  padding: 0.438rem;
+  box-shadow: 0 0.125rem 0.75rem rgba(86, 86, 86, 0.15);
+  border-radius: 0.25rem;
+  width: 100%;
+  outline: none;
+  font-weight: 400;
+  font-size: 0.667rem;
+  color: #a7a7a7;
+  font-family: var(--Poppins);
+}
+
+.search input::placeholder {
+  font-weight: 400;
+  font-size: 0.667rem;
+  line-height: 1rem;
+  color: #a7a7a7;
+  font-family: inherit;
+}
+
+.filter {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.filter .allButton {
+  padding: 0.438rem;
+  text-align: center;
+  width: 2.5rem;
+  background: #efefef;
+  color: #a7a7a7;
+  font-family: var(--Poppins);
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1rem;
+  border: 1px solid var(--neutral-clr-grey-1);
+  border-radius: 0.205rem;
+}
+
+/* Card */
+.bookmarkMain {
+  overflow-x: auto;
+  width: 100%;
+  margin-bottom: 3rem;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  font-family: var(--Poppins);
+  margin-top: 1rem;
+  position: absolute;
+  bottom: 0.625rem;
+  right: 8.75rem;
+}
+
+.previousBtn,
+.nextBtn {
+  border-radius: 4px;
+  padding: 0.5rem 1.3rem;
+  width: fit-content;
+  border: 2px solid #e9ebec;
+  border-radius: 4px;
+  background-color: var(--neutral-clr-white);
+  color: #878a99;
+  font-family: var(--Poppins);
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.previousBtn:hover,
+.nextBtn:hover {
+  background-color: var(--secondary-clr-lt-blue);
+  color: var(--neutral-clr-white);
+  border: 2px solid var(--secondary-clr-lt-blue);
+}
+
+.previousBtn:disabled,
+.nextBtn:disabled {
+  background-color: #e9ebec;
+  color: #878a99;
+  border: 2px solid #e9ebec;
+  cursor: not-allowed;
+}
+
+.active {
+  background-color: var(--secondary-clr-lter-blue);
+  color: var(--neutral-clr-white);
+  border: 2px solid var(--secondary-clr-lter-blue);
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  width: fit-content;
+  font-family: var(--Poppins);
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+}
+
+.pageBtn {
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  width: fit-content;
+  border: 2px solid #e9ebec;
+  border-radius: 4px;
+  background-color: var(--neutral-clr-white);
+  color: #878a99;
+  font-family: var(--Poppins);
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.pageBtn:hover {
+  background-color: var(--secondary-clr-lter-blue);
+  color: var(--neutral-clr-white);
+  border: 2px solid var(--secondary-clr-lter-blue);
+}
+
+.currentPage {
+  border: none;
+  outline: none;
+  width: 1rem;
+  color: #bfbfbf;
+}
+
+.pageCount input::-webkit-outer-spin-button,
+.pageCount input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.pageCount {
+  color: #bfbfbf;
+  font-size: 0.875rem;
+  border: 2px solid #e9ebec;
+  border-radius: 4px;
+  padding: 0.5rem 0.7rem;
+}
+
+/* Media Query */
+@media (max-width: 1100px) {
+  .previousBtn,
+  .nextBtn {
+    padding: 0.5rem 1rem;
+  }
+  .pageBtn {
+    padding: 0.5rem 0.7rem;
+  }
+  .pageCount {
+    padding: 0.5rem 0.7rem;
+  }
+}
+
+@media (max-width: 1030px) {
+  .bookmarkContainer {
+    justify-content: center;
+  }
+
+  .bookmarkContainer h2 {
+    font-weight: 450;
+    padding-right: 1rem;
+  }
+
+  .bookButton {
+    font-size: 0.65rem;
+  }
+
+  .pagination {
+    justify-content: center;
+    height: 3rem;
+    right: 0;
+  }
+}
+@media (max-width: 1015px) and (min-width: 950px) {
+  .bookmarkContainer {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 750px) {
+  .pagination {
+    justify-content: center;
+  }
+  .previousBtn,
+  .nextBtn {
+    padding: 0.5rem 1rem;
+  }
+  .pageBtn {
+    padding: 0.5rem 0.7rem;
+  }
+  .pageCount {
+    padding: 0.5rem 0.7rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .bookmarkContent {
+    width: 100%;
+  }
+  .previousBtn,
+  .nextBtn,
+  .pageBtn,
+  .pageCount {
+    font-weight: 400;
+    font-size: 0.7rem;
+    line-height: 0.96rem;
+    border-radius: 0.1rem;
+  }
+}
+@media (max-width: 470px) {
+  .noBookmarkHeader {
+    margin: 0 0 0 0;
+  }
+  .noBookmark p {
+    font-size: 0.95rem;
+    width: fit-content;
+    font-weight: 700rem;
+  }
+}
+@media (max-width: 400px) {
+  .pagination {
+    gap: 0.5rem;
+  }
+
+  .previousBtn,
+  .nextBtn {
+    padding: 0.5rem 0.7rem;
+    font-size: 0.75rem;
+  }
+
+  .pageBtn {
+    padding: 0.5rem 0.5rem;
+  }
+
+  .pageCount {
+    padding: 0.5rem 0.5rem;
+  }
+}
+
+@media (max-width: 390px) {
+  .search input::placeholder {
+    font-size: 0.55rem;
+  }
+}
+@media (max-width: 330px) {
+  .previousBtn,
+  .nextBtn {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.62rem;
+  }
+  .active{
+    font-weight: 500;
+    padding: 0.3rem 0.8rem;
+  }
+  
+  .pageCount{
+    font-size: 0.62rem;
+    padding: 0.4rem 0.6rem;
+  }
+
+}

@@ -1,0 +1,133 @@
+.profileContainer{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 2%;
+}
+
+.back{
+    display: flex;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+.backText{
+    margin-left: 1rem; 
+    cursor: pointer;
+}
+
+.profileTop{
+    width: 85%;
+    margin: 0 auto;
+    height: 40%;
+    display: flex;
+    align-items: flex-start;
+    /* border: 1px solid  red; */
+    margin-bottom: 2rem;
+}
+
+.profileTopLeft img{
+    width: 150px;
+    min-width: 150px;
+    height: 150px;
+    min-height: 150px;
+    border-radius: 50%;
+    border: 10px solid var( --neutral-clr-grey-1);
+    margin-right: 4rem;
+}
+.profileTopLeft span{
+    margin-right: 4rem;
+}
+.profileTopRight{
+    width: 70%;
+}
+.profileTopRightTop{
+    margin-bottom: 3rem;
+}
+.profileTopRightTop b{
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: black;
+}
+.profileTopRightTop b:not(:last-child){
+    margin-right: 1.2rem;
+}
+.profileTopRightTop p{
+    margin-bottom: 1rem;
+    position: relative;
+    color: var(--neutral-clr-grey-1);
+}
+.profileTopRightTop p span{
+   position: absolute;
+   left: 170px;
+   color: black;
+}
+.profileBio{
+    margin-bottom: 1.5rem;
+
+}
+.profileBioText{
+    width: 60%;
+    height: 130px;
+    
+}
+.profileBioNoText{
+    opacity: 0.5;
+}
+@media screen and (max-width: 600px) {
+    .profileTop{
+        flex-direction: column;
+        align-items: center;
+        width: 95%;
+    }
+    .profileTopName{
+        width: 100%;
+        display: inline-flex;
+        justify-content: center;
+    }
+    .profileTopLeft{
+        width: 100%;
+        display: inline-flex;
+        justify-content: center;
+        margin: 0 auto 1rem auto;
+    }
+    .profileTopLeft span{
+        width: fit-content;
+        margin: 0;
+    }
+    .profileTopLeft img{
+        margin: 0
+    }
+    .profileTopRight{
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+    }
+    .profileTopRightTop{
+        width: 100%;
+        margin: 0 auto;
+        overflow-x: hidden;
+        
+}
+.profileTopRightTop p span{
+    left: 150px;
+}
+
+.profileTopRightBottom{
+    margin-top: 2rem;
+}
+
+.profileBioText{
+    width: 100%;
+}
+}
+@media (min-width: 601px) and (max-width: 700px){
+    .profileTop{
+        width: 100%;
+    }
+    .profileTopLeft span{
+        margin-right: 2rem;
+    }
+
+}

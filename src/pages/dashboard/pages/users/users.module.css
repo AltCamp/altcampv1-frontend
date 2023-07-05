@@ -1,0 +1,456 @@
+.container{
+    width: 100%;
+    height: 100%;
+    padding: 2%;
+    position: relative;
+}
+.top{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.head{
+    margin-bottom: 0.5rem;
+}
+.desc{
+    margin-bottom: 1rem;
+}
+.line{
+    width: 100%;
+    height: 1px;
+    background-color: var(--neutral-clr-grey-2);
+    margin-bottom: 1.5rem;
+}
+.filter{
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+}
+.search{
+  flex: 2;
+    /* width: 50%; */
+   position: relative;
+}
+.searchicon{
+    position: absolute;
+    top: 9px;
+    left: 10px;
+    color: var(--neutral-clr-grey-2);
+}
+.search input{
+    width: 100%;
+    height: 35px;
+    border: 1px solid var( --neutral-clr-grey-2);
+    border-radius: 4px;
+    outline: none;
+    padding-left: 2rem;
+}
+.filterList{
+    margin-bottom: 1rem;
+    flex: 1;
+    margin-left: 5rem;
+}
+.filterItems{
+    list-style-type: none;
+    display: flex;
+    width: 100%;
+    height: 35px;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+    
+}
+.filterItem{
+    height: 100%;
+    flex: 1;
+    font-size: 14px;
+   display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid var( --neutral-clr-grey-2);
+}
+.filterItem:not(:last-child){
+    border-right: 1px solid var( --neutral-clr-grey-2);
+}
+.filternav{
+    width: 95%;
+    display: flex;
+    justify-content: flex-end;
+}
+.filternavItems{
+    list-style-type: none;
+    width: 35%;
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+}
+.filternavItem{
+    color: var( --neutral-clr-grey-1);
+}
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100%; */
+    margin-top: 1rem;
+    height: fit-content;
+    width: 100%;
+  }
+  
+  .loader {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid var(--secondary-clr-lter-blue);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+.body{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 4rem;
+    width: 90%;
+    margin: 4rem auto 0 auto;
+
+}
+.profileLink{
+    /* width: 25%; */
+    color: inherit;
+
+}
+  .user{
+    flex: 25%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 5rem;
+  }
+  .userDetails{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .userImg{
+    margin-right: 0.5rem;
+  }
+  .userImg img{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+  }
+  .userName{
+    font-size: 13px;
+    margin-bottom: 0.2rem;
+  }
+  .userLocation{
+    font-size: 11px;
+    color: var(--neutral-clr-grey-1);
+    margin-bottom: 0.2rem;
+  }
+  .track{
+    font-size: 12px;
+
+  }
+  .pagination {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    font-family: var(--Poppins);
+    margin-top: 1rem;
+    position: absolute;
+    bottom: 20px;
+    right: 5%;
+    flex-wrap: wrap;
+  }
+  
+  .previousBtn,
+  .nextBtn {
+    border-radius: 4px;
+    padding: 0.5rem 1.3rem;
+    width: fit-content;
+    border: 2px solid #e9ebec;
+    border-radius: 4px;
+    background-color: var(--neutral-clr-white);
+    color: #878a99;
+    font-family: var(--Poppins);
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .previousBtn:hover,
+  .nextBtn:hover {
+    background-color: var(--secondary-clr-lter-blue);
+    color: var(--neutral-clr-white);
+    border: 2px solid var(--secondary-clr-lter-blue);
+  }
+  .previousBtn:disabled,.nextBtn:disabled{
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .active {
+    background-color: var(--secondary-clr-lter-blue);
+    color: var(--neutral-clr-white);
+    border: 2px solid var(--secondary-clr-lter-blue);
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    width: fit-content;
+    font-family: var(--Poppins);
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  .pageBtn {
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    width: fit-content;
+    border: 2px solid #e9ebec;
+    border-radius: 4px;
+    background-color: var(--neutral-clr-white);
+    color: #878a99;
+    font-family: var(--Poppins);
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .pageBtn:hover {
+    background-color: var(--secondary-clr-lter-blue);
+    color: var(--neutral-clr-white);
+    border: 2px solid var(--secondary-clr-lter-blue);
+  }
+  
+  .pageCount {
+    color: #bfbfbf;
+    font-size: 14px;
+    border: 2px solid #e9ebec;
+    border-radius: 4px;
+    padding: 0.5rem 0.7rem;
+  }
+  .currentPage{
+    color: inherit;
+    font-size: 15px;
+    border: none;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 15px;
+    padding: 0;
+    margin: 0;
+    background-color: inherit;
+  }
+  .currentPage::-webkit-outer-spin-button,
+.currentPage::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.currentPage:focus{
+  outline: none;
+}
+/* media querry*/
+@media (min-width: 280px) and (max-width: 380px) {
+  .desc {
+    display: flex;
+    width: 100%;
+    font-size: 10.5px;
+    margin: 0 auto;
+    font-weight: 400;
+    align-items: center;
+    margin-bottom: 5px;
+    justify-content: left;
+  }
+
+  .line {
+    margin-bottom: 0.5rem;
+  }
+
+  .filter {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .search {
+    width: 100%;
+    margin-bottom: 5px;
+  }
+
+  .filterList {
+    width: 100%;
+    margin-left: 0rem;
+  }
+
+  .filterItem {
+    font-size: 10px;
+  }
+
+  .filternav {
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+  }
+
+  .filternavItems {
+    width: 100%;
+    font-size: 13px;
+  }
+
+  .body {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    width: 100%;
+    margin-top: 1.5rem;
+  }
+
+  .user {
+    margin-bottom: 2.5rem;
+  }
+
+  .bottom {
+    display: flex;
+    width: 100%;
+  }
+
+  .pagination {
+    display: flex;
+    margin: 0 auto;
+    position: relative;
+    top: 0rem;
+    bottom: 0rem;
+    right: 0rem;
+    width: fit-content;
+    gap: 0.3rem;
+    justify-content: center;
+  }
+
+  .previousBtn {
+    /* visibility: hidden; */
+    padding: 0.3rem;
+    /* width: 40px; */
+    /* margin-right: 0px; */
+  }
+
+  /* .previousBtn:after{
+      display: flex;
+      content: 'Prev';
+      visibility: visible;
+      padding: 0.3rem;
+      border-radius: 4px;
+      border: 2px solid #e9ebec;
+      background-color: var(--neutral-clr-white);
+      color: #878a99;
+      width: fit-content;
+    } */
+
+  .pageBtn, .nextBtn, .pageCount {
+    padding: 0.3rem;
+  }
+  .pageBtn{
+    padding: 0.3rem 1rem;
+  }
+}
+
+@media (min-width: 381px) and (max-width: 699px) {
+  .desc {
+    display: flex;
+    width: 100%;
+    font-size: 15px;
+    margin: 0 auto;
+    font-weight: 400;
+    align-items: center;
+    margin-bottom: 5px;
+    justify-content: left;
+  }
+
+  .line {
+    margin-bottom: 0.5rem;
+  }
+
+  .filter {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .search {
+    width: 100%;
+    margin-bottom: 5px;
+  }
+
+  .filterList {
+    width: 100%;
+    margin-left: 0rem;
+  }
+
+  .filterItem {
+    font-size: 11px;
+  }
+
+  .filternav {
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+  }
+
+  .filternavItems {
+    width: 100%;
+    font-size: 15px;
+  }
+
+  .body {
+    margin-top: 1.5rem;
+    width: 100%;
+  }
+
+  .user {
+    margin-bottom: 2.5rem;
+    flex: 50%;
+  }
+
+  .bottom {
+    display: flex;
+    width: 100%;
+    margin-top: 5rem;
+  }
+
+  .pagination {
+    margin: 0 auto;
+    position: absolute;
+    bottom: 1rem;
+    right: 0rem;
+    justify-content: center;
+  }
+
+  .previousBtn, .pageBtn, .nextBtn, .pageCount {
+    padding: 0.3rem;
+  }
+  .pageBtn, .nextBtn, .pageCount {
+    padding: 0.3rem;
+  }
+  .pageBtn{
+    padding: 0.3rem 1rem;
+  }
+}
