@@ -5,7 +5,7 @@ import {BsFillExclamationCircleFill} from 'react-icons/bs'
 import {GrFormClose} from 'react-icons/gr'
 
 
-function Toaster({type, message, show, onClick }) {
+function Toaster({type, message, show, handleClose, title }) {
     const icon = {
         error : <BsFillExclamationCircleFill/>,
         info : <FaInfoCircle/>,
@@ -19,11 +19,11 @@ function Toaster({type, message, show, onClick }) {
             {icon[type]}
             </div>
             <div className={style.toastCnt}>
-                <h6 className={style.toastTitle}>{type}</h6>
+                <h6 className={style.toastTitle}>{title ? title : type}</h6>
                 <p>{message}</p>
             </div>
             <div>
-                <div onClick={onClick} className={style.toastBtn} type='button'><GrFormClose/></div>
+                <div onClick={handleClose} className={style.toastBtn} type='button'><GrFormClose/></div>
             </div>
         </div>
         }
