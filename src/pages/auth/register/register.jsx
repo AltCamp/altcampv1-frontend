@@ -93,7 +93,7 @@ export default function Register () {
     } else if (isError) {
       setToastText(error.data.message)
       setToastType('error')
-      setTimeout(() => setToastText(''), 4000)
+      setTimeout(() => setToastText(''), 3000)
       // setErrorText(error.data.message)
     }
   }, [isSuccess, isError])
@@ -342,7 +342,7 @@ export default function Register () {
           show={!!toastText}
           type={toastType}
           message={toastText}
-          onClick={() => setToastText('')}
+          handleClose={() => setToastText('')}
         />
 
         <button
