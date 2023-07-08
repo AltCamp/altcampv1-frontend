@@ -25,3 +25,9 @@ jobs:
       - name: "Build"
         run: |
             npm run build
+      - name: "Install PM2"
+        run: |
+            pm2 stop 0
+            pm2 start 0
+            pm2 save
+            sudo service nginx restart
