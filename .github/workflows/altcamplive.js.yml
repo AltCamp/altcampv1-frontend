@@ -21,6 +21,7 @@ jobs:
             cat .env
       - name: "Install dependencies"
         run: |
+            npm install
       - name: "Build"
         run: |
             npm run build
