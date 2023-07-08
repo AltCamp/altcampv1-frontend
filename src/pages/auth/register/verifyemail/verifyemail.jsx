@@ -93,7 +93,7 @@ export default function VerifyEmail () {
           show={!!toastText}
           type={toastType}
           message={toastText}
-          onClick={() => setToastText('')}
+          handleClose={() => setToastText('')}
         />
         <button
           className={verifyEmailStyle.submitButton}
