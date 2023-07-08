@@ -1,20 +1,27 @@
 name: altcamplive CI/CD
 
 on:
-    push:
-        branches:
-            - main
-    pull_request:
-        branches:
-            - main
-            
-jobs:
-    build:
-        runs-on: self-hosted
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
-        steps:
-        - uses: actions/checkout@v2
-        - run:
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: "Create env file"
+        run: |
+            touch .env
+            echo VITE_TINY_KEY=${{ secrets.VITE_TINY_KEY }} >> .env
+            cat .env- run: |
+      - name: "Install dependencies"
+        run: |
             npm install
-        - run:
+      - name: "Build"
+        run: |
             npm run build
