@@ -49,7 +49,7 @@ export default function AskQuestionPage () {
     } else if (isError) {
       setToastText(error.data.message)
       setToastType('error')
-      setTimeout(() => setToastText(''), 4000)
+      setTimeout(() => setToastText(''), 3000)
     }
   }, [data, isLoading, isSuccess, isError, error])
 
@@ -163,7 +163,7 @@ export default function AskQuestionPage () {
           show={!!toastText}
           type={toastType}
           message={toastText}
-          onClick={() => setToastText('')}
+          handleClose={() => setToastText('')}
         />
         {/* succesful message */}
         {isSuccess && (

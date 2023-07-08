@@ -50,7 +50,7 @@ export default function UserLogin () {
       } else if (isError) {
         setToastText(error.data.message)
         setToastType("error")
-        setTimeout(() => setToastText(''), 4000)
+        setTimeout(() => setToastText(''), 3000)
         // setErrorText(error.data.message)
       }
     }, [isSuccess, isError])
@@ -96,7 +96,7 @@ export default function UserLogin () {
         </div>
 
         {/* error ui */}
-        <Toaster show={!!toastText} type={toastType} message={toastText} onClick={() => setToastText('')}/>
+        <Toaster show={!!toastText} type={toastType} message={toastText} handleClose={() => setToastText('')}/>
 
         <button
           className={userLoginStyle.loginButton}
