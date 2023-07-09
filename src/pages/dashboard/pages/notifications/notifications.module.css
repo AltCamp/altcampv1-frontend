@@ -93,7 +93,7 @@
 .pagination {
   list-style: none;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
   gap: 0.5rem;
   width: 100%;
@@ -117,7 +117,7 @@
 
 .paginate {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   list-style: none;
   text-align: center;
   font-size: 0.813rem;
