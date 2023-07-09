@@ -65,7 +65,7 @@
 
 .votes {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   gap: 0.8rem;
   align-items: center;
 }
@@ -101,7 +101,7 @@
 
 .editButtons {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   width: 100%;
   gap: 0.5rem;
 }

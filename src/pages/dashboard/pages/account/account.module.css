@@ -167,7 +167,7 @@
   width: 85%;
   margin: 0 auto;
   display: flex;
-  align-items: end;
+  align-items: flex-end;
 }
 .mainPanelBottom_profileDetails {
   display: flex;

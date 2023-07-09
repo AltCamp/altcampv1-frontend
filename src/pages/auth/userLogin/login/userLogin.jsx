@@ -62,7 +62,9 @@ export default function UserLogin() {
       <h2 className={userLoginStyle.header}>Welcome Back</h2>
       <form className={userLoginStyle.form} onSubmit={handleLogin}>
         <div className={userLoginStyle.formGroup}>
-          <label htmlFor="email">Email Address</label>
+          <label htmlFor="email" className="">
+            Email Address
+          </label>
           <input
             type="email"
             name="email"
