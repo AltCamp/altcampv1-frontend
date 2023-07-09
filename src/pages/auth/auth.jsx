@@ -1,15 +1,15 @@
-import React from "react";
-import { NavLink, Outlet } from "react-router-dom";
-import authHeroImage from "../../assets/general/AuthBackground.webp";
-import altcampWhiteLogo from "../../assets/general/AuthWhiteLogo.svg";
-import authStyles from "./auth.module.css";
-import mobileLogo from "./../../assets/general/AuthBlackLogo.svg";
+import React from 'react';
+import { NavLink, Outlet } from 'react-router-dom';
+import authHeroImage from '../../assets/general/AuthBackground.webp';
+import altcampWhiteLogo from '../../assets/general/AuthWhiteLogo.svg';
+import authStyles from './auth.module.css';
+import mobileLogo from './../../assets/general/AuthBlackLogo.svg';
 
 export default function Auth() {
   let activeStyle = {
-    color: "#6a6ff5",
-    fontWeight: "700",
-    borderBottom: "4px solid #6a6ff5",
+    color: '#6a6ff5',
+    fontWeight: '700',
+    borderBottom: '4px solid #6a6ff5',
   };
 
   return (

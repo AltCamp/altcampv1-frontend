@@ -1,16 +1,16 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore } from '@reduxjs/toolkit';
 
-import { authSlice } from "./slices/apiSlices/authSlice";
+import { authSlice } from './slices/apiSlices/authSlice';
 
-import { communitySlice } from "./slices/apiSlices/communitySlice";
+import { communitySlice } from './slices/apiSlices/communitySlice';
 
-import { userSlice } from "./slices/generalSlices/userSlice";
+import { userSlice } from './slices/generalSlices/userSlice';
 
-import { accountMutationSlice } from "./slices/apiSlices/accountSlices/accountMutationSlice";
+import { accountMutationSlice } from './slices/apiSlices/accountSlices/accountMutationSlice';
 
 import { feedSlice } from './slices/apiSlices/feedSlice';
 
-import { bookmarkSlice } from "./slices/apiSlices/bookmarkSlice";
+import { bookmarkSlice } from './slices/apiSlices/bookmarkSlice';
 
 export const store = configureStore({
   reducer: {

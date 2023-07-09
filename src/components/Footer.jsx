@@ -1,4 +1,4 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faGithubAlt,
   faGoogle,
@@ -7,10 +7,10 @@ import {
   faLinkedin,
   faFacebookF,
   faInstagram,
-} from "@fortawesome/free-brands-svg-icons";
-import { Facebook, Instagram, Twitch, Youtube } from "iconsax-react";
-import altcamplogo from "../assets/general/AuthWhiteLogo.svg";
-import mainFooterStyles from "./Footer.module.css";
+} from '@fortawesome/free-brands-svg-icons';
+import { Facebook, Instagram, Twitch, Youtube } from 'iconsax-react';
+import altcamplogo from '../assets/general/AuthWhiteLogo.svg';
+import mainFooterStyles from './Footer.module.css';
 
 const Footer = () => {
   return (
@@ -39,7 +39,7 @@ const Footer = () => {
         </div>
         <div className={mainFooterStyles.mainFooterList}>
           <div className={mainFooterStyles.footerList}>
-            {" "}
+            {' '}
             <h3>Product</h3>
             <p>For AltSchoolers</p>
             <p>For Instructors</p>
@@ -47,14 +47,14 @@ const Footer = () => {
           </div>
 
           <div className={mainFooterStyles.footerList}>
-            {" "}
+            {' '}
             <h3>Features</h3>
             <p>Feature</p>
             <p>Feature</p>
             <p>Feature</p>
           </div>
           <div className={mainFooterStyles.footerList}>
-            {" "}
+            {' '}
             <h3>Company</h3>
             <p>Company</p>
             <p>Company</p>

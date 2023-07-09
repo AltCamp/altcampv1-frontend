@@ -1,57 +1,56 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react';
 
-import askQuestionPageStyles from './askquestionpage.module.css'
+import askQuestionPageStyles from './askquestionpage.module.css';
 
-import { ArrowCircleLeft } from 'iconsax-react'
+import { ArrowCircleLeft } from 'iconsax-react';
 
-import { useParams, useNavigate, Link } from 'react-router-dom'
-import RichEditor from './../richeditor/richeditor'
+import { useParams, useNavigate, Link } from 'react-router-dom';
+import RichEditor from './../richeditor/richeditor';
 
-import { useCreateQuestionMutation } from '../../../../../app/slices/apiSlices/communitySlice'
-import Toaster from '../../../../../components/Toaster/Toaster'
+import { useCreateQuestionMutation } from '../../../../../app/slices/apiSlices/communitySlice';
+import Toaster from '../../../../../components/Toaster/Toaster';
 
+export default function AskQuestionPage() {
+  const [title, setTitle] = useState('');
+  const [body, setBody] = useState('');
+  const [emptyTitle, setEmptyTitle] = useState(false);
 
-export default function AskQuestionPage () {
-  const [title, setTitle] = useState('')
-  const [body, setBody] = useState('')
-  const [emptyTitle, setEmptyTitle] = useState(false)
+  const [toastText, setToastText] = useState('');
+  const [toastType, setToastType] = useState('info');
 
-  const [toastText, setToastText] = useState('')
-  const [toastType, setToastType] = useState('info')
+  const { question } = useParams();
+  const navigate = useNavigate();
 
-  const { question } = useParams()
-  const navigate = useNavigate()
-
-  const ref = useRef(null)
+  const ref = useRef(null);
 
   const [createQuestion, { data, isLoading, isSuccess, isError, error }] =
-    useCreateQuestionMutation()
+    useCreateQuestionMutation();
 
   const handleCreateQuestion = () => {
     createQuestion({
       title,
-      body
+      body,
       // tags: ['react', 'javascript', 'nodejs', 'express']
-    })
-  }
+    });
+  };
 
   useEffect(() => {
     if (isSuccess) {
-      navigate('/dashboard/community', { state: { created: true } })
+      navigate('/dashboard/community', { state: { created: true } });
     }
-  }, [isSuccess])
+  }, [isSuccess]);
 
   useEffect(() => {
     if (isSuccess) {
       // console.log('data:', data)
-      setToastText(data.message)
-      setToastType('success')
+      setToastText(data.message);
+      setToastType('success');
     } else if (isError) {
-      setToastText(error.data.message)
-      setToastType('error')
-      setTimeout(() => setToastText(''), 3000)
+      setToastText(error.data.message);
+      setToastType('error');
+      setTimeout(() => setToastText(''), 3000);
     }
-  }, [data, isLoading, isSuccess, isError, error])
+  }, [data, isLoading, isSuccess, isError, error]);
 
   return (
     <div className={askQuestionPageStyles.container}>
@@ -61,7 +60,7 @@ export default function AskQuestionPage () {
           onClick={() => navigate(-1)}
         >
           <ArrowCircleLeft
-            size='23'
+            size="23"
             className={askQuestionPageStyles.backIcon}
           />
           <div className={askQuestionPageStyles.backText}>
@@ -86,26 +85,26 @@ export default function AskQuestionPage () {
           </div>
           <div className={askQuestionPageStyles.input}>
             <input
-              type='text'
-              placeholder=''
+              type="text"
+              placeholder=""
               className={askQuestionPageStyles.inputField}
               value={title}
-              onChange={e => {
-                setTitle(e.target.value)
-                setEmptyTitle(false)
+              onChange={(e) => {
+                setTitle(e.target.value);
+                setEmptyTitle(false);
               }}
               style={{
-                border: emptyTitle && '1px solid red'
+                border: emptyTitle && '1px solid red',
               }}
             />
             <button
               className={askQuestionPageStyles.next}
               onClick={() => {
                 if (title !== '') {
-                  tinyMCE.activeEditor.focus()
-                  document.querySelector('.tox-tinymce').scrollIntoView()
+                  tinyMCE.activeEditor.focus();
+                  document.querySelector('.tox-tinymce').scrollIntoView();
                 } else {
-                  setEmptyTitle(true)
+                  setEmptyTitle(true);
                 }
               }}
             >
@@ -131,7 +130,7 @@ export default function AskQuestionPage () {
               onClick={() => {
                 if (body !== '') {
                   // document.querySelector('.submit').focus()
-                  ref.current.scrollIntoView()
+                  ref.current.scrollIntoView();
                 }
               }}
             >
@@ -150,8 +149,8 @@ export default function AskQuestionPage () {
           </div>
           <div className={askQuestionPageStyles.tags}>
             <input
-              type='text'
-              placeholder=''
+              type="text"
+              placeholder=""
               className={askQuestionPageStyles.tagsField}
               disabled={true}
             />
@@ -182,7 +181,7 @@ export default function AskQuestionPage () {
             disabled={isLoading}
             style={{
               cursor: isLoading && 'not-allowed',
-              backgroundColor: isLoading && '#e5e5e5'
+              backgroundColor: isLoading && '#e5e5e5',
             }}
           >
             Submit Question
@@ -190,5 +189,5 @@ export default function AskQuestionPage () {
         </div>
       </div>
     </div>
-  )
+  );
 }

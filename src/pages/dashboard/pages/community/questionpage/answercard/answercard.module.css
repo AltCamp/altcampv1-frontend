@@ -64,29 +64,30 @@
 }
 
 .votes {
-    display: flex;
-    justify-content: end;
-    gap: 0.8rem;
-    align-items: center;
+  display: flex;
+  justify-content: end;
+  gap: 0.8rem;
+  align-items: center;
 }
 
-.upvotes, .downvotes {
-    display: flex;
-    gap: 0.2rem;
-    align-items: center;
+.upvotes,
+.downvotes {
+  display: flex;
+  gap: 0.2rem;
+  align-items: center;
 }
 
 .upvotes {
-    color: #0E8A1A;
+  color: #0e8a1a;
 }
-
 
 .icon {
   cursor: pointer;
   outline: none;
 }
 
-.bookmark, .edit {
+.bookmark,
+.edit {
   display: flex;
   align-items: center;
 }

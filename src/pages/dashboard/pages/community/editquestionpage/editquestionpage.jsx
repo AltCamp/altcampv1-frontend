@@ -1,61 +1,61 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react';
 
-import editQuestionPageStyles from './editquestionpage.module.css'
+import editQuestionPageStyles from './editquestionpage.module.css';
 
-import { ArrowCircleLeft } from 'iconsax-react'
+import { ArrowCircleLeft } from 'iconsax-react';
 
-import { useParams, useNavigate, Link, useLocation } from 'react-router-dom'
-import RichEditor from '../richeditor/richeditor'
+import { useParams, useNavigate, Link, useLocation } from 'react-router-dom';
+import RichEditor from '../richeditor/richeditor';
 
-import { useUpdateQuestionMutation } from '../../../../../app/slices/apiSlices/communitySlice'
+import { useUpdateQuestionMutation } from '../../../../../app/slices/apiSlices/communitySlice';
 
-export default function EditQuestionPage () {
-  const location = useLocation()
+export default function EditQuestionPage() {
+  const location = useLocation();
 
-  const editableQuestionState = location?.state
+  const editableQuestionState = location?.state;
 
-  const [title, setTitle] = useState(editableQuestionState?.title)
-  const [body, setBody] = useState(editableQuestionState?.body)
-  const [emptyTitle, setEmptyTitle] = useState(false)
+  const [title, setTitle] = useState(editableQuestionState?.title);
+  const [body, setBody] = useState(editableQuestionState?.body);
+  const [emptyTitle, setEmptyTitle] = useState(false);
 
-  const [errorText, setErrorText] = useState('')
+  const [errorText, setErrorText] = useState('');
 
-  const { question } = useParams()
-  const navigate = useNavigate()
+  const { question } = useParams();
+  const navigate = useNavigate();
 
-  const ref = useRef(null)
+  const ref = useRef(null);
 
   const [updateQuestion, { data, isLoading, isSuccess, isError, error }] =
-    useUpdateQuestionMutation()
+    useUpdateQuestionMutation();
 
   const handleUpdateQuestion = () => {
     updateQuestion({
       id: editableQuestionState?.question,
       body: {
         title: `Edited: ${title}`,
-        body
+        body,
         // tags: ['react', 'javascript', 'nodejs', 'express']
-      }
-    })
-  }
+      },
+    });
+  };
 
   // console.log(editableQuestionState)
 
   useEffect(() => {
     if (isSuccess) {
       // navigate('/dashboard/community', { state: { created: true } })
-      navigate(-1)
+      navigate(-1);
     }
-  }, [isSuccess])
+  }, [isSuccess]);
 
   useEffect(() => {
     if (isSuccess) {
       // console.log('data:', data)
-      setErrorText('')
+      setErrorText('');
     } else if (isError) {
-      setErrorText(error.data.message)
+      setErrorText(error.data.message);
     }
-  }, [data, isLoading, isSuccess, isError, error])
+  }, [data, isLoading, isSuccess, isError, error]);
 
   return (
     <div className={editQuestionPageStyles.container}>
@@ -65,7 +65,7 @@ export default function EditQuestionPage () {
           onClick={() => navigate(-1)}
         >
           <ArrowCircleLeft
-            size='23'
+            size="23"
             className={editQuestionPageStyles.backIcon}
           />
           <div className={editQuestionPageStyles.backText}>
@@ -88,26 +88,26 @@ export default function EditQuestionPage () {
           </div>
           <div className={editQuestionPageStyles.input}>
             <input
-              type='text'
-              placeholder=''
+              type="text"
+              placeholder=""
               className={editQuestionPageStyles.inputField}
               value={title}
-              onChange={e => {
-                setTitle(e.target.value)
-                setEmptyTitle(false)
+              onChange={(e) => {
+                setTitle(e.target.value);
+                setEmptyTitle(false);
               }}
               style={{
-                border: emptyTitle && '1px solid red'
+                border: emptyTitle && '1px solid red',
               }}
             />
             <button
               className={editQuestionPageStyles.next}
               onClick={() => {
                 if (title !== '') {
-                  tinyMCE.activeEditor.focus()
-                  document.querySelector('.tox-tinymce').scrollIntoView()
+                  tinyMCE.activeEditor.focus();
+                  document.querySelector('.tox-tinymce').scrollIntoView();
                 } else {
-                  setEmptyTitle(true)
+                  setEmptyTitle(true);
                 }
               }}
             >
@@ -133,7 +133,7 @@ export default function EditQuestionPage () {
               onClick={() => {
                 if (body !== '') {
                   // document.querySelector('.submit').focus()
-                  ref.current.scrollIntoView()
+                  ref.current.scrollIntoView();
                 }
               }}
             >
@@ -152,8 +152,8 @@ export default function EditQuestionPage () {
           </div>
           <div className={editQuestionPageStyles.tags}>
             <input
-              type='text'
-              placeholder=''
+              type="text"
+              placeholder=""
               className={editQuestionPageStyles.tagsField}
               disabled={true}
             />
@@ -184,7 +184,7 @@ export default function EditQuestionPage () {
             disabled={isLoading}
             style={{
               cursor: isLoading && 'not-allowed',
-              backgroundColor: isLoading && '#e5e5e5'
+              backgroundColor: isLoading && '#e5e5e5',
             }}
           >
             Update Question
@@ -192,5 +192,5 @@ export default function EditQuestionPage () {
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
-import deletebookmarkmodalStyles from "./deletebookmarkmodal.module.css";
-import { CloseCircle } from "iconsax-react";
-import Warning from "../../../../assets/icons/warning.png";
-import { useDeleteBookmarkMutation } from "../../../../app/slices/apiSlices/bookmarkSlice";
+import React, { useEffect } from 'react';
+import deletebookmarkmodalStyles from './deletebookmarkmodal.module.css';
+import { CloseCircle } from 'iconsax-react';
+import Warning from '../../../../assets/icons/warning.png';
+import { useDeleteBookmarkMutation } from '../../../../app/slices/apiSlices/bookmarkSlice';
 
 export default function DeleteBookmarkModal({
   handleToggleDeleteBookmarkModal,
@@ -36,7 +36,7 @@ export default function DeleteBookmarkModal({
           />
           <div className={deletebookmarkmodalStyles.header}>
             <p className={deletebookmarkmodalStyles.p}>
-              {" "}
+              {' '}
               You're about to delete this bookmark.
             </p>
             <p className={deletebookmarkmodalStyles.p}>Are you sure?</p>
@@ -55,7 +55,7 @@ export default function DeleteBookmarkModal({
               onClick={handleDelete}
               disabled={isLoading}
             >
-              {isLoading ? "Deleting..." : "Delete"}
+              {isLoading ? 'Deleting...' : 'Delete'}
             </button>
           </div>
         </div>

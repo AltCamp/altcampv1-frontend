@@ -1,7 +1,7 @@
-import React, { useRef } from "react";
-import { useState, useEffect } from "react";
-import sortIcon from "../../../../../assets/icons/baseline-sort.svg";
-import sortStyles from "./sortModal.module.css";
+import React, { useRef } from 'react';
+import { useState, useEffect } from 'react';
+import sortIcon from '../../../../../assets/icons/baseline-sort.svg';
+import sortStyles from './sortModal.module.css';
 
 export default function sortModal() {
   const [showSortModal, setShowSortModal] = useState(false);
@@ -14,23 +14,23 @@ export default function sortModal() {
       }
     };
     if (showSortModal) {
-      document.addEventListener("click", handler);
+      document.addEventListener('click', handler);
     } else {
-      document.removeEventListener("click", handler);
+      document.removeEventListener('click', handler);
     }
     return () => {
-      document.removeEventListener("click", handler);
+      document.removeEventListener('click', handler);
     };
   }, [showSortModal]);
-  
+
   const changeSortModal = () => {
     setShowSortModal(!showSortModal);
   };
   const data = [
     {
-      heading: "Sort By",
-      option1: "Newest to oldest",
-      option2: "Oldest to newest",
+      heading: 'Sort By',
+      option1: 'Newest to oldest',
+      option2: 'Oldest to newest',
     },
   ];
   return (

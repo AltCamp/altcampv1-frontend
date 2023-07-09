@@ -1,16 +1,16 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
-import layoutStyles from './layout.module.css'
-import { Outlet } from 'react-router-dom'
-import Topbar from '../components/topbar/topbar'
-import Sidebar from '../components/sidebar/sidebar'
+import layoutStyles from './layout.module.css';
+import { Outlet } from 'react-router-dom';
+import Topbar from '../components/topbar/topbar';
+import Sidebar from '../components/sidebar/sidebar';
 
-export default function Layout () {
-  const [toggleSideBar, setToggleSideBar] = useState(false)
+export default function Layout() {
+  const [toggleSideBar, setToggleSideBar] = useState(false);
 
   const handleSideBar = () => {
-    setToggleSideBar(!toggleSideBar)
-  }
+    setToggleSideBar(!toggleSideBar);
+  };
 
   return (
     <div className={layoutStyles.container}>
@@ -24,5 +24,5 @@ export default function Layout () {
         </div>
       </div>
     </div>
-  )
+  );
 }

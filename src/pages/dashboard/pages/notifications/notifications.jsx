@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import notificationsStyles from "./notifications.module.css";
-import EmptyNotification from "../../../../assets/general/EmptyNotification.png";
-import { Link } from "react-router-dom";
-import FilterModal from "./modals/filterModal";
-import SortModal from "./modals/sortModal";
+import React, { useState } from 'react';
+import notificationsStyles from './notifications.module.css';
+import EmptyNotification from '../../../../assets/general/EmptyNotification.png';
+import { Link } from 'react-router-dom';
+import FilterModal from './modals/filterModal';
+import SortModal from './modals/sortModal';
 
 export default function Notifications() {
   const [notification, setNotification] = useState(true);
@@ -13,82 +13,82 @@ export default function Notifications() {
   const data = [
     {
       id: 1,
-      name: "Seun Akingboye",
-      day: "Today",
-      time: "4:00pm",
+      name: 'Seun Akingboye',
+      day: 'Today',
+      time: '4:00pm',
     },
     {
       id: 2,
-      name: "Seun Akingboye",
-      day: "Yesterday",
-      time: "4:00pm",
+      name: 'Seun Akingboye',
+      day: 'Yesterday',
+      time: '4:00pm',
     },
     {
       id: 3,
-      name: "Seun Akingboye",
-      day: "03/02/2022",
-      time: "4:00pm",
+      name: 'Seun Akingboye',
+      day: '03/02/2022',
+      time: '4:00pm',
     },
     {
       id: 4,
-      name: "Seun Akingboye",
-      day: "03/02/2022",
-      time: "4:00pm",
+      name: 'Seun Akingboye',
+      day: '03/02/2022',
+      time: '4:00pm',
     },
     {
       id: 5,
-      name: "Seun Akingboye",
-      day: "03/02/2022",
-      time: "4:00pm",
+      name: 'Seun Akingboye',
+      day: '03/02/2022',
+      time: '4:00pm',
     },
     {
       id: 6,
-      name: "Seun Akingboye",
-      day: "03/02/2022",
-      time: "4:00pm",
+      name: 'Seun Akingboye',
+      day: '03/02/2022',
+      time: '4:00pm',
     },
     {
       id: 7,
-      name: "Seun Akingboye",
-      day: "03/02/2022",
-      time: "4:00pm",
+      name: 'Seun Akingboye',
+      day: '03/02/2022',
+      time: '4:00pm',
     },
     {
       id: 8,
-      name: "Seun Akingboye",
-      day: "03/02/2022",
-      time: "4:00pm",
+      name: 'Seun Akingboye',
+      day: '03/02/2022',
+      time: '4:00pm',
     },
 
     {
       id: 9,
-      name: "Seun Akingboye",
-      day: "03/02/2022",
-      time: "4:00pm",
+      name: 'Seun Akingboye',
+      day: '03/02/2022',
+      time: '4:00pm',
     },
     {
       id: 10,
-      name: "Seun Akingboye",
-      day: "03/02/2022",
-      time: "4:00pm",
+      name: 'Seun Akingboye',
+      day: '03/02/2022',
+      time: '4:00pm',
     },
     {
       id: 11,
-      name: "Seun Akingboye",
-      day: "03/02/2022",
-      time: "4:00pm",
+      name: 'Seun Akingboye',
+      day: '03/02/2022',
+      time: '4:00pm',
     },
     {
       id: 12,
-      name: "Seun Akingboye",
-      day: "03/02/2022",
-      time: "4:00pm",
+      name: 'Seun Akingboye',
+      day: '03/02/2022',
+      time: '4:00pm',
     },
     {
       id: 13,
-      name: "Seun Akingboye",
-      day: "03/02/2022",
-      time: "4:00pm",
+      name: 'Seun Akingboye',
+      day: '03/02/2022',
+      time: '4:00pm',
     },
   ];
 
@@ -176,9 +176,9 @@ export default function Notifications() {
             <button className={notificationsStyles.pageLink}>3</button>
 
             <button className={notificationsStyles.next}>Next</button> */}
-             <div className={notificationsStyles.pageCount}>
+            <div className={notificationsStyles.pageCount}>
               <span>1</span>/<span>60</span>
-            </div> 
+            </div>
           </div>
         </div>
       )}
