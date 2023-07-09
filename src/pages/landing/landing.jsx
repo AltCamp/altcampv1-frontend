@@ -1,5 +1,5 @@
-import landingPageStyles from './landing.module.css'
-import Navbar from '../../components/Navbar'
+import landingPageStyles from './landing.module.css';
+import Navbar from '../../components/Navbar';
 import {
   Bubble,
   Convert3DCube,
@@ -7,15 +7,15 @@ import {
   Brush2,
   ChartCircle,
   TickSquare,
-  RecordCircle
-} from 'iconsax-react'
-import Footer from '../../components/Footer'
-import CommunityImage from '../../assets/general/CommunityImage.png'
-import IconSquare from '../../assets/general/iconsquare.webp'
-import heroImage from '../../assets/general/heroImage.svg'
-import AboutUsImage from '../../assets/general/AboutusImage.png'
+  RecordCircle,
+} from 'iconsax-react';
+import Footer from '../../components/Footer';
+import CommunityImage from '../../assets/general/CommunityImage.png';
+import IconSquare from '../../assets/general/iconsquare.webp';
+import heroImage from '../../assets/general/heroImage.svg';
+import AboutUsImage from '../../assets/general/AboutusImage.png';
 
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 const Landing = () => {
   return (
@@ -29,12 +29,12 @@ const Landing = () => {
               A community for Altschoolers that provides easy access to
               assistance from peers and mentors.
             </p>
-            <Link to='/account'>
+            <Link to="/account">
               <button>Get Started</button>
             </Link>
           </div>
           <div className={landingPageStyles['intro-image-area']}>
-            <img src={heroImage} alt='' />
+            <img src={heroImage} alt="" />
           </div>
         </div>
       </div>
@@ -44,11 +44,11 @@ const Landing = () => {
             className={`${landingPageStyles['decor-box']} ${landingPageStyles['decor-box-1']}`}
           ></div>
           <div className={landingPageStyles['about-us-image']}>
-            <img src={CommunityImage} alt='about us image' />
+            <img src={CommunityImage} alt="about us image" />
             <img
               className={landingPageStyles['about-us-image-lg']}
               src={AboutUsImage}
-              alt='about us image'
+              alt="about us image"
             />
           </div>
           <div
@@ -69,39 +69,39 @@ const Landing = () => {
         <h2>Tracks on AltCamp</h2>
         <div className={landingPageStyles['tracks-container']}>
           <div className={landingPageStyles['track']}>
-            <TickSquare size='32' variant='Bold' />
+            <TickSquare size="32" variant="Bold" />
             <p>Frontend Engineering</p>
           </div>
           <div className={landingPageStyles['track']}>
-            <TickSquare size='32' variant='Bold' />
+            <TickSquare size="32" variant="Bold" />
             <p>Product Design</p>
           </div>
           <div className={landingPageStyles['track']}>
-            <TickSquare size='32' variant='Bold' />
+            <TickSquare size="32" variant="Bold" />
             <p>Data Analysis</p>
           </div>
           <div className={landingPageStyles['track']}>
-            <TickSquare size='32' variant='Bold' />
+            <TickSquare size="32" variant="Bold" />
             <p>Backend Engineering</p>
           </div>
           <div className={landingPageStyles['track']}>
-            <TickSquare size='32' variant='Bold' />
+            <TickSquare size="32" variant="Bold" />
             <p>Product Marketing</p>
           </div>
           <div className={landingPageStyles['track']}>
-            <TickSquare size='32' variant='Bold' />
+            <TickSquare size="32" variant="Bold" />
             <p>Data Engineering</p>
           </div>
           <div className={landingPageStyles['track']}>
-            <TickSquare size='32' variant='Bold' />
+            <TickSquare size="32" variant="Bold" />
             <p>Cloud Engineering</p>
           </div>
           <div className={landingPageStyles['track']}>
-            <TickSquare size='32' variant='Bold' />
+            <TickSquare size="32" variant="Bold" />
             <p>Product Management</p>
           </div>
           <div className={landingPageStyles['track']}>
-            <TickSquare size='32' variant='Bold' />
+            <TickSquare size="32" variant="Bold" />
             <p>Data Science</p>
           </div>
         </div>
@@ -112,7 +112,7 @@ const Landing = () => {
         <div className={landingPageStyles['benefits-container']}>
           <div className={landingPageStyles['benefit-card']}>
             <div className={landingPageStyles['benefit-icon']}>
-              <Convert3DCube size='40' />
+              <Convert3DCube size="40" />
             </div>
             <h3>Interactive Community</h3>
             <p>
@@ -122,7 +122,7 @@ const Landing = () => {
           </div>
           <div className={landingPageStyles['benefit-card']}>
             <div className={landingPageStyles['benefit-icon']}>
-              <Bubble size='40' />
+              <Bubble size="40" />
             </div>
             <h3>Learning Resources</h3>
             <p>
@@ -132,7 +132,7 @@ const Landing = () => {
           </div>
           <div className={landingPageStyles['benefit-card']}>
             <div className={landingPageStyles['benefit-icon']}>
-              <RecordCircle size='40' />
+              <RecordCircle size="40" />
             </div>
             <h3>Access to Mentors</h3>
             <p>
@@ -142,7 +142,7 @@ const Landing = () => {
           </div>
           <div className={landingPageStyles['benefit-card']}>
             <div className={landingPageStyles['benefit-icon']}>
-              <ReceiptSquare size='40' />
+              <ReceiptSquare size="40" />
             </div>
             <h3>Career Growth</h3>
             <p>
@@ -152,7 +152,7 @@ const Landing = () => {
           </div>
           <div className={landingPageStyles['benefit-card']}>
             <div className={landingPageStyles['benefit-icon']}>
-              <Brush2 size='40' />
+              <Brush2 size="40" />
             </div>
             <h3>Skill Analysis</h3>
             <p>
@@ -162,7 +162,7 @@ const Landing = () => {
           </div>
           <div className={landingPageStyles['benefit-card']}>
             <div className={landingPageStyles['benefit-icon']}>
-              <ChartCircle size='40' />
+              <ChartCircle size="40" />
             </div>
             <h3>Learning Circle</h3>
             <p>
@@ -171,7 +171,7 @@ const Landing = () => {
             </p>
           </div>
         </div>
-        <Link to='/account'>
+        <Link to="/account">
           <button>Get Started</button>
         </Link>
       </div>
@@ -179,7 +179,7 @@ const Landing = () => {
         <div className={landingPageStyles['icon-boxes-area']}>
           <img
             src={IconSquare}
-            alt='Icon square'
+            alt="Icon square"
             className={landingPageStyles['icon-square-img']}
           />
         </div>
@@ -190,7 +190,7 @@ const Landing = () => {
             Share what you know even as you learn what you do not know in the
             most convenient way.
           </p>
-          <Link to='/account'>
+          <Link to="/account">
             <button>Get Started</button>
           </Link>
         </div>
@@ -198,7 +198,7 @@ const Landing = () => {
 
       <Footer />
     </>
-  )
-}
+  );
+};
 
-export default Landing
+export default Landing;

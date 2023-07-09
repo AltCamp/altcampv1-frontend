@@ -1,9 +1,8 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react';
 
-import { Editor } from '@tinymce/tinymce-react'
+import { Editor } from '@tinymce/tinymce-react';
 
-export default function RichEditor ({ setBody, body, isSuccess }) {
-
+export default function RichEditor({ setBody, body, isSuccess }) {
   return (
     <>
       <Editor
@@ -41,7 +40,7 @@ export default function RichEditor ({ setBody, body, isSuccess }) {
             'codesample',
             'directionality',
             'visualchars',
-            'nonbreaking'
+            'nonbreaking',
           ],
           toolbar:
             'undo redo | bold italic underline strikethrough | fontsize blocks | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen | insertfile image media link anchor codesample | ltr rtl',
@@ -59,16 +58,15 @@ export default function RichEditor ({ setBody, body, isSuccess }) {
             { text: 'Typescript', value: 'typescript' },
             { text: 'React', value: 'jsx' },
             { text: 'Vue', value: 'html' },
-            
           ],
           // add template in the future
-          body_class: 'tiny-body'
+          body_class: 'tiny-body',
         }}
         onEditorChange={(content, editor) => {
-          setBody(content)
+          setBody(content);
           // setContent(editor)
         }}
       />
     </>
-  )
+  );
 }

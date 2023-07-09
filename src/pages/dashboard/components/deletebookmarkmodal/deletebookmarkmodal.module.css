@@ -1,4 +1,3 @@
-
 .toggleDeleteOverlay {
   display: flex;
   justify-content: center;
@@ -48,12 +47,12 @@
   width: 100%;
 }
 
-.content img{
-    width: 100px;
-    margin: auto;
+.content img {
+  width: 100px;
+  margin: auto;
 }
 .header {
-    margin: 2rem 0;
+  margin: 2rem 0;
 }
 .p {
   font-size: 1rem;
@@ -69,19 +68,19 @@
 }
 
 .cancelButton {
-    display: flex;
-    justify-content: center;
-    border-radius: 4px;
-    padding: 0.5rem 0.9rem;
-    width: 100%;
-    font-family: var(--Inter);
-    background-color: var(--secondary-clr-ltester-blue);
-    color: var( --secondary-clr-drk-blue);
-    font-weight: 600;
-    outline: none;
-    border: none;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
+  display: flex;
+  justify-content: center;
+  border-radius: 4px;
+  padding: 0.5rem 0.9rem;
+  width: 100%;
+  font-family: var(--Inter);
+  background-color: var(--secondary-clr-ltester-blue);
+  color: var(--secondary-clr-drk-blue);
+  font-weight: 600;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
 }
 
 .deleteButton {
@@ -121,5 +120,4 @@
   .p {
     font-size: 0.9rem;
   }
-
 }

@@ -1,28 +1,28 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 
-import OtpInput from 'react18-input-otp'
+import OtpInput from 'react18-input-otp';
 
-import verifyEmailStyle from './verifyemail.module.css'
-import mobileLogo from '../../../../assets/general/AuthBlackLogo.svg'
+import verifyEmailStyle from './verifyemail.module.css';
+import mobileLogo from '../../../../assets/general/AuthBlackLogo.svg';
 
-import { useVerifyEmailMutation } from '../../../../app/slices/apiSlices/accountSlices/accountMutationSlice'
+import { useVerifyEmailMutation } from '../../../../app/slices/apiSlices/accountSlices/accountMutationSlice';
 
-import { useVerifyOtpMutation } from '../../../../app/slices/apiSlices/accountSlices/accountMutationSlice'
-import Toaster from '../../../../components/Toaster/Toaster'
+import { useVerifyOtpMutation } from '../../../../app/slices/apiSlices/accountSlices/accountMutationSlice';
+import Toaster from '../../../../components/Toaster/Toaster';
 
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
-export default function VerifyEmail () {
-  const [otp, setOtp] = useState('')
-  const [otpSent, setOtpSent] = useState(false)
+export default function VerifyEmail() {
+  const [otp, setOtp] = useState('');
+  const [otpSent, setOtpSent] = useState(false);
 
-  const [toastText, setToastText] = useState('')
-  const [toastType, setToastType] = useState('info')
+  const [toastText, setToastText] = useState('');
+  const [toastType, setToastType] = useState('info');
 
-  const navigate = useNavigate()
-  const handleSetOtp = otp => {
-    setOtp(otp)
-  }
+  const navigate = useNavigate();
+  const handleSetOtp = (otp) => {
+    setOtp(otp);
+  };
 
   const [
     verifyEmail,
@@ -30,14 +30,14 @@ export default function VerifyEmail () {
       data: verifyData,
       isSuccess: verifyEmailSuccess,
       isError: verifyEmailError,
-      error: verifyEmailErrors
-    }
-  ] = useVerifyEmailMutation()
+      error: verifyEmailErrors,
+    },
+  ] = useVerifyEmailMutation();
 
   const handleSendOtp = () => {
-    verifyEmail()
-    setOtpSent(true)
-  }
+    verifyEmail();
+    setOtpSent(true);
+  };
 
   const [
     verifyOtp,
@@ -46,34 +46,36 @@ export default function VerifyEmail () {
       isLoading: verifyOtpIsLoading,
       isSuccess: verifyOtpSuccess,
       isError: verifyOtpError,
-      error: verifyOtpErrors
-    }
-  ] = useVerifyOtpMutation()
+      error: verifyOtpErrors,
+    },
+  ] = useVerifyOtpMutation();
 
   const handleVerifyOtp = () => {
-    verifyOtp({ token: otp })
-  }
+    verifyOtp({ token: otp });
+  };
 
   useEffect(() => {
     if (verifyOtpSuccess) {
-      setToastText(verifyOtpData.message)
-      setToastType('success')
-      setTimeout(() => {navigate('/dashboard')}, 2000)
+      setToastText(verifyOtpData.message);
+      setToastType('success');
+      setTimeout(() => {
+        navigate('/dashboard');
+      }, 2000);
     }
     if (verifyOtpError) {
-      setToastText(verifyOtpErrors?.data.message)
-      setToastType('error')
+      setToastText(verifyOtpErrors?.data.message);
+      setToastType('error');
     }
-  }, [verifyOtpSuccess, verifyOtpError])
+  }, [verifyOtpSuccess, verifyOtpError]);
 
-    // console.log(otp)
+  // console.log(otp)
   // console.log(verifyOtpErrors?.data.message)
 
   return (
     <div className={verifyEmailStyle.container}>
       <div className={verifyEmailStyle.content}>
         <div className={verifyEmailStyle.mobileLogo}>
-          <img src={mobileLogo} alt='altcamp mobile logo' className='' />
+          <img src={mobileLogo} alt="altcamp mobile logo" className="" />
         </div>
         <h2 className={verifyEmailStyle.header}>Verify Email</h2>
         <p className={verifyEmailStyle.subHeader}>
@@ -98,7 +100,7 @@ export default function VerifyEmail () {
         <button
           className={verifyEmailStyle.submitButton}
           onClick={() => {
-            handleVerifyOtp()
+            handleVerifyOtp();
           }}
           disabled={otp.length < 4 || verifyOtpIsLoading}
         >
@@ -109,5 +111,5 @@ export default function VerifyEmail () {
         </p>
       </div>
     </div>
-  )
+  );
 }

@@ -1,27 +1,27 @@
 // import Empty from '../../empty/empty'
-import React, { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
-import userStyles from "./users.module.css";
-import searchicon from "../../../../assets/icons/searchicon.png";
-import { useGetAllAccountsQuery } from "../../../../app/slices/apiSlices/accountSlices/accountMutationSlice";
-import { useGetSearchedAccountsQuery } from "../../../../app/slices/apiSlices/accountSlices/accountMutationSlice";
-import { useGetAccountsByCategoryQuery } from "../../../../app/slices/apiSlices/accountSlices/accountMutationSlice";
-import { ProfileCircle } from "iconsax-react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import userStyles from './users.module.css';
+import searchicon from '../../../../assets/icons/searchicon.png';
+import { useGetAllAccountsQuery } from '../../../../app/slices/apiSlices/accountSlices/accountMutationSlice';
+import { useGetSearchedAccountsQuery } from '../../../../app/slices/apiSlices/accountSlices/accountMutationSlice';
+import { useGetAccountsByCategoryQuery } from '../../../../app/slices/apiSlices/accountSlices/accountMutationSlice';
+import { ProfileCircle } from 'iconsax-react';
+import { Link } from 'react-router-dom';
 
 export default function Users() {
   const [page, setPage] = useState(1);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [accountType, setAccountType] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
+  const [accountType, setAccountType] = useState('');
 
   const { data, isLoading, isSuccess, isError, error } = useGetAllAccountsQuery(
-    { accountType,searchTerm, page }
+    { accountType, searchTerm, page }
   );
 
   const handleFilter = (e) => {
     e.preventDefault();
-    if (e.target.innerText === "All") {
-      setAccountType("");
+    if (e.target.innerText === 'All') {
+      setAccountType('');
     } else {
       setAccountType(e.target.innerText);
     }
@@ -33,7 +33,7 @@ export default function Users() {
     // if(e.target.value === ""){
     //   setAccountType("");
     // }
-  }
+  };
 
   // const { data: searchData, isLoading: searchLoading, isSuccess: searchSuccess, isError: searchError, error: searchErr } = useGetSearchedAccountsQuery(searchTerm)
 
@@ -57,8 +57,12 @@ export default function Users() {
         <div className={userStyles.line}></div>
         <aside className={userStyles.filter}>
           <div className={userStyles.search}>
-            <input type="text" placeholder="search users" value={searchTerm}
-            onChange={(e)=> handleSearch(e)}/>
+            <input
+              type="text"
+              placeholder="search users"
+              value={searchTerm}
+              onChange={(e) => handleSearch(e)}
+            />
             <span className={userStyles.searchicon}>
               <img src={searchicon} alt="" />
             </span>
@@ -69,12 +73,12 @@ export default function Users() {
                 className={userStyles.filterItem}
                 style={{
                   backgroundColor:
-                    accountType === "" ? "var(--primary-clr-black)" : "",
-                  color: accountType === "" ? "#fff" : "",
+                    accountType === '' ? 'var(--primary-clr-black)' : '',
+                  color: accountType === '' ? '#fff' : '',
                   border:
-                    accountType === ""
-                      ? "1px solid var(--primary-clr-black)"
-                      : "",
+                    accountType === ''
+                      ? '1px solid var(--primary-clr-black)'
+                      : '',
                 }}
                 onClick={(e) => handleFilter(e)}
               >
@@ -84,12 +88,12 @@ export default function Users() {
                 className={userStyles.filterItem}
                 style={{
                   backgroundColor:
-                    accountType === "Student" ? "var(--primary-clr-black)" : "",
-                  color: accountType === "Student" ? "#fff" : "",
+                    accountType === 'Student' ? 'var(--primary-clr-black)' : '',
+                  color: accountType === 'Student' ? '#fff' : '',
                   border:
-                    accountType === "Student"
-                      ? "1px solid var(--primary-clr-black)"
-                      : "",
+                    accountType === 'Student'
+                      ? '1px solid var(--primary-clr-black)'
+                      : '',
                 }}
                 onClick={(e) => handleFilter(e)}
               >
@@ -99,12 +103,12 @@ export default function Users() {
                 className={userStyles.filterItem}
                 style={{
                   backgroundColor:
-                    accountType === "Mentor" ? "var(--primary-clr-black)" : "",
-                  color: accountType === "Mentor" ? "#fff" : "",
+                    accountType === 'Mentor' ? 'var(--primary-clr-black)' : '',
+                  color: accountType === 'Mentor' ? '#fff' : '',
                   border:
-                    accountType === "Mentor"
-                      ? "1px solid var(--primary-clr-black)"
-                      : "",
+                    accountType === 'Mentor'
+                      ? '1px solid var(--primary-clr-black)'
+                      : '',
                 }}
                 onClick={(e) => handleFilter(e)}
               >
@@ -181,9 +185,9 @@ export default function Users() {
                   style={{
                     backgroundColor:
                       meta?.currentPage === index + 1
-                        ? "var(--secondary-clr-lter-blue)"
-                        : "",
-                    color: meta?.currentPage === index + 1 ? "#FFFFFF" : "",
+                        ? 'var(--secondary-clr-lter-blue)'
+                        : '',
+                    color: meta?.currentPage === index + 1 ? '#FFFFFF' : '',
                   }}
                   onClick={() => setPage(index + 1)}
                 >
@@ -207,7 +211,7 @@ export default function Users() {
                   setPages(e.target.value);
                 }}
                 onKeyDown={(e) => {
-                  if (e.key === "Enter") {
+                  if (e.key === 'Enter') {
                     setPage(pages);
                   }
                 }}

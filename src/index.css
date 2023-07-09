@@ -1,15 +1,14 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 :root {
   /* fonts variables */
-  --Inter: "Inter", sans-serif;
-  --Poppins: "Poppins", sans-serif;
+  --Inter: 'Inter', sans-serif;
+  --Poppins: 'Poppins', sans-serif;
 
   /* Color Variables (Using Figma Assets) */
 
   /* 585DCC this color is missing */
- 
- 
+
   /* Primary Colors */
   --primary-clr-black: #333130;
   --primary-clr-drkst-brown: #55524f;
@@ -24,7 +23,7 @@
   /* Neutral Colors */
   --neutral-clr-black: #000;
   --neutral-clr-white: #fff;
-  
+
   --neutral-clr-deep-grey: #212529;
   --neutral-clr-drkst-grey: #343a40;
   --neutral-clr-drker-grey: #495057;
@@ -35,7 +34,6 @@
   --neutral-clr-lter-grey: #e9ecef;
   --neutral-clr-ltest-grey: #f8f9fa;
 
-  
   /* Secondary Colors */
   --secondary-clr-deep-blue: #151631;
   --secondary-clr-drkst-blue: #232552;
@@ -61,7 +59,6 @@ body {
   margin: 0;
   padding: 0;
 }
-
 
 ::-webkit-scrollbar {
   width: 8px;
@@ -93,4 +90,3 @@ html {
 a {
   text-decoration: none;
 }
-

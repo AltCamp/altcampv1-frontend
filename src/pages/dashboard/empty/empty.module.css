@@ -16,7 +16,7 @@
   margin-top: 2rem;
 }
 
-.emptyText p{
+.emptyText p {
   font-weight: 400;
   font-size: 1rem;
   line-height: 1.75rem;
@@ -41,7 +41,7 @@
 .emptyImg p {
   position: absolute;
   top: 5.25rem;
-  left:-6rem;
+  left: -6rem;
   z-index: 1;
   text-transform: uppercase;
   font-family: var(--Inter);
@@ -77,49 +77,49 @@
 
 @media (max-width: 425px) {
   .emptyImg p {
-    left: -.9rem;
+    left: -0.9rem;
     font-size: 1.25rem;
   }
-  .emptyText p{
-  font-size: .9rem;
+  .emptyText p {
+    font-size: 0.9rem;
+  }
 }
-}
-
 
 @media (max-width: 350px) {
-  .emptyImg p{
-    left: .5rem;
+  .emptyImg p {
+    left: 0.5rem;
   }
 }
 
 @media (max-width: 320px) {
-    .emptyImg p {
+  .emptyImg p {
     font-size: 1rem;
     left: 1.2rem;
-} .emptyText p{
-  font-size: .75rem;
+  }
+  .emptyText p {
+    font-size: 0.75rem;
+  }
 }
-}
-
 
 @media (max-width: 290px) {
-    .emptyImg p {
-    font-size: .9rem;
+  .emptyImg p {
+    font-size: 0.9rem;
     left: 2rem;
-}  .emptyText p{
-  font-size: .6rem;
-}
+  }
+  .emptyText p {
+    font-size: 0.6rem;
+  }
 }
 
 @media (max-width: 270px) {
-   .emptyText p{
-  font-size: .55rem;
-}
+  .emptyText p {
+    font-size: 0.55rem;
+  }
 }
 
 @media (max-width: 265px) {
-    .emptyImg p {
-    font-size: .8rem;
+  .emptyImg p {
+    font-size: 0.8rem;
     left: 3rem;
-} 
+  }
 }
