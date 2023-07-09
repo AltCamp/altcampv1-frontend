@@ -408,14 +408,13 @@
     padding: 0.4rem 0.6rem;
     font-size: 0.62rem;
   }
-  .active{
+  .active {
     font-weight: 500;
     padding: 0.3rem 0.8rem;
   }
-  
-  .pageCount{
+
+  .pageCount {
     font-size: 0.62rem;
     padding: 0.4rem 0.6rem;
   }
-
 }

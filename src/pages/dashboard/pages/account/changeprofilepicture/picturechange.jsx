@@ -1,12 +1,12 @@
-import React, { useRef, useEffect, useState } from "react";
-import picUpdate from "./picturechange.module.css";
-import { ProfileCircle } from "iconsax-react";
-import { useDispatch } from "react-redux";
-import { useOutletContext } from "react-router-dom";
-import { setProfilePicture } from "../../../../../app/slices/generalSlices/userSlice";
-import { useUpdateProfilePictureMutation } from "../../../../../app/slices/apiSlices/accountSlices/accountMutationSlice";
-import { useMediaHandler } from "./../hooks/useMediaHandler";
-import Toaster from "../../../../../components/Toaster/Toaster";
+import React, { useRef, useEffect, useState } from 'react';
+import picUpdate from './picturechange.module.css';
+import { ProfileCircle } from 'iconsax-react';
+import { useDispatch } from 'react-redux';
+import { useOutletContext } from 'react-router-dom';
+import { setProfilePicture } from '../../../../../app/slices/generalSlices/userSlice';
+import { useUpdateProfilePictureMutation } from '../../../../../app/slices/apiSlices/accountSlices/accountMutationSlice';
+import { useMediaHandler } from './../hooks/useMediaHandler';
+import Toaster from '../../../../../components/Toaster/Toaster';
 
 export default function Picturechange() {
   const chooseref = useRef(null);
@@ -22,19 +22,19 @@ export default function Picturechange() {
     e.preventDefault();
     e.stopPropagation();
     dropRef.current.style.border =
-      "2px dashed var(--secondary-clr-lter-purple)";
+      '2px dashed var(--secondary-clr-lter-purple)';
   };
 
   const handleStyleLeave = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    dropRef.current.style.border = "1px solid var(--secondary-clr-lter-purple)";
+    dropRef.current.style.border = '1px solid var(--secondary-clr-lter-purple)';
   };
 
   const handleStyleDrop = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    dropRef.current.style.border = "1px solid var(--secondary-clr-lter-purple)";
+    dropRef.current.style.border = '1px solid var(--secondary-clr-lter-purple)';
     handleMedia(e.dataTransfer.files[0]);
   };
 
@@ -45,7 +45,7 @@ export default function Picturechange() {
       show: false,
       title: null,
       text: null,
-      type: "info",
+      type: 'info',
     },
   });
 
@@ -76,7 +76,7 @@ export default function Picturechange() {
         toastConfig: {
           show: true,
           text: data.message,
-          type: "success",
+          type: 'success',
         },
       });
       dispatch(setProfilePicture(data.data.profilePicture));
@@ -88,9 +88,9 @@ export default function Picturechange() {
       handleStateUpdate({
         toastConfig: {
           show: true,
-          title: "Upload Error!",
+          title: 'Upload Error!',
           text: error.data.message,
-          type: "error",
+          type: 'error',
         },
       });
       removeImage();
@@ -99,28 +99,28 @@ export default function Picturechange() {
   }, [isSuccess, isError]);
 
   return (
-    <div className={picUpdate["container"]}>
-      <div className={picUpdate["header"]}>
+    <div className={picUpdate['container']}>
+      <div className={picUpdate['header']}>
         <p>Display Picture</p>
       </div>
-      <div className={picUpdate["body"]}>
+      <div className={picUpdate['body']}>
         <section
-          className={picUpdate["body_upload"]}
+          className={picUpdate['body_upload']}
           ref={dropRef}
           onDragEnter={(e) => handleStyleEnter(e)}
           onDragLeave={(e) => handleStyleLeave(e)}
           onDragOver={(e) => handleStyleEnter(e)}
           onDrop={(e) => handleStyleDrop(e)}
         >
-          <aside className={picUpdate["profile"]}>
+          <aside className={picUpdate['profile']}>
             {!image ? (
               <ProfileCircle size="100" color="#555555" />
             ) : (
               <img src={image} alt="profile" />
             )}
           </aside>
-          <p className={picUpdate["group_desc"]}>Drag and drop Picture</p>
-          <p className={picUpdate["group_desc2"]}>OR</p>
+          <p className={picUpdate['group_desc']}>Drag and drop Picture</p>
+          <p className={picUpdate['group_desc2']}>OR</p>
           <form action="" encType="multipart/form-data">
             <label
               htmlFor="projectImage"
@@ -131,7 +131,7 @@ export default function Picturechange() {
             <input
               type="file"
               name="projectImage"
-              id={picUpdate["projectImage"]}
+              id={picUpdate['projectImage']}
               accept="image/jpeg, image/png"
               ref={chooseref}
               onChange={(e) => handleMedia(e.target.files[0])}
@@ -146,16 +146,16 @@ export default function Picturechange() {
           message={state.toastConfig.text}
           handleClose={handleCloseToast}
         />
-        <section className={picUpdate["upload_button"]}>
+        <section className={picUpdate['upload_button']}>
           <button
             onClick={handleUpdateProfilePicture}
             disabled={isLoading || !image}
             style={{
-              cursor: isLoading || !image ? "not-allowed" : "pointer",
-              opacity: isLoading || !image ? "0.7" : "1",
+              cursor: isLoading || !image ? 'not-allowed' : 'pointer',
+              opacity: isLoading || !image ? '0.7' : '1',
             }}
           >
-            {isLoading ? "Uploading..." : "Upload Photo"}
+            {isLoading ? 'Uploading...' : 'Upload Photo'}
           </button>
         </section>
       </div>

@@ -1,6 +1,6 @@
-import React from "react";
-import emptyStyle from "./empty.module.css";
-import EmptyImg from "../../../assets/general/empty.png";
+import React from 'react';
+import emptyStyle from './empty.module.css';
+import EmptyImg from '../../../assets/general/empty.png';
 
 export default function Empty() {
   return (
@@ -11,17 +11,17 @@ export default function Empty() {
           <p>coming soon</p>
         </div>
         <div className={emptyStyle.emptyText}>
+          <p>Nothing to see here yet, this page is under construction.</p>
           <p>
-            Nothing to see here yet, this page is under construction. 
-          </p>
-          <p>Click{" "}
+            Click{' '}
             <a
               className={emptyStyle.emptyLink}
               href="https://github.com/AltCamp/altcampv1-frontend/issues/new/choose"
             >
-              here {" "}
+              here{' '}
             </a>
-            to report any issue.</p>
+            to report any issue.
+          </p>
         </div>
       </div>
     </div>

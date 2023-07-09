@@ -1,51 +1,51 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 
-import answerCardStyles from './answercard.module.css'
+import answerCardStyles from './answercard.module.css';
 
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-import { ArrowDown, ArrowUp, ArchiveAdd, Edit } from 'iconsax-react'
+import { ArrowDown, ArrowUp, ArchiveAdd, Edit } from 'iconsax-react';
 
-import { BsFillBookmarkFill, BsBookmarkPlus } from 'react-icons/bs'
+import { BsFillBookmarkFill, BsBookmarkPlus } from 'react-icons/bs';
 
-import ReactTimeAgo from 'react-time-ago'
-import DOMPurify from 'isomorphic-dompurify'
-import { Tooltip } from 'react-tooltip'
+import ReactTimeAgo from 'react-time-ago';
+import DOMPurify from 'isomorphic-dompurify';
+import { Tooltip } from 'react-tooltip';
 
 import {
   useUpvoteAnswerMutation,
   useDownvoteAnswerMutation,
-  useUpdateAnswerMutation
-} from '../../../../../../app/slices/apiSlices/communitySlice'
+  useUpdateAnswerMutation,
+} from '../../../../../../app/slices/apiSlices/communitySlice';
 
-import { useSelector } from 'react-redux'
-import RichEditor from '../../richeditor/richeditor'
+import { useSelector } from 'react-redux';
+import RichEditor from '../../richeditor/richeditor';
 
-import BookmarkModal from './../../../../components/bookmarkmodal/bookmarkmodal'
+import BookmarkModal from './../../../../components/bookmarkmodal/bookmarkmodal';
 
 // import prsims modules for code highlighting and sytyling
 // import Prism from 'prismjs'
 
-export default function Answercard ({ answer }) {
-  const [content, setContent] = useState(answer?.content)
-  const [editMode, setEditMode] = useState(false)
-  const [toggleBookmarkModal, setToggleBookmarkModal] = useState()
+export default function Answercard({ answer }) {
+  const [content, setContent] = useState(answer?.content);
+  const [editMode, setEditMode] = useState(false);
+  const [toggleBookmarkModal, setToggleBookmarkModal] = useState();
 
   const clean = DOMPurify.sanitize(answer?.content, {
     ADD_TAGS: ['iframe'],
-    ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling']
-  })
+    ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling'],
+  });
 
-  const { user } = useSelector(state => state?.user.user)
+  const { user } = useSelector((state) => state?.user.user);
 
-  const location = useLocation()
+  const location = useLocation();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const answerId = answer?._id
+  const answerId = answer?._id;
 
   const [upvoteAnswer, { data, isSuccess, isLoading, isError, error }] =
-    useUpvoteAnswerMutation()
+    useUpvoteAnswerMutation();
 
   const [
     downvoteAnswer,
@@ -54,9 +54,9 @@ export default function Answercard ({ answer }) {
       isSuccess: downvoteSuccess,
       isLoading: downvoteLoading,
       isError: downvoteIsError,
-      error: downvoteError
-    }
-  ] = useDownvoteAnswerMutation()
+      error: downvoteError,
+    },
+  ] = useDownvoteAnswerMutation();
 
   const [
     updateAnswer,
@@ -65,53 +65,53 @@ export default function Answercard ({ answer }) {
       isSuccess: updateAnswerSuccess,
       isLoading: updateAnswerLoading,
       isError: updateAnswerIsError,
-      error: updateAnswerError
-    }
-  ] = useUpdateAnswerMutation()
+      error: updateAnswerError,
+    },
+  ] = useUpdateAnswerMutation();
 
   const handleUpvoteAnswer = () => {
-    upvoteAnswer(answerId)
-  }
+    upvoteAnswer(answerId);
+  };
 
   const handleDownvoteAnswer = () => {
-    downvoteAnswer(answerId)
-  }
+    downvoteAnswer(answerId);
+  };
 
   const handleUpdateAnswer = () => {
     updateAnswer({
       answerId,
       body: {
-        content: `Edited: ${content}`
-      }
-    })
-  }
+        content: `Edited: ${content}`,
+      },
+    });
+  };
 
   useEffect(() => {
     if (updateAnswerSuccess) {
-      setEditMode(false)
+      setEditMode(false);
     }
-  }, [updateAnswerSuccess])
+  }, [updateAnswerSuccess]);
 
   const handleToggleBookmarkModal = () => {
-    setToggleBookmarkModal(!toggleBookmarkModal)
-  }
+    setToggleBookmarkModal(!toggleBookmarkModal);
+  };
 
   useEffect(() => {
     if (location?.state?.postId) {
-      const postElement = document.getElementById(location?.state?.postId)
+      const postElement = document.getElementById(location?.state?.postId);
       postElement?.scrollIntoView({
         behavior: 'smooth',
-        block: 'center'
-      })
+        block: 'center',
+      });
 
-      postElement?.classList.add(answerCardStyles.highlight)
+      postElement?.classList.add(answerCardStyles.highlight);
       setTimeout(() => {
-        postElement?.classList.remove(answerCardStyles.highlight)
-      }, 7000)
+        postElement?.classList.remove(answerCardStyles.highlight);
+      }, 7000);
     }
     // remove the postId from the location state
-    navigate(location?.pathname, { replace: true })
-  }, [location?.state?.postId])
+    navigate(location?.pathname, { replace: true });
+  }, [location?.state?.postId]);
 
   return (
     <>
@@ -140,7 +140,7 @@ export default function Answercard ({ answer }) {
                 disabled={updateAnswerLoading}
                 style={{
                   cursor: updateAnswerLoading ? 'not-allowed' : 'pointer',
-                  opacity: updateAnswerLoading ? '0.7' : '1'
+                  opacity: updateAnswerLoading ? '0.7' : '1',
                 }}
               >
                 {updateAnswerLoading ? 'Updating...' : 'Update'}
@@ -165,7 +165,7 @@ export default function Answercard ({ answer }) {
               </Link>
               <span className={answerCardStyles.divider}></span>
               <span className={answerCardStyles.timeAnswered}>
-                <ReactTimeAgo date={answer?.createdAt} locale='en-US' />
+                <ReactTimeAgo date={answer?.createdAt} locale="en-US" />
               </span>
             </div>
             <div className={answerCardStyles.content}>
@@ -179,39 +179,39 @@ export default function Answercard ({ answer }) {
               <div
                 className={answerCardStyles.upvotes}
                 style={{
-                  color: answer?.upvotes > 0 ? '#0e8a1a' : '#343a40'
+                  color: answer?.upvotes > 0 ? '#0e8a1a' : '#343a40',
                 }}
               >
-                <Tooltip id='my-tooltip' />
+                <Tooltip id="my-tooltip" />
                 <ArrowUp
-                  size='19'
+                  size="19"
                   className={answerCardStyles.icon}
                   onClick={handleUpvoteAnswer}
-                  data-tooltip-id='my-tooltip'
-                  data-tooltip-content='upvote'
-                  data-tooltip-place='top'
+                  data-tooltip-id="my-tooltip"
+                  data-tooltip-content="upvote"
+                  data-tooltip-place="top"
                 />
                 {answer?.upvotes}
               </div>
               <div
                 className={answerCardStyles.downvotes}
                 style={{
-                  color: answer?.downvotes > 0 ? '#dc3545' : '#343a40'
+                  color: answer?.downvotes > 0 ? '#dc3545' : '#343a40',
                 }}
               >
                 <ArrowDown
-                  size='19'
+                  size="19"
                   className={answerCardStyles.icon}
                   onClick={handleDownvoteAnswer}
-                  data-tooltip-id='my-tooltip'
-                  data-tooltip-content='downvote'
-                  data-tooltip-place='top'
+                  data-tooltip-id="my-tooltip"
+                  data-tooltip-content="downvote"
+                  data-tooltip-place="top"
                 />
                 {answer?.downvotes}
               </div>
               <div className={answerCardStyles.bookmark}>
                 <BsBookmarkPlus
-                  size='19'
+                  size="19"
                   className={answerCardStyles.icon}
                   onClick={handleToggleBookmarkModal}
                 />
@@ -221,7 +221,7 @@ export default function Answercard ({ answer }) {
                   className={answerCardStyles.edit}
                   onClick={() => setEditMode(!editMode)}
                 >
-                  <Edit size='19' className={answerCardStyles.icon} />
+                  <Edit size="19" className={answerCardStyles.icon} />
                 </div>
               )}
             </div>
@@ -229,5 +229,5 @@ export default function Answercard ({ answer }) {
         )}
       </div>
     </>
-  )
+  );
 }

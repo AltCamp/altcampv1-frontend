@@ -1,29 +1,29 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { baseQuery } from "../../../constants/api";
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { baseQuery } from '../../../constants/api';
 
 export const accountMutationSlice = createApi({
-  reducerPath: "accountMutationApi",
+  reducerPath: 'accountMutationApi',
   baseQuery,
   // tagTypes:["Auth"],
   endpoints: (builder) => ({
     updateProfilePicture: builder.mutation({
       query: (body) => ({
-        url: "/accounts/profile-picture",
-        method: "PUT",
+        url: '/accounts/profile-picture',
+        method: 'PUT',
         body,
       }),
     }),
     updatePassword: builder.mutation({
       query: (body) => ({
-        url: "/students/change-password",
-        method: "PUT",
+        url: '/students/change-password',
+        method: 'PUT',
         body,
       }),
     }),
     updateBio: builder.mutation({
       query: (body) => ({
-        url: "/accounts/bio",
-        method: "PUT",
+        url: '/accounts/bio',
+        method: 'PUT',
         body,
       }),
     }),
@@ -38,51 +38,51 @@ export const accountMutationSlice = createApi({
             ? `/accounts?category=${accountType}&isPaginated=true&page=${page}&limit=${limit}`
             : `/accounts?&isPaginated=true&page=${page}&limit=${limit}`,
         // url: `/accounts?category=${accountType}&searchTerm=${searchTerm}&isPaginated=true&page=${page}&limit=${limit}`,
-        method: "GET",
+        method: 'GET',
       }),
     }),
     getSearchedAccounts: builder.query({
       query: (searchTerm) => ({
         url: `/accounts?searchTerm=${searchTerm}&isPaginated=true`,
-        method: "GET",
+        method: 'GET',
       }),
     }),
     getAccountsByCategory: builder.query({
       query: (accountType) => ({
         url: `/accounts/category=${accountType}`,
-        method: "GET",
+        method: 'GET',
       }),
     }),
     getAccountsByCategory: builder.query({
       query: (accountType) => ({
         url: `/accounts/category=${accountType}`,
-        method: "GET",
+        method: 'GET',
       }),
     }),
     getAccountById: builder.query({
       query: (accountId) => ({
         url: `/accounts/${accountId}`,
-        method: "GET",
+        method: 'GET',
       }),
     }),
     updateDetails: builder.mutation({
       query: (body) => ({
-        url: "/accounts",
-        method: "PUT",
+        url: '/accounts',
+        method: 'PUT',
         body,
       }),
     }),
     verifyEmail: builder.mutation({
       query: (body) => ({
-        url: "/auth/verify-email",
-        method: "POST",
+        url: '/auth/verify-email',
+        method: 'POST',
         body,
       }),
     }),
     verifyOtp: builder.mutation({
       query: (body) => ({
-        url: "/auth/verify-otp",
-        method: "POST",
+        url: '/auth/verify-otp',
+        method: 'POST',
         body,
       }),
     }),

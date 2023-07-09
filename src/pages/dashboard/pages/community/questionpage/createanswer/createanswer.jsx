@@ -1,31 +1,31 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 
-import createAnswerStyles from './createanswer.module.css'
-import RichEditor from './../../richeditor/richeditor'
+import createAnswerStyles from './createanswer.module.css';
+import RichEditor from './../../richeditor/richeditor';
 
-import { useCreateAnswerMutation } from '../../../../../../app/slices/apiSlices/communitySlice'
+import { useCreateAnswerMutation } from '../../../../../../app/slices/apiSlices/communitySlice';
 
-export default function Createanswer ({ questionId }) {
-  const [content, setContent] = useState('')
+export default function Createanswer({ questionId }) {
+  const [content, setContent] = useState('');
 
   const [createAnswer, { data, isSuccess, isLoading, isError, error }] =
-    useCreateAnswerMutation()
+    useCreateAnswerMutation();
 
-  const handleCreateAnswer = e => {
-    e.preventDefault()
-    createAnswer({ content, questionId })
-  }
+  const handleCreateAnswer = (e) => {
+    e.preventDefault();
+    createAnswer({ content, questionId });
+  };
 
   // set content to empty string after successful answer creation
   useEffect(() => {
     if (isSuccess) {
-      setContent('')
+      setContent('');
       window.scrollBy({
         top: -100,
-        behavior: 'smooth'
-      })
+        behavior: 'smooth',
+      });
     }
-  }, [isSuccess])
+  }, [isSuccess]);
 
   // console.log(data)
   // console.log(error)
@@ -34,7 +34,7 @@ export default function Createanswer ({ questionId }) {
   return (
     <div className={createAnswerStyles.container}>
       <form className={createAnswerStyles.form} onSubmit={handleCreateAnswer}>
-        <label htmlFor='answer' className=''>
+        <label htmlFor="answer" className="">
           Your Answer
         </label>
         <RichEditor setBody={setContent} body={content} isSuccess={isSuccess} />
@@ -43,5 +43,5 @@ export default function Createanswer ({ questionId }) {
         </button>
       </form>
     </div>
-  )
+  );
 }

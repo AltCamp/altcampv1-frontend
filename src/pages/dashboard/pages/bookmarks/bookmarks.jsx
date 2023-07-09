@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
-import BookmarkCard from "./bookmarkCard/bookmarkCard";
-import bookmarksStyles from "./bookmarks.module.css";
-import { RiArrowDownSLine } from "react-icons/ri";
-import { useGetAllBookmarksQuery } from "../../../../app/slices/apiSlices/bookmarkSlice";
-import EmptyBookmark from "../../../../assets/general/EmptyNotification.png";
+import React, { useState, useEffect } from 'react';
+import { useSearchParams, useNavigate } from 'react-router-dom';
+import BookmarkCard from './bookmarkCard/bookmarkCard';
+import bookmarksStyles from './bookmarks.module.css';
+import { RiArrowDownSLine } from 'react-icons/ri';
+import { useGetAllBookmarksQuery } from '../../../../app/slices/apiSlices/bookmarkSlice';
+import EmptyBookmark from '../../../../assets/general/EmptyNotification.png';
 
 export default function Bookmarks() {
   const [isActionOpen, setActionOpen] = useState(false);
@@ -14,7 +14,7 @@ export default function Bookmarks() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const { data, isLoading, error, isSuccess } = useGetAllBookmarksQuery({
-    page: searchParams.get("page") ? searchParams.get("page") : 1,
+    page: searchParams.get('page') ? searchParams.get('page') : 1,
   });
   const bookmarks = data?.data;
   const meta = data?.meta;
@@ -26,7 +26,6 @@ export default function Bookmarks() {
   const handleToggleFilter = () => {
     setFilterOpen(!isFilterOpen);
   };
-
 
   useEffect(() => {
     if (bookmarks.length === 0) {
@@ -40,7 +39,7 @@ export default function Bookmarks() {
     if (data) {
       window.scrollTo(0, 0);
     }
-  }, [searchParams.get("page"), data]);
+  }, [searchParams.get('page'), data]);
 
   const navigate = useNavigate();
 
@@ -62,7 +61,7 @@ export default function Bookmarks() {
                 className={bookmarksStyles.bookButton}
                 onClick={handleToggleAction}
               >
-                <span>Action</span>{" "}
+                <span>Action</span>{' '}
                 <RiArrowDownSLine
                   className={bookmarksStyles.bookIcon}
                   size="20"
@@ -92,7 +91,7 @@ export default function Bookmarks() {
                   className={bookmarksStyles.bookButton}
                   onClick={handleToggleFilter}
                 >
-                  <span>Filter</span>{" "}
+                  <span>Filter</span>{' '}
                   <RiArrowDownSLine
                     className={bookmarksStyles.bookIcon}
                     size="20"
@@ -160,18 +159,20 @@ export default function Bookmarks() {
                   value={page}
                   onChange={(e) => setPage(e.target.value)}
                   onKeyDown={(e) => {
-                    if (e.key === "Enter") {
+                    if (e.key === 'Enter') {
                       setSearchParams({ page });
                     }
                   }}
-                    onKeyUp={e => {
-                  if (Number(e.target.value) > meta?.totalPages) {
-                    setPage(meta?.totalPages)
-                  }
-                }}
+                  onKeyUp={(e) => {
+                    if (Number(e.target.value) > meta?.totalPages) {
+                      setPage(meta?.totalPages);
+                    }
+                  }}
                 />
-                <span className={bookmarksStyles.divider}>/ {" "} </span>
-                <span className={bookmarksStyles.totalPage}>{meta?.totalPages}</span>
+                <span className={bookmarksStyles.divider}>/ </span>
+                <span className={bookmarksStyles.totalPage}>
+                  {meta?.totalPages}
+                </span>
               </div>
             </div>
           )}
@@ -186,7 +187,7 @@ export default function Bookmarks() {
           <div className={bookmarksStyles.noBookmark}>
             <img src={EmptyBookmark} alt="empty bookmark" />
             <p>
-              No bookmarks here yet!{" "}
+              No bookmarks here yet!{' '}
               <span>Bookmark your favorite posts, questions, and answers</span>
             </p>
           </div>

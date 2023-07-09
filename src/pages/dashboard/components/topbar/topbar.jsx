@@ -1,45 +1,45 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
-import topbarStyles from './topbar.module.css'
-import { ProfileCircle } from 'iconsax-react'
+import topbarStyles from './topbar.module.css';
+import { ProfileCircle } from 'iconsax-react';
 
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 import {
   SearchNormal1,
   Notification,
   HambergerMenu,
-  ToggleOff
-} from 'iconsax-react'
+  ToggleOff,
+} from 'iconsax-react';
 
-import darkLogo from '../../../../assets/general/AuthBlackLogo.svg'
+import darkLogo from '../../../../assets/general/AuthBlackLogo.svg';
 
-import iconLogo from '../../../../assets/general/logonotext.svg'
+import iconLogo from '../../../../assets/general/logonotext.svg';
 
-import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux';
 
-export default function Topbar ({ toggleSideBar, handleSideBar }) {
-  const { user } = useSelector(state => state?.user.user)
+export default function Topbar({ toggleSideBar, handleSideBar }) {
+  const { user } = useSelector((state) => state?.user.user);
 
-  const [showSearch, setShowSearch] = useState(false)
+  const [showSearch, setShowSearch] = useState(false);
 
   const handleSearch = () => {
-    setShowSearch(!showSearch)
-  }
+    setShowSearch(!showSearch);
+  };
 
   // console.log(user)
 
   return (
     <div className={topbarStyles.container}>
       <div className={topbarStyles.hamburger} onClick={handleSideBar}>
-        <HambergerMenu size='32' className={topbarStyles.icons} />
+        <HambergerMenu size="32" className={topbarStyles.icons} />
       </div>
-      <Link to='/dashboard' className={topbarStyles.logo}>
-        <img src={darkLogo} alt='' className={topbarStyles.img} />
-        <img src={iconLogo} alt='' className={topbarStyles.imgSmallScreen} />
+      <Link to="/dashboard" className={topbarStyles.logo}>
+        <img src={darkLogo} alt="" className={topbarStyles.img} />
+        <img src={iconLogo} alt="" className={topbarStyles.imgSmallScreen} />
       </Link>
       <div className={topbarStyles.notifyDesktop}>
-        <Notification size='23' className={topbarStyles.icons} />
+        <Notification size="23" className={topbarStyles.icons} />
       </div>
       <div
         className={`${topbarStyles.searchBox} ${
@@ -47,38 +47,38 @@ export default function Topbar ({ toggleSideBar, handleSideBar }) {
         }`}
       >
         <input
-          type='text'
-          id='search'
-          name='search'
-          placeholder='search members, resources, trends, contributors'
+          type="text"
+          id="search"
+          name="search"
+          placeholder="search members, resources, trends, contributors"
         />
-        <button type='submit'>
-          <SearchNormal1 size='23' className={topbarStyles.icons} />
+        <button type="submit">
+          <SearchNormal1 size="23" className={topbarStyles.icons} />
         </button>
       </div>
       <div className={topbarStyles.profileInfo}>
         <div
           className={topbarStyles.searchMobile}
           onClick={() => {
-            handleSearch()
+            handleSearch();
             if (toggleSideBar) {
-              handleSideBar()
+              handleSideBar();
             }
           }}
         >
-          <SearchNormal1 size='23' className={topbarStyles.icons} />
+          <SearchNormal1 size="23" className={topbarStyles.icons} />
         </div>
 
         <div className={topbarStyles.notifyMobile}>
-          <Notification size='23' className={topbarStyles.icons} />
+          <Notification size="23" className={topbarStyles.icons} />
         </div>
         <Link to={`/dashboard/account`} className={topbarStyles.profileImg}>
           {user?.profilePicture ? (
-            <img src={user.profilePicture} alt='' />
+            <img src={user.profilePicture} alt="" />
           ) : (
             <ProfileCircle
               size={45}
-              color='#555555'
+              color="#555555"
               className={topbarStyles.avatar}
             />
           )}
@@ -89,5 +89,5 @@ export default function Topbar ({ toggleSideBar, handleSideBar }) {
         </div>
       </div>
     </div>
-  )
+  );
 }

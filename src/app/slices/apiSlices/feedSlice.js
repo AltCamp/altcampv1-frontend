@@ -1,63 +1,62 @@
-import { createApi } from "@reduxjs/toolkit/query/react";
+import { createApi } from '@reduxjs/toolkit/query/react';
 
-import { baseQuery } from "../../constants/api";
+import { baseQuery } from '../../constants/api';
 
 export const feedSlice = createApi({
-  reducerPath: "feedApi",
+  reducerPath: 'feedApi',
   baseQuery,
-  tagTypes: ["Posts", "Post", "Comments"],
+  tagTypes: ['Posts', 'Post', 'Comments'],
   endpoints: (builder) => ({
     getAllPosts: builder.query({
       query: ({ page, limit = 15 }) => ({
         url: `/posts?isPaginated=true&page=${page}&limit=${limit}`,
-        method: "GET",
+        method: 'GET',
       }),
-      providesTags: ["Posts"],
+      providesTags: ['Posts'],
     }),
     getPostById: builder.query({
       query: (id) => ({
         url: `/posts/${id}`,
-        method: "GET",
+        method: 'GET',
       }),
-      providesTags: ["Post"],
+      providesTags: ['Post'],
     }),
     createPost: builder.mutation({
       query: (body) => ({
-        url: "/posts",
-        method: "POST",
+        url: '/posts',
+        method: 'POST',
         body,
       }),
-      invalidatesTags: ["Posts"],
+      invalidatesTags: ['Posts'],
     }),
     likePost: builder.mutation({
       query: (id) => ({
         url: `/posts/${id}/upvote`,
-        method: "PATCH",
+        method: 'PATCH',
       }),
-      invalidatesTags: ["Post"],
+      invalidatesTags: ['Post'],
     }),
     getAllComments: builder.query({
       query: (postId) => ({
         url: `/comments?postId=${postId}`,
-        method: "GET",
+        method: 'GET',
       }),
-      providesTags: ["Comments"],
+      providesTags: ['Comments'],
     }),
     createComment: builder.mutation({
       query: (body) => ({
         url: `/comments`,
-        method: "POST",
+        method: 'POST',
         body,
       }),
-      invalidatesTags: ["Comments", "Post", "Posts"],
-
+      invalidatesTags: ['Comments', 'Post', 'Posts'],
     }),
     likeComment: builder.mutation({
       query: (id) => ({
         url: `/comments/${id}/upvote`,
-        method: "PATCH",
+        method: 'PATCH',
       }),
-      invalidatesTags: ["Comments"],
+      invalidatesTags: ['Comments'],
     }),
   }),
 });

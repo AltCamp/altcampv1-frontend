@@ -1,31 +1,30 @@
-import React, { useEffect, useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
-import userProfileStyle from './userProfile.module.css'
-import userStyles from '../users.module.css'
-import { ArrowCircleLeft } from 'iconsax-react'
-import { ProfileCircle } from 'iconsax-react'
-import { useGetAccountByIdQuery } from '../../../../../app/slices/apiSlices/accountSlices/accountMutationSlice'
-import Empty from '../../../empty/empty'
+import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import userProfileStyle from './userProfile.module.css';
+import userStyles from '../users.module.css';
+import { ArrowCircleLeft } from 'iconsax-react';
+import { ProfileCircle } from 'iconsax-react';
+import { useGetAccountByIdQuery } from '../../../../../app/slices/apiSlices/accountSlices/accountMutationSlice';
+import Empty from '../../../empty/empty';
 
-
-export default function UserProfile () {
-  const { userId } = useParams()
-  const [user, setUser] = useState([])
+export default function UserProfile() {
+  const { userId } = useParams();
+  const [user, setUser] = useState([]);
   const { data, isLoading, isSuccess, isError, error } =
-  useGetAccountByIdQuery(userId)
- 
-  const navigate = useNavigate()
+    useGetAccountByIdQuery(userId);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isSuccess) {
-      setUser(data?.data)
+      setUser(data?.data);
     }
-  }, [isSuccess])
+  }, [isSuccess]);
 
   return (
     <main className={userProfileStyle.profileContainer}>
-     <div className={userProfileStyle.back} onClick={() => navigate(-1)}>
-        <ArrowCircleLeft size='23' className={userProfileStyle.backIcon} />
+      <div className={userProfileStyle.back} onClick={() => navigate(-1)}>
+        <ArrowCircleLeft size="23" className={userProfileStyle.backIcon} />
         <div className={userProfileStyle.backText}>Go Back</div>
       </div>
       {isLoading && (
@@ -36,7 +35,13 @@ export default function UserProfile () {
       {isSuccess && (
         <section className={userProfileStyle.profileTop}>
           <div className={userProfileStyle.profileTopLeft}>
-          {user.profilePicture ? <img src={user.profilePicture} alt="display image" />: <span><ProfileCircle size={150} /></span>} 
+            {user.profilePicture ? (
+              <img src={user.profilePicture} alt="display image" />
+            ) : (
+              <span>
+                <ProfileCircle size={150} />
+              </span>
+            )}
           </div>
           <div className={userProfileStyle.profileTopRight}>
             <aside className={userProfileStyle.profileTopRightTop}>
@@ -56,13 +61,20 @@ export default function UserProfile () {
             <aside className={userProfileStyle.profileTopRightBottom}>
               <h3 className={userProfileStyle.profileBio}>Bio</h3>
               <p className={userProfileStyle.profileBioText}>
-                {user.bio ? user.bio : <span className={userProfileStyle.profileBioNoText}> 'No bio yet' </span>}
+                {user.bio ? (
+                  user.bio
+                ) : (
+                  <span className={userProfileStyle.profileBioNoText}>
+                    {' '}
+                    'No bio yet'{' '}
+                  </span>
+                )}
               </p>
             </aside>
           </div>
         </section>
       )}
-      {isError && <Empty/>}
+      {isError && <Empty />}
     </main>
-  )
+  );
 }

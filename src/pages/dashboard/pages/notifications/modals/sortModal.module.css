@@ -3,17 +3,16 @@
   margin-bottom: 15px;
 }
 
-
 .options {
   line-height: 40px;
   font-size: 12px;
 }
 
-.option:hover{
-    cursor: pointer;
+.option:hover {
+  cursor: pointer;
 }
 
-.modalParent{
+.modalParent {
   position: relative;
 }
 
@@ -22,7 +21,6 @@
 
   top: 35px;
   right: 0px;
-
 
   /* Auto layout */
 

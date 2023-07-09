@@ -1,5 +1,5 @@
 .tableBody {
-  font-family: "Segoe UI", sans-serif;
+  font-family: 'Segoe UI', sans-serif;
   width: 100%;
   border: 1px solid #f3f3f9;
   margin-top: 1rem;
@@ -15,11 +15,10 @@
   margin-bottom: 1.25rem;
 }
 .titleLink {
-  
   width: fit-content;
 }
 
-.titleLink h3{
+.titleLink h3 {
   color: #282829;
   font-weight: 700;
   font-size: 0.88rem;
@@ -27,7 +26,7 @@
   cursor: pointer;
 }
 
-.titleLink h3:hover{
+.titleLink h3:hover {
   color: #2e69ff;
 }
 
@@ -52,7 +51,7 @@
   line-height: 1.125rem;
   color: #939598;
   margin-bottom: 0.5rem;
-  
+
   display: flex;
   justify-content: space-between;
 }
@@ -80,4 +79,5 @@
 }
 
 .bodyIcons:hover {
-  color: #2e69ff;}
+  color: #2e69ff;
+}

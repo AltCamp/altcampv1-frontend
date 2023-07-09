@@ -1,56 +1,56 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 
-import postPageStyles from './postpage.module.css'
+import postPageStyles from './postpage.module.css';
 
-import { Link, useNavigate, useLocation, useParams } from 'react-router-dom'
+import { Link, useNavigate, useLocation, useParams } from 'react-router-dom';
 
 import {
   ArrowCircleLeft,
   ArchiveAdd,
   ProfileCircle,
   MessageText1,
-  Send2
-} from 'iconsax-react'
+  Send2,
+} from 'iconsax-react';
 
-import ReactTimeAgo from 'react-time-ago'
+import ReactTimeAgo from 'react-time-ago';
 
 import {
   useLikePostMutation,
   useGetPostByIdQuery,
   useGetAllCommentsQuery,
-  useCreateCommentMutation
-} from '../../../../../app/slices/apiSlices/feedSlice'
+  useCreateCommentMutation,
+} from '../../../../../app/slices/apiSlices/feedSlice';
 
-import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux';
 
-import Postcomment from './postcomment/postcomment'
+import Postcomment from './postcomment/postcomment';
 
-import BookmarkModal from '../../../components/bookmarkmodal/bookmarkmodal'
+import BookmarkModal from '../../../components/bookmarkmodal/bookmarkmodal';
 
-export default function Postpage () {
-  const [likeAnimation, setLikeAnimation] = useState(false)
-  const [content, setContent] = useState('')
-  const [toggleBookmarkModal, setToggleBookmarkModal] = useState()
+export default function Postpage() {
+  const [likeAnimation, setLikeAnimation] = useState(false);
+  const [content, setContent] = useState('');
+  const [toggleBookmarkModal, setToggleBookmarkModal] = useState();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const { user } = useSelector(state => state?.user?.user)
+  const { user } = useSelector((state) => state?.user?.user);
 
-  const { postId } = useParams()
+  const { postId } = useParams();
 
   const {
     data: singlePost,
     isLoading: singlePostLoading,
     isSuccess: singlePostSuccess,
     isError: singlePostIsError,
-    error: singlePostError
-  } = useGetPostByIdQuery(postId)
+    error: singlePostError,
+  } = useGetPostByIdQuery(postId);
 
   useEffect(() => {
     if (singlePostError) {
-      navigate(-1)
+      navigate(-1);
     }
-  }, [singlePostError])
+  }, [singlePostError]);
 
   const [
     likePost,
@@ -59,33 +59,33 @@ export default function Postpage () {
       isLoading: likeIsLoading,
       isSuccess: likeIsSucccess,
       isError: likeIsSuccess,
-      error: likeError
-    }
-  ] = useLikePostMutation()
+      error: likeError,
+    },
+  ] = useLikePostMutation();
 
   const handleLikePost = () => {
-    likePost(postId)
-  }
+    likePost(postId);
+  };
 
   useEffect(() => {
     if (likeIsSucccess) {
-      setLikeAnimation(true)
+      setLikeAnimation(true);
 
       setTimeout(() => {
-        setLikeAnimation(false)
-      }, 1000)
+        setLikeAnimation(false);
+      }, 1000);
     }
-  }, [likeIsSucccess])
+  }, [likeIsSucccess]);
 
   const {
     data: comments,
     isLoading: commentsLoading,
     isSuccess: commentsSuccess,
     isError: commentsIsError,
-    error: commentsError
-  } = useGetAllCommentsQuery(postId)
+    error: commentsError,
+  } = useGetAllCommentsQuery(postId);
 
-  const commentList = comments?.data
+  const commentList = comments?.data;
 
   // console.log(commentList)
 
@@ -96,30 +96,30 @@ export default function Postpage () {
       isLoading: createCommentLoading,
       isSuccess: createCommentSuccess,
       isError: createCommentIsError,
-      error: createCommentError
-    }
-  ] = useCreateCommentMutation()
+      error: createCommentError,
+    },
+  ] = useCreateCommentMutation();
 
-  const handleCreateComment = e => {
+  const handleCreateComment = (e) => {
     // e.preventDefault()
-    createComment({ content, postId })
-  }
+    createComment({ content, postId });
+  };
 
   useEffect(() => {
     if (createCommentSuccess) {
-      setContent('')
+      setContent('');
       // scroll to the botttom of the page
-      window.scrollTo(0, document.body.scrollHeight)
+      window.scrollTo(0, document.body.scrollHeight);
     }
-  }, [createCommentSuccess])
+  }, [createCommentSuccess]);
 
-  const post = singlePost?.data
+  const post = singlePost?.data;
 
   // console.log(post)
 
   const handleToggleBookmarkModal = () => {
-    setToggleBookmarkModal(!toggleBookmarkModal)
-  }
+    setToggleBookmarkModal(!toggleBookmarkModal);
+  };
 
   return (
     <>
@@ -133,7 +133,7 @@ export default function Postpage () {
       )}
       <div className={postPageStyles.container}>
         <div className={postPageStyles.back} onClick={() => navigate(-1)}>
-          <ArrowCircleLeft size='24' color='#1E1E1E' />
+          <ArrowCircleLeft size="24" color="#1E1E1E" />
         </div>
 
         {singlePostLoading && (
@@ -160,13 +160,13 @@ export default function Postpage () {
                     {post?.author?.profilePicture ? (
                       <img
                         src={post?.author?.profilePicture}
-                        alt=''
+                        alt=""
                         className={postPageStyles.img}
                       />
                     ) : (
                       <ProfileCircle
                         size={45}
-                        color='#555555'
+                        color="#555555"
                         className={postPageStyles.iconAvatar}
                       />
                     )}
@@ -183,7 +183,7 @@ export default function Postpage () {
                       {post?.author.firstName} {post?.author.lastName}
                     </Link>
                     <div className={postPageStyles.timePosted}>
-                      {<ReactTimeAgo date={post?.createdAt} locale='en-US' />}
+                      {<ReactTimeAgo date={post?.createdAt} locale="en-US" />}
                     </div>
                   </div>
                 </div>
@@ -201,10 +201,10 @@ export default function Postpage () {
                   <div className={postPageStyles.left}>
                     <div className={postPageStyles.like}>
                       <svg
-                        xmlns='http://www.w3.org/2000/svg'
-                        width='20'
-                        height='20'
-                        viewBox='0 0 24 24'
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
                         fill={
                           post?.upvotedBy?.includes(user?._id)
                             ? 'red'
@@ -216,15 +216,15 @@ export default function Postpage () {
                         }`}
                       >
                         <path
-                          d='M12.62 20.81c-.34.12-.9.12-1.24 0C8.48 19.82 2 15.69 2 8.69 2 5.6 4.49 3.1 7.56 3.1c1.82 0 3.43.88 4.44 2.24a5.53 5.53 0 0 1 4.44-2.24C19.51 3.1 22 5.6 22 8.69c0 7-6.48 11.13-9.38 12.12Z'
+                          d="M12.62 20.81c-.34.12-.9.12-1.24 0C8.48 19.82 2 15.69 2 8.69 2 5.6 4.49 3.1 7.56 3.1c1.82 0 3.43.88 4.44 2.24a5.53 5.53 0 0 1 4.44-2.24C19.51 3.1 22 5.6 22 8.69c0 7-6.48 11.13-9.38 12.12Z"
                           stroke={
                             post?.upvotedBy?.includes(user?._id)
                               ? 'red'
                               : '#343A40'
                           }
-                          strokeWidth='1'
-                          strokeLinecap='round'
-                          strokeLinejoin='round'
+                          strokeWidth="1"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         ></path>
                       </svg>
                       <div
@@ -234,7 +234,7 @@ export default function Postpage () {
                         style={{
                           color: post?.upvotedBy?.includes(user?._id)
                             ? 'red'
-                            : '#343A40'
+                            : '#343A40',
                         }}
                       >
                         {post?.upvotedBy?.length}
@@ -244,7 +244,7 @@ export default function Postpage () {
                     <div className={postPageStyles.comment}>
                       <MessageText1
                         size={20}
-                        color='#555555'
+                        color="#555555"
                         className={postPageStyles.icon}
                       />
                       <div className={postPageStyles.count}>
@@ -256,7 +256,7 @@ export default function Postpage () {
                     <div className={postPageStyles.bookmark}>
                       <ArchiveAdd
                         size={20}
-                        color='#555555'
+                        color="#555555"
                         className={postPageStyles.icon}
                         onClick={handleToggleBookmarkModal}
                       />
@@ -272,7 +272,7 @@ export default function Postpage () {
               <div className={postPageStyles.commentHeader}>All Comments</div>
 
               <div className={postPageStyles.comments}>
-                {commentList?.map(comment => (
+                {commentList?.map((comment) => (
                   <Postcomment key={comment._id} comment={comment} />
                 ))}
               </div>
@@ -283,27 +283,27 @@ export default function Postpage () {
                 {user?.profilePicture ? (
                   <img
                     src={user?.profilePicture}
-                    alt=''
+                    alt=""
                     className={postPageStyles.img}
                   />
                 ) : (
                   <ProfileCircle
                     size={45}
-                    color='#555555'
+                    color="#555555"
                     className={postPageStyles.iconAvatar}
                   />
                 )}
               </div>
               <input
-                type='text'
-                placeholder='Write a comment...'
+                type="text"
+                placeholder="Write a comment..."
                 value={content}
                 className={postPageStyles.inputField}
-                onChange={e => setContent(e.target.value)}
-                onKeyDown={e => {
+                onChange={(e) => setContent(e.target.value)}
+                onKeyDown={(e) => {
                   if (e.key === 'Enter') {
-                    e.preventDefault()
-                    handleCreateComment()
+                    e.preventDefault();
+                    handleCreateComment();
                   }
                 }}
                 disabled={createCommentLoading}
@@ -313,8 +313,8 @@ export default function Postpage () {
                   <div className={postPageStyles.loaderSend}></div>
                 ) : (
                   <Send2
-                    size='32'
-                    color='#555555'
+                    size="32"
+                    color="#555555"
                     className={postPageStyles.send}
                     onClick={handleCreateComment}
                   />
@@ -325,5 +325,5 @@ export default function Postpage () {
         )}
       </div>
     </>
-  )
+  );
 }

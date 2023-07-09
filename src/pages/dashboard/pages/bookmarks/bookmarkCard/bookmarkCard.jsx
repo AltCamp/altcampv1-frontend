@@ -1,17 +1,17 @@
-import React, { useState } from 'react'
-import bookmarkCardStyles from './bookmarkcard.module.css'
-import { RiShareForwardLine } from 'react-icons/ri'
-import { BsBookmarkDash } from 'react-icons/bs'
-import { Link } from 'react-router-dom'
-import ReactTimeAgo from 'react-time-ago'
-import DeleteBookmarkModal from '../../../components/deletebookmarkmodal/deletebookmarkmodal'
+import React, { useState } from 'react';
+import bookmarkCardStyles from './bookmarkcard.module.css';
+import { RiShareForwardLine } from 'react-icons/ri';
+import { BsBookmarkDash } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
+import ReactTimeAgo from 'react-time-ago';
+import DeleteBookmarkModal from '../../../components/deletebookmarkmodal/deletebookmarkmodal';
 
 const bookmarkcard = ({ bookmark }) => {
-  const [showDeleteBookmarkModal, setShowDeleteBookmarkModal] = useState(false)
+  const [showDeleteBookmarkModal, setShowDeleteBookmarkModal] = useState(false);
 
   const handleToggleDeleteBookmarkModal = () => {
-    setShowDeleteBookmarkModal(!showDeleteBookmarkModal)
-  }
+    setShowDeleteBookmarkModal(!showDeleteBookmarkModal);
+  };
 
   return (
     <>
@@ -27,15 +27,15 @@ const bookmarkcard = ({ bookmark }) => {
             <div className={bookmarkCardStyles.bodyHeaderLeft}>
               <Link
                 to={
-                  bookmark.postType == "Post"
+                  bookmark.postType == 'Post'
                     ? `/dashboard/post/${bookmark.post._id}`
-                    : bookmark.postType == "Comment"
+                    : bookmark.postType == 'Comment'
                     ? `/dashboard/post/${bookmark.post?.post}`
-                    : bookmark.postType == "Question"
+                    : bookmark.postType == 'Question'
                     ? `/dashboard/community/question/${bookmark?.post._id}/${bookmark?.post.slug}`
-                    : bookmark.postType == "Answer"
+                    : bookmark.postType == 'Answer'
                     ? `/dashboard/community/question/${bookmark?.post.question._id}/${bookmark?.post.question.slug}`
-                    : " "
+                    : ' '
                 }
                 className={bookmarkCardStyles.titleLink}
               >
@@ -46,9 +46,9 @@ const bookmarkcard = ({ bookmark }) => {
               <div className={bookmarkCardStyles.post}>
                 <p>
                   <span className={bookmarkCardStyles.poster}>
-                    {bookmark.post.author.firstName}{" "}
+                    {bookmark.post.author.firstName}{' '}
                     {bookmark.post.author.lastName}
-                  </span>{" "}
+                  </span>{' '}
                   <span className={bookmarkCardStyles.dated}>
                     {
                       <ReactTimeAgo
@@ -78,4 +78,4 @@ const bookmarkcard = ({ bookmark }) => {
   );
 };
 
-export default bookmarkcard
+export default bookmarkcard;

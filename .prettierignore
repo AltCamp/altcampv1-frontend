@@ -1,0 +1,6 @@
+# Ignore artifacts:
+build
+coverage
+.github
+package-lock.json
+README.md
