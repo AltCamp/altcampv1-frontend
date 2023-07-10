@@ -126,7 +126,7 @@ export default function Picturechange() {
               htmlFor="projectImage"
               onClick={() => chooseref.current.click()}
             >
-              Select from computer
+              Select from device
             </label>
             <input
               type="file"

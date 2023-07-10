@@ -5,6 +5,7 @@ import { useUpdateDetailsMutation } from '../../../../../app/slices/apiSlices/ac
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { setUpdateDetails } from '../../../../../app/slices/generalSlices/userSlice';
+import Toaster from '../../../../../components/Toaster/Toaster';
 
 export default function Editprofile () {
   const {user} = useSelector(state => state?.user.user);
@@ -16,6 +17,29 @@ export default function Editprofile () {
   const dispatch = useDispatch();
 
   const [updateDetails, { data, isSuccess, isLoading, isError, error}] = useUpdateDetailsMutation();
+
+  // toast notification state manangement
+
+  const [state, setState] = useState({
+    toastConfig: {
+      show: false,
+      title: null,
+      text: null,
+      type: "info",
+    },
+  });
+
+  const handleStateUpdate = (newState) => {
+    setState({
+      ...state,
+      ...newState,
+    });
+  };
+
+  const handleCloseToast = () =>
+    handleStateUpdate({
+      toastConfig: { show: false, title: null, text: null },
+    });
 
 const handleSubmit = (e) => {
   e.preventDefault();
@@ -30,14 +54,34 @@ const handleSubmit = (e) => {
 }
 useEffect(() => {
   if (isSuccess){
+    handleStateUpdate({
+      toastConfig: {
+        show: true,
+        text: data.message,
+        type: "success",
+      },
+    });
     dispatch(setUpdateDetails({
       firstName: data?.data.firstName,
       lastName: data?.data.lastName,
       track: data?.data.track
-    }))
-    handleCancel();
+    }));
+    setTimeout(() => {
+      handleCloseToast();
+      handleCancel();
+    }, 3000);
+  } else if (isError) {
+    handleStateUpdate({
+      toastConfig: {
+        show: true,
+        title: "Upload Error!",
+        text: error.data.message,
+        type: "error",
+      },
+    });
+    setTimeout(() => handleCloseToast(), 3000);
   }
-}, [isSuccess])
+}, [isSuccess, isError]);
   return (
     <div className={profilestyles['container']}>
       <div className={profilestyles['header']}>
@@ -61,6 +105,13 @@ useEffect(() => {
             <option value='Data Engineering'>Data Engineering</option>
             <option value='Data Analysis'>Data Analysis</option>  
           </select>
+          <Toaster
+          show={state.toastConfig.show}
+          title={state.toastConfig.title}
+          type={state.toastConfig.type}
+          message={state.toastConfig.text}
+          handleClose={handleCloseToast}
+        />
           <label htmlFor='lCircle'>Learning Circle</label>
           <input type='text' name='lCircle' id='lCircle' />
           <input  type='submit' value={isLoading? "saving changes...":'Save Changes'} disabled={isLoading}/>

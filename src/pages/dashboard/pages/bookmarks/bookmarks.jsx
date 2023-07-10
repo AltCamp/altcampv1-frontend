@@ -28,13 +28,13 @@ export default function Bookmarks() {
   };
 
 
-  useEffect(() => {
-    if (bookmarks.length === 0) {
-      setEmptyBookmark(true);
-    } else {
-      setEmptyBookmark(false);
-    }
-  }, [bookmarks]);
+  // useEffect(() => {
+  //   if (bookmarks.length === 0) {
+  //     setEmptyBookmark(true);
+  //   } else {
+  //     setEmptyBookmark(false);
+  //   }
+  // }, [bookmarks]);
 
   useEffect(() => {
     if (data) {
