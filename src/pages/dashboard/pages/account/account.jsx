@@ -1,9 +1,9 @@
-import accountStyles from "./account.module.css";
-import React, { useState, useRef } from "react";
+import accountStyles from './account.module.css';
+import React, { useState, useRef } from 'react';
 // import profileimage from "../../../../assets/general/profileimage.png";
-import { NavLink, useNavigate, useLocation, Outlet } from "react-router-dom";
-import Myprofile from "./myprofile/myprofile";
-import { ProfileCircle } from 'iconsax-react'
+import { NavLink, useNavigate, useLocation, Outlet } from 'react-router-dom';
+import Myprofile from './myprofile/myprofile';
+import { ProfileCircle } from 'iconsax-react';
 
 import {
   InfoCircle,
@@ -12,14 +12,12 @@ import {
   ProfileRemove,
   CloseCircle,
   ColorSwatch,
-} from "iconsax-react";
+} from 'iconsax-react';
 
-import { useSelector } from "react-redux";
-import Myprojects from "./myprojects/myprojects";
-
+import { useSelector } from 'react-redux';
+import Myprojects from './myprojects/myprojects';
 
 export default function Account() {
-  
   // const [track, setTrack] = useState("Frontend");
   const [lCircle, setLCircle] = useState(25);
 
@@ -28,54 +26,57 @@ export default function Account() {
   // console.log(location)
 
   const edit = useRef(null);
-  
+
   const handleEdit = () => {
-    edit.current.style.display = "block";
+    edit.current.style.display = 'block';
   };
 
   const handleEditProfile = () => {
     handleEdit();
-    nav("/dashboard/account/editprofile");
-  }
+    nav('/dashboard/account/editprofile');
+  };
   const updateProfilePicture = () => {
     handleEdit();
-    nav("/dashboard/account/updateprofilepicture");
+    nav('/dashboard/account/updateprofilepicture');
   };
 
   const updateBio = () => {
     handleEdit();
-    nav("/dashboard/account/updatebio");
-  }
+    nav('/dashboard/account/updatebio');
+  };
 
   const handleCancel = () => {
-    edit.current.style.display = "none";
-    nav("/dashboard/account");
+    edit.current.style.display = 'none';
+    nav('/dashboard/account');
   };
 
   let activeStyle = {
-    color: "#474AA3",
-    fontWeight: "600",
+    color: '#474AA3',
+    fontWeight: '600',
   };
 
   const { user } = useSelector((state) => state?.user.user);
 
   // console.log(user)
 
-
   return (
     <>
-      <main className={accountStyles["main"]}>
-        <section className={accountStyles["sidePanel"]}>
+      <main className={accountStyles['main']}>
+        <section className={accountStyles['sidePanel']}>
           <article>
-            <div className={accountStyles["sidePanel_top"]}>
-              <div className={accountStyles["sidePanel_image"]}>
-                {user.profilePicture ? <img src={user.profilePicture} alt="display image" />: <ProfileCircle size={50} />} 
+            <div className={accountStyles['sidePanel_top']}>
+              <div className={accountStyles['sidePanel_image']}>
+                {user.profilePicture ? (
+                  <img src={user.profilePicture} alt="display image" />
+                ) : (
+                  <ProfileCircle size={50} />
+                )}
               </div>
-              <h1 className={accountStyles["sidePanel_profileName"]}>
+              <h1 className={accountStyles['sidePanel_profileName']}>
                 {user?.firstName} {user?.lastName}
               </h1>
             </div>
-            <div className={accountStyles["links"]}>
+            <div className={accountStyles['links']}>
               <NavLink
                 to="/dashboard/account"
                 className={accountStyles.link}
@@ -132,20 +133,24 @@ export default function Account() {
             </div>
           </article>
         </section>
-        <section className={accountStyles["mainPanel"]}>
-          {location.pathname === "/dashboard/account/myprojects" ? (
+        <section className={accountStyles['mainPanel']}>
+          {location.pathname === '/dashboard/account/myprojects' ? (
             <Myprojects />
           ) : (
-            <Myprofile edit={handleEditProfile} picUpdate={updateProfilePicture} updateBio = {updateBio}/>
+            <Myprofile
+              edit={handleEditProfile}
+              picUpdate={updateProfilePicture}
+              updateBio={updateBio}
+            />
           )}
         </section>
       </main>
-      <div ref={edit} className={accountStyles["full_panel"]}>
+      <div ref={edit} className={accountStyles['full_panel']}>
         <span onClick={handleCancel}>
           <CloseCircle size={30} />
         </span>
-        <div className={accountStyles["full_panel_right"]}>
-          <Outlet context={[handleEdit, handleCancel]}/>
+        <div className={accountStyles['full_panel_right']}>
+          <Outlet context={[handleEdit, handleCancel]} />
         </div>
       </div>
     </>

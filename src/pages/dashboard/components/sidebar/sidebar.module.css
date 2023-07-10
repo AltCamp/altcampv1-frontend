@@ -7,7 +7,7 @@
   font-family: var(--Inter);
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
   gap: 3rem;
   padding: 1rem;
   position: fixed;
@@ -29,7 +29,7 @@
 .nav .navGroup {
   display: flex;
   flex-direction: column;
-  align-content: start;
+  align-content: flex-start;
   gap: 1rem;
 }
 
@@ -70,7 +70,7 @@
   font-weight: 600;
   align-self: flex-start;
 }
-.accountLinks{
+.accountLinks {
   display: none !important;
 }
 

@@ -1,17 +1,17 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 export const useMediaHandler = () => {
-  const [error, setError] = useState("");
-  const [image, setImage] = useState("");
-  const [video, setVideo] = useState("");
-  const [caption, setCaption] = useState("");
+  const [error, setError] = useState('');
+  const [image, setImage] = useState('');
+  const [video, setVideo] = useState('');
+  const [caption, setCaption] = useState('');
 
   const handleMedia = (file) => {
     let files = file;
     let fileType = files.type;
     let filename = files.name;
-    let validExtension = ["image/png", "image/jpeg", "image/webp"];
-    let validVideoExtension = ["video/webm", "video/mp4", "video/*"];
+    let validExtension = ['image/png', 'image/jpeg', 'image/webp'];
+    let validVideoExtension = ['video/webm', 'video/mp4', 'video/*'];
 
     if (validExtension.includes(fileType)) {
       let fileReader = new FileReader();
@@ -28,13 +28,13 @@ export const useMediaHandler = () => {
         setCaption(filename);
       };
     } else {
-      setError("Please upload either a JPEG or PNG format file");
+      setError('Please upload either a JPEG or PNG format file');
       return false;
     }
   };
 
   const removeImage = () => {
-    setImage("");
+    setImage('');
   };
   return { image, caption, error, handleMedia, video, removeImage };
 };

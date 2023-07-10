@@ -3,8 +3,7 @@
   margin-bottom: 15px;
 }
 
-
-.horizontalLine{
+.horizontalLine {
   border: 1px solid var(--neutral-clr-lt-grey);
 }
 .options {
@@ -12,11 +11,11 @@
   font-size: 12px;
 }
 
-.option:hover{
+.option:hover {
   cursor: pointer;
 }
 
-.modalParent{
+.modalParent {
   position: relative;
 }
 
@@ -24,8 +23,8 @@
   position: absolute;
 
   top: 35px;
-  right:0px;
-  
+  right: 0px;
+
   /* Auto layout */
 
   display: flex;

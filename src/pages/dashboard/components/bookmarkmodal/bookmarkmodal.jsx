@@ -1,43 +1,43 @@
-import { useState, useEffect,useRef } from 'react'
+import { useState, useEffect, useRef } from 'react';
 
-import bookModalStyles from './bookmarkmodal.module.css'
+import bookModalStyles from './bookmarkmodal.module.css';
 
-import { CloseCircle } from 'iconsax-react'
+import { CloseCircle } from 'iconsax-react';
 
-import { useCreateBookmarkMutation } from '../../../../app/slices/apiSlices/bookmarkSlice'
+import { useCreateBookmarkMutation } from '../../../../app/slices/apiSlices/bookmarkSlice';
 
-export default function BookmarkModal ({
+export default function BookmarkModal({
   handleToggleBookmarkModal,
   postId,
   postType,
-  postTitle
+  postTitle,
 }) {
-  const [title, setTitle] = useState(postTitle ? postTitle : '')
+  const [title, setTitle] = useState(postTitle ? postTitle : '');
 
   const [createBookmark, { data, isLoading, isSuccess, isError, error }] =
-    useCreateBookmarkMutation()
+    useCreateBookmarkMutation();
 
   const handleCreateBookmark = () => {
-    createBookmark({ title, postId, postType })
-  }
+    createBookmark({ title, postId, postType });
+  };
 
   useEffect(() => {
     if (isSuccess) {
-      handleToggleBookmarkModal()
+      handleToggleBookmarkModal();
     }
-  }, [isSuccess])
+  }, [isSuccess]);
 
-  const inputRef = useRef(null)
+  const inputRef = useRef(null);
 
   useEffect(() => {
-    inputRef.current.focus()
-  }, [])
+    inputRef.current.focus();
+  }, []);
 
   return (
     <div className={bookModalStyles.toggleCreateOverlay}>
       <div className={bookModalStyles.toggleCreate}>
         <CloseCircle
-          size='20'
+          size="20"
           className={bookModalStyles.closeIcon}
           onClick={handleToggleBookmarkModal}
         />
@@ -57,26 +57,26 @@ export default function BookmarkModal ({
             }`}</p>
           </div>
           <form
-            action=''
+            action=""
             className={bookModalStyles.formContainer}
-            onSubmit={e => {
-              e.preventDefault()
-              handleCreateBookmark()
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleCreateBookmark();
             }}
           >
             <input
-              type='text'
-              name='title'
-              id='title'
-              placeholder='Give your bookmark a title'
+              type="text"
+              name="title"
+              id="title"
+              placeholder="Give your bookmark a title"
               ref={inputRef}
               value={title}
-              onChange={e => setTitle(e.target.value)}
+              onChange={(e) => setTitle(e.target.value)}
               className={bookModalStyles.input}
             />
 
             <button
-              type='submit'
+              type="submit"
               className={bookModalStyles.postBtn}
               disabled={isLoading}
             >
@@ -86,5 +86,5 @@ export default function BookmarkModal ({
         </div>
       </div>
     </div>
-  )
+  );
 }

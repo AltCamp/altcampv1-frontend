@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 
-import questionPageStyles from './questionpage.module.css'
+import questionPageStyles from './questionpage.module.css';
 
-import { useParams, useNavigate, Link, useLocation } from 'react-router-dom'
+import { useParams, useNavigate, Link, useLocation } from 'react-router-dom';
 
-import gravatar from '../../../../../assets/general/gravatar.png'
-import caution from '../../../../../assets/general/deletecaution.svg'
+import gravatar from '../../../../../assets/general/gravatar.png';
+import caution from '../../../../../assets/general/deletecaution.svg';
 
 import {
   ArrowCircleLeft,
@@ -15,79 +15,79 @@ import {
   Edit,
   Trash,
   CloseCircle,
-  ProfileCircle
-} from 'iconsax-react'
+  ProfileCircle,
+} from 'iconsax-react';
 
-import { BsFillBookmarkFill, BsBookmarkPlus } from 'react-icons/bs'
+import { BsFillBookmarkFill, BsBookmarkPlus } from 'react-icons/bs';
 
-import share from '../../../../../assets/icons/share.svg'
+import share from '../../../../../assets/icons/share.svg';
 
-import { Helmet } from 'react-helmet-async'
-import { ShareSocial } from 'react-share-social'
-import { Tooltip } from 'react-tooltip'
+import { Helmet } from 'react-helmet-async';
+import { ShareSocial } from 'react-share-social';
+import { Tooltip } from 'react-tooltip';
 
 // import answercard
-import Answercard from './answercard/answercard'
+import Answercard from './answercard/answercard';
 
 // import createanswer
-import Createanswer from './createanswer/createanswer'
+import Createanswer from './createanswer/createanswer';
 
-import { useGetQuestionByIdQuery } from '../../../../../app/slices/apiSlices/communitySlice'
+import { useGetQuestionByIdQuery } from '../../../../../app/slices/apiSlices/communitySlice';
 
-import { useUpvoteQuestionMutation } from '../../../../../app/slices/apiSlices/communitySlice'
+import { useUpvoteQuestionMutation } from '../../../../../app/slices/apiSlices/communitySlice';
 
-import { useDownvoteQuestionMutation } from '../../../../../app/slices/apiSlices/communitySlice'
+import { useDownvoteQuestionMutation } from '../../../../../app/slices/apiSlices/communitySlice';
 
-import { useGetAnswersQuery } from '../../../../../app/slices/apiSlices/communitySlice'
+import { useGetAnswersQuery } from '../../../../../app/slices/apiSlices/communitySlice';
 
-import { useDeleteQuestionMutation } from '../../../../../app/slices/apiSlices/communitySlice'
+import { useDeleteQuestionMutation } from '../../../../../app/slices/apiSlices/communitySlice';
 
-import ReactTimeAgo from 'react-time-ago'
-import DOMPurify from 'isomorphic-dompurify'
+import ReactTimeAgo from 'react-time-ago';
+import DOMPurify from 'isomorphic-dompurify';
 
-import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux';
 
-import altlogo from '../../../../../assets/general/Authlogo.png'
+import altlogo from '../../../../../assets/general/Authlogo.png';
 
-import BookmarkModal from '../../../components/bookmarkmodal/bookmarkmodal'
-export default function Questionpage () {
-  const [deleteQuestionModal, setDeleteQuestionModal] = useState(false)
-  const [shareModal, setShareModal] = useState(false)
-  const [screenWidthState, setScreenWidthState] = useState(false)
-  const [toggleBookmarkModal, setToggleBookmarkModal] = useState()
+import BookmarkModal from '../../../components/bookmarkmodal/bookmarkmodal';
+export default function Questionpage() {
+  const [deleteQuestionModal, setDeleteQuestionModal] = useState(false);
+  const [shareModal, setShareModal] = useState(false);
+  const [screenWidthState, setScreenWidthState] = useState(false);
+  const [toggleBookmarkModal, setToggleBookmarkModal] = useState();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const location = useLocation()
-  const { questionId } = useParams()
+  const location = useLocation();
+  const { questionId } = useParams();
 
   // get currnet page address
-  const shareLink = window.location.href
+  const shareLink = window.location.href;
 
-  const { user } = useSelector(state => state?.user.user)
+  const { user } = useSelector((state) => state?.user.user);
 
   const {
     data: questionData,
     isLoading: questionLoading,
     isSuccess: questionSuccess,
     isError: questionIsError,
-    error: questionError
-  } = useGetQuestionByIdQuery(questionId)
+    error: questionError,
+  } = useGetQuestionByIdQuery(questionId);
 
-  const questionDetails = questionData?.data
+  const questionDetails = questionData?.data;
 
   useEffect(() => {
     if (questionIsError) {
-      navigate(-1)
+      navigate(-1);
     }
-  }, [questionIsError])
+  }, [questionIsError]);
 
   // console.log(questionId)
 
   const clean = DOMPurify.sanitize(questionDetails?.body, {
     ADD_TAGS: ['iframe'],
-    ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling']
-  })
+    ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling'],
+  });
 
   const [
     upvoteQuestion,
@@ -96,9 +96,9 @@ export default function Questionpage () {
       isLoading: upvoteLoading,
       isSuccess: upvoteSuccess,
       isError: upvoteIsError,
-      error: upvoteError
-    }
-  ] = useUpvoteQuestionMutation()
+      error: upvoteError,
+    },
+  ] = useUpvoteQuestionMutation();
 
   const [
     downvoteQuestion,
@@ -107,23 +107,23 @@ export default function Questionpage () {
       isLoading: downvoteLoading,
       isSuccess: downvoteSuccess,
       isError: downvoteIsError,
-      error: downvoteError
-    }
-  ] = useDownvoteQuestionMutation()
+      error: downvoteError,
+    },
+  ] = useDownvoteQuestionMutation();
 
   const handleUpvoteQuestion = () => {
-    upvoteQuestion(questionId)
-  }
+    upvoteQuestion(questionId);
+  };
 
   const handleDownvoteQuestion = () => {
-    downvoteQuestion(questionId)
-  }
+    downvoteQuestion(questionId);
+  };
 
   // logic for getting answers
   const { data: answersData, isSuccess: answersSuccess } =
-    useGetAnswersQuery(questionId)
+    useGetAnswersQuery(questionId);
 
-  const answers = answersData?.data
+  const answers = answersData?.data;
   // console.log(answers)
 
   const [
@@ -133,38 +133,38 @@ export default function Questionpage () {
       isLoading: deleteQuestionLoading,
       isSuccess: deleteQuestionSuccess,
       isError: deleteQuestionError,
-      error: deleteQuestionErrors
-    }
-  ] = useDeleteQuestionMutation()
+      error: deleteQuestionErrors,
+    },
+  ] = useDeleteQuestionMutation();
 
   const handleDeleteQuestion = () => {
-    deleteQuestion(questionId)
-  }
+    deleteQuestion(questionId);
+  };
 
   useEffect(() => {
     if (deleteQuestionSuccess) {
-      navigate('/dashboard/community', { state: { deleted: true } })
+      navigate('/dashboard/community', { state: { deleted: true } });
     }
-  }, [deleteQuestionSuccess])
+  }, [deleteQuestionSuccess]);
 
   const handleDeleteModal = () => {
-    setDeleteQuestionModal(!deleteQuestionModal)
-  }
+    setDeleteQuestionModal(!deleteQuestionModal);
+  };
 
   useEffect(() => {
     if (deleteQuestionModal) {
-      document.body.style.overflow = 'hidden'
+      document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = 'auto'
+      document.body.style.overflow = 'auto';
     }
-  }, [deleteQuestionModal])
+  }, [deleteQuestionModal]);
 
   useEffect(() => {
-    const media = window.innerWidth
+    const media = window.innerWidth;
     window.addEventListener('resize', () => {
-      setScreenWidthState(media < 500)
-    })
-  }, [])
+      setScreenWidthState(media < 500);
+    });
+  }, []);
 
   // console.log(screenWidthState)
 
@@ -186,21 +186,21 @@ export default function Questionpage () {
       flexDirection: 'column',
       flexWrap: 'wrap',
       // use inter from google as fontFamily
-      fontFamily: 'Inter'
+      fontFamily: 'Inter',
     },
     copyContainer: {
       border: '1px solid blue',
-      background: 'rgb(0,0,0,0.7)'
+      background: 'rgb(0,0,0,0.7)',
     },
     title: {
       color: 'aquamarine',
-      fontStyle: 'italic'
-    }
-  }
+      fontStyle: 'italic',
+    },
+  };
 
   const handleToggleBookmarkModal = () => {
-    setToggleBookmarkModal(!toggleBookmarkModal)
-  }
+    setToggleBookmarkModal(!toggleBookmarkModal);
+  };
 
   return (
     <>
@@ -208,18 +208,18 @@ export default function Questionpage () {
         <title>
           {questionDetails?.title ? questionDetails?.title : 'Community'}
         </title>
-        <meta name='description' content={`${questionDetails?.body}`} />
-        <link rel='canonical' href={`/question/${questionDetails?.slug}`} />
-        <meta property='og:title' content={questionDetails?.title} />
-        <meta property='og:description' content={questionDetails?.body} />
-        <meta property='og:url' content={shareLink} />
-        <meta property='og:type' content='website' />
-        <meta property='og:image' content={altlogo} />
-        <meta property='og:image:alt' content={questionDetails?.title} />
-        <meta property='og:image:width' content='1200' />
-        <meta property='og:image:height' content='630' />
-        <meta property='og:image:type' content='image/png' />
-        <meta property='og:site_name' content='AltCamp' />
+        <meta name="description" content={`${questionDetails?.body}`} />
+        <link rel="canonical" href={`/question/${questionDetails?.slug}`} />
+        <meta property="og:title" content={questionDetails?.title} />
+        <meta property="og:description" content={questionDetails?.body} />
+        <meta property="og:url" content={shareLink} />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content={altlogo} />
+        <meta property="og:image:alt" content={questionDetails?.title} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:site_name" content="AltCamp" />
       </Helmet>
 
       {toggleBookmarkModal && (
@@ -234,12 +234,12 @@ export default function Questionpage () {
         <div className={questionPageStyles.deleteWarningOverlay}>
           <div className={questionPageStyles.deleteWarning}>
             <CloseCircle
-              size='20'
+              size="20"
               className={questionPageStyles.closeIcon}
               onClick={handleDeleteModal}
             />
             <div className={questionPageStyles.warningIcon}>
-              <img src={caution} alt='' className={questionPageStyles.check} />
+              <img src={caution} alt="" className={questionPageStyles.check} />
             </div>
             <p className={questionPageStyles.warningText}>
               You are about to delete this question. Do you want to proceed?
@@ -257,7 +257,7 @@ export default function Questionpage () {
                 disabled={deleteQuestionLoading}
                 style={{
                   backgroundColor: deleteQuestionLoading ? '#ccc' : '#FF5B5B',
-                  cursor: deleteQuestionLoading ? 'not-allowed' : 'pointer'
+                  cursor: deleteQuestionLoading ? 'not-allowed' : 'pointer',
                 }}
               >
                 {deleteQuestionLoading ? 'Deleting...' : 'Proceed'}
@@ -281,7 +281,7 @@ export default function Questionpage () {
               onClick={() => navigate(-1)}
             >
               <ArrowCircleLeft
-                size='23'
+                size="23"
                 className={questionPageStyles.backIcon}
               />
               <div className={questionPageStyles.backText}>
@@ -306,12 +306,12 @@ export default function Questionpage () {
                       {questionDetails?.author?.profilePicture ? (
                         <img
                           src={questionDetails?.author?.profilePicture}
-                          alt=''
+                          alt=""
                           className={questionPageStyles.img}
                         />
                       ) : (
                         <ProfileCircle
-                          color='#555555'
+                          color="#555555"
                           className={questionPageStyles.img}
                         />
                       )}
@@ -335,11 +335,11 @@ export default function Questionpage () {
                       state={{
                         question: questionDetails?._id,
                         title: questionDetails?.title,
-                        body: questionDetails?.body
+                        body: questionDetails?.body,
                       }}
                       className={questionPageStyles.edit}
                     >
-                      <Edit size='19' />
+                      <Edit size="19" />
                       <p className={questionPageStyles.editText}>
                         Edit Question
                       </p>
@@ -356,7 +356,7 @@ export default function Questionpage () {
                       {questionDetails && (
                         <ReactTimeAgo
                           date={questionDetails?.createdAt}
-                          locale='en-US'
+                          locale="en-US"
                         />
                       )}
                     </span>
@@ -372,16 +372,16 @@ export default function Questionpage () {
                       onClick={handleUpvoteQuestion}
                       style={{
                         color:
-                          questionDetails?.upvotes > 0 ? '#0e8a1a' : '#343a40'
+                          questionDetails?.upvotes > 0 ? '#0e8a1a' : '#343a40',
                       }}
                     >
-                      <Tooltip id='my-tooltip' className='tooltip' />
+                      <Tooltip id="my-tooltip" className="tooltip" />
                       <ArrowUp
-                        size='19'
+                        size="19"
                         className={questionPageStyles.icon}
-                        data-tooltip-id='my-tooltip'
-                        data-tooltip-content='upvote'
-                        data-tooltip-place='top'
+                        data-tooltip-id="my-tooltip"
+                        data-tooltip-content="upvote"
+                        data-tooltip-place="top"
                       />
                       {questionDetails?.upvotes}
                     </div>
@@ -390,15 +390,17 @@ export default function Questionpage () {
                       onClick={handleDownvoteQuestion}
                       style={{
                         color:
-                          questionDetails?.downvotes > 0 ? '#dc3545' : '#343a40'
+                          questionDetails?.downvotes > 0
+                            ? '#dc3545'
+                            : '#343a40',
                       }}
                     >
                       <ArrowDown
-                        size='19'
+                        size="19"
                         className={questionPageStyles.icon}
-                        data-tooltip-id='my-tooltip'
-                        data-tooltip-content='downvote'
-                        data-tooltip-place='top'
+                        data-tooltip-id="my-tooltip"
+                        data-tooltip-content="downvote"
+                        data-tooltip-place="top"
                       />
                       {questionDetails?.downvotes}
                     </div>
@@ -406,7 +408,7 @@ export default function Questionpage () {
                   <div className={questionPageStyles.icons}>
                     {user?._id === questionDetails?.author?._id && (
                       <Trash
-                        size='20'
+                        size="20"
                         className={questionPageStyles.icon}
                         onClick={handleDeleteModal}
                       />
@@ -414,11 +416,11 @@ export default function Questionpage () {
                     <div className={questionPageStyles.share}>
                       <img
                         src={share}
-                        alt=''
+                        alt=""
                         className={questionPageStyles.icon}
                         style={{
                           color: '#212529',
-                          width: '1rem'
+                          width: '1rem',
                         }}
                         onClick={() => setShareModal(!shareModal)}
                       />
@@ -434,7 +436,7 @@ export default function Questionpage () {
                               'linkedin',
                               'whatsapp',
                               'email',
-                              'telegram'
+                              'telegram',
                             ]}
                             style={style}
                           />
@@ -442,9 +444,9 @@ export default function Questionpage () {
                       )}
                     </div>
                     <BsBookmarkPlus
-                      size='20'
+                      size="20"
                       className={questionPageStyles.icon}
-                      color='#212529'
+                      color="#212529"
                       onClick={handleToggleBookmarkModal}
                     />
                   </div>
@@ -480,7 +482,7 @@ export default function Questionpage () {
                 ) : (
                   questionSuccess &&
                   answersSuccess &&
-                  answers?.map(answer => (
+                  answers?.map((answer) => (
                     <Answercard key={answer._id} answer={answer} />
                   ))
                 )}
@@ -494,5 +496,5 @@ export default function Questionpage () {
         </div>
       )}
     </>
-  )
+  );
 }

@@ -1,7 +1,7 @@
-import React, { useRef } from "react";
-import { useState, useEffect } from "react";
-import filterIcon from "../../../../../assets/icons/filtering.svg";
-import filterStyles from "./filterModal.module.css";
+import React, { useRef } from 'react';
+import { useState, useEffect } from 'react';
+import filterIcon from '../../../../../assets/icons/filtering.svg';
+import filterStyles from './filterModal.module.css';
 
 export default function filterModal() {
   const [showFilterModal, setShowFilterModal] = useState(false);
@@ -14,12 +14,12 @@ export default function filterModal() {
       }
     };
     if (showFilterModal) {
-      document.addEventListener("click", handler);
+      document.addEventListener('click', handler);
     } else {
-      document.removeEventListener("click", handler);
+      document.removeEventListener('click', handler);
     }
     return () => {
-      document.removeEventListener("click", handler);
+      document.removeEventListener('click', handler);
     };
   }, [showFilterModal]);
 
@@ -28,9 +28,9 @@ export default function filterModal() {
   };
   const data = [
     {
-      heading: "Filter by showing",
-      option1: "Unread notifications only",
-      option2: "Read notifications only",
+      heading: 'Filter by showing',
+      option1: 'Unread notifications only',
+      option2: 'Read notifications only',
     },
   ];
   return (

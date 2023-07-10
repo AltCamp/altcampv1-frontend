@@ -1,10 +1,9 @@
-import { useEffect } from 'react'
-import sidebarStyle from './sidebar.module.css'
-import darkLogo from '../../../../assets/general/AuthBlackLogo.svg'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { useEffect } from 'react';
+import sidebarStyle from './sidebar.module.css';
+import darkLogo from '../../../../assets/general/AuthBlackLogo.svg';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 // import link icons
-
 
 import {
   Airdrop,
@@ -22,40 +21,40 @@ import {
   ArrowRight2,
   KeySquare,
   ProfileRemove,
-  ColorSwatch
-} from 'iconsax-react'
+  ColorSwatch,
+} from 'iconsax-react';
 
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux';
 
-import { removeUser } from '../../../../app/slices/generalSlices/userSlice'
+import { removeUser } from '../../../../app/slices/generalSlices/userSlice';
 
-import decode from 'jwt-decode'
+import decode from 'jwt-decode';
 
-export default function Sidebar ({ toggleSideBar, handleSideBar }) {
+export default function Sidebar({ toggleSideBar, handleSideBar }) {
   let activeStyle = {
     color: '#474AA3',
-    fontWeight: '600'
-  }
+    fontWeight: '600',
+  };
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const user = useSelector(state => state?.user.user)
+  const user = useSelector((state) => state?.user.user);
 
   // console.log(decode(user.token).exp)
 
-  const toggleWidth = window.innerWidth < 950
+  const toggleWidth = window.innerWidth < 950;
 
   // automatically log user out if token as expired
   useEffect(() => {
     if (user) {
       if (decode(user.token).exp < Date.now() / 1000) {
-        dispatch(removeUser())
-        navigate('/account/login')
+        dispatch(removeUser());
+        navigate('/account/login');
       }
     }
-  }, [user])
+  }, [user]);
 
   return (
     <div
@@ -63,107 +62,107 @@ export default function Sidebar ({ toggleSideBar, handleSideBar }) {
         toggleSideBar && sidebarStyle.show
       }`}
     >
-      <img src={darkLogo} alt='' className={sidebarStyle.img} />
+      <img src={darkLogo} alt="" className={sidebarStyle.img} />
       <nav className={sidebarStyle.nav}>
         <div className={sidebarStyle.navGroup}>
           <h2>OVERVIEW</h2>
-          <div className=''>
+          <div className="">
             <NavLink
-              to='/dashboard'
+              to="/dashboard"
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
               onClick={toggleWidth && handleSideBar}
               end
             >
-              <FtxToken size='23' className={sidebarStyle.icon} />
+              <FtxToken size="23" className={sidebarStyle.icon} />
               Feed
             </NavLink>
             <NavLink
-              to='/dashboard/community'
+              to="/dashboard/community"
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
               onClick={toggleWidth && handleSideBar}
             >
-              <People size='23' className={sidebarStyle.icon} />
+              <People size="23" className={sidebarStyle.icon} />
               Community
             </NavLink>
             <NavLink
-              to='/dashboard/topics'
+              to="/dashboard/topics"
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
               onClick={toggleWidth && handleSideBar}
             >
-              <Airdrop size='23' className={sidebarStyle.icon} />
+              <Airdrop size="23" className={sidebarStyle.icon} />
               Topics
             </NavLink>
             <NavLink
-              to='/dashboard/bookmarks'
+              to="/dashboard/bookmarks"
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
               onClick={toggleWidth && handleSideBar}
             >
-              <Bookmark size='23' className={sidebarStyle.icon} />
+              <Bookmark size="23" className={sidebarStyle.icon} />
               Bookmarks
             </NavLink>
           </div>
         </div>
         <div className={sidebarStyle.navGroup}>
           <h2>LEARNING</h2>
-          <div className=''>
+          <div className="">
             <NavLink
-              to='/dashboard/circle'
+              to="/dashboard/circle"
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
               onClick={toggleWidth && handleSideBar}
             >
-              <ChartCircle size='23' className={sidebarStyle.icon} />
+              <ChartCircle size="23" className={sidebarStyle.icon} />
               Learning Circle
             </NavLink>
             <NavLink
-              to='/dashboard/resources'
+              to="/dashboard/resources"
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
               onClick={toggleWidth && handleSideBar}
             >
-              <Bubble size='23' className={sidebarStyle.icon} />
+              <Bubble size="23" className={sidebarStyle.icon} />
               Learning Resources
             </NavLink>
             <NavLink
-              to='/dashboard/contributors'
+              to="/dashboard/contributors"
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
               onClick={toggleWidth && handleSideBar}
             >
-              <Layer size='23' className={sidebarStyle.icon} />
+              <Layer size="23" className={sidebarStyle.icon} />
               Contributors
             </NavLink>
             <NavLink
-              to='/dashboard/quiz'
+              to="/dashboard/quiz"
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
               onClick={toggleWidth && handleSideBar}
             >
-              <Designtools size='23' className={sidebarStyle.icon} />
+              <Designtools size="23" className={sidebarStyle.icon} />
               Quiz
             </NavLink>
           </div>
         </div>
         <div className={sidebarStyle.navGroup}>
           <h2>PERSONAL</h2>
-          <div className=''>
+          <div className="">
             {/* links for all accounts in mobile media query */}
             <NavLink
-              to='/dashboard/account'
+              to="/dashboard/account"
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
               onClick={toggleWidth && handleSideBar}
             >
-              <ProfileCircle size='23' className={sidebarStyle.icon} />
+              <ProfileCircle size="23" className={sidebarStyle.icon} />
               Account
             </NavLink>
             <div className={sidebarStyle.accountLinks}>
               <NavLink
-                to='/dashboard/account'
+                to="/dashboard/account"
                 className={sidebarStyle.link}
                 style={({ isActive }) => (isActive ? activeStyle : undefined)}
                 end
@@ -174,7 +173,7 @@ export default function Sidebar ({ toggleSideBar, handleSideBar }) {
                 <span> My Profile </span>
               </NavLink>
               <NavLink
-                to='/dashboard/account/myprojects'
+                to="/dashboard/account/myprojects"
                 className={sidebarStyle.link}
                 style={({ isActive }) => (isActive ? activeStyle : undefined)}
               >
@@ -185,7 +184,7 @@ export default function Sidebar ({ toggleSideBar, handleSideBar }) {
               </NavLink>
               <NavLink
                 className={sidebarStyle.link}
-                to='/dashboard/account/resetpassword'
+                to="/dashboard/account/resetpassword"
                 style={({ isActive }) => (isActive ? activeStyle : undefined)}
               >
                 <span>
@@ -195,7 +194,7 @@ export default function Sidebar ({ toggleSideBar, handleSideBar }) {
               </NavLink>
               <NavLink
                 className={sidebarStyle.link}
-                to='/dashboard/account/deactivateaccount'
+                to="/dashboard/account/deactivateaccount"
                 style={({ isActive }) => (isActive ? activeStyle : undefined)}
               >
                 <span>
@@ -205,28 +204,28 @@ export default function Sidebar ({ toggleSideBar, handleSideBar }) {
               </NavLink>
             </div>
             <NavLink
-              to='/dashboard/notifications'
+              to="/dashboard/notifications"
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
               onClick={toggleWidth && handleSideBar}
             >
-              <Notification size='23' className={sidebarStyle.icon} />
+              <Notification size="23" className={sidebarStyle.icon} />
               Notifications
             </NavLink>
             <NavLink
-              to='/dashboard/users'
+              to="/dashboard/users"
               className={sidebarStyle.link}
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
               onClick={toggleWidth && handleSideBar}
             >
-              <Profile2User size='23' className={sidebarStyle.icon} />
+              <Profile2User size="23" className={sidebarStyle.icon} />
               Users
             </NavLink>
             <button
               className={sidebarStyle.logout}
               onClick={() => {
-                dispatch(removeUser())
-                navigate('/account/login')
+                dispatch(removeUser());
+                navigate('/account/login');
               }}
             >
               Log Out
@@ -235,5 +234,5 @@ export default function Sidebar ({ toggleSideBar, handleSideBar }) {
         </div>
       </nav>
     </div>
-  )
+  );
 }

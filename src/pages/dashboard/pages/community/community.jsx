@@ -1,81 +1,80 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 
-import communityStyle from './community.module.css'
+import communityStyle from './community.module.css';
 
-import Questioncard from './questioncard/questioncard'
+import Questioncard from './questioncard/questioncard';
 
 import {
   Link,
   useNavigate,
   useLocation,
-  useSearchParams
-} from 'react-router-dom'
+  useSearchParams,
+} from 'react-router-dom';
 
-import { useGetAllQuestionsQuery } from '../../../../app/slices/apiSlices/communitySlice'
+import { useGetAllQuestionsQuery } from '../../../../app/slices/apiSlices/communitySlice';
 
-import { CloseCircle } from 'iconsax-react'
+import { CloseCircle } from 'iconsax-react';
 
-import greenCheck from '../../../../assets/general/greencreatepostcheck.svg'
+import greenCheck from '../../../../assets/general/greencreatepostcheck.svg';
 
-import { Helmet } from 'react-helmet-async'
+import { Helmet } from 'react-helmet-async';
 
-export default function Community () {
-  const [sortedQuestions, setSortedQuestions] = useState()
-  const [createDeleteModal, setCreateDeleteModal] = useState(false)
-  const [page, setPage] = useState(1)
+export default function Community() {
+  const [sortedQuestions, setSortedQuestions] = useState();
+  const [createDeleteModal, setCreateDeleteModal] = useState(false);
+  const [page, setPage] = useState(1);
 
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams();
 
   // console.log(searchParams.get('page'))
 
   const { data, isLoading, isSuccess, isError, error } =
     useGetAllQuestionsQuery({
-      page: searchParams.get('page') ? searchParams.get('page') : 1
-    })
+      page: searchParams.get('page') ? searchParams.get('page') : 1,
+    });
 
-  const questions = data?.data
+  const questions = data?.data;
 
-  const meta = data?.meta
+  const meta = data?.meta;
 
   // console.log(meta)
 
   useEffect(() => {
     if (data) {
-      window.scrollTo(0, 0)
+      window.scrollTo(0, 0);
     }
-  }, [searchParams.get('page'), data])
+  }, [searchParams.get('page'), data]);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const location = useLocation()
+  const location = useLocation();
 
   // check location state for new post created and clear it after handleNewPostCreated is called
 
   useEffect(() => {
     if (location.state) {
       if (location.state.created || location.state.deleted) {
-        setCreateDeleteModal(true)
+        setCreateDeleteModal(true);
       } else {
-        setCreateDeleteModal(false)
+        setCreateDeleteModal(false);
       }
     }
-  }, [location])
+  }, [location]);
 
   const handleCreateDeleteModal = () => {
-    setCreateDeleteModal(!createDeleteModal)
+    setCreateDeleteModal(!createDeleteModal);
     // reload the page
     // window.location.reload()
-    navigate(location.pathname, { state: {} })
-  }
-
+    navigate(location.pathname, { state: {} });
+  };
 
   useEffect(() => {
     if (createDeleteModal) {
-      document.body.style.overflow = 'hidden'
+      document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = 'auto'
+      document.body.style.overflow = 'auto';
     }
-  }, [createDeleteModal])
+  }, [createDeleteModal]);
 
   return (
     <div className={communityStyle.container}>
@@ -91,12 +90,12 @@ export default function Community () {
         <div className={communityStyle.creationSuccessOverlay}>
           <div className={communityStyle.creationSuccess}>
             <CloseCircle
-              size='20'
+              size="20"
               className={communityStyle.closeIcon}
               onClick={handleCreateDeleteModal}
             />
             <div className={communityStyle.successIcon}>
-              <img src={greenCheck} alt='' className={communityStyle.check} />
+              <img src={greenCheck} alt="" className={communityStyle.check} />
             </div>
             <p className={communityStyle.successText}>
               {location.state.created
@@ -136,7 +135,7 @@ export default function Community () {
               <div className={communityStyle.loader}></div>
             </div>
           )}
-          {questions?.map(question => (
+          {questions?.map((question) => (
             <Questioncard key={question._id} question={question} />
           ))}
         </div>
@@ -179,18 +178,18 @@ export default function Community () {
                 {meta?.currentPage}
               </span> */}
               <input
-                type='number'
+                type="number"
                 className={communityStyle.currentPage}
                 value={page}
-                onChange={e => setPage(e.target.value)}
-                onKeyDown={e => {
+                onChange={(e) => setPage(e.target.value)}
+                onKeyDown={(e) => {
                   if (e.key === 'Enter') {
-                    setSearchParams({ page })
+                    setSearchParams({ page });
                   }
                 }}
-                onKeyUp={e => {
+                onKeyUp={(e) => {
                   if (Number(e.target.value) > meta?.totalPages) {
-                    setPage(meta?.totalPages)
+                    setPage(meta?.totalPages);
                   }
                 }}
               />
@@ -204,5 +203,5 @@ export default function Community () {
         )}
       </div>
     </div>
-  )
+  );
 }
