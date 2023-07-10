@@ -42,6 +42,12 @@ export default {
         800: '#232552',
         900: '#151631',
       },
+
+      // toaster colors
+      success: '#55b938',
+      info: '#6a6ff5',
+      error: '#d10909',
+      warning: '#f38920',
     },
     screens: {
       '2xl': { max: '1535px' },
