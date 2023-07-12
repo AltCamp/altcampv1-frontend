@@ -58,9 +58,11 @@ export default function UserLogin() {
   // console.log(error)
 
   return (
-    <div className={userLoginStyle.container}>
-      <h2 className={userLoginStyle.header}>Welcome Back</h2>
-      <form className={userLoginStyle.form} onSubmit={handleLogin}>
+    <div className="mt-12 flex flex-col justify-center gap-8">
+      <h2 className="mb-6 text-center text-[2rem] font-semibold ">
+        Welcome Back
+      </h2>
+      <form className="flex flex-col gap-[2.5rem] " onSubmit={handleLogin}>
         <div className={userLoginStyle.formGroup}>
           <label htmlFor="email" className="">
             Email Address
