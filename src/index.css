@@ -95,3 +95,37 @@ html {
 a {
   text-decoration: none;
 }
+
+/* TAILWINDCSS COMPONENTS */
+
+@layer components {
+  /* CUSTOM CLASSNAME FOR FORM GROUPS e.g label and input elements sharing a parent element */
+  .form-group {
+    @apply flex flex-col gap-2;
+  }
+
+  /* CUSTOM CLASSNAME FOR LABEL ELEMENTS */
+  .label {
+    @apply text-primary-800 w-fit;
+  }
+
+  /* CUSTOM CLASSNAME FOR INPUT ELEMENTS */
+  .input {
+    @apply w-full h-[2.5rem] border-[1px] border-neutral-400 rounded-[4px] shadow-[0px_2px_2px_rgba(33,37,41,0.06),0px_0px_1px_rgba(33,37,41,0.08)] p-[0.5rem] font-normal text-neutral-800 focus:outline-none focus:border-primary-800;
+  }
+
+  /* CUSTOM CLASSNAME FOR PASSWORD GROUP i.e input element with eye icon */
+  .password-group {
+    @apply flex items-center gap-2 w-full h-[2.5rem] border-[1px] border-neutral-400 rounded-[4px] shadow-[0px_2px_2px_rgba(33,37,41,0.06),0px_0px_1px_rgba(33,37,41,0.08)] p-[0.5rem] font-normal text-neutral-800 focus-within:outline-none focus-within:border-primary-800;
+  }
+
+  /* CUSTOM CLASSNAME FOR PASSWORD INPUT ELEMENT */
+  .password-input {
+    @apply w-full h-full font-normal text-neutral-800 focus:outline-none;
+  }
+
+  /* CUSTOM CLASSNAME FOR AUTH BUTTONS */
+  .auth-btn {
+    @apply mt-[1rem] w-full h-[2.5rem] rounded-[4px] font-medium text-white bg-secondary-400 hover:bg-secondary-800 focus:outline-none disabled:cursor-not-allowed disabled:bg-neutral-400;
+  }
+}

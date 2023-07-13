@@ -63,8 +63,8 @@ export default function UserLogin() {
         Welcome Back
       </h2>
       <form className="flex flex-col gap-[2.5rem] " onSubmit={handleLogin}>
-        <div className={userLoginStyle.formGroup}>
-          <label htmlFor="email" className="">
+        <div className="form-group">
+          <label htmlFor="email" className="label">
             Email Address
           </label>
           <input
@@ -72,25 +72,29 @@ export default function UserLogin() {
             name="email"
             id="email"
             placeholder="seun@altcamp.com"
-            className={userLoginStyle.email}
+            className="input"
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
         </div>
-        <div className={userLoginStyle.passwordFormGroup}>
-          <label htmlFor="password">Password</label>
-          <div className={userLoginStyle.inputGroup}>
+        <div className="form-group">
+          <label htmlFor="password" className="label">
+            Password
+          </label>
+          <div className="password-group">
             <input
               type={showPassword ? 'text' : 'password'}
               name="password"
               id="password"
               placeholder="********"
-              className={userLoginStyle.password}
+              className="password-input"
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
             <img
               src={showPassword ? eyeClosedIcon : eyeIcon}
               alt="eye icon"
-              className={userLoginStyle.showPasswordIcon}
+              className="cursor-pointer"
               onClick={() => setShowPassword(!showPassword)}
             />
           </div>
@@ -104,16 +108,12 @@ export default function UserLogin() {
           handleClose={() => setToastText('')}
         />
 
-        <button
-          className={userLoginStyle.loginButton}
-          type="submit"
-          disabled={isLoading}
-        >
+        <button className="auth-btn" type="submit" disabled={isLoading}>
           {isLoading ? 'Unlocking the door...' : 'Login'}
         </button>
         <Link
           to={`/${parentPath}/login/forgotpassword`}
-          className={userLoginStyle.forgotPassword}
+          className="w-fit cursor-pointer self-end text-right text-[0.875rem] font-normal"
         >
           Forgot Password?
         </Link>
