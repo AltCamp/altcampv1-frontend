@@ -19,7 +19,6 @@ jobs:
             touch .env
             echo VITE_TINY_KEY=${{ secrets.VITE_TINY_KEY }} >> .env
             echo VITE_GA_ID=${{ secrets.VITE_GA_ID }} >> .env
-            cat .env
       - name: "Install dependencies"
         run: |
             npm install
