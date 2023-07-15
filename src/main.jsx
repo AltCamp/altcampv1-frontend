@@ -30,11 +30,18 @@ import { Provider } from 'react-redux';
 
 // import components for Authentication
 import {
+  // FORGOT PASSWORD FLOW
   ForgotPassword,
-  LoginGroup,
-  UserLogin,
-  Auth,
+  EnterOtp,
+  ResetPassword,
+
+  // AUTH FLOW
+  LoginLayout,
+  Login,
+  AuthLayout,
   Register,
+
+  // VERIFY EMAIL FLOW
   VerifyEmail,
 } from './pages/auth';
 
@@ -84,7 +91,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/account',
-    element: <Auth />,
+    element: <AuthLayout />,
     // loader: () => {
     //   if (JSON.parse(localStorage.getItem('user'))?.user.emailIsVerified) {
     //     return redirect('/dashboard')
@@ -95,16 +102,24 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/account/login',
-        element: <LoginGroup />,
+        element: <LoginLayout />,
         errorElement: <Error />,
         children: [
           {
             index: true,
-            element: <UserLogin />,
+            element: <Login />,
           },
           {
             path: '/account/login/forgotpassword',
             element: <ForgotPassword />,
+          },
+          {
+            path: '/account/login/forgotpassword/enterotp',
+            element: <EnterOtp />,
+          },
+          {
+            path: '/account/login/forgotpassword/resetpassword',
+            element: <ResetPassword />,
           },
         ],
       },
