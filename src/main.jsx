@@ -92,13 +92,12 @@ const router = createBrowserRouter([
   {
     path: '/account',
     element: <AuthLayout />,
-    // loader: () => {
-    //   if (JSON.parse(localStorage.getItem('user'))?.user.emailIsVerified) {
-    //     return redirect('/dashboard')
-    //   } else {
-    //     return redirect('/account/verifyemail')
-    //   }
-    // },
+    loader: () => {
+      if (localStorage.getItem('user')) {
+        return redirect('/dashboard');
+      }
+      return null;
+    },
     children: [
       {
         path: '/account/login',

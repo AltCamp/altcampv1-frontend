@@ -6,7 +6,7 @@ import { communitySlice } from './slices/apiSlices/communitySlice';
 
 import { userSlice } from './slices/generalSlices/userSlice';
 
-import { accountMutationSlice } from './slices/apiSlices/accountSlices/accountMutationSlice';
+import { accountSlice } from './slices/apiSlices/accountSlice';
 
 import { feedSlice } from './slices/apiSlices/feedSlice';
 
@@ -18,7 +18,7 @@ export const store = configureStore({
     [authSlice.reducerPath]: authSlice.reducer,
     [communitySlice.reducerPath]: communitySlice.reducer,
     [feedSlice.reducerPath]: feedSlice.reducer,
-    [accountMutationSlice.reducerPath]: accountMutationSlice.reducer,
+    [accountSlice.reducerPath]: accountSlice.reducer,
     user: userSlice.reducer,
     [bookmarkSlice.reducerPath]: bookmarkSlice.reducer,
   },
@@ -27,7 +27,7 @@ export const store = configureStore({
       authSlice.middleware,
       communitySlice.middleware,
       feedSlice.middleware,
-      accountMutationSlice.middleware,
+      accountSlice.middleware,
       bookmarkSlice.middleware,
     ]),
 });

@@ -1,21 +1,14 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { baseQuery } from '../../../constants/api';
+import { baseQuery } from '../../constants/api';
 
-export const accountMutationSlice = createApi({
-  reducerPath: 'accountMutationApi',
+export const accountSlice = createApi({
+  reducerPath: 'accountApi',
   baseQuery,
   // tagTypes:["Auth"],
   endpoints: (builder) => ({
     updateProfilePicture: builder.mutation({
       query: (body) => ({
         url: '/accounts/profile-picture',
-        method: 'PUT',
-        body,
-      }),
-    }),
-    updatePassword: builder.mutation({
-      query: (body) => ({
-        url: '/students/change-password',
         method: 'PUT',
         body,
       }),
@@ -47,18 +40,6 @@ export const accountMutationSlice = createApi({
         method: 'GET',
       }),
     }),
-    getAccountsByCategory: builder.query({
-      query: (accountType) => ({
-        url: `/accounts/category=${accountType}`,
-        method: 'GET',
-      }),
-    }),
-    getAccountsByCategory: builder.query({
-      query: (accountType) => ({
-        url: `/accounts/category=${accountType}`,
-        method: 'GET',
-      }),
-    }),
     getAccountById: builder.query({
       query: (accountId) => ({
         url: `/accounts/${accountId}`,
@@ -72,16 +53,31 @@ export const accountMutationSlice = createApi({
         body,
       }),
     }),
-    verifyEmail: builder.mutation({
+    startVerifyEmail: builder.mutation({
       query: (body) => ({
-        url: '/auth/verify-email',
+        url: '/auth/start-email-verification',
         method: 'POST',
         body,
       }),
     }),
-    verifyOtp: builder.mutation({
+    verifyEmail: builder.mutation({
       query: (body) => ({
-        url: '/auth/verify-otp',
+        url: 'auth/verify-email',
+        method: 'POST',
+        body,
+      }),
+    }),
+    // forgot password flow
+    forgotPassword: builder.mutation({
+      query: (body) => ({
+        url: '/accounts/forgot-password',
+        method: 'POST',
+        body,
+      }),
+    }),
+    resetPassword: builder.mutation({
+      query: (body) => ({
+        url: '/accounts/reset-password',
         method: 'POST',
         body,
       }),
@@ -95,8 +91,9 @@ export const {
   useGetAllAccountsQuery,
   useGetAccountByIdQuery,
   useUpdateDetailsMutation,
-  useGetAccountsByCategoryQuery,
   useGetSearchedAccountsQuery,
+  useStartVerifyEmailMutation,
   useVerifyEmailMutation,
-  useVerifyOtpMutation,
-} = accountMutationSlice;
+  useForgotPasswordMutation,
+  useResetPasswordMutation,
+} = accountSlice;

@@ -1,11 +1,19 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { useForgotPasswordMutation } from '../../../app/slices/apiSlices/accountSlice';
+
 export default function ForgotPassword() {
+  const [email, setEmail] = useState();
+
   const navigate = useNavigate();
+
+  const [forgotPassword, { data, isLoading, isSuccess, isError, error }] =
+    useForgotPasswordMutation();
 
   const handleSubmitEmail = (e) => {
     e.preventDefault();
+    // forgotPassword(email)
     navigate('/account/login/forgotpassword/enterotp');
   };
 
@@ -34,6 +42,7 @@ export default function ForgotPassword() {
             id="email"
             placeholder="seun@altcamp.com"
             className="input"
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>

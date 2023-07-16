@@ -12,7 +12,7 @@ import { useDispatch } from 'react-redux';
 
 import { useRegisterMutation } from '../../../app/slices/apiSlices/authSlice';
 
-import { useVerifyEmailMutation } from '../../../app/slices/apiSlices/accountSlices/accountMutationSlice';
+import { useStartVerifyEmailMutation } from '../../../app/slices/apiSlices/accountSlice';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -47,7 +47,7 @@ export default function Register() {
     useRegisterMutation();
 
   const [
-    verifyEmail,
+    startVerifyEmail,
     {
       data: verifyEmailData,
       isLoading: verifyIsLoading,
@@ -55,7 +55,7 @@ export default function Register() {
       isError: verifyIsError,
       error: verifyError,
     },
-  ] = useVerifyEmailMutation();
+  ] = useStartVerifyEmailMutation();
 
   const handleStudentRegister = (e) => {
     e.preventDefault();
@@ -81,19 +81,26 @@ export default function Register() {
     }
   };
 
+  // if startVerifyEmailSuccess is true.
+  useEffect(() => {
+    if (verifyIsSuccess) {
+      // save requestId to localStorage
+      localStorage.setItem('requestId', verifyEmailData.data.requestId);
+      // console.log(verifyEmailData.data.requestId);
+    }
+  }, [verifyIsSuccess]);
+
   useEffect(() => {
     if (isSuccess) {
-      // console.log(data)
       setToastText(data.message);
       setToastType('success');
       dispatch(setUser(data?.data));
-      verifyEmail();
-      setTimeout(() => navigate('/dashboard'), 2000);
+      startVerifyEmail();
+      setTimeout(() => navigate('/account/verifyemail'), 2000);
     } else if (isError) {
       setToastText(error.data.message);
       setToastType('error');
       setTimeout(() => setToastText(''), 3000);
-      // setErrorText(error.data.message)
     }
   }, [isSuccess, isError]);
 
