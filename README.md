@@ -13,8 +13,17 @@ We welcome contributions to this project. For detailed information on how to go 
 - [Code of Conduct](/CODE-OF-CONDUCT.md)
 
 ## Built With
-* [ReactJS](https://beta.reactjs.org/) - A JavaScript library for building user interfaces
+* [ReactJS](https://react.dev/) - A JavaScript library for building user interfaces
+* [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) - A programming language that conforms to the ECMAScript specification
+* [TypeScript](https://www.typescriptlang.org/) - A strongly typed programming language which builds on JavaScript giving you better tooling at any scale
 * [Vanilla CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) - A programming language that lets you style HTML pages
+* [CSS Modules](https://github.com/css-modules/css-modules) - A CSS file in which all class names and animation names are scoped locally by default
+* [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework for rapidly building custom designs
+* [React Router](https://reactrouter.com/) - A collection of navigational components that compose declaratively with your application
+* [Redux-Toolkit](https://redux-toolkit.js.org/) - The official, opinionated, batteries-included toolset for efficient Redux development
+* [RTK-Query](https://redux-toolkit.js.org/rtk-query/overview) - A powerful data fetching and caching tool
+
+
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](/LICENSE) file for details.
