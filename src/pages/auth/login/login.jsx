@@ -1,23 +1,21 @@
 import React, { useState, useEffect } from 'react';
-// import { motion, AnimatePresence } from 'framer-motion'
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import userLoginStyle from './userLogin.module.css';
-import eyeIcon from '../../../../assets/general/eye.svg';
-import eyeClosedIcon from '../../../../assets/general/eyeclosed.svg';
+
+import eyeIcon from '../../../assets/general/eye.svg';
+import eyeClosedIcon from '../../../assets/general/eyeclosed.svg';
 
 // import apiSLice hook
-import { useLoginMutation } from '../../../../app/slices/apiSlices/authSlice';
+import { useLoginMutation } from '../../../app/slices/apiSlices/authSlice';
 
 import { useDispatch } from 'react-redux';
 
-import { setUser } from '../../../../app/slices/generalSlices/userSlice';
-import Toaster from '../../../../components/Toaster/Toaster';
+import { setUser } from '../../../app/slices/generalSlices/userSlice';
+import Toaster from '../../../components/Toaster/Toaster';
 
-export default function UserLogin() {
+export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
 
   const parentPath = useLocation().pathname.split('/')[1];
-  // console.log(parentPath)
 
   const [toastText, setToastText] = useState('');
   const [toastType, setToastType] = useState('info');
@@ -29,7 +27,6 @@ export default function UserLogin() {
 
   const navigate = useNavigate();
 
-  // console.log(email, password)
   const [login, { isSuccess, isLoading, data, isError, error }] =
     useLoginMutation();
 
@@ -44,53 +41,47 @@ export default function UserLogin() {
       setToastType('success');
       dispatch(setUser(data?.data));
       setTimeout(() => navigate('/dashboard'), 2000);
-      // navigate('/dashboard')
-      // navigate('/dashboard')
     } else if (isError) {
       setToastText(error.data.message);
       setToastType('error');
       setTimeout(() => setToastText(''), 3000);
-      // setErrorText(error.data.message)
     }
   }, [isSuccess, isError]);
 
-  // console.log(data?.data)
-  // console.log(error)
-
   return (
     <div className="mt-12 flex flex-col justify-center gap-8">
-      <h2 className="mb-6 text-center text-[2rem] font-semibold ">
+      <h2 className="mb-6 text-center text-[2rem] font-semibold sm:text-[1.5rem]">
         Welcome Back
       </h2>
       <form className="flex flex-col gap-[2.5rem] " onSubmit={handleLogin}>
-        <div className={userLoginStyle.formGroup}>
-          <label htmlFor="email" className="">
-            Email Address
-          </label>
+        <div className="form-group">
+          <label htmlFor="email">Email Address</label>
           <input
             type="email"
             name="email"
             id="email"
             placeholder="seun@altcamp.com"
-            className={userLoginStyle.email}
+            className="input"
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
         </div>
-        <div className={userLoginStyle.passwordFormGroup}>
+        <div className="form-group">
           <label htmlFor="password">Password</label>
-          <div className={userLoginStyle.inputGroup}>
+          <div className="password-group">
             <input
               type={showPassword ? 'text' : 'password'}
               name="password"
               id="password"
               placeholder="********"
-              className={userLoginStyle.password}
+              className="password-input"
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
             <img
               src={showPassword ? eyeClosedIcon : eyeIcon}
               alt="eye icon"
-              className={userLoginStyle.showPasswordIcon}
+              className="cursor-pointer"
               onClick={() => setShowPassword(!showPassword)}
             />
           </div>
@@ -104,16 +95,12 @@ export default function UserLogin() {
           handleClose={() => setToastText('')}
         />
 
-        <button
-          className={userLoginStyle.loginButton}
-          type="submit"
-          disabled={isLoading}
-        >
+        <button className="auth-btn" type="submit" disabled={isLoading}>
           {isLoading ? 'Unlocking the door...' : 'Login'}
         </button>
         <Link
           to={`/${parentPath}/login/forgotpassword`}
-          className={userLoginStyle.forgotPassword}
+          className="w-fit cursor-pointer self-end text-right text-[0.875rem] font-normal"
         >
           Forgot Password?
         </Link>

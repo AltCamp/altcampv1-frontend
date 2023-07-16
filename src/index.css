@@ -95,3 +95,46 @@ html {
 a {
   text-decoration: none;
 }
+
+/* TAILWINDCSS COMPONENTS */
+
+@layer components {
+  /* CUSTOM CLASSNAME FOR FORM GROUPS e.g label and input elements sharing a parent element */
+  .form-group {
+    @apply flex flex-col gap-2;
+  }
+
+  /* CUSTOM CLASSNAME FOR LABEL ELEMENTS */
+  .form-group label {
+    @apply w-fit text-primary-800;
+  }
+
+  /* CUSTOM CLASSNAME FOR INPUT ELEMENTS */
+  .input {
+    @apply h-[2.5rem] w-full rounded-[4px] border-[1px] border-neutral-400 p-[0.5rem] font-normal text-neutral-800 shadow-[0px_2px_2px_rgba(33,37,41,0.06),0px_0px_1px_rgba(33,37,41,0.08)] focus:border-primary-800 focus:outline-none;
+  }
+
+  /* CUSTOM CLASSNAME FOR PASSWORD GROUP i.e input element with eye icon */
+  .password-group {
+    @apply flex h-[2.5rem] w-full items-center gap-2 rounded-[4px] border-[1px] border-neutral-400 p-[0.5rem] font-normal text-neutral-800 shadow-[0px_2px_2px_rgba(33,37,41,0.06),0px_0px_1px_rgba(33,37,41,0.08)] focus-within:border-primary-800 focus-within:outline-none;
+  }
+
+  /* CUSTOM CLASSNAME FOR PASSWORD INPUT ELEMENT */
+  .password-input {
+    @apply h-full w-full font-normal text-neutral-800 focus:outline-none;
+  }
+
+  /* CUSTOM CLASSNAME FOR AUTH BUTTONS */
+  .auth-btn {
+    @apply mt-[1rem] h-[2.5rem] w-full rounded-[4px] bg-secondary-400 font-medium text-white hover:bg-secondary-800 focus:outline-none disabled:cursor-not-allowed disabled:bg-neutral-400;
+  }
+
+  /* CUSTOM CLASSNAMES FOR OTP INPUT COMPONENTS */
+  .otp-input-container {
+    @apply mb-[2rem] flex w-full justify-center gap-[2rem] xs:mb-0 xs:justify-between xs:gap-0;
+  }
+
+  .otp-input {
+    @apply h-[3.5rem] !w-[5rem] rounded-[4px] border-[1px] border-neutral-400 p-[0.5rem] font-normal text-neutral-800 shadow-[0px_2px_2px_rgba(33,37,41,0.06),0px_0px_1px_rgba(33,37,41,0.08)] focus:border-primary-800 focus:outline-none xs:!w-[3.5rem];
+  }
+}

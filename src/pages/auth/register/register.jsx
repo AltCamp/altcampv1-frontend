@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import registerStyles from './register.module.css';
 import eyeIcon from '../../../assets/general/eye.svg';
 import eyeClosedIcon from '../../../assets/general/eyeclosed.svg';
 import Toaster from '../../../components/Toaster/Toaster';
@@ -156,16 +155,16 @@ export default function Register() {
   }, [password]);
 
   return (
-    <div className={registerStyles.container}>
-      <h2 className={registerStyles.header}>Create Account</h2>
+    <div className="mt-12 flex flex-col justify-center gap-8">
+      <h2 className="mb-4 text-center text-[2rem] font-semibold sm:text-[1.5rem]">
+        Create Account
+      </h2>
       <form
         action=""
-        className={registerStyles.form}
+        className="sm:grid-row-none grid grid-cols-2 gap-4  sm:grid-cols-none"
         onSubmit={handleStudentRegister}
       >
-        <div
-          className={`${registerStyles.formGroup} ${registerStyles.firstName}`}
-        >
+        <div className="form-group sm:col-span-2">
           <label htmlFor="firstName">First Name</label>
           <input
             type="text"
@@ -173,12 +172,11 @@ export default function Register() {
             id="firstName"
             placeholder="Seun"
             onChange={(e) => setFirstName(e.target.value)}
+            className="input"
             required
           />
         </div>
-        <div
-          className={`${registerStyles.formGroup} ${registerStyles.lastName}`}
-        >
+        <div className="form-group sm:col-span-2">
           <label htmlFor="lastName">Last Name</label>
           <input
             type="text"
@@ -186,18 +184,18 @@ export default function Register() {
             id="lastName"
             placeholder="Ogunlana"
             onChange={(e) => setLastName(e.target.value)}
+            className="input"
             required
           />
         </div>
-        <div
-          className={`${registerStyles.formGroup} ${registerStyles.category}`}
-        >
+        <div className="form-group col-span-2">
           <label htmlFor="category">Category</label>
           <select
             name="category"
             id="category"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
+            className="input"
             required
           >
             <option value="Student">AltSchooler</option>
@@ -205,7 +203,7 @@ export default function Register() {
           </select>
         </div>
         <motion.div
-          className={`${registerStyles.formGroup} ${registerStyles.track}`}
+          className="form-group sm:col-span-2"
           style={{
             gridColumn:
               category == 'Student' && screenWidthState
@@ -220,6 +218,7 @@ export default function Register() {
             name="track"
             id="track"
             onChange={(e) => setTrack(e.target.value)}
+            className="input"
             required
           >
             <option value="">Select Track</option>
@@ -237,7 +236,7 @@ export default function Register() {
         <AnimatePresence>
           {category == 'Student' && (
             <motion.div
-              className={`${registerStyles.formGroup} ${registerStyles.matric}`}
+              className="form-group sm:col-span-2"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -249,13 +248,14 @@ export default function Register() {
                 id="matric"
                 placeholder="ALT/SOP/022/0001"
                 onChange={(e) => setAltSchoolId(e.target.value)}
+                className="input"
                 pattern="^ALT/SO[EPD]/02[2-9]/[0-9]{0,4}$"
                 required
               />
             </motion.div>
           )}
         </AnimatePresence>
-        <div className={`${registerStyles.formGroup} ${registerStyles.email}`}>
+        <div className="form-group col-span-2">
           <label htmlFor="email">Email Address</label>
           <input
             type="email"
@@ -263,14 +263,13 @@ export default function Register() {
             id="email"
             placeholder="seun@altcamp.com"
             onChange={(e) => setEmail(e.target.value)}
+            className="input"
             required
           />
         </div>
-        <div
-          className={`${registerStyles.formGroup} ${registerStyles.password}`}
-        >
+        <div className="form-group col-span-2">
           <label htmlFor="password">Password</label>
-          <div className={registerStyles.inputGroup}>
+          <div className="password-group">
             <input
               type={toggleShowPassword ? 'text' : 'password'}
               name="password"
@@ -278,18 +277,18 @@ export default function Register() {
               placeholder=""
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              // pattern={passwordPattern}
+              className="password-input"
               required
             />
             <img
               src={toggleShowPassword ? eyeClosedIcon : eyeIcon}
               alt="showPassword"
-              className={registerStyles.showPasswordIcon}
+              className="cursor-pointer"
               onClick={() => setToggleShowPassword(!toggleShowPassword)}
             />
           </div>
           {/* { */}
-          <div className={registerStyles.guide}>
+          <div className="flex flex-wrap gap-2 text-[11px] [&>*]:flex [&>*]:items-center [&>*]:gap-[0.2rem] [&>*]:rounded-[4px] ">
             <span
               style={{
                 color: charLength ? '#0E8A1A' : '#495057',
@@ -347,7 +346,7 @@ export default function Register() {
 
         <button
           type="submit"
-          className={registerStyles.submitButton}
+          className="auth-btn col-span-2"
           disabled={isLoading}
         >
           {isLoading ? 'Unlocking the door...' : 'Create Account'}

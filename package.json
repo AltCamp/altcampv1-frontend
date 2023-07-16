@@ -11,10 +11,8 @@
     "prepare": "husky install"
   },
   "lint-staged": {
-    "**/*.{js,jsx,ts,tsx}": [
-      "prettier --write --ignore-unknown",
-      "eslint --fix"
-    ]
+    "**/*.{js,jsx,ts,tsx,css}": "prettier --write --ignore-unknown",
+    "**/*.{js,jsx,ts,tsx}": "eslint --fix"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.0",

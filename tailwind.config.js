@@ -24,8 +24,8 @@ export default {
           900: '#333130',
         },
 
-        // transparent colors
-        trans: {
+        // neutral/transparent colors
+        neutral: {
           100: '#f8f9fa',
           200: '#e9ecef',
           300: '#dee2e6',
