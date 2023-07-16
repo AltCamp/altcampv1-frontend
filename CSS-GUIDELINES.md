@@ -1,12 +1,20 @@
 # CSS Guidelines
 
-1. Use vanilla CSS for styling and avoid using preprocessors such as Sass or Less.
-2. Use a consistent naming convention (e.g. BEM, SMACSS) for class names.
-3. Use the CSS variables for reusable values such as colors, font sizes and others as specified in the index.css file.
-4. Use CSS grid and flexbox for layout, avoid using frameworks such as Bootstrap or TailwindCSS.
-5. Use media queries for responsive design, avoid using JavaScript for this purpose.
-6. Use CSS animations sparingly and make sure they are performant and accessible.
-7. Avoid using !important, except in rare cases where it is absolutely necessary.
-8. Write clean, organized, and well-commented code.
-9. Test your CSS in all relevant browsers and devices.
-10. Follow the project's existing CSS conventions and style.
+This document provides guidelines for using TailwindCSS in this project.
+
+## General Guidelines
+
+* Refer to the tailwind.config.js file to see which TailwindCSS plugins are enabled.
+* Refer to the tailwind.config.js file to see extended colors, fonts, and breakpoints.
+* Refer to the index.css to see the custom components classnames and their respective TailwindCSS classes.
+* Use TailwindCSS classes to style your components.
+* Avoid using inline CSS.
+* Use the TailwindCSS documentation as a reference.
+* Keep your CSS code DRY.
+* Use consistent naming conventions for your TailwindCSS classes.
+
+## Resources
+
+* [TailwindCSS Documentation](https://tailwindcss.com/docs/)
+* [TailwindCSS Cheatsheet](https://tailwindcss.com/docs/cheatsheet/)
+* [TailwindCSS Code Generator](https://tailwindcss.com/generate/)
