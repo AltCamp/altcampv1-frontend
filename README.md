@@ -24,6 +24,42 @@ We welcome contributions to this project. For detailed information on how to go 
 * [RTK-Query](https://redux-toolkit.js.org/rtk-query/overview) - A powerful data fetching and caching tool
 
 
+## Quick Start
+To get started with this project, you need to have the following installed on your local machine:
+
+
+### Development Setup
+
+1. Fork the repository and clone it to your local machine.
+
+```
+$ git clone https://github.com/YOUR_GITHUB_USERNAME/altcampv1-frontend.git
+```
+
+2. Navigate to the project directory.
+
+```
+$ cd altcampv1-frontend
+```
+
+3. Install the project dependencies.
+
+```
+$ npm install
+```
+
+4. Copy the contents of `example.env` to a new file called `.env` and fill in the required environment variables.
+
+```
+cp example.env .env
+```
+
+5. Start the development server.
+
+```
+$ npm run dev
+```
+
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](/LICENSE) file for details.
