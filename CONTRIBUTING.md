@@ -1,4 +1,4 @@
-# Contributing to StudyBuddy
+# Contributing to AltCamp
 
 ## Introduction
 
