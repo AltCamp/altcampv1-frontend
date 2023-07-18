@@ -60,6 +60,9 @@
   outline: none;
   cursor: pointer;
   color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .icons {

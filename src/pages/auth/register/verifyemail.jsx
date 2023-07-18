@@ -4,9 +4,9 @@ import OtpInput from 'react18-input-otp';
 
 import mobileLogo from '../../../assets/general/AuthBlackLogo.svg';
 
-import { useVerifyEmailMutation } from '../../../app/slices/apiSlices/accountSlices/accountMutationSlice';
+import { useStartVerifyEmailMutation } from '../../../app/slices/apiSlices/accountSlice';
 
-import { useVerifyOtpMutation } from '../../../app/slices/apiSlices/accountSlices/accountMutationSlice';
+import { useVerifyEmailMutation } from '../../../app/slices/apiSlices/accountSlice';
 
 import Toaster from '../../../components/Toaster/Toaster';
 
@@ -20,56 +20,75 @@ export default function VerifyEmail() {
   const [toastType, setToastType] = useState('info');
 
   const navigate = useNavigate();
+
   const handleSetOtp = (otp) => {
     setOtp(otp);
   };
 
   const [
+    startVerifyEmail,
+    {
+      data: startVerifyEmailData,
+      isSuccess: startVerifyEmailSuccess,
+      isError: startVerifyEmailError,
+      error: startVerifyEmailErrors,
+    },
+  ] = useStartVerifyEmailMutation();
+
+  const handleStartVerifyEmail = () => {
+    startVerifyEmail();
+    setOtpSent(true);
+  };
+
+  const [
     verifyEmail,
     {
-      data: verifyData,
+      data: verifyEmailData,
+      isLoading: verifyEmailIsLoading,
       isSuccess: verifyEmailSuccess,
       isError: verifyEmailError,
       error: verifyEmailErrors,
     },
   ] = useVerifyEmailMutation();
 
-  const handleSendOtp = () => {
-    verifyEmail();
-    setOtpSent(true);
-  };
-
-  const [
-    verifyOtp,
-    {
-      data: verifyOtpData,
-      isLoading: verifyOtpIsLoading,
-      isSuccess: verifyOtpSuccess,
-      isError: verifyOtpError,
-      error: verifyOtpErrors,
-    },
-  ] = useVerifyOtpMutation();
-
-  const handleVerifyOtp = () => {
+  const handleVerifyEmail = () => {
     if (otp.length < 4) {
       return;
     }
-    verifyOtp({ token: otp });
+    verifyEmail({
+      requestId:
+        startVerifyEmailData?.data.requestId ||
+        localStorage.getItem('requestIdForEmail'),
+      token: Number(otp),
+    });
   };
 
+  // if startVerifyEmailSuccess is true, then we have to set the requestId in localStorage
+  // so that we can use it in the verifyEmail function
   useEffect(() => {
-    if (verifyOtpSuccess) {
-      setToastText(verifyOtpData.message);
+    if (startVerifyEmailSuccess) {
+      localStorage.setItem(
+        'requestIdForEmail',
+        startVerifyEmailData?.data.requestId
+      );
+    }
+  }, [startVerifyEmailSuccess]);
+
+  useEffect(() => {
+    if (verifyEmailSuccess) {
+      // remove saved values in localStorage
+      localStorage.removeItem('requestIdForEmail');
+      setToastText(verifyEmailData.message);
       setToastType('success');
       setTimeout(() => {
         navigate('/dashboard');
       }, 2000);
     }
-    if (verifyOtpError) {
-      setToastText(verifyOtpErrors?.data.message);
+    if (verifyEmailError) {
+      setToastText(verifyEmailErrors?.message);
       setToastType('error');
     }
-  }, [verifyOtpSuccess, verifyOtpError]);
+  }, [verifyEmailSuccess, verifyEmailError]);
 
   return (
     <div className="flex h-screen w-full flex-col items-center justify-center">
@@ -102,17 +121,20 @@ export default function VerifyEmail() {
         <button
           className="auth-btn"
           onClick={() => {
-            handleVerifyOtp();
+            handleVerifyEmail();
           }}
-          disabled={verifyOtpIsLoading}
+          disabled={verifyEmailIsLoading}
         >
-          {verifyOtpIsLoading ? 'Verifying...' : 'Verify'}
+          {verifyEmailIsLoading ? 'Verifying...' : 'Verify'}
         </button>
-        <p
-          className="mt-3 w-fit cursor-pointer self-center font-medium text-primary-800 sm:text-[0.875rem]"
-          onClick={handleSendOtp}
-        >
-          Resend Code
+        <p className="mt-3 flex w-fit gap-[0.5rem] self-center font-medium text-primary-800 sm:text-[0.875rem]">
+          Didn&apos;t receive the code?{' '}
+          <span
+            onClick={handleStartVerifyEmail}
+            className="underline-primary-800 cursor-pointer font-semibold underline underline-offset-2 hover:no-underline"
+          >
+            Resend
+          </span>
         </p>
       </div>
     </div>

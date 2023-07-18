@@ -6,6 +6,8 @@ import { CloseCircle } from 'iconsax-react';
 
 import { useCreateBookmarkMutation } from '../../../../app/slices/apiSlices/bookmarkSlice';
 
+import VerifyEmailPopUp from '../verifyEmailPopUp';
+
 export default function BookmarkModal({
   handleToggleBookmarkModal,
   postId,
@@ -13,6 +15,8 @@ export default function BookmarkModal({
   postTitle,
 }) {
   const [title, setTitle] = useState(postTitle ? postTitle : '');
+
+  const [queryError, setQueryError] = useState();
 
   const [createBookmark, { data, isLoading, isSuccess, isError, error }] =
     useCreateBookmarkMutation();
@@ -25,7 +29,10 @@ export default function BookmarkModal({
     if (isSuccess) {
       handleToggleBookmarkModal();
     }
-  }, [isSuccess]);
+    if (isError) {
+      setQueryError(error?.data?.message);
+    }
+  }, [isSuccess, isError]);
 
   const inputRef = useRef(null);
 
@@ -35,6 +42,8 @@ export default function BookmarkModal({
 
   return (
     <div className={bookModalStyles.toggleCreateOverlay}>
+      {/* verifyEmailPopUp */}
+      <VerifyEmailPopUp queryError={queryError} setQueryError={setQueryError} />
       <div className={bookModalStyles.toggleCreate}>
         <CloseCircle
           size="20"

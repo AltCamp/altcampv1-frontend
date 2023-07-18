@@ -7,8 +7,10 @@ const url = {
   // AUTH URL
   LOGIN_URL: '/auth/login',
   REGISTER_URL: '/auth/register',
-  VERIFY_EMAIL_URL: '/auth/verify-email',
-  VERIFY_OTP_URL: '/auth/verify-otp',
+  VERIFY_EMAIL_URL: '/auth/start-email-verification',
+  VERIFY_OTP_URL: '/auth/verify-email',
+  FORGOT_PASSWORD_URL: '/accounts/forgot-password',
+  RESET_PASSWORD_URL: '/accounts/reset-password',
 
   // ACCOUNT URL
   GET_ACCOUNTS_URL: '/accounts',

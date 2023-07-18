@@ -50,11 +50,15 @@ import { useSelector } from 'react-redux';
 import altlogo from '../../../../../assets/general/Authlogo.png';
 
 import BookmarkModal from '../../../components/bookmarkmodal/bookmarkmodal';
+
+import VerifyEmailPopUp from '../../../components/verifyEmailPopUp';
 export default function Questionpage() {
   const [deleteQuestionModal, setDeleteQuestionModal] = useState(false);
   const [shareModal, setShareModal] = useState(false);
   const [screenWidthState, setScreenWidthState] = useState(false);
   const [toggleBookmarkModal, setToggleBookmarkModal] = useState();
+
+  const [queryError, setQueryError] = useState();
 
   const navigate = useNavigate();
 
@@ -166,7 +170,16 @@ export default function Questionpage() {
     });
   }, []);
 
-  // console.log(screenWidthState)
+  // grab all the errors from api queries and pass the message to queryError state
+  useEffect(() => {
+    if (upvoteIsError || downvoteIsError || deleteQuestionError) {
+      setQueryError(
+        upvoteError?.data.message ||
+          downvoteError?.data.message ||
+          deleteQuestionErrors?.data.message
+      );
+    }
+  }, [upvoteIsError, downvoteIsError, deleteQuestionError]);
 
   // style for share modal
 
@@ -221,6 +234,9 @@ export default function Questionpage() {
         <meta property="og:image:type" content="image/png" />
         <meta property="og:site_name" content="AltCamp" />
       </Helmet>
+
+      {/* verifyEmailPopUp */}
+      <VerifyEmailPopUp queryError={queryError} setQueryError={setQueryError} />
 
       {toggleBookmarkModal && (
         <BookmarkModal
@@ -453,7 +469,7 @@ export default function Questionpage() {
                 </div>
               </div>
               <Link
-                to={'/dashboard/community/ask/:question'}
+                to={'/dashboard/community/ask'}
                 className={questionPageStyles.questionCta}
               >
                 Ask Question
