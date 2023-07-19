@@ -12,10 +12,14 @@ import { useMediaHandler } from '../../account/hooks/useMediaHandler';
 
 import { useCreatePostMutation } from '../../../../../app/slices/apiSlices/feedSlice';
 
+import VerifyEmailPopUp from '../../../components/verifyEmailPopUp';
+
 import { useSelector } from 'react-redux';
 
 export default function Createpost({ setToggleCreatePost }) {
   const [content, setContent] = useState(false);
+
+  const [queryError, setQueryError] = useState();
 
   const { user } = useSelector((state) => state?.user?.user);
 
@@ -69,12 +73,16 @@ export default function Createpost({ setToggleCreatePost }) {
     if (isSuccess) {
       setToggleCreatePost(false);
     }
+    if (isError) {
+      setQueryError(createPostError?.data.message);
+    }
   }, [isSuccess]);
-
-  // console.log(video)
 
   return (
     <div className={createPostStyles.container}>
+      {/* verifyEmailPopUp */}
+      <VerifyEmailPopUp queryError={queryError} setQueryError={setQueryError} />
+
       <div className={createPostStyles.header}>
         <h1 className={createPostStyles.h1}>Add a post</h1>
         <p className={createPostStyles.p}>
@@ -134,7 +142,7 @@ export default function Createpost({ setToggleCreatePost }) {
         >
           {image ? (
             <div className={createPostStyles.mediaDisplay}>
-              <label for="media" className={createPostStyles.change}>
+              <label htmlFor="media" className={createPostStyles.change}>
                 Change <ArrowRotateLeft size="18" color="#585DCC" />
               </label>
               <input
@@ -149,7 +157,7 @@ export default function Createpost({ setToggleCreatePost }) {
             </div>
           ) : video ? (
             <div className={createPostStyles.mediaDisplay}>
-              <label for="media" className={createPostStyles.change}>
+              <label htmlFor="media" className={createPostStyles.change}>
                 Change <ArrowRotateLeft size="18" color="#585DCC" />
               </label>
               <input
@@ -160,15 +168,8 @@ export default function Createpost({ setToggleCreatePost }) {
                 onChange={(e) => handleMedia(e.target.files[0])}
                 className={createPostStyles.fileInput}
               />
-              {/* <img src={image} alt='media' className={createPostStyles.media} /> */}
               <video className={createPostStyles.media} controls width="250">
-                {/* <source src='/media/cc0-videos/flower.webm' type='video/webm' /> */}
                 <source src={video} type="video/*" />
-                {/* Download the
-                <a href='/media/cc0-videos/flower.webm'>WEBM</a>
-                or
-                <a href='/media/cc0-videos/flower.mp4'>MP4</a>
-                video. */}
               </video>
             </div>
           ) : (
@@ -178,7 +179,7 @@ export default function Createpost({ setToggleCreatePost }) {
                 Drag and drop files to upload resources. For photo, use JPG or
                 PNG. For videos, use MP4 or MOV.
               </p>
-              <label for="media" className={createPostStyles.inputLabel}>
+              <label htmlFor="media" className={createPostStyles.inputLabel}>
                 Select from your device
               </label>
               <input

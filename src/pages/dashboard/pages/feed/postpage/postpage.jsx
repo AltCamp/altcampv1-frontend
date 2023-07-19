@@ -27,10 +27,15 @@ import Postcomment from './postcomment/postcomment';
 
 import BookmarkModal from '../../../components/bookmarkmodal/bookmarkmodal';
 
+import VerifyEmailPopUp from '../../../components/verifyEmailPopUp';
+
 export default function Postpage() {
   const [likeAnimation, setLikeAnimation] = useState(false);
   const [content, setContent] = useState('');
   const [toggleBookmarkModal, setToggleBookmarkModal] = useState();
+
+  // stored and passed as props to verifyemailpopup modal
+  const [queryError, setQueryError] = useState();
 
   const navigate = useNavigate();
 
@@ -57,8 +62,8 @@ export default function Postpage() {
     {
       data: likeData,
       isLoading: likeIsLoading,
-      isSuccess: likeIsSucccess,
-      isError: likeIsSuccess,
+      isSuccess: likeIsSuccess,
+      isError: likeIsError,
       error: likeError,
     },
   ] = useLikePostMutation();
@@ -68,14 +73,14 @@ export default function Postpage() {
   };
 
   useEffect(() => {
-    if (likeIsSucccess) {
+    if (likeIsSuccess) {
       setLikeAnimation(true);
 
       setTimeout(() => {
         setLikeAnimation(false);
       }, 1000);
     }
-  }, [likeIsSucccess]);
+  }, [likeIsSuccess]);
 
   const {
     data: comments,
@@ -121,6 +126,15 @@ export default function Postpage() {
     setToggleBookmarkModal(!toggleBookmarkModal);
   };
 
+  // grab all the errors from api queries and pass the message to queryError state
+  useEffect(() => {
+    if (createCommentIsError || likeIsError) {
+      setQueryError(
+        createCommentError?.data?.message || likeError?.data?.message
+      );
+    }
+  }, [createCommentIsError, likeIsError]);
+
   return (
     <>
       {toggleBookmarkModal && (
@@ -131,6 +145,10 @@ export default function Postpage() {
           postTitle={post?.content}
         />
       )}
+
+      {/* verifyEmailPopUp */}
+      <VerifyEmailPopUp queryError={queryError} setQueryError={setQueryError} />
+
       <div className={postPageStyles.container}>
         <div className={postPageStyles.back} onClick={() => navigate(-1)}>
           <ArrowCircleLeft size="24" color="#1E1E1E" />

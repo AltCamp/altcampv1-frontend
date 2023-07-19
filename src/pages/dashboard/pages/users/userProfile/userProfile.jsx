@@ -4,7 +4,7 @@ import userProfileStyle from './userProfile.module.css';
 import userStyles from '../users.module.css';
 import { ArrowCircleLeft } from 'iconsax-react';
 import { ProfileCircle } from 'iconsax-react';
-import { useGetAccountByIdQuery } from '../../../../../app/slices/apiSlices/accountSlices/accountMutationSlice';
+import { useGetAccountByIdQuery } from '../../../../../app/slices/apiSlices/accountSlice';
 import Empty from '../../../empty/empty';
 
 export default function UserProfile() {
@@ -66,7 +66,7 @@ export default function UserProfile() {
                 ) : (
                   <span className={userProfileStyle.profileBioNoText}>
                     {' '}
-                    'No bio yet'{' '}
+                    No bio yet{' '}
                   </span>
                 )}
               </p>

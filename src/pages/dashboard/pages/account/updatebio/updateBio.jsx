@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import bioStyles from './updatebio.module.css';
-import { useUpdateBioMutation } from '../../../../../app/slices/apiSlices/accountSlices/accountMutationSlice';
+import { useUpdateBioMutation } from '../../../../../app/slices/apiSlices/accountSlice';
 import { useDispatch } from 'react-redux';
 import { setUserBio } from '../../../../../app/slices/generalSlices/userSlice';
 import { useOutletContext } from 'react-router-dom';

@@ -1,12 +1,20 @@
-import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
 import OtpInput from 'react18-input-otp';
 
+import { useVerifyForgotPasswordOtpMutation } from '../../../app/slices/apiSlices/forgotPasswordSlice';
+
+import { useForgotPasswordMutation } from '../../../app/slices/apiSlices/forgotPasswordSlice';
+
+import Toaster from '../../../components/Toaster/Toaster';
+
 export default function EnterOtp() {
   const [otp, setOtp] = useState('');
+
+  const [toastText, setToastText] = useState('');
+  const [toastType, setToastType] = useState('info');
 
   const navigate = useNavigate();
 
@@ -14,13 +22,70 @@ export default function EnterOtp() {
     setOtp(otp);
   };
 
+  const [
+    verifyForgotPasswordOtp,
+    {
+      data: verifyForgotPasswordOtpData,
+      isSuccess: verifyForgotPasswordOtpIsSuccess,
+      isLoading: verifyForgotPasswordOtpIsLoading,
+      isError: verifyForgotPasswordOtpIsError,
+      error: verifyForgotPasswordOtpError,
+    },
+  ] = useVerifyForgotPasswordOtpMutation();
+
   const handleSubmitOtp = (e) => {
     e.preventDefault();
     if (otp.length < 4) {
       return;
     }
-    navigate('/account/login/forgotpassword/resetpassword');
+    console.log(localStorage.getItem('requestIdForReset'));
+    verifyForgotPasswordOtp({
+      requestId: localStorage.getItem('requestIdForReset'),
+      token: otp,
+    });
   };
+
+  useEffect(() => {
+    if (verifyForgotPasswordOtpIsSuccess) {
+      // save otp in localStorage
+      localStorage.setItem('otp', otp);
+      setToastText(verifyForgotPasswordOtpData?.message);
+      setToastType('success');
+      setTimeout(() => {
+        navigate('/account/login/forgotpassword/resetpassword');
+      }, 1000);
+    }
+    if (verifyForgotPasswordOtpIsError) {
+      setToastText(verifyForgotPasswordOtpError?.message);
+      setToastType('error');
+    }
+  }, [verifyForgotPasswordOtpData]);
+
+  const [
+    forgotPassword,
+    {
+      data: forgotPasswordData,
+      isSuccess: forgotPasswordIsSuccess,
+      isLoading: forgotPasswordIsLoading,
+      isError: forgotPasswordIsError,
+      error: forgotPasswordError,
+    },
+  ] = useForgotPasswordMutation();
+
+  const handleResendCode = () => {
+    forgotPassword(localStorage.getItem('email'));
+  };
+
+  useEffect(() => {
+    if (forgotPasswordIsSuccess) {
+      setToastText(forgotPasswordData?.message);
+      setToastType('success');
+    }
+    if (forgotPasswordIsError) {
+      setToastText(forgotPasswordError?.message);
+      setToastType('error');
+    }
+  }, [forgotPasswordData]);
 
   return (
     <div className="mt-[3rem] flex flex-col justify-center gap-[1rem]">
@@ -45,11 +110,28 @@ export default function EnterOtp() {
             isInputNum={true}
           />
         </div>
-        <button className="auth-btn">Verify</button>
-        <p className="w-fit cursor-pointer self-center font-medium text-primary-800">
-          Resend Code
+        <button
+          className="auth-btn"
+          disabled={verifyForgotPasswordOtpIsLoading}
+        >
+          Verify
+        </button>
+        <p className="flex w-fit gap-[0.5rem] self-center font-medium text-primary-800">
+          Didn&apos;t receive the code?{' '}
+          <span
+            onClick={handleResendCode}
+            className="underline-primary-800 cursor-pointer font-semibold underline underline-offset-2 hover:no-underline"
+          >
+            Resend
+          </span>
         </p>
       </form>
+      <Toaster
+        show={!!toastText}
+        type={toastType}
+        message={toastText}
+        handleClose={() => setToastText('')}
+      />
     </div>
   );
 }
