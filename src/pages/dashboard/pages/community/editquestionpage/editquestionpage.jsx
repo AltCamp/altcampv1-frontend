@@ -9,6 +9,8 @@ import RichEditor from '../richeditor/richeditor';
 
 import { useUpdateQuestionMutation } from '../../../../../app/slices/apiSlices/communitySlice';
 
+import VerifyEmailPopUp from '../../../components/verifyEmailPopUp';
+
 export default function EditQuestionPage() {
   const location = useLocation();
 
@@ -19,6 +21,8 @@ export default function EditQuestionPage() {
   const [emptyTitle, setEmptyTitle] = useState(false);
 
   const [errorText, setErrorText] = useState('');
+
+  const [queryError, setQueryError] = useState();
 
   const { question } = useParams();
   const navigate = useNavigate();
@@ -39,26 +43,26 @@ export default function EditQuestionPage() {
     });
   };
 
-  // console.log(editableQuestionState)
-
   useEffect(() => {
     if (isSuccess) {
-      // navigate('/dashboard/community', { state: { created: true } })
       navigate(-1);
     }
   }, [isSuccess]);
 
   useEffect(() => {
     if (isSuccess) {
-      // console.log('data:', data)
       setErrorText('');
     } else if (isError) {
-      setErrorText(error.data.message);
+      setErrorText(error?.data.message);
+      setQueryError(error?.data.message);
     }
   }, [data, isLoading, isSuccess, isError, error]);
 
   return (
     <div className={editQuestionPageStyles.container}>
+      {/* verifyEmailPopUp */}
+      <VerifyEmailPopUp queryError={queryError} setQueryError={setQueryError} />
+
       <div className={editQuestionPageStyles.header}>
         <div
           className={editQuestionPageStyles.back}

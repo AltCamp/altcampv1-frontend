@@ -4,7 +4,7 @@ import { ProfileCircle } from 'iconsax-react';
 import { useDispatch } from 'react-redux';
 import { useOutletContext } from 'react-router-dom';
 import { setProfilePicture } from '../../../../../app/slices/generalSlices/userSlice';
-import { useUpdateProfilePictureMutation } from '../../../../../app/slices/apiSlices/accountSlices/accountMutationSlice';
+import { useUpdateProfilePictureMutation } from '../../../../../app/slices/apiSlices/accountSlice';
 import { useMediaHandler } from './../hooks/useMediaHandler';
 import Toaster from '../../../../../components/Toaster/Toaster';
 
@@ -89,7 +89,7 @@ export default function Picturechange() {
         toastConfig: {
           show: true,
           title: 'Upload Error!',
-          text: error.data.message,
+          text: error?.data.message,
           type: 'error',
         },
       });

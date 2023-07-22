@@ -3,8 +3,27 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
+
+## [thealtcamp.com](https://thealtcamp.com/)
 ## About AltCamp
 AltCamp by AltSchool is an e-learning platform that allows students to post messages to the discussion threads, interact and receive feedback from other students and instructors, and hence create a deeper understanding of the subject matter being discussed.
+
+## Quick Links
+
+### API
+- Base URL: https://the-altcamp.onrender.com
+- Documentation: https://the-altcamp.onrender.com/api-docs or `<base_url>/api-docs`
+- Postman Collection: https://documenter.getpostman.com/view/21313847/2s93eePUTg#intro
+
+### Backend
+- GitHub Repository: https://github.com/AltCamp/altcampv1-backend
+
+### Design
+- Figma: https://www.figma.com/file/xYVO33gFoAqIJMyluGdd8M/ALTCAMP?type=design&node-id=112-1241&mode=design&t=wzi8NTlLzrpQP9dU-0
+
+### Project Management
+- Project Board: https://coda.io/d/AltCamp_dD2LqZxW5Lw/Back-End-Engineering-Team_su_Ao#_luCDb
+
 
 
 ## Contributing

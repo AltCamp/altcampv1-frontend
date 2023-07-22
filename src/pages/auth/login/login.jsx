@@ -40,9 +40,14 @@ export default function Login() {
       setToastText(data.message);
       setToastType('success');
       dispatch(setUser(data?.data));
+      // remove requestIdForEmail, otp, requestIdForReset and email from localStorage
+      localStorage.removeItem('requestIdForEmail');
+      localStorage.removeItem('otp');
+      localStorage.removeItem('requestIdForReset');
+      localStorage.removeItem('email');
       setTimeout(() => navigate('/dashboard'), 2000);
     } else if (isError) {
-      setToastText(error.data.message);
+      setToastText(error?.message);
       setToastType('error');
       setTimeout(() => setToastText(''), 3000);
     }
