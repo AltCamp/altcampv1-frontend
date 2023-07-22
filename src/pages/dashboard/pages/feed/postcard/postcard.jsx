@@ -22,10 +22,14 @@ import { useSelector } from 'react-redux';
 
 import BookmarkModal from '../../../components/bookmarkmodal/bookmarkmodal';
 
+import VerifyEmailPopUp from './../../../components/verifyEmailPopUp';
+
 export default function Postcard({ post }) {
   const [latestPost, setLatestPost] = useState(post);
   const [likeAnimation, setLikeAnimation] = useState(false);
   const [toggleBookmarkModal, setToggleBookmarkModal] = useState();
+
+  const [queryError, setQueryError] = useState();
 
   const { user } = useSelector((state) => state?.user?.user);
 
@@ -45,7 +49,10 @@ export default function Postcard({ post }) {
         setLikeAnimation(false);
       }, 1100);
     }
-  }, [isSuccess]);
+    if (isError) {
+      setQueryError(error?.data.message);
+    }
+  }, [isSuccess, isError]);
 
   const handleToggleBookmarkModal = () => {
     setToggleBookmarkModal(!toggleBookmarkModal);
@@ -63,6 +70,9 @@ export default function Postcard({ post }) {
           postTitle={post?.content}
         />
       )}
+      {/* verifyEmailPopUp */}
+      <VerifyEmailPopUp queryError={queryError} setQueryError={setQueryError} />
+
       <Link
         to={`/dashboard/post/${latestPost?._id}`}
         className={postCardStyles.container}

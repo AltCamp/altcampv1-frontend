@@ -23,6 +23,8 @@ import RichEditor from '../../richeditor/richeditor';
 
 import BookmarkModal from './../../../../components/bookmarkmodal/bookmarkmodal';
 
+import VerifyEmailPopUp from '../../../../components/verifyEmailPopUp';
+
 // import prsims modules for code highlighting and sytyling
 // import Prism from 'prismjs'
 
@@ -30,6 +32,9 @@ export default function Answercard({ answer }) {
   const [content, setContent] = useState(answer?.content);
   const [editMode, setEditMode] = useState(false);
   const [toggleBookmarkModal, setToggleBookmarkModal] = useState();
+
+  // stored and passed as props to verifyemailpopup modal
+  const [queryError, setQueryError] = useState();
 
   const clean = DOMPurify.sanitize(answer?.content, {
     ADD_TAGS: ['iframe'],
@@ -113,6 +118,17 @@ export default function Answercard({ answer }) {
     navigate(location?.pathname, { replace: true });
   }, [location?.state?.postId]);
 
+  // grab all the errors from api queries and pass the message to queryError state
+  useEffect(() => {
+    if (isError || downvoteIsError || updateAnswerIsError) {
+      setQueryError(
+        error?.data?.message ||
+          downvoteError?.data?.message ||
+          updateAnswerError?.data.message
+      );
+    }
+  }, [isError, downvoteIsError, updateAnswerIsError]);
+
   return (
     <>
       {toggleBookmarkModal && (
@@ -123,6 +139,10 @@ export default function Answercard({ answer }) {
           postTitle={answer?.content}
         />
       )}
+
+      {/* verifyEmailPopUp */}
+      <VerifyEmailPopUp queryError={queryError} setQueryError={setQueryError} />
+
       <div className={answerCardStyles.container} id={answer?._id}>
         {editMode ? (
           <div className={answerCardStyles.editContainer}>

@@ -16,6 +16,7 @@ import { useLikeCommentMutation } from '../../../../../../app/slices/apiSlices/f
 
 import BookmarkModal from './../../../../components/bookmarkmodal/bookmarkmodal';
 
+import VerifyEmailPopUp from '../../../../components/verifyEmailPopUp';
 export default function Postcomment({ comment }) {
   // const [latestComment, setLatestComment] = useState(comment)
 
@@ -23,6 +24,8 @@ export default function Postcomment({ comment }) {
   const [toggleBookmarkModal, setToggleBookmarkModal] = useState();
 
   const { user } = useSelector((state) => state?.user?.user);
+
+  const [queryError, setQueryError] = useState();
 
   const location = useLocation();
 
@@ -45,14 +48,16 @@ export default function Postcomment({ comment }) {
 
   useEffect(() => {
     if (likeCommentIsSuccess) {
-      // setLatestComment(likeCommentData?.data)
       setLikeAnimation(true);
 
       setTimeout(() => {
         setLikeAnimation(false);
       }, 1000);
     }
-  }, [likeCommentIsSuccess]);
+    if (likeCommentIsError) {
+      setQueryError(likeCommentError?.data.message);
+    }
+  }, [likeCommentIsSuccess, likeCommentIsError]);
 
   const handleToggleBookmarkModal = () => {
     setToggleBookmarkModal(!toggleBookmarkModal);
@@ -86,6 +91,10 @@ export default function Postcomment({ comment }) {
           postTitle={comment?.content}
         />
       )}
+
+      {/* verifyEmailPopUp */}
+      <VerifyEmailPopUp queryError={queryError} setQueryError={setQueryError} />
+
       <div className={postCommentStyles.container} id={comment?._id}>
         <div className={postCommentStyles.header}>
           <Link
