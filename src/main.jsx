@@ -19,7 +19,7 @@ import ru from 'javascript-time-ago/locale/ru.json';
 import ReactGA from 'react-ga4';
 
 // INITIALIZE GOOGLE ANALYTICS USING REACT-GA4
-ReactGA.initialize(import.meta.env.VITE_GA_ID);
+// ReactGA.initialize(import.meta.env.VITE_GA_ID);
 
 TimeAgo.addDefaultLocale(en);
 TimeAgo.addLocale(ru);
