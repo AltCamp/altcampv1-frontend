@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
 import Post from './post';
 import Questions from './questions';
 import Answers from './answers';

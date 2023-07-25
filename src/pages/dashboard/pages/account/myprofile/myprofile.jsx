@@ -12,9 +12,9 @@ export default function Myprofile({ edit, picUpdate, updateBio }) {
   return (
     <>
       <article>
-        <div className={accountStyles['profileTop']}>
-          <h1 className={accountStyles['profileTop_title']}>Profile</h1>
-          <button className={accountStyles['profileTop_link']}>
+        <div className="mx-auto flex h-[12%] w-[85%] justify-between">
+          <h1 className="font-semibold">Profile</h1>
+          <button className="flex h-10 w-[197px] items-center justify-center self-center rounded bg-[var(--secondary-clr-lter-blue)] text-white ">
             <span>
               <Link21 size={20} />
             </span>{' '}
@@ -22,31 +22,31 @@ export default function Myprofile({ edit, picUpdate, updateBio }) {
           </button>
         </div>
         <div className={accountStyles['mainPanelTop']}>
-          <div className={accountStyles['mainPanelTop_profileImage']}>
+          <div className='flex-[1.5] relative max-w-[180px] min-w-[180px]'>
             {user.profilePicture ? (
-              <img src={user.profilePicture} alt="display image" />
+              <img src={user.profilePicture} alt="display image" className='w-[150px] h-[150px] rounded-full border-[10px] border-[var(--neutral-clr-grey-1)]'/>
             ) : (
               <ProfileCircle size={165} />
             )}
-            <span>
+            <span className='absolute bottom-0 right-[30px] bg-[var(--neutral-clr-ltest-grey)] cursor-pointer rounded-full p-[8px]'>
               <GalleryEdit
                 size={25}
-                className={accountStyles['profileImage_icon']}
+                className='text-[#585dcc]'
                 onClick={picUpdate}
               />
             </span>
           </div>
-          <div className={accountStyles['mainPanelTop_bio']}>
-            <h1>
+          <div className='flex-[3]'>
+            <h1 className='mb-[0.5rem] flex flex-wrap content-center'>
               Bio{' '}
-              <span onClick={updateBio}>
+              <span onClick={updateBio} className='ml-[1rem] text-[#585dcc]'>
                 <Edit size={20} />
               </span>
             </h1>
             <p>{user?.bio ? user?.bio : 'Add a bio to your profile.'}</p>
           </div>
         </div>
-        <div className={accountStyles['mainPanelBottom']}>
+        <div className='w-[85%] mx-auto flex items-end'>
           <section className={accountStyles['mainPanelBottom_profileDetails']}>
             <div className={accountStyles['profileDetails_fName']}>
               <span>First Name</span>

@@ -36,7 +36,7 @@ export default function UserProfile() {
         <section className={userProfileStyle.profileTop}>
           <div className={userProfileStyle.profileTopLeft}>
             {user.profilePicture ? (
-              <img src={user.profilePicture} alt="display image" />
+              <img src={user.profilePicture} alt="display image" className='object-cover'/>
             ) : (
               <span>
                 <ProfileCircle size={150} />
