@@ -1,10 +1,13 @@
-import { useState, useEffect, useRef } from 'react';
+/* eslint-disable react/prop-types */
+import { useState, useEffect, useRef, useContext } from 'react';
 
 import bookModalStyles from './bookmarkmodal.module.css';
 
 import { CloseCircle } from 'iconsax-react';
 
 import { useCreateBookmarkMutation } from '../../../../app/slices/apiSlices/bookmarkSlice';
+
+import { ToasterContext } from '../../../../components/Toaster';
 
 export default function BookmarkModal({
   handleToggleBookmarkModal,
@@ -14,18 +17,33 @@ export default function BookmarkModal({
 }) {
   const [title, setTitle] = useState(postTitle ? postTitle : '');
 
+  const {setToast} = useContext(ToasterContext)
+
   const [createBookmark, { data, isLoading, isSuccess, isError, error }] =
     useCreateBookmarkMutation();
 
   const handleCreateBookmark = () => {
     createBookmark({ title, postId, postType });
   };
-
+  
   useEffect(() => {
     if (isSuccess) {
-      handleToggleBookmarkModal();
+      setToast({
+        show : true,
+        type : 'success',
+        message : data.message
+      })
+      setTimeout(() => handleToggleBookmarkModal(), 1000);
+      setTimeout(() => setToast({show : false}), 3000);
+    } else if (isError) {
+      setToast({
+        show : true,
+        type : 'error',
+        message : error.data.message
+      })
+      setTimeout(() => setToast({show : false}), 3000);
     }
-  }, [isSuccess]);
+  }, [isSuccess, isError]);
 
   const inputRef = useRef(null);
 

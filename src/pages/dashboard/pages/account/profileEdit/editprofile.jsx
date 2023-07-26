@@ -69,7 +69,7 @@ useEffect(() => {
     setTimeout(() => {
       handleCloseToast();
       handleCancel();
-    }, 3000);
+    }, 1000);
   } else if (isError) {
     handleStateUpdate({
       toastConfig: {

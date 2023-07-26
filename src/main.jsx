@@ -13,13 +13,15 @@ import TimeAgo from 'javascript-time-ago';
 
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
+import { ToasterContextProvider } from './components/Toaster';
+
 import en from 'javascript-time-ago/locale/en.json';
 import ru from 'javascript-time-ago/locale/ru.json';
 
 import ReactGA from 'react-ga4';
 
 // INITIALIZE GOOGLE ANALYTICS USING REACT-GA4
-ReactGA.initialize(import.meta.env.VITE_GA_ID);
+// ReactGA.initialize(import.meta.env.VITE_GA_ID);
 
 TimeAgo.addDefaultLocale(en);
 TimeAgo.addLocale(ru);
@@ -247,7 +249,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <HelmetProvider>
       <Provider store={store}>
-        <RouterProvider router={router} />
+        <ToasterContextProvider>
+          <RouterProvider router={router} />
+        </ToasterContextProvider>
       </Provider>
     </HelmetProvider>
   </React.StrictMode>

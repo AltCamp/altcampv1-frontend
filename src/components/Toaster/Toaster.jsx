@@ -8,6 +8,7 @@ import {
 import { BsFillExclamationCircleFill } from 'react-icons/bs';
 import { GrFormClose } from 'react-icons/gr';
 
+// eslint-disable-next-line react/prop-types
 function Toaster({ type, message, show, handleClose, title }) {
   const icon = {
     error: <BsFillExclamationCircleFill />,

@@ -19,7 +19,7 @@
   color: #6c757d;
   font-weight: 400;
   border-top: solid 4px var(--color);
-  box-shadow: 10px 10px 5px #adb5bd74;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
   border-radius: 2px;
   font-size: 14px;
   padding: 20px;
@@ -29,7 +29,7 @@
   right: 50px;
   top: 50px;
   width: 400px;
-  z-index: 120;
+  z-index: 999;
   animation-name: slideIn, slideOut;
   animation-duration: 0.5s;
   animation-fill-mode: forwards;
