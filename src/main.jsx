@@ -94,13 +94,12 @@ const router = createBrowserRouter([
   {
     path: '/account',
     element: <AuthLayout />,
-    // loader: () => {
-    //   if (JSON.parse(localStorage.getItem('user'))?.user.emailIsVerified) {
-    //     return redirect('/dashboard')
-    //   } else {
-    //     return redirect('/account/verifyemail')
-    //   }
-    // },
+    loader: () => {
+      if (localStorage.getItem('user')) {
+        return redirect('/dashboard');
+      }
+      return null;
+    },
     children: [
       {
         path: '/account/login',
@@ -118,10 +117,26 @@ const router = createBrowserRouter([
           {
             path: '/account/login/forgotpassword/enterotp',
             element: <EnterOtp />,
+            loader: () => {
+              // check if requestIdForReset is stored in the localStorage
+              // if not, redirect to account page
+              if (!localStorage.getItem('requestIdForReset')) {
+                return redirect('/account/login');
+              }
+              return null;
+            },
           },
           {
             path: '/account/login/forgotpassword/resetpassword',
             element: <ResetPassword />,
+            loader: () => {
+              // check if requestIdForReset is stored in the localStorage
+              // if not, redirect to account page
+              if (!localStorage.getItem('requestIdForReset')) {
+                return redirect('/account/login');
+              }
+              return null;
+            },
           },
         ],
       },
@@ -134,6 +149,14 @@ const router = createBrowserRouter([
   {
     path: '/account/verifyemail',
     element: <VerifyEmail />,
+    loader: () => {
+      // check if requestIdForEmail is stored in the localStorage
+      // if not, redirect to account page
+      if (!localStorage.getItem('requestIdForEmail')) {
+        return redirect('/account');
+      }
+      return null;
+    },
   },
   {
     path: '/dashboard',

@@ -8,6 +8,7 @@ import { CloseCircle } from 'iconsax-react';
 import { useCreateBookmarkMutation } from '../../../../app/slices/apiSlices/bookmarkSlice';
 
 import { ToasterContext } from '../../../../components/Toaster';
+import VerifyEmailPopUp from '../verifyEmailPopUp';
 
 export default function BookmarkModal({
   handleToggleBookmarkModal,
@@ -18,6 +19,7 @@ export default function BookmarkModal({
   const [title, setTitle] = useState(postTitle ? postTitle : '');
 
   const {setToast} = useContext(ToasterContext)
+  const [queryError, setQueryError] = useState();
 
   const [createBookmark, { data, isLoading, isSuccess, isError, error }] =
     useCreateBookmarkMutation();
@@ -43,6 +45,9 @@ export default function BookmarkModal({
       })
       setTimeout(() => setToast({show : false}), 3000);
     }
+    if (isError) {
+      setQueryError(error?.data?.message);
+    }
   }, [isSuccess, isError]);
 
   const inputRef = useRef(null);
@@ -53,6 +58,8 @@ export default function BookmarkModal({
 
   return (
     <div className={bookModalStyles.toggleCreateOverlay}>
+      {/* verifyEmailPopUp */}
+      <VerifyEmailPopUp queryError={queryError} setQueryError={setQueryError} />
       <div className={bookModalStyles.toggleCreate}>
         <CloseCircle
           size="20"

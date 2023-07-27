@@ -3,9 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import userStyles from './users.module.css';
 import searchicon from '../../../../assets/icons/searchicon.png';
-import { useGetAllAccountsQuery } from '../../../../app/slices/apiSlices/accountSlices/accountMutationSlice';
-import { useGetSearchedAccountsQuery } from '../../../../app/slices/apiSlices/accountSlices/accountMutationSlice';
-import { useGetAccountsByCategoryQuery } from '../../../../app/slices/apiSlices/accountSlices/accountMutationSlice';
+import { useGetAllAccountsQuery } from '../../../../app/slices/apiSlices/accountSlice';
+
 import { ProfileCircle } from 'iconsax-react';
 import { Link } from 'react-router-dom';
 

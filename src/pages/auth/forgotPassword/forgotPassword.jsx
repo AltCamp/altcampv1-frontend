@@ -1,13 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { useForgotPasswordMutation } from '../../../app/slices/apiSlices/forgotPasswordSlice';
+
+import Toaster from '../../../components/Toaster/Toaster';
+
 export default function ForgotPassword() {
+  const [email, setEmail] = useState();
+
+  const [toastText, setToastText] = useState('');
+  const [toastType, setToastType] = useState('info');
+
   const navigate = useNavigate();
+
+  const [forgotPassword, { data, isLoading, isSuccess, isError, error }] =
+    useForgotPasswordMutation();
 
   const handleSubmitEmail = (e) => {
     e.preventDefault();
-    navigate('/account/login/forgotpassword/enterotp');
+    forgotPassword({ email });
   };
+
+  // if otp is sent save the requestId in localstorage
+  useEffect(() => {
+    if (isSuccess) {
+      localStorage.setItem('requestIdForReset', data?.data.requestId);
+      localStorage.setItem('email', email);
+      setToastText(data?.message);
+      setToastType('success');
+      setTimeout(() => {
+        navigate('/account/login/forgotpassword/enterotp');
+      }, 1000);
+    }
+    if (isError) {
+      setToastText(error?.message);
+      setToastType('error');
+    }
+  }, [data]);
 
   return (
     <div className="mt-[3rem] flex flex-col justify-center gap-[1rem] ">
@@ -34,12 +63,22 @@ export default function ForgotPassword() {
             id="email"
             placeholder="seun@altcamp.com"
             className="input"
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
 
-        <button className="auth-btn">Send Password Reset Code</button>
+        <button className="auth-btn" disabled={isLoading}>
+          Send Password Reset Code
+        </button>
       </form>
+
+      <Toaster
+        show={!!toastText}
+        type={toastType}
+        message={toastText}
+        handleClose={() => setToastText('')}
+      />
     </div>
   );
 }

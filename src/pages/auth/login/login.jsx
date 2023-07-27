@@ -43,6 +43,11 @@ export default function Login() {
         message : data.message
       })
       dispatch(setUser(data?.data));
+      // remove requestIdForEmail, otp, requestIdForReset and email from localStorage
+      localStorage.removeItem('requestIdForEmail');
+      localStorage.removeItem('otp');
+      localStorage.removeItem('requestIdForReset');
+      localStorage.removeItem('email');
       setTimeout(() => navigate('/dashboard'), 2000);
     } else if (isError) {
       setToast({
