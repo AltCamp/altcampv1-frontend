@@ -8,7 +8,7 @@ export const ToasterContextProvider = ({ children }) => {
   const [state, setState] = useState({
     show: false,
     title: '',
-    text: '',
+    message: '',
     type: 'info',
   });
 

@@ -5,14 +5,13 @@ import { useUpdateDetailsMutation } from '../../../../../app/slices/apiSlices/ac
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { setUpdateDetails } from '../../../../../app/slices/generalSlices/userSlice';
-import Toaster from '../../../../../components/Toaster/Toaster';
 import { ToasterContext } from '../../../../../components/Toaster';
 
 export default function Editprofile() {
   const { user } = useSelector((state) => state?.user.user);
 
   const [handleEdit, handleCancel] = useOutletContext();
-  const [setToast] = useContext(ToasterContext);
+  const { setToast } = useContext(ToasterContext);
   const dispatch = useDispatch();
 
   const [updateDetails, { data, isSuccess, isLoading, isError, error }] =
@@ -34,8 +33,10 @@ export default function Editprofile() {
   };
 
   const handleCloseToast = () =>
-    handleStateUpdate({
-      toastConfig: { show: false, title: null, text: null },
+    setToast({
+      show: false,
+      title: null,
+      message: null,
     });
 
   const handleSubmit = (e) => {
@@ -55,7 +56,7 @@ export default function Editprofile() {
     if (isSuccess) {
       setToast({
         show: true,
-        text: data.message,
+        message: data.message,
         type: 'success',
       });
       dispatch(
@@ -73,10 +74,12 @@ export default function Editprofile() {
       setToast({
         show: true,
         title: 'Upload Error!',
-        text: error.data.message,
+        message: error.data.message,
         type: 'error',
       });
-      setTimeout(() => handleCloseToast(), 3000);
+      setTimeout(() => {
+        handleCloseToast();
+      }, 3000);
     }
   }, [isSuccess, isError]);
   return (
@@ -120,13 +123,6 @@ export default function Editprofile() {
             <option value="Data Engineering">Data Engineering</option>
             <option value="Data Analysis">Data Analysis</option>
           </select>
-          <Toaster
-            show={state.toastConfig.show}
-            title={state.toastConfig.title}
-            type={state.toastConfig.type}
-            message={state.toastConfig.text}
-            handleClose={handleCloseToast}
-          />
           <label htmlFor="lCircle">Learning Circle</label>
           <input type="text" name="lCircle" id="lCircle" />
           <input
