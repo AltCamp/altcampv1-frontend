@@ -72,13 +72,13 @@ export default function Account() {
                   <img
                     src={user.profilePicture}
                     alt="display image"
-                    className="h-[inherit] w-[inherit] rounded-full border-4 border-[#adb5bd]"
+                    className="h-[inherit] w-[inherit] rounded-full border-4 border-neutral-500"
                   />
                 ) : (
                   <ProfileCircle size={50} />
                 )}
               </div>
-              <h1 className="text-sm font-medium text-[#6c757d] text-center">
+              <h1 className="text-sm font-medium text-neutral-600 text-center">
                 {user?.firstName} {user?.lastName}
               </h1>
             </div>

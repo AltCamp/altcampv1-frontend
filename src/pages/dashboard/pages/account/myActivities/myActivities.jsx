@@ -9,7 +9,7 @@ export default function MyActivities() {
     <main className="mx-auto w-[85%] pt-8">
       <section className="">
         <h2 className="text-medium mb-2 text-lg">Activities</h2>
-        <p className="text-medium text-sm text-[var(--neutral-clr-drk-grey)]">
+        <p className="text-medium text-sm text-neutral-600">
           manage your posts, question, and other activities here
         </p>
       </section>
