@@ -19,7 +19,7 @@ import ru from 'javascript-time-ago/locale/ru.json';
 import ReactGA from 'react-ga4';
 
 // INITIALIZE GOOGLE ANALYTICS USING REACT-GA4
-ReactGA.initialize(import.meta.env.VITE_GA_ID);
+// ReactGA.initialize(import.meta.env.VITE_GA_ID);
 
 TimeAgo.addDefaultLocale(en);
 TimeAgo.addLocale(ru);
@@ -81,6 +81,11 @@ import {
 } from './pages/dashboard/pages';
 import Updatebio from './pages/dashboard/pages/account/updatebio/updateBio';
 import UserProfile from './pages/dashboard/pages/users/userProfile/userProfile';
+import MyActivities from './pages/dashboard/pages/account/myActivities/myActivities';
+import Post from './pages/dashboard/pages/account/myActivities/post';
+import Answers from './pages/dashboard/pages/account/myActivities/answers';
+import Questions from './pages/dashboard/pages/account/myActivities/questions';
+import Myprofile from './pages/dashboard/pages/account/myprofile/myprofile';
 
 // set up router using createBrowserRouter
 const router = createBrowserRouter([
@@ -226,6 +231,22 @@ const router = createBrowserRouter([
           {
             path: '/dashboard/account/updatebio',
             element: <Updatebio />,
+          },
+          {
+            path: '/dashboard/account/myactivities',
+            element: <MyActivities />,
+          },
+          {
+            path: '/dashboard/account/myactivities/post',
+            element: <Post />,
+          },
+          {
+            path: '/dashboard/account/myactivities/questions',
+            element: <Questions />,
+          },
+          {
+            path: '/dashboard/account/myactivities/answers',
+            element: <Answers />,
           },
         ],
       },

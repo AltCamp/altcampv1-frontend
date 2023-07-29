@@ -36,7 +36,7 @@ export default {
           800: '#343a40',
           900: '#212529',
         },
-
+        
         // secondary colors
         secondary: {
           50: '#cdcffc',
@@ -50,7 +50,7 @@ export default {
           800: '#232552',
           900: '#151631',
         },
-
+        
         // toaster colors
         success: '#55b938',
         info: '#6a6ff5',
