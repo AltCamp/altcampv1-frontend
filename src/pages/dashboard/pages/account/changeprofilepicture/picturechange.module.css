@@ -28,7 +28,7 @@
   flex-direction: column;
   align-items: center;
   padding: 1rem 0;
-  height: 250px;
+  height: 300px;
   border: 1px dashed var(--secondary-clr-lter-purple);
 }
 .profile img {

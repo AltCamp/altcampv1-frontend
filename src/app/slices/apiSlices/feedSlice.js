@@ -2,6 +2,8 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { baseQuery } from '../../constants/api';
 
+import url from '../../url';
+
 export const feedSlice = createApi({
   reducerPath: 'feedApi',
   baseQuery,
@@ -9,21 +11,21 @@ export const feedSlice = createApi({
   endpoints: (builder) => ({
     getAllPosts: builder.query({
       query: ({ page, limit = 15 }) => ({
-        url: `/posts?isPaginated=true&page=${page}&limit=${limit}`,
+        url: url.GET_ALL_POSTS_URL(url, true, page, limit),
         method: 'GET',
       }),
       providesTags: ['Posts'],
     }),
     getPostById: builder.query({
       query: (id) => ({
-        url: `/posts/${id}`,
+        url: url.GET_POST_BY_ID(url, id),
         method: 'GET',
       }),
       providesTags: ['Post'],
     }),
     createPost: builder.mutation({
       query: (body) => ({
-        url: '/posts',
+        url: url.CREATE_POST,
         method: 'POST',
         body,
       }),
@@ -31,21 +33,21 @@ export const feedSlice = createApi({
     }),
     likePost: builder.mutation({
       query: (id) => ({
-        url: `/posts/${id}/upvote`,
+        url: url.LIKE_POST(url, id),
         method: 'PATCH',
       }),
       invalidatesTags: ['Post'],
     }),
     getAllComments: builder.query({
       query: (postId) => ({
-        url: `/comments?postId=${postId}`,
+        url: url.GET_ALL_COMMENTS_URL(url, postId),
         method: 'GET',
       }),
       providesTags: ['Comments'],
     }),
     createComment: builder.mutation({
       query: (body) => ({
-        url: `/comments`,
+        url: url.CREATE_COMMENT_URL,
         method: 'POST',
         body,
       }),
@@ -53,7 +55,7 @@ export const feedSlice = createApi({
     }),
     likeComment: builder.mutation({
       query: (id) => ({
-        url: `/comments/${id}/upvote`,
+        url: url.LIKE_COMMENT_URL(url, id),
         method: 'PATCH',
       }),
       invalidatesTags: ['Comments'],

@@ -10,21 +10,21 @@ export const forgotPasswordSlice = createApi({
     // forgot password flow
     forgotPassword: builder.mutation({
       query: (body) => ({
-        url: '/accounts/forgot-password',
+        url: url.FORGOT_PASSWORD_URL,
         method: 'POST',
         body,
       }),
     }),
     verifyForgotPasswordOtp: builder.mutation({
       query: (body) => ({
-        url: '/accounts/verify-password-reset-otp',
+        url: url.VERIFY_FORGOT_PASSWORD_OTP_URL,
         method: 'POST',
         body,
       }),
     }),
     resetPassword: builder.mutation({
       query: (body) => ({
-        url: '/accounts/reset-password',
+        url: url.RESET_PASSWORD_URL,
         method: 'POST',
         body,
       }),

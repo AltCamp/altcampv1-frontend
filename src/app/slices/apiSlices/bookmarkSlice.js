@@ -1,6 +1,8 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseQuery } from '../../constants/api';
 
+import url from '../../url';
+
 export const bookmarkSlice = createApi({
   reducerPath: 'bookmarkApi',
   baseQuery,
@@ -8,20 +10,20 @@ export const bookmarkSlice = createApi({
   endpoints: (builder) => ({
     getAllBookmarks: builder.query({
       query: ({ page, limit = 10 }) => ({
-        url: `/bookmarks?isPaginated=true&page=${page}&limit=${limit}`,
+        url: url.GET_ALL_BOOKMARKS_URL(url, page, true, limit),
         method: 'GET',
       }),
       providesTags: ['Bookmark'],
     }),
     getBookmarkById: builder.query({
       query: (bookmarkId) => ({
-        url: `/bookmarks/${bookmarkId}`,
+        url: url.GET_BOOKMARK_BY_ID_URL(url, bookmarkId),
         method: 'GET',
       }),
     }),
     createBookmark: builder.mutation({
       query: (body) => ({
-        url: '/bookmarks',
+        url: url.CREATE_BOOKMARK_URL,
         method: 'POST',
         body,
       }),
@@ -29,14 +31,14 @@ export const bookmarkSlice = createApi({
     }),
     updateBookmark: builder.mutation({
       query: ({ bookmarkId, ...body }) => ({
-        url: `/bookmarks/${bookmarkId}`,
+        url: url.UPDATE_BOOKMARK_URL(url, bookmarkId),
         method: 'PATCH',
         body,
       }),
     }),
     deleteBookmark: builder.mutation({
       query: (bookmarkId) => ({
-        url: `/bookmarks/${bookmarkId}`,
+        url: url.DELETE_BOOKMARK_URL(url, bookmarkId),
         method: 'DELETE',
       }),
       invalidatesTags: ['Bookmark'],
