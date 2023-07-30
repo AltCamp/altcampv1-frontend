@@ -2,6 +2,8 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { baseQuery } from '../../constants/api';
 
+import url from '../../url';
+
 export const communitySlice = createApi({
   reducerPath: 'communityApi',
   baseQuery,
@@ -9,21 +11,21 @@ export const communitySlice = createApi({
   endpoints: (builder) => ({
     getAllQuestions: builder.query({
       query: ({ page, limit = 10 }) => ({
-        url: `/questions?isPaginated=true&page=${page}&limit=${limit}`,
+        url: url.GET_ALL_QUESTIONS_URL(url, page, true, limit),
         method: 'GET',
       }),
       providesTags: ['Questions'],
     }),
     getQuestionById: builder.query({
       query: (id) => ({
-        url: `/questions/${id}`,
+        url: url.GET_QUESTION_BY_ID_URL(url, id),
         method: 'GET',
       }),
       providesTags: ['Questions'],
     }),
     createQuestion: builder.mutation({
       query: (body) => ({
-        url: '/questions',
+        url: url.CREATE_QUESTION_URL,
         method: 'POST',
         body,
       }),
@@ -31,7 +33,7 @@ export const communitySlice = createApi({
     }),
     updateQuestion: builder.mutation({
       query: ({ id, body }) => ({
-        url: `/questions/${id}`,
+        url: url.UPDATE_QUESTION_URL(url, id),
         method: 'PATCH',
         body,
       }),
@@ -39,21 +41,21 @@ export const communitySlice = createApi({
     }),
     deleteQuestion: builder.mutation({
       query: (id) => ({
-        url: `/questions/${id}`,
+        url: url.DELETE_QUESTION_URL(url, id),
         method: 'DELETE',
       }),
       invalidatesTags: ['Questions'],
     }),
     upvoteQuestion: builder.mutation({
       query: (id) => ({
-        url: `/questions/${id}/upvote`,
+        url: url.UPVOTE_QUESTION_URL(url, id),
         method: 'PATCH',
       }),
       invalidatesTags: ['Questions'],
     }),
     downvoteQuestion: builder.mutation({
       query: (id) => ({
-        url: `/questions/${id}/downvote`,
+        url: url.DOWNVOTE_QUESTION_URL(url, id),
         method: 'PATCH',
       }),
       invalidatesTags: ['Questions'],
@@ -62,14 +64,14 @@ export const communitySlice = createApi({
     // Answers
     getAnswers: builder.query({
       query: (questionId) => ({
-        url: `/answers?questionId=${questionId}`,
+        url: url.GET_ALL_ANSWERS_URL(url, questionId),
         method: 'GET',
       }),
       providesTags: ['Answers'],
     }),
     createAnswer: builder.mutation({
       query: (body) => ({
-        url: `/answers`,
+        url: url.CREATE_ANSWER_URL,
         method: 'POST',
         body,
       }),
@@ -77,7 +79,7 @@ export const communitySlice = createApi({
     }),
     updateAnswer: builder.mutation({
       query: ({ answerId, body }) => ({
-        url: `/answers/${answerId}`,
+        url: url.UPDATE_ANSWER_URL(url, answerId),
         method: 'PATCH',
         body,
       }),
@@ -85,14 +87,14 @@ export const communitySlice = createApi({
     }),
     upvoteAnswer: builder.mutation({
       query: (answerId) => ({
-        url: `/answers/upvote/${answerId}`,
+        url: url.UPVOTE_ANSWER_URL(url, answerId),
         method: 'PATCH',
       }),
       invalidatesTags: ['Answers'],
     }),
     downvoteAnswer: builder.mutation({
       query: (answerId) => ({
-        url: `/answers/downvote/${answerId}`,
+        url: url.DOWNVOTE_ANSWER_URL(url, answerId),
         method: 'PATCH',
       }),
       invalidatesTags: ['Answers'],

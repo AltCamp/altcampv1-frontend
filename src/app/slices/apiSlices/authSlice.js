@@ -1,19 +1,21 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
+import url from '../../url';
+
 export const authSlice = createApi({
   reducerPath: 'authApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://api.thealtcamp.com' }),
+  baseQuery: fetchBaseQuery({ baseUrl: url.BASE_URL }),
   endpoints: (builder) => ({
     login: builder.mutation({
       query: (body) => ({
-        url: '/auth/login',
+        url: url.LOGIN_URL,
         method: 'POST',
         body,
       }),
     }),
     register: builder.mutation({
       query: (body) => ({
-        url: '/auth/register',
+        url: url.REGISTER_URL,
         method: 'POST',
         body,
       }),
