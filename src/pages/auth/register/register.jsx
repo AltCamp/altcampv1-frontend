@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import eyeIcon from '../../../assets/general/eye.svg';
 import eyeClosedIcon from '../../../assets/general/eyeclosed.svg';
-import Toaster from '../../../components/Toaster/Toaster';
+import { ToasterContext } from '../../../components/Toaster';
 
 import { AiFillCheckSquare } from 'react-icons/ai';
 
@@ -19,6 +19,8 @@ import { useNavigate } from 'react-router-dom';
 export default function Register() {
   const [toggleShowPassword, setToggleShowPassword] = useState(false);
   const [screenWidthState, setScreenWidthState] = useState(false);
+
+  const {setToast} = useContext(ToasterContext)
 
   // user data state
   const [firstName, setFirstName] = useState('');
@@ -91,15 +93,21 @@ export default function Register() {
 
   useEffect(() => {
     if (isSuccess) {
-      setToastText(data.message);
-      setToastType('success');
+      setToast({
+        show : true,
+        type : 'success',
+        message : data?.message
+      })
       dispatch(setUser(data?.data));
       startVerifyEmail();
       setTimeout(() => navigate('/account/verifyemail'), 2000);
     } else if (isError) {
-      setToastText(error?.message);
-      setToastType('error');
-      setTimeout(() => setToastText(''), 3000);
+      setToast({
+        show : true,
+        type : 'error',
+        message : error?.data?.message
+      })
+      setTimeout(() => setToast({show : false}), 3000);
     }
   }, [isSuccess, isError]);
 
@@ -341,14 +349,6 @@ export default function Register() {
             </span>
           </div>
         </div>
-
-        {/* error ui */}
-        <Toaster
-          show={!!toastText}
-          type={toastType}
-          message={toastText}
-          handleClose={() => setToastText('')}
-        />
 
         <button
           type="submit"

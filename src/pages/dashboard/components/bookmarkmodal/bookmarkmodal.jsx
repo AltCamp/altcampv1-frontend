@@ -33,7 +33,7 @@ export default function BookmarkModal({
       setToast({
         show : true,
         type : 'success',
-        message : data.message
+        message : data?.message
       })
       setTimeout(() => handleToggleBookmarkModal(), 1000);
       setTimeout(() => setToast({show : false}), 3000);
@@ -41,7 +41,7 @@ export default function BookmarkModal({
       setToast({
         show : true,
         type : 'error',
-        message : error.data.message
+        message : error?.data?.message
       })
       setTimeout(() => setToast({show : false}), 3000);
     }

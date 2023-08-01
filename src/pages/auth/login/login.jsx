@@ -40,7 +40,7 @@ export default function Login() {
       setToast({
         show : true,
         type : 'success',
-        message : data.message
+        message : data?.message
       })
       dispatch(setUser(data?.data));
       // remove requestIdForEmail, otp, requestIdForReset and email from localStorage
@@ -53,7 +53,7 @@ export default function Login() {
       setToast({
         show : true,
         type : 'error',
-        message : error.data.message
+        message : error?.data?.message
       })
       setTimeout(() => setToast({show : false}), 3000);
     }

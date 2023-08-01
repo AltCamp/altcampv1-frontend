@@ -56,7 +56,7 @@ export default function Editprofile() {
     if (isSuccess) {
       setToast({
         show: true,
-        message: data.message,
+        message: data?.message,
         type: 'success',
       });
       dispatch(
@@ -74,7 +74,7 @@ export default function Editprofile() {
       setToast({
         show: true,
         title: 'Upload Error!',
-        message: error.data.message,
+        message: error?.data?.message,
         type: 'error',
       });
       setTimeout(() => {
