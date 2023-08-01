@@ -128,6 +128,8 @@ export default function Picturechange() {
             >
               Select from device
             </label>
+            {!image &&  <p className='my-5 text-sm'>MAXIMUM SIZE: 500Kb</p>}
+            
             <input
               type="file"
               name="projectImage"

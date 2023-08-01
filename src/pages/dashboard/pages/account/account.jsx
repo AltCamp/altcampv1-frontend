@@ -12,10 +12,12 @@ import {
   ProfileRemove,
   CloseCircle,
   ColorSwatch,
+  AlignHorizontally,
 } from 'iconsax-react';
 
 import { useSelector } from 'react-redux';
 import Myprojects from './myprojects/myprojects';
+import MyActivities from './myActivities/myActivities';
 
 export default function Account() {
   // const [track, setTrack] = useState("Frontend");
@@ -64,15 +66,19 @@ export default function Account() {
       <main className={accountStyles['main']}>
         <section className={accountStyles['sidePanel']}>
           <article>
-            <div className={accountStyles['sidePanel_top']}>
-              <div className={accountStyles['sidePanel_image']}>
+            <div className='w-full flex flex-col justify-center mb-4'>
+              <div className="h-[3.5rem] w-[3.5rem] mx-auto mb-2">
                 {user.profilePicture ? (
-                  <img src={user.profilePicture} alt="display image" />
+                  <img
+                    src={user.profilePicture}
+                    alt="display image"
+                    className="h-[inherit] w-[inherit] rounded-full border-4 border-neutral-500"
+                  />
                 ) : (
                   <ProfileCircle size={50} />
                 )}
               </div>
-              <h1 className={accountStyles['sidePanel_profileName']}>
+              <h1 className="text-sm font-medium text-neutral-600 text-center">
                 {user?.firstName} {user?.lastName}
               </h1>
             </div>
@@ -87,6 +93,19 @@ export default function Account() {
                   <InfoCircle size={20} />
                 </span>
                 <span> My Profile </span>
+                <span>
+                  <ArrowRight2 size={20} />
+                </span>
+              </NavLink>
+              <NavLink
+                to="/dashboard/account/myactivities"
+                className={accountStyles.link}
+                style={({ isActive }) => (isActive ? activeStyle : undefined)}
+              >
+                <span>
+                  <AlignHorizontally size={20} />
+                </span>
+                <span> My Activities</span>
                 <span>
                   <ArrowRight2 size={20} />
                 </span>
@@ -136,7 +155,9 @@ export default function Account() {
         <section className={accountStyles['mainPanel']}>
           {location.pathname === '/dashboard/account/myprojects' ? (
             <Myprojects />
-          ) : (
+          ) : location.pathname === '/dashboard/account/myactivities' ? (
+            <MyActivities />
+          ) :  (
             <Myprofile
               edit={handleEditProfile}
               picUpdate={updateProfilePicture}

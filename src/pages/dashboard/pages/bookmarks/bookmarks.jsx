@@ -27,7 +27,6 @@ export default function Bookmarks() {
     setFilterOpen(!isFilterOpen);
   };
 
-
   useEffect(() => {
     if (bookmarks?.length === 0) {
       setEmptyBookmark(true);

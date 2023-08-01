@@ -4,17 +4,23 @@ import { GalleryEdit, Edit, Link21 } from 'iconsax-react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { ProfileCircle } from 'iconsax-react';
+import VerifyEmailPopUp from '../../../components/verifyEmailPopUp';
 
 export default function Myprofile({ edit, picUpdate, updateBio }) {
   const nav = useNavigate();
+  const [queryError, setQueryError] = useState('');
 
   const { user } = useSelector((state) => state?.user.user);
+
+  const handleVerify = () => {
+    setQueryError('Email is not verified');
+  }
   return (
     <>
       <article>
-        <div className={accountStyles['profileTop']}>
-          <h1 className={accountStyles['profileTop_title']}>Profile</h1>
-          <button className={accountStyles['profileTop_link']}>
+        <div className="mx-auto flex h-[12%] w-[85%] justify-between">
+          <h1 className="font-semibold">Profile</h1>
+          <button className="flex h-10 w-[197px] items-center justify-center self-center rounded bg-secondary-400 text-white ">
             <span>
               <Link21 size={20} />
             </span>{' '}
@@ -22,31 +28,38 @@ export default function Myprofile({ edit, picUpdate, updateBio }) {
           </button>
         </div>
         <div className={accountStyles['mainPanelTop']}>
-          <div className={accountStyles['mainPanelTop_profileImage']}>
+          <div className="relative min-w-[180px] max-w-[180px] flex-[1.5]">
             {user.profilePicture ? (
-              <img src={user.profilePicture} alt="display image" />
+              <img
+                src={user.profilePicture}
+                alt="display image"
+                className="h-[150px] w-[150px] rounded-full border-[10px] border-neutral-500"
+              />
             ) : (
               <ProfileCircle size={165} />
             )}
-            <span>
+            <span className="absolute bottom-0 right-[30px] cursor-pointer rounded-full bg-neutral-100 p-[8px]">
               <GalleryEdit
                 size={25}
-                className={accountStyles['profileImage_icon']}
+                className="text-secondary-500"
                 onClick={picUpdate}
               />
             </span>
           </div>
-          <div className={accountStyles['mainPanelTop_bio']}>
-            <h1>
+          <div className="flex-[3]">
+            <h1 className="mb-[0.5rem] flex flex-wrap content-center">
               Bio{' '}
-              <span onClick={updateBio}>
+              <span
+                onClick={updateBio}
+                className="ml-[1rem] text-secondary-500"
+              >
                 <Edit size={20} />
               </span>
             </h1>
             <p>{user?.bio ? user?.bio : 'Add a bio to your profile.'}</p>
           </div>
         </div>
-        <div className={accountStyles['mainPanelBottom']}>
+        <div className="mx-auto flex w-[85%] items-end">
           <section className={accountStyles['mainPanelBottom_profileDetails']}>
             <div className={accountStyles['profileDetails_fName']}>
               <span>First Name</span>
@@ -74,12 +87,27 @@ export default function Myprofile({ edit, picUpdate, updateBio }) {
             )}
             <div className={accountStyles['profileDetails_email']}>
               <span>Email</span>
-              <span>{user?.email}</span>
+              <span className="flex items-center">
+                {user?.email}
+                <span className="ms-4">
+                  {user.emailIsVerified ? (
+                    <p className="rounded-full border border-teal-200 px-1 text-green-400">
+                      Verified
+                    </p>
+                  ) : (
+                    <p className="cursor-pointer rounded-full border border-orange-500 px-1 text-orange-900"
+                    onClick={handleVerify}>
+                      Not verified
+                    </p>
+                  )}
+                </span>
+              </span>
             </div>
           </section>
           <p className={accountStyles['edit']} onClick={edit}>
             Edit details
           </p>
+          <VerifyEmailPopUp queryError={queryError} setQueryError={setQueryError} />
         </div>
       </article>
     </>
