@@ -18,7 +18,7 @@ const bookmarkcard = ({ bookmark }) => {
       {showDeleteBookmarkModal && (
         <DeleteBookmarkModal
           handleToggleDeleteBookmarkModal={handleToggleDeleteBookmarkModal}
-          bookmarkId={bookmark._id}
+          bookmarkId={bookmark?._id}
         />
       )}
       <div className={bookmarkCardStyles.tableContent}>
@@ -28,13 +28,13 @@ const bookmarkcard = ({ bookmark }) => {
               <Link
                 to={
                   bookmark.postType == 'Post'
-                    ? `/dashboard/post/${bookmark.post._id}`
+                    ? `/dashboard/feed/post/${bookmark.post?._id}`
                     : bookmark.postType == 'Comment'
-                    ? `/dashboard/post/${bookmark.post?.post}`
+                    ? `/dashboard/feed/post/${bookmark.post?.post}`
                     : bookmark.postType == 'Question'
-                    ? `/dashboard/community/question/${bookmark?.post._id}/${bookmark?.post.slug}`
+                    ? `/dashboard/community/question/${bookmark?.post?._id}/${bookmark?.post?.slug}`
                     : bookmark.postType == 'Answer'
-                    ? `/dashboard/community/question/${bookmark?.post.question._id}/${bookmark?.post.question.slug}`
+                    ? `/dashboard/community/question/${bookmark?.post?.question?._id}/${bookmark?.post?.question?.slug}`
                     : ' '
                 }
                 className={bookmarkCardStyles.titleLink}
@@ -46,16 +46,16 @@ const bookmarkcard = ({ bookmark }) => {
               <div className={bookmarkCardStyles.post}>
                 <p>
                   <span className={bookmarkCardStyles.poster}>
-                    {bookmark.post.author.firstName}{' '}
-                    {bookmark.post.author.lastName}
+                    {bookmark?.post?.author?.firstName}{' '}
+                    {bookmark?.post?.author?.lastName}
                   </span>{' '}
                   <span className={bookmarkCardStyles.dated}>
-                    {
+                    {bookmark?.post && (
                       <ReactTimeAgo
-                        date={bookmark.post.createdAt}
+                        date={bookmark?.post?.createdAt}
                         locale="en-US"
                       />
-                    }
+                    )}
                   </span>
                 </p>
               </div>
