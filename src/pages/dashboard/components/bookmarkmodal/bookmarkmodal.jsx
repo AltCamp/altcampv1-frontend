@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState, useEffect, useRef } from 'react';
 
 import bookModalStyles from './bookmarkmodal.module.css';
@@ -6,6 +7,7 @@ import { CloseCircle } from 'iconsax-react';
 
 import { useCreateBookmarkMutation } from '../../../../app/slices/apiSlices/bookmarkSlice';
 
+import Toaster from '../../../../components/Toaster/Toaster';
 import VerifyEmailPopUp from '../verifyEmailPopUp';
 
 export default function BookmarkModal({
@@ -16,6 +18,8 @@ export default function BookmarkModal({
 }) {
   const [title, setTitle] = useState(postTitle ? postTitle : '');
 
+  const [toastText, setToastText] = useState('');
+  const [toastType, setToastType] = useState('info');
   const [queryError, setQueryError] = useState();
 
   const [createBookmark, { data, isLoading, isSuccess, isError, error }] =
@@ -27,7 +31,13 @@ export default function BookmarkModal({
 
   useEffect(() => {
     if (isSuccess) {
-      handleToggleBookmarkModal();
+      setToastText(data?.message);
+      setToastType('success');
+      setTimeout(() => handleToggleBookmarkModal(), 1000);
+    } else if (isError) {
+      setToastText(error?.data?.message);
+      setToastType('error');
+      setTimeout(() => setToastText(''), 3000);
     }
     if (isError) {
       setQueryError(error?.data?.message);
@@ -82,6 +92,13 @@ export default function BookmarkModal({
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               className={bookModalStyles.input}
+            />
+            {/* toast */}
+            <Toaster
+              show={!!toastText}
+              type={toastType}
+              message={toastText}
+              handleClose={() => setToastText('')}
             />
 
             <button

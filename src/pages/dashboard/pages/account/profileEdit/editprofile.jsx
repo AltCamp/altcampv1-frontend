@@ -10,16 +10,13 @@ import Toaster from '../../../../../components/Toaster/Toaster';
 export default function Editprofile() {
   const { user } = useSelector((state) => state?.user.user);
 
-  const [fName, setFName] = useState(user.firstName);
-  const [lName, setLName] = useState(user.lastName);
-  const [track, setTrack] = useState(user.track);
   const [handleEdit, handleCancel] = useOutletContext();
   const dispatch = useDispatch();
 
   const [updateDetails, { data, isSuccess, isLoading, isError, error }] =
     useUpdateDetailsMutation();
 
-  // toast notification state manangement
+  //toast notification state manangement
 
   const [state, setState] = useState({
     toastConfig: {
@@ -28,6 +25,10 @@ export default function Editprofile() {
       text: null,
       type: 'info',
     },
+
+    firstName: user.firstName,
+    lastName: user.lastName,
+    track: user.track,
   });
 
   const handleStateUpdate = (newState) => {
@@ -45,20 +46,22 @@ export default function Editprofile() {
   const handleSubmit = (e) => {
     e.preventDefault();
     updateDetails({
-      firstName: fName,
-      lastName: lName,
-      track: track,
+      firstName: state.firstName,
+      lastName: state.lastName,
+      track: state.track,
     });
-    setFName('');
-    setLName('');
-    setTrack('');
+    handleStateUpdate({
+      firstName: '',
+      lastName: '',
+      track: '',
+    });
   };
   useEffect(() => {
     if (isSuccess) {
       handleStateUpdate({
         toastConfig: {
           show: true,
-          text: data.message,
+          text: data?.message,
           type: 'success',
         },
       });
@@ -77,12 +80,13 @@ export default function Editprofile() {
       handleStateUpdate({
         toastConfig: {
           show: true,
-          title: 'Upload Error!',
-          text: error.data.message,
+          text: error?.data.message,
           type: 'error',
         },
       });
-      setTimeout(() => handleCloseToast(), 3000);
+      setTimeout(() => {
+        handleCloseToast();
+      }, 3000);
     }
   }, [isSuccess, isError]);
   return (
@@ -92,28 +96,28 @@ export default function Editprofile() {
       </div>
       <div className={profilestyles['form']}>
         <form action="" onSubmit={(e) => handleSubmit(e)}>
-          <label htmlFor="fName">First Name</label>
+          <label htmlFor="firstName">First Name</label>
           <input
             type="text"
-            name="fName"
-            id="fName"
-            value={fName}
-            onChange={(e) => setFName(e.target.value)}
+            name="firstName"
+            id="firstName"
+            value={state.firstName}
+            onChange={(e) => handleStateUpdate({ firstName: e.target.value })}
           />
-          <label htmlFor="lName">Last Name</label>
+          <label htmlFor="lastName">Last Name</label>
           <input
             type="text"
-            name="lName"
-            id="lName"
-            value={lName}
-            onChange={(e) => setLName(e.target.value)}
+            name="lastName"
+            id="lastName"
+            value={state.lastName}
+            onChange={(e) => handleStateUpdate({ lastName: e.target.value })}
           />
           <label htmlFor="track">Track</label>
           <select
             name="track"
             id="track"
-            value={track}
-            onChange={(e) => setTrack(e.target.value)}
+            value={state.track}
+            onChange={(e) => handleStateUpdate({ track: e.target.value })}
             className={profilestyles['select']}
           >
             <option value="Frontend Engineering">Frontend Engineering</option>
@@ -126,19 +130,20 @@ export default function Editprofile() {
             <option value="Data Engineering">Data Engineering</option>
             <option value="Data Analysis">Data Analysis</option>
           </select>
-          <Toaster
-            show={state.toastConfig.show}
-            title={state.toastConfig.title}
-            type={state.toastConfig.type}
-            message={state.toastConfig.text}
-            handleClose={handleCloseToast}
-          />
           <label htmlFor="lCircle">Learning Circle</label>
           <input type="text" name="lCircle" id="lCircle" />
           <input
             type="submit"
             value={isLoading ? 'saving changes...' : 'Save Changes'}
             disabled={isLoading}
+          />
+          {/* error ui */}
+          <Toaster
+            show={state.toastConfig.show}
+            title={state.toastConfig.title}
+            type={state.toastConfig.type}
+            message={state.toastConfig.text}
+            handleClose={handleCloseToast}
           />
         </form>
       </div>

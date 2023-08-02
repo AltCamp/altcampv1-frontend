@@ -10,6 +10,7 @@ import { useLoginMutation } from '../../../app/slices/apiSlices/authSlice';
 import { useDispatch } from 'react-redux';
 
 import { setUser } from '../../../app/slices/generalSlices/userSlice';
+
 import Toaster from '../../../components/Toaster/Toaster';
 
 export default function Login() {
@@ -37,7 +38,7 @@ export default function Login() {
 
   useEffect(() => {
     if (isSuccess) {
-      setToastText(data.message);
+      setToastText(data?.message);
       setToastType('success');
       dispatch(setUser(data?.data));
       // remove requestIdForEmail, otp, requestIdForReset and email from localStorage
@@ -47,7 +48,7 @@ export default function Login() {
       localStorage.removeItem('email');
       setTimeout(() => navigate('/dashboard'), 2000);
     } else if (isError) {
-      setToastText(error?.message);
+      setToastText(error?.data?.message);
       setToastType('error');
       setTimeout(() => setToastText(''), 3000);
     }

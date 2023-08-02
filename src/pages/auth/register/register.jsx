@@ -91,13 +91,13 @@ export default function Register() {
 
   useEffect(() => {
     if (isSuccess) {
-      setToastText(data.message);
+      setToastText(data?.message);
       setToastType('success');
       dispatch(setUser(data?.data));
       startVerifyEmail();
       setTimeout(() => navigate('/account/verifyemail'), 2000);
     } else if (isError) {
-      setToastText(error?.message);
+      setToastText(error?.data?.message);
       setToastType('error');
       setTimeout(() => setToastText(''), 3000);
     }
@@ -342,7 +342,7 @@ export default function Register() {
           </div>
         </div>
 
-        {/* error ui */}
+        {/* toast */}
         <Toaster
           show={!!toastText}
           type={toastType}
