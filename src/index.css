@@ -24,11 +24,11 @@
   --primary-clr-pink-2: #fff7f1;
   --primary-clr-pink-3: #fff9f4;
   --primary-clr-pink-4: #fffaf6;
-  
+
   /* Neutral Colors */
   --neutral-clr-black: #000;
   --neutral-clr-white: #fff;
-  
+
   --neutral-clr-deep-grey: #212529;
   --neutral-clr-drkst-grey: #343a40;
   --neutral-clr-drker-grey: #495057;
@@ -51,7 +51,6 @@
   --secondary-clr-lt-purple: #9c9ff8;
   --secondary-clr-lter-purple: #cdcffc;
 }
-
 
 /* secondary-blue-100 #F0F1FE */
 /* spacing between Benefit and items below */

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { ProfileCircle, CloseCircle } from 'iconsax-react';
 
@@ -11,7 +11,7 @@ import Postcard from './postcard/postcard';
 import { useGetAllPostsQuery } from '../../../../app/slices/apiSlices/feedSlice';
 
 import { useSelector } from 'react-redux';
-import Createpost from './createpost/createpost';
+import Createpost from './createpost';
 
 export default function Feed() {
   const [toggleCreatePost, setToggleCreatePost] = useState(false);
@@ -52,7 +52,7 @@ export default function Feed() {
     <div className="mb-16 flex h-full w-full overflow-y-scroll p-8 md:p-4">
       {toggleCreatePost && (
         <div className="fixed left-0 top-0 z-50 flex h-full  w-screen items-center justify-center overflow-hidden bg-black/50 xs:overflow-scroll ">
-          <div className="relative flex h-[80%] w-1/2 flex-col items-center justify-center gap-6 rounded-[4px] bg-white p-8 tab:w-[70%] md:h-auto md:w-[80%] xs:w-[95%] xs:p-4 ">
+          <div className="relative flex h-[80%] w-1/2 flex-col items-center justify-center gap-6 rounded-[4px] bg-white p-8 tab:h-auto tab:w-[70%] md:w-[80%] md:p-3 xs:w-[95%] ">
             <CloseCircle
               size="20"
               className="absolute -right-8 top-0 cursor-pointer text-white xs:-top-8 xs:left-1/2 xs:-translate-x-1/2 "

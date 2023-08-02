@@ -22,6 +22,8 @@ import {
   ColorSwatch,
 } from 'iconsax-react';
 
+import { Button, Tooltip } from 'flowbite-react';
+
 import { useSelector, useDispatch } from 'react-redux';
 
 import { removeUser } from '../../../../app/slices/generalSlices/userSlice';
@@ -170,7 +172,10 @@ export default function LeftSidebar({ toggleSideBar, handleSideBar }) {
                   style={({ isActive }) => (isActive ? activeStyle : undefined)}
                   onClick={toggleWidth && handleSideBar}
                 >
-                  {link.icon}
+                  <Tooltip content={link.text} placement="right" style="light">
+                    {link.icon}
+                  </Tooltip>
+
                   <span className="text-inherit xl:hidden tab:flex">
                     {link.text}
                   </span>
