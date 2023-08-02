@@ -259,6 +259,7 @@
   }
   .full_panel {
     animation: none;
+    z-index: 0;
   }
   .mainPanelTop {
     display: block;

@@ -117,7 +117,7 @@ export default function Bookmarks() {
           {/* Card */}
           <div className={bookmarksStyles.bookmarkMain}>
             {bookmarks.map((bookmark) => (
-              <BookmarkCard bookmark={bookmark} key={bookmark._id} />
+              <BookmarkCard bookmark={bookmark} key={bookmark?._id} />
             ))}
           </div>
 

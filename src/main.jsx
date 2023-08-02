@@ -99,7 +99,7 @@ const router = createBrowserRouter([
     element: <AuthLayout />,
     loader: () => {
       if (localStorage.getItem('user')) {
-        return redirect('/dashboard');
+        return redirect('/dashboard/feed');
       }
       return null;
     },
@@ -173,11 +173,11 @@ const router = createBrowserRouter([
     },
     children: [
       {
-        index: true,
+        path: '/dashboard/feed',
         element: <Feed />,
       },
       {
-        path: '/dashboard/post/:postId',
+        path: '/dashboard/feed/post/:postId',
         element: <Postpage />,
       },
       {

@@ -1,6 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  content: [
+    './index.html',
+    './src/**/*.{js,ts,jsx,tsx}',
+    'node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}',
+  ],
   theme: {
     extend: {
       fontFamily: {
@@ -36,7 +40,7 @@ export default {
           800: '#343a40',
           900: '#212529',
         },
-        
+
         // secondary colors
         secondary: {
           50: '#cdcffc',
@@ -50,17 +54,35 @@ export default {
           800: '#232552',
           900: '#151631',
         },
-        
+
         // toaster colors
         success: '#55b938',
         info: '#6a6ff5',
         error: '#d10909',
         warning: '#f38920',
       },
+      keyframes: {
+        showSearch: {
+          '0%': {
+            opacity: 0,
+            transform: 'translateX(-50%) scale(0.5)',
+          },
+          '100%': {
+            opacity: 1,
+            transform: 'translateX(-50%) scale(1)',
+          },
+        },
+      },
+      animation: {
+        showSearch: 'showSearch 0.3s ease-in-out forwards',
+      },
     },
     screens: {
       '2xl': { max: '1535px' },
       // => @media (max-width: 1535px) { ... }
+
+      dashboard: { max: '1400px' },
+      // => @media (max-width: 1400px) { ... }
 
       xl: { max: '1279px' },
       // => @media (max-width: 1279px) { ... }
@@ -84,5 +106,5 @@ export default {
       // => @media (max-width: 300px) { ... }
     },
   },
-  plugins: [],
+  plugins: [require('flowbite/plugin')],
 };

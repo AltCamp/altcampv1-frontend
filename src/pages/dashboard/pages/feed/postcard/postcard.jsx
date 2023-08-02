@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import postCardStyles from './postcard.module.css';
 
@@ -32,6 +32,8 @@ export default function Postcard({ post }) {
   const [queryError, setQueryError] = useState();
 
   const { user } = useSelector((state) => state?.user?.user);
+
+  const navigate = useNavigate();
 
   const [likePost, { data, isLoading, isSuccess, isError, error }] =
     useLikePostMutation();
@@ -74,7 +76,7 @@ export default function Postcard({ post }) {
       <VerifyEmailPopUp queryError={queryError} setQueryError={setQueryError} />
 
       <Link
-        to={`/dashboard/post/${latestPost?._id}`}
+        to={`/dashboard/feed/post/${latestPost?._id}`}
         className={postCardStyles.container}
       >
         <div className={postCardStyles.content}>
@@ -129,7 +131,7 @@ export default function Postcard({ post }) {
 
           <div className={postCardStyles.icons}>
             <div className={postCardStyles.left}>
-              <Link to={`/dashboard`} className={postCardStyles.like}>
+              <Link to={`/dashboard/feed`} className={postCardStyles.like}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
@@ -183,7 +185,7 @@ export default function Postcard({ post }) {
               </div>
             </div>
             <div className={postCardStyles.right}>
-              <Link to={`/dashboard`} className={postCardStyles.bookmark}>
+              <Link to={`/dashboard/feed`} className={postCardStyles.bookmark}>
                 <BsBookmarkPlus
                   size={20}
                   color="#555555"
