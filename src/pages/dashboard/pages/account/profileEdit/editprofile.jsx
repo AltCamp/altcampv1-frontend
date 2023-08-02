@@ -1,25 +1,31 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import profilestyles from './editprofile.module.css';
 import { useOutletContext } from 'react-router-dom';
 import { useUpdateDetailsMutation } from '../../../../../app/slices/apiSlices/accountSlice';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { setUpdateDetails } from '../../../../../app/slices/generalSlices/userSlice';
-import { ToasterContext } from '../../../../../components/Toaster';
+import Toaster from '../../../../../components/Toaster/Toaster';
 
 export default function Editprofile() {
   const { user } = useSelector((state) => state?.user.user);
 
   const [handleEdit, handleCancel] = useOutletContext();
-  const { setToast } = useContext(ToasterContext);
   const dispatch = useDispatch();
 
   const [updateDetails, { data, isSuccess, isLoading, isError, error }] =
     useUpdateDetailsMutation();
 
-  //state manangement
+  //toast notification state manangement
 
   const [state, setState] = useState({
+    toastConfig: {
+      show: false,
+      title: null,
+      text: null,
+      type: 'info',
+    },
+
     firstName: user.firstName,
     lastName: user.lastName,
     track: user.track,
@@ -33,10 +39,8 @@ export default function Editprofile() {
   };
 
   const handleCloseToast = () =>
-    setToast({
-      show: false,
-      title: null,
-      message: null,
+    handleStateUpdate({
+      toastConfig: { show: false, title: null, text: null },
     });
 
   const handleSubmit = (e) => {
@@ -54,10 +58,12 @@ export default function Editprofile() {
   };
   useEffect(() => {
     if (isSuccess) {
-      setToast({
-        show: true,
-        message: data?.message,
-        type: 'success',
+      handleStateUpdate({
+        toastConfig: {
+          show: true,
+          text: data?.message,
+          type: 'success',
+        },
       });
       dispatch(
         setUpdateDetails({
@@ -71,11 +77,12 @@ export default function Editprofile() {
         handleCancel();
       }, 3000);
     } else if (isError) {
-      setToast({
-        show: true,
-        title: 'Upload Error!',
-        message: error?.data?.message,
-        type: 'error',
+      handleStateUpdate({
+        toastConfig: {
+          show: true,
+          text: error?.data.message,
+          type: 'error',
+        },
       });
       setTimeout(() => {
         handleCloseToast();
@@ -129,6 +136,14 @@ export default function Editprofile() {
             type="submit"
             value={isLoading ? 'saving changes...' : 'Save Changes'}
             disabled={isLoading}
+          />
+          {/* error ui */}
+          <Toaster
+            show={state.toastConfig.show}
+            title={state.toastConfig.title}
+            type={state.toastConfig.type}
+            message={state.toastConfig.text}
+            handleClose={handleCloseToast}
           />
         </form>
       </div>

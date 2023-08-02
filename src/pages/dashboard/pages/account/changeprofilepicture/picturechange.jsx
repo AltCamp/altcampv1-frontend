@@ -75,7 +75,7 @@ export default function Picturechange() {
       handleStateUpdate({
         toastConfig: {
           show: true,
-          text: data.message,
+          text: data?.message,
           type: 'success',
         },
       });
@@ -83,13 +83,13 @@ export default function Picturechange() {
       setTimeout(() => {
         handleCloseToast();
         handleCancel();
-      }, 3000);
+      }, 2000);
     } else if (isError) {
       handleStateUpdate({
         toastConfig: {
           show: true,
           title: 'Upload Error!',
-          text: error?.data.message,
+          text: error?.data?.message,
           type: 'error',
         },
       });
@@ -128,8 +128,8 @@ export default function Picturechange() {
             >
               Select from device
             </label>
-            {!image &&  <p className='my-5 text-sm'>MAXIMUM SIZE: 500Kb</p>}
-            
+            {!image && <p className="my-5 text-sm">MAXIMUM SIZE: 500Kb</p>}
+
             <input
               type="file"
               name="projectImage"

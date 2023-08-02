@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 import eyeIcon from '../../../assets/general/eye.svg';
@@ -11,14 +11,15 @@ import { useDispatch } from 'react-redux';
 
 import { setUser } from '../../../app/slices/generalSlices/userSlice';
 
-import { ToasterContext } from '../../../components/Toaster';
+import Toaster from '../../../components/Toaster/Toaster';
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
 
   const parentPath = useLocation().pathname.split('/')[1];
-  
-  const {setToast} = useContext(ToasterContext)
+
+  const [toastText, setToastText] = useState('');
+  const [toastType, setToastType] = useState('info');
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -37,11 +38,8 @@ export default function Login() {
 
   useEffect(() => {
     if (isSuccess) {
-      setToast({
-        show : true,
-        type : 'success',
-        message : data?.message
-      })
+      setToastText(data?.message);
+      setToastType('success');
       dispatch(setUser(data?.data));
       // remove requestIdForEmail, otp, requestIdForReset and email from localStorage
       localStorage.removeItem('requestIdForEmail');
@@ -50,12 +48,9 @@ export default function Login() {
       localStorage.removeItem('email');
       setTimeout(() => navigate('/dashboard'), 2000);
     } else if (isError) {
-      setToast({
-        show : true,
-        type : 'error',
-        message : error?.data?.message
-      })
-      setTimeout(() => setToast({show : false}), 3000);
+      setToastText(error?.data?.message);
+      setToastType('error');
+      setTimeout(() => setToastText(''), 3000);
     }
   }, [isSuccess, isError]);
 
@@ -97,6 +92,14 @@ export default function Login() {
             />
           </div>
         </div>
+
+        {/* error ui */}
+        <Toaster
+          show={!!toastText}
+          type={toastType}
+          message={toastText}
+          handleClose={() => setToastText('')}
+        />
 
         <button className="auth-btn" type="submit" disabled={isLoading}>
           {isLoading ? 'Unlocking the door...' : 'Login'}

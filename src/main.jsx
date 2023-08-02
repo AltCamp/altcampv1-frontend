@@ -13,8 +13,6 @@ import TimeAgo from 'javascript-time-ago';
 
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
-import { ToasterContextProvider } from './components/Toaster';
-
 import en from 'javascript-time-ago/locale/en.json';
 import ru from 'javascript-time-ago/locale/ru.json';
 
@@ -293,9 +291,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <HelmetProvider>
       <Provider store={store}>
-        <ToasterContextProvider>
-          <RouterProvider router={router} />
-        </ToasterContextProvider>
+        <RouterProvider router={router} />
       </Provider>
     </HelmetProvider>
   </React.StrictMode>

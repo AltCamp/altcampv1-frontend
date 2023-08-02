@@ -40,24 +40,16 @@ export default function AskQuestionPage() {
 
   useEffect(() => {
     if (isSuccess) {
-      navigate('/dashboard/community', { state: { created: true } });
-    }
-    if (isError) {
-      setQueryError(error.data.message);
-    }
-  }, [isSuccess, isError]);
-
-  useEffect(() => {
-    if (isSuccess) {
       // console.log('data:', data)
       setToastText(data.message);
       setToastType('success');
+      setTimeout(() => navigate('/dashboard/community'), 1000);
     } else if (isError) {
       setToastText(error.data.message);
       setToastType('error');
       setTimeout(() => setToastText(''), 3000);
     }
-  }, [data, isLoading, isSuccess, isError, error]);
+  }, [isSuccess, isError]);
 
   return (
     <>
@@ -168,21 +160,13 @@ export default function AskQuestionPage() {
             </div>
           </div>
 
-          {/* error message ui */}
+          {/* toast */}
           <Toaster
             show={!!toastText}
             type={toastType}
             message={toastText}
             handleClose={() => setToastText('')}
           />
-          {/* succesful message */}
-          {isSuccess && (
-            <div className={askQuestionPageStyles.successBody}>
-              <p className={askQuestionPageStyles.successText}>
-                Question created successfully
-              </p>
-            </div>
-          )}
 
           <div className={askQuestionPageStyles.submit}>
             <button
