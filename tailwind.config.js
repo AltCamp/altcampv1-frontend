@@ -89,10 +89,19 @@ export default {
             transform: 'scale(1)',
           },
         },
+        highlights: {
+          '0%': {
+            backgroundColor: 'var(--neutral-clr-grey-2)',
+          },
+          '100%': {
+            backgroundColor: 'var(--neutral-clr-white)',
+          },
+        },
       },
       animation: {
         showSearch: 'showSearch 0.3s ease-in-out forwards',
         like: 'like 1s',
+        highlights: 'highlights 10s',
       },
     },
     screens: {

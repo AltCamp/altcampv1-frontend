@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 
 import { Link, useNavigate, useLocation, useParams } from 'react-router-dom';
 
+import { BsFillBookmarkFill, BsBookmarkPlus } from 'react-icons/bs';
+
 import {
   ArrowCircleLeft,
   ArchiveAdd,
@@ -21,7 +23,7 @@ import {
 
 import { useSelector } from 'react-redux';
 
-import Postcomment from './postcomment/postcomment';
+import Postcomment from './postcomment';
 
 import BookmarkModal from '../../../components/bookmarkmodal/bookmarkmodal';
 
@@ -282,12 +284,20 @@ export default function Postpage() {
                   </div>
                   <div className="">
                     <div className="">
-                      <ArchiveAdd
-                        size={20}
-                        color="#555555"
-                        className="cursor-pointer"
-                        onClick={handleToggleBookmarkModal}
-                      />
+                      {!post.isBookmarked ? (
+                        <BsBookmarkPlus
+                          size={20}
+                          color="#555555"
+                          className="cursor-pointer"
+                          onClick={handleToggleBookmarkModal}
+                        />
+                      ) : (
+                        <BsFillBookmarkFill
+                          size={20}
+                          color="#555555"
+                          className="cursor-pointer"
+                        />
+                      )}
                     </div>
                   </div>
                 </div>
@@ -299,7 +309,7 @@ export default function Postpage() {
             <div className="mb-20">
               <div className="">All Comments</div>
 
-              <div className="flex items-center gap-[0.3rem] font-medium text-neutral-600 ">
+              <div className="flex flex-col items-center gap-[0.3rem] font-medium text-neutral-600 ">
                 {commentList?.map((comment) => (
                   <Postcomment key={comment._id} comment={comment} />
                 ))}
