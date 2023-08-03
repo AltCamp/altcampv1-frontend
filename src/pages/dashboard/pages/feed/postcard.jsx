@@ -16,7 +16,7 @@ import BookmarkModal from '../../components/bookmarkmodal/bookmarkmodal';
 
 import VerifyEmailPopUp from '../../components/verifyEmailPopUp';
 
-export default function Postcard({ post, postSuccess }) {
+export default function Postcard({ post }) {
   const [latestPost, setLatestPost] = useState(post);
   const [likeAnimation, setLikeAnimation] = useState(false);
   const [toggleBookmarkModal, setToggleBookmarkModal] = useState();
@@ -47,12 +47,6 @@ export default function Postcard({ post, postSuccess }) {
       setQueryError(error?.data.message);
     }
   }, [isSuccess, isError]);
-
-  useEffect(() => {
-    if (post) {
-      setLatestPost(post);
-    }
-  }, [postSuccess, post, isSuccess]);
 
   const handleToggleBookmarkModal = () => {
     setToggleBookmarkModal(!toggleBookmarkModal);

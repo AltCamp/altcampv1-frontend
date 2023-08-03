@@ -31,10 +31,10 @@ export default function Feed() {
   const [allPosts, setAllPosts] = useState();
 
   useEffect(() => {
-    if (data && isSuccess) {
+    if (data) {
       setAllPosts(posts);
     }
-  }, [data, isSuccess]);
+  }, [data]);
 
   const handleToggleCreatePost = () => {
     setToggleCreatePost(!toggleCreatePost);
@@ -129,9 +129,7 @@ export default function Feed() {
           )}
           {posts &&
             !isLoading &&
-            allPosts?.map((post) => (
-              <Postcard key={post._id} post={post} postSuccess={isSuccess} />
-            ))}
+            allPosts?.map((post) => <Postcard key={post._id} post={post} />)}
         </div>
 
         {posts && allPosts && (
