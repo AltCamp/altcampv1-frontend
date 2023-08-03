@@ -39,7 +39,7 @@ export default function Layout() {
   return (
     <div className="bg-red flex h-full w-full flex-col items-center ">
       <Topbar toggleSideBar={toggleSideBar} handleSideBar={handleSideBar} />
-      <div className="fixed top-0 mx-auto flex h-full w-[80%] min-w-[1200px] max-w-full overflow-y-scroll px-2 pt-[5rem] dashboard:w-full dashboard:min-w-full dashboard:px-0">
+      <div className="fixed top-0 mx-auto flex h-full w-[80%] min-w-[1200px] max-w-full overflow-y-scroll px-2 pt-[5rem] dashboard:w-full dashboard:min-w-full dashboard:px-0 xl:w-[90%] xl:min-w-[90%] tab:w-full tab:min-w-full ">
         <LeftSidebar
           toggleSideBar={toggleSideBar}
           handleSideBar={handleSideBar}

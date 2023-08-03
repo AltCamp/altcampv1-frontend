@@ -76,7 +76,6 @@ import {
   EditQuestionPage,
 
   // subpages of feed
-  Createpost,
   Postpage,
 } from './pages/dashboard/pages';
 import Updatebio from './pages/dashboard/pages/account/updatebio/updateBio';

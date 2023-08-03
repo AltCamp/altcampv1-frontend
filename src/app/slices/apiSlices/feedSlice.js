@@ -36,7 +36,7 @@ export const feedSlice = createApi({
         url: url.LIKE_POST(url, id),
         method: 'PATCH',
       }),
-      invalidatesTags: ['Post'],
+      invalidatesTags: ['Posts', 'Post'],
     }),
     getAllComments: builder.query({
       query: (postId) => ({

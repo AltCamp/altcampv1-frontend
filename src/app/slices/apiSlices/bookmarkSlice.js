@@ -3,6 +3,8 @@ import { baseQuery } from '../../constants/api';
 
 import url from '../../url';
 
+import { feedSlice } from './feedSlice';
+
 export const bookmarkSlice = createApi({
   reducerPath: 'bookmarkApi',
   baseQuery,
@@ -28,6 +30,10 @@ export const bookmarkSlice = createApi({
         body,
       }),
       invalidatesTags: ['Bookmark'],
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        await queryFulfilled;
+        dispatch(feedSlice.util.invalidateTags(['Posts', 'Post']));
+      },
     }),
     updateBookmark: builder.mutation({
       query: ({ bookmarkId, ...body }) => ({
@@ -42,6 +48,10 @@ export const bookmarkSlice = createApi({
         method: 'DELETE',
       }),
       invalidatesTags: ['Bookmark'],
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        await queryFulfilled;
+        dispatch(feedSlice.util.invalidateTags(['Posts', 'Post']));
+      },
     }),
   }),
 });

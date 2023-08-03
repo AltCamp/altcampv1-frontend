@@ -2,29 +2,21 @@ import { useState, useEffect } from 'react';
 
 import { Link, useNavigate } from 'react-router-dom';
 
-import postCardStyles from './postcard.module.css';
-
-import {
-  Heart,
-  ArchiveAdd,
-  Edit,
-  ProfileCircle,
-  MessageText1,
-} from 'iconsax-react';
+import { ProfileCircle, MessageText1 } from 'iconsax-react';
 
 import { BsFillBookmarkFill, BsBookmarkPlus } from 'react-icons/bs';
 
 import ReactTimeAgo from 'react-time-ago';
 
-import { useLikePostMutation } from '../../../../../app/slices/apiSlices/feedSlice';
+import { useLikePostMutation } from '../../../../app/slices/apiSlices/feedSlice';
 
 import { useSelector } from 'react-redux';
 
-import BookmarkModal from '../../../components/bookmarkmodal/bookmarkmodal';
+import BookmarkModal from '../../components/bookmarkmodal/bookmarkmodal';
 
-import VerifyEmailPopUp from './../../../components/verifyEmailPopUp';
+import VerifyEmailPopUp from '../../components/verifyEmailPopUp';
 
-export default function Postcard({ post }) {
+export default function Postcard({ post, postSuccess }) {
   const [latestPost, setLatestPost] = useState(post);
   const [likeAnimation, setLikeAnimation] = useState(false);
   const [toggleBookmarkModal, setToggleBookmarkModal] = useState();
@@ -44,7 +36,7 @@ export default function Postcard({ post }) {
 
   useEffect(() => {
     if (isSuccess) {
-      setLatestPost(data?.data);
+      // setLatestPost(data?.data);
       setLikeAnimation(true);
 
       setTimeout(() => {
@@ -55,6 +47,12 @@ export default function Postcard({ post }) {
       setQueryError(error?.data.message);
     }
   }, [isSuccess, isError]);
+
+  useEffect(() => {
+    if (post) {
+      setLatestPost(post);
+    }
+  }, [postSuccess, post, isSuccess]);
 
   const handleToggleBookmarkModal = () => {
     setToggleBookmarkModal(!toggleBookmarkModal);
@@ -77,51 +75,51 @@ export default function Postcard({ post }) {
 
       <Link
         to={`/dashboard/feed/post/${latestPost?._id}`}
-        className={postCardStyles.container}
+        className="decoration-none p-6 shadow-[0px_3.31218px_19.8731px_rgba(86,_86,_86,_0.15)] "
       >
-        <div className={postCardStyles.content}>
-          <div className={postCardStyles.header}>
+        <div className="flex flex-col gap-4">
+          <div className="flex items-start gap-2">
             <Link
               to={
                 user?._id === latestPost?.author?._id
                   ? `/dashboard/account`
                   : `/dashboard/users/${latestPost?.author?._id}`
               }
-              className={postCardStyles.avatar}
+              className="h-10 w-10 overflow-hidden rounded-full"
             >
               {latestPost?.author?.profilePicture ? (
                 <img
                   src={latestPost?.author?.profilePicture}
                   alt=""
-                  className={postCardStyles.img}
+                  className="h-full w-full object-cover"
                 />
               ) : (
                 <ProfileCircle
                   size={45}
                   color="#555555"
-                  className={postCardStyles.iconAvatar}
+                  className="h-full w-full object-cover"
                 />
               )}
             </Link>
-            <div className={postCardStyles.info}>
+            <div className="flex flex-col">
               <Link
                 to={
                   user?._id === latestPost?.author?._id
                     ? `/dashboard/account`
                     : `/dashboard/users/${latestPost?.author?._id}`
                 }
-                className={postCardStyles.name}
+                className="font-semibold text-neutral-900"
               >
                 {latestPost?.author?.firstName} {latestPost?.author?.lastName}
               </Link>
-              <div className={postCardStyles.timePosted}>
+              <div className="text-[0.8rem] text-neutral-600">
                 {<ReactTimeAgo date={latestPost.createdAt} locale="en-US" />}
               </div>
             </div>
           </div>
 
-          <div className={postCardStyles.body}>
-            <div className={postCardStyles.text}>
+          <div className="flex flex-col gap-3.5 overflow-hidden font-medium text-neutral-900">
+            <div className="">
               <p>{latestPost.content}</p>
             </div>
             {/* <div className={postCardStyles.media}>
@@ -129,9 +127,12 @@ export default function Postcard({ post }) {
           </div> */}
           </div>
 
-          <div className={postCardStyles.icons}>
-            <div className={postCardStyles.left}>
-              <Link to={`/dashboard/feed`} className={postCardStyles.like}>
+          <div className="flex items-center justify-between">
+            <div className="flex gap-[0.8rem] ">
+              <Link
+                to={`/dashboard/feed`}
+                className="flex items-center gap-[0.3rem] font-medium text-neutral-600 "
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
@@ -143,8 +144,8 @@ export default function Postcard({ post }) {
                       : '#FFFFFF'
                   }
                   onClick={handleLikePost}
-                  className={`${postCardStyles.icon} ${
-                    likeAnimation && postCardStyles.likeAnimation
+                  className={`cursor-pointer ${
+                    likeAnimation && 'animate-like'
                   }`}
                 >
                   <path
@@ -160,9 +161,7 @@ export default function Postcard({ post }) {
                   ></path>
                 </svg>
                 <div
-                  className={`${postCardStyles.count} ${
-                    likeAnimation && postCardStyles.likeAnimation
-                  }`}
+                  className={`${likeAnimation && 'animate-like'}`}
                   style={{
                     color: latestPost?.upvotedBy?.includes(user?._id)
                       ? 'red'
@@ -172,26 +171,32 @@ export default function Postcard({ post }) {
                   {latestPost.upvotedBy?.length}
                 </div>
               </Link>
-              <div className={postCardStyles.divider}></div>
-              <div className={postCardStyles.comment}>
+              <div className="w-[1px] bg-neutral-600 "></div>
+              <div className="flex items-center gap-[0.3rem] font-medium text-neutral-600 ">
                 <MessageText1
                   size={20}
                   color="#555555"
-                  className={postCardStyles.icon}
+                  className="cursor-pointer"
                 />
-                <div className={postCardStyles.count}>
-                  {latestPost.comments?.length}
-                </div>
+                <div className="">{latestPost.comments?.length}</div>
               </div>
             </div>
-            <div className={postCardStyles.right}>
-              <Link to={`/dashboard/feed`} className={postCardStyles.bookmark}>
-                <BsBookmarkPlus
-                  size={20}
-                  color="#555555"
-                  className={postCardStyles.icon}
-                  onClick={handleToggleBookmarkModal}
-                />
+            <div className="">
+              <Link to={`/dashboard/feed`} className="w-fit">
+                {!latestPost.isBookmarked ? (
+                  <BsBookmarkPlus
+                    size={20}
+                    color="#555555"
+                    className="cursor-pointer"
+                    onClick={handleToggleBookmarkModal}
+                  />
+                ) : (
+                  <BsFillBookmarkFill
+                    size={20}
+                    color="#555555"
+                    className="cursor-pointer"
+                  />
+                )}
               </Link>
             </div>
           </div>

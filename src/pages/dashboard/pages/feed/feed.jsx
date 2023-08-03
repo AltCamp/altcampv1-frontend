@@ -6,7 +6,7 @@ import { ProfileCircle, CloseCircle } from 'iconsax-react';
 
 import { RiImageLine } from 'react-icons/ri';
 
-import Postcard from './postcard/postcard';
+import Postcard from './postcard';
 
 import { useGetAllPostsQuery } from '../../../../app/slices/apiSlices/feedSlice';
 
@@ -31,10 +31,10 @@ export default function Feed() {
   const [allPosts, setAllPosts] = useState();
 
   useEffect(() => {
-    if (data) {
+    if (data && isSuccess) {
       setAllPosts(posts);
     }
-  }, [data]);
+  }, [data, isSuccess]);
 
   const handleToggleCreatePost = () => {
     setToggleCreatePost(!toggleCreatePost);
@@ -49,7 +49,7 @@ export default function Feed() {
   }, [toggleCreatePost]);
 
   return (
-    <div className="mb-16 flex h-full w-full overflow-y-scroll p-8 md:p-4">
+    <div className="mx-auto mb-16 flex h-full w-full overflow-y-scroll p-8 tab:w-[75%] md:p-4 sm:w-full ">
       {toggleCreatePost && (
         <div className="fixed left-0 top-0 z-50 flex h-full  w-screen items-center justify-center overflow-hidden bg-black/50 xs:overflow-scroll ">
           <div className="relative flex h-[80%] w-1/2 flex-col items-center justify-center gap-6 rounded-[4px] bg-white p-8 tab:h-auto tab:w-[70%] md:w-[80%] md:p-3 xs:w-[95%] ">
@@ -74,7 +74,7 @@ export default function Feed() {
           <div className="flex h-full w-[4rem] justify-center">
             <Link
               to={`/dashboard/account`}
-              className="h-12 w-12 overflow-hidden rounded-full "
+              className="h-10 w-10 overflow-hidden rounded-full "
             >
               {user?.profilePicture ? (
                 <img
@@ -129,7 +129,9 @@ export default function Feed() {
           )}
           {posts &&
             !isLoading &&
-            allPosts?.map((post) => <Postcard key={post._id} post={post} />)}
+            allPosts?.map((post) => (
+              <Postcard key={post._id} post={post} postSuccess={isSuccess} />
+            ))}
         </div>
 
         {posts && allPosts && (

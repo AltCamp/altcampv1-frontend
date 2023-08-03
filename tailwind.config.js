@@ -72,9 +72,27 @@ export default {
             transform: 'translateX(-50%) scale(1)',
           },
         },
+        like: {
+          '0%': {
+            transform: 'scale(1)',
+          },
+          '25%': {
+            transform: 'scale(1.5)',
+          },
+          '50%': {
+            transform: 'scale(1.2)',
+          },
+          '75%': {
+            transform: 'scale(1.4)',
+          },
+          '100%': {
+            transform: 'scale(1)',
+          },
+        },
       },
       animation: {
         showSearch: 'showSearch 0.3s ease-in-out forwards',
+        like: 'like 1s',
       },
     },
     screens: {

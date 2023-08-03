@@ -2,7 +2,7 @@
 
 const url = {
   // API URL
-  BASE_URL: 'https://api.thealtcamp.com',
+  BASE_URL: import.meta.env.VITE_BASE_URL,
 
   // AUTH URLS
   LOGIN_URL: '/auth/login',
