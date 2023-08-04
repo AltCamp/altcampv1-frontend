@@ -44,7 +44,7 @@ export default function Layout() {
           toggleSideBar={toggleSideBar}
           handleSideBar={handleSideBar}
         />
-        <div className="h-auto w-full overflow-y-scroll bg-[#F8F9FA] ">
+        <div className="z-0 h-auto w-full overflow-y-scroll bg-[#F8F9FA] ">
           <Outlet />
         </div>
         {currentSection && <RightSidebar />}

@@ -28,13 +28,13 @@ export default function Topbar({ toggleSideBar, handleSideBar }) {
 
   return (
     <div
-      className=" z-0 flex h-fit w-full items-center justify-center bg-white py-[10px] font-inter
+      className=" z-30 flex h-fit w-full items-center justify-center bg-white py-[10px] font-inter
     shadow-[0px_2px_12px_0px_#56565626] tab:px-2
 "
     >
       <div className="flex h-full w-[80%] min-w-[1200px] max-w-full items-center justify-between overflow-y-scroll px-2 dashboard:w-full dashboard:min-w-full dashboard:px-4">
         <div className="hidden cursor-pointer tab:flex" onClick={handleSideBar}>
-          <HambergerMenu size="32" className="text-inherit" />
+          <HambergerMenu size="32" className="cursor-pointer text-inherit" />
         </div>
         <Link to="/dashboard/feed" className="tab:hidden">
           <img src={darkLogo} alt="" className="h-[3.5rem]" />

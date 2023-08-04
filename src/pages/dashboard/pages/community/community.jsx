@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import Questioncard from './questioncard/questioncard';
+import Questioncard from './questioncard';
 
 import {
   Link,
