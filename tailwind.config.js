@@ -97,11 +97,20 @@ export default {
             backgroundColor: 'var(--neutral-clr-white)',
           },
         },
+        fadeIn: {
+          '0%': {
+            opacity: 0,
+          },
+          '100%': {
+            opacity: 1,
+          },
+        },
       },
       animation: {
         showSearch: 'showSearch 0.3s ease-in-out forwards',
         like: 'like 1s',
         highlights: 'highlights 10s',
+        fadeIn: 'fadeIn 0.5s ease-in-out',
       },
     },
     screens: {

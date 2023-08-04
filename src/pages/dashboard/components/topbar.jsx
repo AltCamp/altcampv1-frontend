@@ -28,7 +28,7 @@ export default function Topbar({ toggleSideBar, handleSideBar }) {
 
   return (
     <div
-      className=" z-10 flex h-fit w-full items-center justify-center bg-white py-[10px] font-inter
+      className=" z-0 flex h-fit w-full items-center justify-center bg-white py-[10px] font-inter
     shadow-[0px_2px_12px_0px_#56565626] tab:px-2
 "
     >

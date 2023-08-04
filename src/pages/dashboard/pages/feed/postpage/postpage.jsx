@@ -29,10 +29,14 @@ import BookmarkModal from '../../../components/bookmarkmodal/bookmarkmodal';
 
 import VerifyEmailPopUp from '../../../components/verifyEmailPopUp';
 
+import Toast from '../../../components/toast';
+
 export default function Postpage() {
   const [likeAnimation, setLikeAnimation] = useState(false);
   const [content, setContent] = useState('');
   const [toggleBookmarkModal, setToggleBookmarkModal] = useState();
+  const [message, setMessage] = useState();
+  const [messageType, setMessageType] = useState('');
 
   // stored and passed as props to verifyemailpopup modal
   const [queryError, setQueryError] = useState();
@@ -114,9 +118,15 @@ export default function Postpage() {
     if (createCommentSuccess) {
       setContent('');
       // scroll to the botttom of the page
-      window.scrollTo(0, document.body.scrollHeight);
+      window.scrollTo(0, document.getElementById('postpage').scrollHeight);
+      setMessage(createCommentData?.message);
+      setMessageType('success');
     }
-  }, [createCommentSuccess]);
+    if (createCommentIsError) {
+      setMessage(createCommentError?.message);
+      setMessageType('error');
+    }
+  }, [createCommentSuccess, createCommentIsError]);
 
   const post = singlePost?.data;
 
@@ -149,7 +159,16 @@ export default function Postpage() {
       {/* verifyEmailPopUp */}
       <VerifyEmailPopUp queryError={queryError} setQueryError={setQueryError} />
 
-      <div className="mx-auto flex h-full w-full flex-col px-6 py-8 dashboard:w-[90%] dashboard:max-w-[35rem] xs:w-full ">
+      <div
+        id="postpage"
+        className="mx-auto flex h-full w-full flex-col px-6 py-8 dashboard:w-[90%] dashboard:max-w-[35rem] xs:w-full "
+      >
+        <Toast
+          message={message}
+          messageType={messageType}
+          setMessage={setMessage}
+        />
+        {/* <ToastError message={message} setMessage={setMessage} /> */}
         <div className="cursor-pointer" onClick={() => navigate(-1)}>
           <ArrowCircleLeft size="24" color="#1E1E1E" />
         </div>

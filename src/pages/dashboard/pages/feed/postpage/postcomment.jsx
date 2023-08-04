@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-import { ArchiveAdd, ProfileCircle } from 'iconsax-react';
+import { ProfileCircle } from 'iconsax-react';
 
 import { BsFillBookmarkFill, BsBookmarkPlus } from 'react-icons/bs';
 

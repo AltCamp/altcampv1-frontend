@@ -86,6 +86,12 @@ html {
   scroll-behavior: smooth;
 }
 
+#pageCount input::-webkit-outer-spin-button,
+#pageCount input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .container {
   width: 100%;
   max-width: 1440px;

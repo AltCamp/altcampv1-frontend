@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import communityStyle from './community.module.css';
-
 import Questioncard from './questioncard/questioncard';
 
 import {
@@ -16,6 +14,8 @@ import { useGetAllQuestionsQuery } from '../../../../app/slices/apiSlices/commun
 import { CloseCircle } from 'iconsax-react';
 
 import greenCheck from '../../../../assets/general/greencreatepostcheck.svg';
+
+import Pagination from '../../components/pagination';
 
 import { Helmet } from 'react-helmet-async';
 
@@ -77,7 +77,7 @@ export default function Community() {
   }, [createDeleteModal]);
 
   return (
-    <div className={communityStyle.container}>
+    <div className="mb-16 flex h-full w-full overflow-scroll p-8 md:p-4 ">
       {/* <Helmet>
         <title>{`AltCamp-Dashboard-Community`}</title>
         <meta
@@ -87,52 +87,70 @@ export default function Community() {
         <link rel='canonical' href={`dashboard/community`} />
       </Helmet> */}
       {createDeleteModal && (
-        <div className={communityStyle.creationSuccessOverlay}>
-          <div className={communityStyle.creationSuccess}>
+        <div className="fixed bottom-0 left-0 top-0 z-50 flex h-screen w-screen animate-fadeIn items-center justify-center overflow-hidden bg-black/50 ">
+          <div className="relative flex h-[20rem] w-[20rem] flex-col items-center justify-center gap-8 rounded-[4px] bg-white p-8 md:h-[15rem] md:w-[15rem] xs:h-[12rem] xs:w-[12rem] xs:gap-2 xs:p-4 ">
             <CloseCircle
               size="20"
-              className={communityStyle.closeIcon}
+              className="absolute -right-8 top-0 cursor-pointer text-white "
               onClick={handleCreateDeleteModal}
             />
-            <div className={communityStyle.successIcon}>
-              <img src={greenCheck} alt="" className={communityStyle.check} />
+            <div className="">
+              <img src={greenCheck} alt="" className="w-20 md:w-16 xs:w-12" />
             </div>
-            <p className={communityStyle.successText}>
+            <p className="text-center text-[15px] font-semibold text-neutral-900 ">
               {location.state.created
                 ? 'Your question has been submitted successfully.'
                 : location.state.deleted
                 ? 'Your question has been deleted successfully.'
                 : ''}
             </p>
-            <button
-              className={communityStyle.successBtn}
-              onClick={handleCreateDeleteModal}
-            >
+            <button className="auth-btn" onClick={handleCreateDeleteModal}>
               Done
             </button>
           </div>
         </div>
       )}
-      <div className={communityStyle.sectionOne}>
-        <div className={communityStyle.header}>
-          <div className={communityStyle.title}>
-            <h1 className={communityStyle.h1}>Community</h1>
-            <p className={communityStyle.p}>
+      <div className="flex w-full flex-col gap-8">
+        <div className="flex w-full items-center justify-between  ">
+          <div className="w-fit">
+            <h1 className="text-[20px] font-semibold text-neutral-900 ">
+              Community
+            </h1>
+            <p className="text-[14px] text-neutral-600 ">
               Share what you know even and also ask about what you do not know
             </p>
           </div>
           <Link
             to={'/dashboard/community/ask'}
-            className={communityStyle.questionCta}
+            className="auth-btn sm:min-w-40 flex w-fit items-center justify-center gap-1 px-2 sm:h-8 sm:w-40"
           >
-            Ask Question
+            <span className="">Ask</span>
+            <span className="">Question</span>
           </Link>
         </div>
 
-        <div className={communityStyle.questions}>
+        <div className="flex w-full flex-col gap-4">
           {isLoading && (
-            <div className={communityStyle.loading}>
-              <div className={communityStyle.loader}></div>
+            <div className="text-center">
+              <div role="status">
+                <svg
+                  aria-hidden="true"
+                  className="mr-2 inline h-8 w-8 animate-spin fill-blue-600 text-gray-200 dark:text-gray-600"
+                  viewBox="0 0 100 101"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                    fill="currentColor"
+                  />
+                  <path
+                    d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                    fill="currentFill"
+                  />
+                </svg>
+                <span className="sr-only">Loading...</span>
+              </div>
             </div>
           )}
           {questions?.map((question) => (
@@ -142,64 +160,12 @@ export default function Community() {
 
         {/* pagination */}
         {questions && questions.length > 0 && (
-          <div className={communityStyle.pagination}>
-            <button
-              className={communityStyle.previousBtn}
-              onClick={() => setSearchParams({ page: meta?.currentPage - 1 })}
-              disabled={meta?.currentPage === 1}
-            >
-              Previous
-            </button>
-            {
-              // create an array of page numbers
-              [...Array(meta?.totalPages)].map((_, index) => (
-                <button
-                  key={index}
-                  className={
-                    meta?.currentPage === index + 1
-                      ? communityStyle.active
-                      : communityStyle.pageBtn
-                  }
-                  onClick={() => setSearchParams({ page: index + 1 })}
-                >
-                  {index + 1}
-                </button>
-              ))
-            }
-            <button
-              className={communityStyle.nextBtn}
-              onClick={() => setSearchParams({ page: meta?.currentPage + 1 })}
-              disabled={meta?.currentPage === meta?.totalPages}
-            >
-              Next
-            </button>
-            <div className={communityStyle.pageCount}>
-              {/* <span className={communityStyle.currentPage}>
-                {meta?.currentPage}
-              </span> */}
-              <input
-                type="number"
-                className={communityStyle.currentPage}
-                value={page}
-                onChange={(e) => setPage(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    setSearchParams({ page });
-                  }
-                }}
-                onKeyUp={(e) => {
-                  if (Number(e.target.value) > meta?.totalPages) {
-                    setPage(meta?.totalPages);
-                  }
-                }}
-              />
-
-              <span className={communityStyle.divider}>/</span>
-              <span className={communityStyle.totalPage}>
-                {meta?.totalPages}
-              </span>
-            </div>
-          </div>
+          <Pagination
+            meta={meta}
+            page={page}
+            setPage={setPage}
+            setSearchParams={setSearchParams}
+          />
         )}
       </div>
     </div>
