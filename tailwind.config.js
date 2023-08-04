@@ -105,12 +105,21 @@ export default {
             opacity: 1,
           },
         },
+        slideIn: {
+          from: {
+            transform: 'translateX(100%)',
+          },
+          to: {
+            transform: 'translateX(0)',
+          },
+        },
       },
       animation: {
         showSearch: 'showSearch 0.3s ease-in-out forwards',
         like: 'like 1s',
         highlights: 'highlights 10s',
         fadeIn: 'fadeIn 0.5s ease-in-out',
+        slideIn: 'slideIn 0.2s ease-in-out',
       },
     },
     screens: {
