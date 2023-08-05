@@ -27,7 +27,7 @@ import { Tooltip } from 'flowbite-react';
 import Answercard from './answercard';
 
 // import createanswer
-import Createanswer from './createanswer/createanswer';
+import Createanswer from './createanswer';
 
 import { useGetQuestionByIdQuery } from '../../../../../app/slices/apiSlices/communitySlice';
 
