@@ -1,29 +1,27 @@
 import { useState, useEffect } from 'react';
 
-import answerCardStyles from './answercard.module.css';
-
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-import { ArrowDown, ArrowUp, ArchiveAdd, Edit } from 'iconsax-react';
+import { ArrowDown, ArrowUp, Edit } from 'iconsax-react';
 
 import { BsFillBookmarkFill, BsBookmarkPlus } from 'react-icons/bs';
 
 import ReactTimeAgo from 'react-time-ago';
 import DOMPurify from 'isomorphic-dompurify';
-import { Tooltip } from 'react-tooltip';
+import { Tooltip } from 'flowbite-react';
 
 import {
   useUpvoteAnswerMutation,
   useDownvoteAnswerMutation,
   useUpdateAnswerMutation,
-} from '../../../../../../app/slices/apiSlices/communitySlice';
+} from '../../../../../app/slices/apiSlices/communitySlice';
 
 import { useSelector } from 'react-redux';
-import RichEditor from '../../richeditor/richeditor';
+import RichEditor from '../richeditor/richeditor';
 
-import BookmarkModal from './../../../../components/bookmarkmodal/bookmarkmodal';
+import BookmarkModal from '../../../components/bookmarkmodal/bookmarkmodal';
 
-import VerifyEmailPopUp from '../../../../components/verifyEmailPopUp';
+import VerifyEmailPopUp from '../../../components/verifyEmailPopUp';
 
 // import prsims modules for code highlighting and sytyling
 // import Prism from 'prismjs'
@@ -101,6 +99,8 @@ export default function Answercard({ answer }) {
     setToggleBookmarkModal(!toggleBookmarkModal);
   };
 
+  const highlight = `bg-neutral-400 rounded-2 p-2 animate-highlights`;
+
   useEffect(() => {
     if (location?.state?.postId) {
       const postElement = document.getElementById(location?.state?.postId);
@@ -109,9 +109,9 @@ export default function Answercard({ answer }) {
         block: 'center',
       });
 
-      postElement?.classList.add(answerCardStyles.highlight);
+      postElement?.classList.add(highlight);
       setTimeout(() => {
-        postElement?.classList.remove(answerCardStyles.highlight);
+        postElement?.classList.remove(highlight);
       }, 7000);
     }
     // remove the postId from the location state
@@ -143,19 +143,19 @@ export default function Answercard({ answer }) {
       {/* verifyEmailPopUp */}
       <VerifyEmailPopUp queryError={queryError} setQueryError={setQueryError} />
 
-      <div className={answerCardStyles.container} id={answer?._id}>
+      <div className="flex flex-col gap-2" id={answer?._id}>
         {editMode ? (
-          <div className={answerCardStyles.editContainer}>
+          <div className="flex w-full flex-col gap-2">
             <RichEditor setBody={setContent} body={content} />
-            <div className={answerCardStyles.editButtons}>
+            <div className="flex w-full justify-end gap-2">
               <button
-                className={answerCardStyles.cancelButton}
+                className="flex w-fit items-center justify-center rounded-[4px] bg-secondary-200 px-4 py-2 font-semibold outline-none "
                 onClick={() => setEditMode(false)}
               >
                 Cancel
               </button>
               <button
-                className={answerCardStyles.updateButton}
+                className="auth-btn mt-0 h-fit w-fit px-4 py-2 "
                 onClick={handleUpdateAnswer}
                 disabled={updateAnswerLoading}
                 style={{
@@ -169,79 +169,84 @@ export default function Answercard({ answer }) {
           </div>
         ) : (
           <>
-            <div className={answerCardStyles.header}>
+            <div className="flex items-center gap-2 text-neutral-600 ">
               <Link
                 to={
                   user?._id === answer?.author?._id
                     ? '/dashboard/account'
                     : `/dashboard/users/${answer?.author?._id}`
                 }
-                className={answerCardStyles.name}
+                className="font-medium text-inherit "
               >
                 {answer?.author?.firstName} {answer?.author?.lastName}{' '}
                 {answer?.author?.accountType == 'Mentor' && (
-                  <span className={answerCardStyles.mentor}>Instructor</span>
+                  <span className="w-fit rounded-[4px] bg-secondary-300 p-1 text-[11px] font-medium uppercase ">
+                    Instructor
+                  </span>
                 )}
               </Link>
-              <span className={answerCardStyles.divider}></span>
-              <span className={answerCardStyles.timeAnswered}>
+              <span className="h-1.5 w-1.5 rounded-full bg-neutral-600 "></span>
+              <span className="text-[14px] ">
                 <ReactTimeAgo date={answer?.createdAt} locale="en-US" />
               </span>
             </div>
-            <div className={answerCardStyles.content}>
+            <div className="font-light leading-normal text-neutral-900 ">
               <div
-                className={answerCardStyles.body}
+                className="w-full "
                 dangerouslySetInnerHTML={{ __html: answer?.content }}
               />
             </div>
 
-            <div className={answerCardStyles.votes}>
+            <div className="flex items-center justify-end gap-3">
               <div
-                className={answerCardStyles.upvotes}
+                className="flex items-center gap-1 "
                 style={{
                   color: answer?.upvotes > 0 ? '#0e8a1a' : '#343a40',
                 }}
               >
-                <Tooltip id="my-tooltip" />
-                <ArrowUp
-                  size="19"
-                  className={answerCardStyles.icon}
-                  onClick={handleUpvoteAnswer}
-                  data-tooltip-id="my-tooltip"
-                  data-tooltip-content="upvote"
-                  data-tooltip-place="top"
-                />
+                <Tooltip content="Upvote" placement="top" style="light">
+                  <ArrowUp
+                    size="19"
+                    className="cursor-pointer text-inherit"
+                    onClick={handleUpvoteAnswer}
+                  />
+                </Tooltip>
                 {answer?.upvotes}
               </div>
               <div
-                className={answerCardStyles.downvotes}
+                className="flex items-center gap-1 "
                 style={{
                   color: answer?.downvotes > 0 ? '#dc3545' : '#343a40',
                 }}
               >
-                <ArrowDown
-                  size="19"
-                  className={answerCardStyles.icon}
-                  onClick={handleDownvoteAnswer}
-                  data-tooltip-id="my-tooltip"
-                  data-tooltip-content="downvote"
-                  data-tooltip-place="top"
-                />
+                <Tooltip content="Downvote" placement="top" style="light">
+                  <ArrowDown
+                    size="19"
+                    className="cursor-pointer text-inherit"
+                    onClick={handleDownvoteAnswer}
+                  />
+                </Tooltip>
                 {answer?.downvotes}
               </div>
-              <div className={answerCardStyles.bookmark}>
-                <BsBookmarkPlus
-                  size="19"
-                  className={answerCardStyles.icon}
-                  onClick={handleToggleBookmarkModal}
-                />
+              <div className="">
+                {!answer.isBookmarked ? (
+                  <BsBookmarkPlus
+                    size={20}
+                    color="#555555"
+                    className="cursor-pointer"
+                    onClick={handleToggleBookmarkModal}
+                  />
+                ) : (
+                  <BsFillBookmarkFill
+                    size={20}
+                    color="#555555"
+                    className="cursor-pointer"
+                  />
+                )}
               </div>
               {user?._id === answer?.author?._id && (
-                <div
-                  className={answerCardStyles.edit}
-                  onClick={() => setEditMode(!editMode)}
-                >
-                  <Edit size="19" className={answerCardStyles.icon} />
+                <div className="" onClick={() => setEditMode(!editMode)}>
+                  <Edit size="19" className="cursor-pointer text-inherit" />
                 </div>
               )}
             </div>

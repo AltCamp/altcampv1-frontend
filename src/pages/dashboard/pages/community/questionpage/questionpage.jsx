@@ -24,7 +24,7 @@ import { ShareSocial } from 'react-share-social';
 import { Tooltip } from 'flowbite-react';
 
 // import answercard
-import Answercard from './answercard/answercard';
+import Answercard from './answercard';
 
 // import createanswer
 import Createanswer from './createanswer/createanswer';
