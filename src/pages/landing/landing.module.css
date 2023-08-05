@@ -52,7 +52,7 @@ button:hover {
 
 .intro-area .slider-area {
   height: max-content;
-  padding: 1rem;
+  padding: 1rem 0;
   width: 100%;
 }
 
@@ -329,7 +329,7 @@ button:hover {
 }
 
 .call-to-action-area .slider-area {
-  padding: 5px;
+  padding: 5px 0;
 }
 
 .call-to-action-area p {
@@ -622,6 +622,7 @@ button:hover {
   }
 
   .about-us-text h2 {
+    font-weight: bold;
     font-size: 24px;
     padding-top: 0;
     margin: 0 0 20px;
@@ -630,7 +631,7 @@ button:hover {
 
   .about-us-text p {
     color: var(--neutral-clr-drkst-grey);
-    font-size: 24px;
+    font-size: 19px;
     line-height: 1.7;
     /* width: 500px; */
   }
