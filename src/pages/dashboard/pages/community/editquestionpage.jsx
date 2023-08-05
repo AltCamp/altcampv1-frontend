@@ -1,15 +1,15 @@
 import { useState, useRef, useEffect } from 'react';
 
-import editQuestionPageStyles from './editquestionpage.module.css';
-
 import { ArrowCircleLeft } from 'iconsax-react';
 
 import { useParams, useNavigate, Link, useLocation } from 'react-router-dom';
-import RichEditor from '../richeditor/richeditor';
+import RichEditor from './richeditor';
 
-import { useUpdateQuestionMutation } from '../../../../../app/slices/apiSlices/communitySlice';
+import { useUpdateQuestionMutation } from '../../../../app/slices/apiSlices/communitySlice';
 
-import VerifyEmailPopUp from '../../../components/verifyEmailPopUp';
+import VerifyEmailPopUp from '../../components/verifyEmailPopUp';
+
+import Toaster from '../../../../components/Toaster/Toaster';
 
 export default function EditQuestionPage() {
   const location = useLocation();
@@ -20,7 +20,8 @@ export default function EditQuestionPage() {
   const [body, setBody] = useState(editableQuestionState?.body);
   const [emptyTitle, setEmptyTitle] = useState(false);
 
-  const [errorText, setErrorText] = useState('');
+  const [toastText, setToastText] = useState('');
+  const [toastType, setToastType] = useState('info');
 
   const [queryError, setQueryError] = useState();
 
@@ -45,56 +46,49 @@ export default function EditQuestionPage() {
 
   useEffect(() => {
     if (isSuccess) {
-      navigate(-1);
-    }
-  }, [isSuccess]);
-
-  useEffect(() => {
-    if (isSuccess) {
-      setErrorText('');
+      setToastText(data?.message);
+      setToastType('success');
+      setTimeout(() => navigate(-1), 500);
     } else if (isError) {
-      setErrorText(error?.data.message);
+      setToastText(error?.data?.message);
+      setToastType('error');
+      setTimeout(() => setToastText(''), 3000);
       setQueryError(error?.data.message);
     }
   }, [data, isLoading, isSuccess, isError, error]);
 
   return (
-    <div className={editQuestionPageStyles.container}>
+    <div className="relative flex h-full w-full flex-col p-8 sm:p-2 ">
       {/* verifyEmailPopUp */}
       <VerifyEmailPopUp queryError={queryError} setQueryError={setQueryError} />
 
-      <div className={editQuestionPageStyles.header}>
+      <div className="flex flex-col gap-10 border-b-2 border-neutral-500 pb-4 ">
         <div
-          className={editQuestionPageStyles.back}
+          className="flex cursor-pointer items-center gap-2 text-[14px] font-medium text-neutral-700  "
           onClick={() => navigate(-1)}
         >
-          <ArrowCircleLeft
-            size="23"
-            className={editQuestionPageStyles.backIcon}
-          />
-          <div className={editQuestionPageStyles.backText}>
-            Back to community
-          </div>
+          <ArrowCircleLeft size="23" className="" />
+          <div className="">Back to community</div>
         </div>
-        <div className={editQuestionPageStyles.headerGroup}>
-          <h3 className={editQuestionPageStyles.title}>Edit Your Question</h3>
+        <div className="flex w-full flex-col gap-2 py-2">
+          <h3 className="font-medium text-neutral-900 ">Edit Your Question</h3>
         </div>
       </div>
 
-      <div className={editQuestionPageStyles.questionForm}>
-        <div className={editQuestionPageStyles.titleGroup}>
-          <div className={editQuestionPageStyles.titleHeader}>
-            <h3 className={editQuestionPageStyles.titleText}>Title</h3>
-            <p className={editQuestionPageStyles.titleDescription}>
+      <div className="flex w-full flex-col gap-8 py-12">
+        <div className="flex w-full flex-col gap-6 rounded-lg border border-neutral-300 px-4 py-8 sm:px-2 sm:py-4 ">
+          <div className="flex flex-col gap-2 ">
+            <h3 className="font-medium text-neutral-900 ">Title</h3>
+            <p className="text-[14px] text-neutral-600 ">
               Give your question a brief and specific title. (This will serve
               the question heading).
             </p>
           </div>
-          <div className={editQuestionPageStyles.input}>
+          <div className="flex flex-col items-end gap-3 ">
             <input
               type="text"
               placeholder=""
-              className={editQuestionPageStyles.inputField}
+              className="input focus:border-2 focus:border-secondary-400"
               value={title}
               onChange={(e) => {
                 setTitle(e.target.value);
@@ -105,7 +99,7 @@ export default function EditQuestionPage() {
               }}
             />
             <button
-              className={editQuestionPageStyles.next}
+              className="auth-btn w-fit px-3 py-2"
               onClick={() => {
                 if (title !== '') {
                   tinyMCE.activeEditor.focus();
@@ -120,20 +114,20 @@ export default function EditQuestionPage() {
           </div>
         </div>
 
-        <div className={editQuestionPageStyles.bodyGroup}>
-          <div className={editQuestionPageStyles.bodyHeader}>
-            <h3 className={editQuestionPageStyles.bodyText}>
+        <div className="flex w-full flex-col gap-6 rounded-lg border border-neutral-300 px-4 py-8 sm:px-2 sm:py-4 ">
+          <div className="flex flex-col gap-2 ">
+            <h3 className="font-medium text-neutral-900 ">
               Question description
             </h3>
-            <p className={editQuestionPageStyles.bodyDescription}>
+            <p className="ext-neutral-600 text-[14px] ">
               Explain your question in details and be clear on what you need
               answers to.
             </p>
           </div>
-          <div className={editQuestionPageStyles.textarea}>
+          <div className="flex w-full flex-col gap-3 ">
             <RichEditor setBody={setBody} body={body} />
             <button
-              className={editQuestionPageStyles.next}
+              className="auth-btn w-fit self-end px-3 py-2 "
               onClick={() => {
                 if (body !== '') {
                   // document.querySelector('.submit').focus()
@@ -146,44 +140,36 @@ export default function EditQuestionPage() {
           </div>
         </div>
 
-        <div className={editQuestionPageStyles.tagsGroup}>
-          <div className={editQuestionPageStyles.tagsHeader}>
-            <h3 className={editQuestionPageStyles.tagsText}>Tags</h3>
-            <p className={editQuestionPageStyles.tagsDescription}>
+        <div className="flex w-full flex-col gap-6 rounded-lg border border-neutral-300 px-4 py-8 sm:px-2 sm:py-4 ">
+          <div className="flex flex-col gap-2 ">
+            <h3 className="font-medium text-neutral-900 ">Tags</h3>
+            <p className="text-[14px] text-neutral-600">
               These show the category and the specifics of your question
               (Maximum of 4)
             </p>
           </div>
-          <div className={editQuestionPageStyles.tags}>
+          <div className="flex flex-col gap-3 ">
             <input
               type="text"
               placeholder=""
-              className={editQuestionPageStyles.tagsField}
+              className="input focus:border-2 focus:border-secondary-400"
               disabled={true}
             />
           </div>
         </div>
 
-        {/* error message ui */}
-        {errorText && (
-          <div className={editQuestionPageStyles.errorBody}>
-            <p className={editQuestionPageStyles.errorText}>{errorText}</p>
-          </div>
-        )}
+        {/* toast */}
+        <Toaster
+          show={!!toastText}
+          type={toastType}
+          message={toastText}
+          handleClose={() => setToastText('')}
+        />
 
-        {/* succesful message */}
-        {isSuccess && (
-          <div className={editQuestionPageStyles.successBody}>
-            <p className={editQuestionPageStyles.successText}>
-              Question updated successfully
-            </p>
-          </div>
-        )}
-
-        <div className={editQuestionPageStyles.submit}>
+        <div className="self-end">
           <button
             ref={ref}
-            className={editQuestionPageStyles.submitBtn}
+            className="auth-btn px-3 py-2"
             onClick={handleUpdateQuestion}
             disabled={isLoading}
             style={{

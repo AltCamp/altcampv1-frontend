@@ -17,7 +17,7 @@ import {
 } from '../../../../../app/slices/apiSlices/communitySlice';
 
 import { useSelector } from 'react-redux';
-import RichEditor from '../richeditor/richeditor';
+import RichEditor from '../richeditor';
 
 import BookmarkModal from '../../../components/bookmarkmodal/bookmarkmodal';
 

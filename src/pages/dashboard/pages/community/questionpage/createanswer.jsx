@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import RichEditor from '../richeditor/richeditor';
+import RichEditor from '../richeditor';
 
 import { useCreateAnswerMutation } from '../../../../../app/slices/apiSlices/communitySlice';
 

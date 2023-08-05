@@ -12,7 +12,7 @@ export { default as Users } from './users/users';
 
 // subpages
 export { default as Questionpage } from './community/questionpage/questionpage';
-export { default as AskQuestionPage } from './community/askquestionpage/askquestionpage';
-export { default as EditQuestionPage } from './community/editquestionpage/editquestionpage';
+export { default as AskQuestionPage } from './community/askquestionpage';
+export { default as EditQuestionPage } from './community/editquestionpage';
 
 export { default as Postpage } from './feed/postpage/postpage';
