@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import {
   ArrowDown,
@@ -9,7 +9,9 @@ import {
   ProfileCircle,
 } from 'iconsax-react';
 
-import { BsFillBookmarkFill, BsBookmarkPlus } from 'react-icons/bs';
+import { BsBookmarkPlus } from 'react-icons/bs';
+
+import { FcBookmark } from 'react-icons/fc';
 
 import ReactTimeAgo from 'react-time-ago';
 
@@ -19,10 +21,13 @@ import BookmarkModal from '../../components/bookmarkmodal/bookmarkmodal';
 
 import { useDeleteBookmarkMutation } from '../../../../app/slices/apiSlices/bookmarkSlice';
 
-export default function Questioncard({ question }) {
+export default function Questioncard({ question, isBookmarked }) {
   // console.log(bookmarkState)
 
   const [toggleBookmarkModal, setToggleBookmarkModal] = useState();
+  const [bookmarked, setBookmarked] = useState(
+    isBookmarked || question?.isBookmarked
+  );
   const { user } = useSelector((state) => state?.user?.user);
 
   const handleToggleBookmarkModal = () => {
@@ -31,6 +36,8 @@ export default function Questioncard({ question }) {
 
   const [deleteBookmark, { isSuccess, isLoading, isError, error }] =
     useDeleteBookmarkMutation();
+
+  const location = useLocation();
 
   return (
     <>
@@ -42,7 +49,15 @@ export default function Questioncard({ question }) {
           postTitle={question.title}
         />
       )}
-      <div className="flex h-fit w-full flex-col gap-[0.2rem] rounded-[5px] px-3 py-4 shadow-[0px_0px_10px_rgba(0,_0,_0,_0.1)] sm:h-auto sm:gap-4 ">
+      <div
+        className={`flex h-fit w-full flex-col gap-[0.2rem] rounded-[5px] px-3 py-4 shadow-[0px_0px_10px_rgba(0,_0,_0,_0.1)] sm:h-auto sm:gap-4 
+      ${
+        location.pathname.includes('bookmarks')
+          ? 'border-b border-b-neutral-400 px-0 py-4 shadow-none transition-all duration-150 ease-in-out hover:bg-gray-300/25 '
+          : ''
+      }
+      `}
+      >
         <div className="flex flex-col items-start justify-between gap-1 ">
           <Link
             to={`/dashboard/community/question/${question._id}/${question.slug}`}
@@ -78,35 +93,35 @@ export default function Questioncard({ question }) {
               <div
                 className="flex items-center font-medium text-[#0e8a1a] "
                 style={{
-                  color: question?.upvotes > 0 ? '#0e8a1a' : '#343a40',
+                  color: question?.upvotedBy.includes(user?._id)
+                    ? '#0e8a1a'
+                    : '#343a40',
                 }}
               >
                 <ArrowUp size="19" className="" />
-                {question.upvotes}
+                {question.upvotedBy.length}
               </div>
               <div
                 className="flex items-center font-medium text-neutral-800 "
                 style={{
-                  color: question?.downvotes > 0 ? '#dc3545' : '#343a40',
+                  color: question?.downvotedBy.includes(user?._id)
+                    ? '#dc3545'
+                    : '#343a40',
                 }}
               >
                 <ArrowDown size="19" className="" />
-                {question.downvotes}
+                {question.downvotedBy.length}
               </div>
               <div className="text-neutral-800 ">
-                {!question.isBookmarked ? (
+                {!bookmarked ? (
                   <BsBookmarkPlus
-                    size={20}
+                    size={17}
                     color="#555555"
                     className="cursor-pointer"
                     onClick={handleToggleBookmarkModal}
                   />
                 ) : (
-                  <BsFillBookmarkFill
-                    size={20}
-                    color="#555555"
-                    className="cursor-pointer"
-                  />
+                  <FcBookmark size={20} className="cursor-pointer" />
                 )}
               </div>
             </div>

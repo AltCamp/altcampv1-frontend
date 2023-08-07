@@ -31,10 +31,10 @@ export default function Feed() {
   const [allPosts, setAllPosts] = useState();
 
   useEffect(() => {
-    if (data) {
+    if (isSuccess) {
       setAllPosts(posts);
     }
-  }, [data]);
+  }, [data, isSuccess]);
 
   const handleToggleCreatePost = () => {
     setToggleCreatePost(!toggleCreatePost);
@@ -129,13 +129,15 @@ export default function Feed() {
           )}
           {posts &&
             !isLoading &&
-            allPosts?.map((post) => <Postcard key={post._id} post={post} />)}
+            allPosts?.map((post) => (
+              <Postcard key={post._id} post={post} postSuccess={isSuccess} />
+            ))}
         </div>
 
         {posts && allPosts && (
           <div className="flex w-full justify-center">
             <button
-              className="ease w-fit cursor-pointer rounded-[8px] border border-secondary-400 bg-transparent px-4 py-2 text-[0.9rem] text-secondary-400 outline-none transition-all duration-200 hover:border-none hover:bg-secondary-400 hover:text-white "
+              className="ease w-fit cursor-pointer rounded-[8px] border border-secondary-400 bg-transparent px-3 py-1 text-[0.9rem] text-secondary-400 outline-none transition-all duration-200 hover:border-none hover:bg-secondary-400 hover:text-white "
               // onclick set page to current page + 1 and set allPosts to allPosts + posts
               onClick={() => {
                 setPage(page + 1);

@@ -43,8 +43,8 @@ export const bookmarkSlice = createApi({
       }),
     }),
     deleteBookmark: builder.mutation({
-      query: (bookmarkId) => ({
-        url: url.DELETE_BOOKMARK_URL(url, bookmarkId),
+      query: (postId) => ({
+        url: url.DELETE_BOOKMARK_URL(url, postId),
         method: 'DELETE',
       }),
       invalidatesTags: ['Bookmark'],

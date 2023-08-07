@@ -11,7 +11,6 @@ export default function Layout() {
 
   const handleSideBar = () => {
     setToggleSideBar(!toggleSideBar);
-    console.log('toggleSideBar: ', toggleSideBar);
   };
 
   const location = useLocation();

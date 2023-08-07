@@ -14,7 +14,9 @@ import {
   ProfileCircle,
 } from 'iconsax-react';
 
-import { BsFillBookmarkFill, BsBookmarkPlus } from 'react-icons/bs';
+import { BsBookmarkPlus } from 'react-icons/bs';
+
+import { FcBookmark } from 'react-icons/fc';
 
 import { AiOutlineShareAlt } from 'react-icons/ai';
 
@@ -406,8 +408,9 @@ export default function Questionpage() {
                       className="flex items-center font-medium text-[#0e8a1a] "
                       onClick={handleUpvoteQuestion}
                       style={{
-                        color:
-                          questionDetails?.upvotes > 0 ? '#0e8a1a' : '#343a40',
+                        color: questionDetails?.upvotedBy.includes(user?._id)
+                          ? '#0e8a1a'
+                          : '#343a40',
                       }}
                     >
                       <Tooltip content="Upvote" placement="top" style="light">
@@ -416,16 +419,15 @@ export default function Questionpage() {
                           className="cursor-pointer text-inherit"
                         />
                       </Tooltip>
-                      {questionDetails?.upvotes}
+                      {questionDetails?.upvotedBy.length}
                     </div>
                     <div
                       className="flex items-center font-medium text-neutral-800 "
                       onClick={handleDownvoteQuestion}
                       style={{
-                        color:
-                          questionDetails?.downvotes > 0
-                            ? '#dc3545'
-                            : '#343a40',
+                        color: questionDetails?.downvotedBy.includes(user?._id)
+                          ? '#dc3545'
+                          : '#343a40',
                       }}
                     >
                       <Tooltip content="Downvote" placement="top" style="light">
@@ -434,7 +436,7 @@ export default function Questionpage() {
                           className="cursor-pointer text-inherit"
                         />
                       </Tooltip>
-                      {questionDetails?.downvotes}
+                      {questionDetails?.downvitedBy.length}
                     </div>
                   </div>
                   <div className="flex items-center gap-2 ">
@@ -473,17 +475,13 @@ export default function Questionpage() {
                     </div>
                     {!questionDetails.isBookmarked ? (
                       <BsBookmarkPlus
-                        size={20}
+                        size={17}
                         color="#555555"
                         className="cursor-pointer"
                         onClick={handleToggleBookmarkModal}
                       />
                     ) : (
-                      <BsFillBookmarkFill
-                        size={20}
-                        color="#555555"
-                        className="cursor-pointer"
-                      />
+                      <FcBookmark size={20} className="cursor-pointer" />
                     )}
                   </div>
                 </div>

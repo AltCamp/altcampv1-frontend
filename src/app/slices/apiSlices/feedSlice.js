@@ -58,7 +58,7 @@ export const feedSlice = createApi({
         url: url.LIKE_COMMENT_URL(url, id),
         method: 'PATCH',
       }),
-      invalidatesTags: ['Comments'],
+      invalidatesTags: ['Comments', 'Posts'],
     }),
   }),
 });

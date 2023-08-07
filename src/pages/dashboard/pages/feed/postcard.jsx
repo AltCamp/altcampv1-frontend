@@ -1,14 +1,18 @@
 import { useState, useEffect } from 'react';
 
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 import { ProfileCircle, MessageText1 } from 'iconsax-react';
 
-import { BsFillBookmarkFill, BsBookmarkPlus } from 'react-icons/bs';
+import { BsBookmarkPlus } from 'react-icons/bs';
+
+import { FcBookmark } from 'react-icons/fc';
 
 import ReactTimeAgo from 'react-time-ago';
 
 import { useLikePostMutation } from '../../../../app/slices/apiSlices/feedSlice';
+
+import { useDeleteBookmarkMutation } from '../../../../app/slices/apiSlices/bookmarkSlice';
 
 import { useSelector } from 'react-redux';
 
@@ -16,10 +20,13 @@ import BookmarkModal from '../../components/bookmarkmodal/bookmarkmodal';
 
 import VerifyEmailPopUp from '../../components/verifyEmailPopUp';
 
-export default function Postcard({ post }) {
+export default function Postcard({ post, isBookmarked, postSuccess }) {
   const [latestPost, setLatestPost] = useState(post);
   const [likeAnimation, setLikeAnimation] = useState(false);
   const [toggleBookmarkModal, setToggleBookmarkModal] = useState();
+  const [bookmarked, setBookmarked] = useState(
+    isBookmarked || latestPost?.isBookmarked
+  );
 
   const [queryError, setQueryError] = useState();
 
@@ -27,8 +34,25 @@ export default function Postcard({ post }) {
 
   const navigate = useNavigate();
 
+  const location = useLocation();
+
   const [likePost, { data, isLoading, isSuccess, isError, error }] =
     useLikePostMutation();
+
+  const [
+    deleteBookmark,
+    {
+      data: deleteBookData,
+      isLoading: deleteBookIsLoading,
+      isSuccess: deleteBookIsSuccess,
+      isError: deleteBookIsError,
+      error: deleteBookError,
+    },
+  ] = useDeleteBookmarkMutation();
+
+  const handleDeleteBookmark = () => {
+    deleteBookmark(post._id);
+  };
 
   const handleLikePost = () => {
     likePost(post._id);
@@ -36,7 +60,7 @@ export default function Postcard({ post }) {
 
   useEffect(() => {
     if (isSuccess) {
-      // setLatestPost(data?.data);
+      setLatestPost(data?.data);
       setLikeAnimation(true);
 
       setTimeout(() => {
@@ -46,13 +70,11 @@ export default function Postcard({ post }) {
     if (isError) {
       setQueryError(error?.data.message);
     }
-  }, [isSuccess, isError]);
+  }, [isSuccess, isError, data, postSuccess]);
 
   const handleToggleBookmarkModal = () => {
     setToggleBookmarkModal(!toggleBookmarkModal);
   };
-
-  // console.log(latestPost?.author?._id)
 
   return (
     <>
@@ -69,7 +91,13 @@ export default function Postcard({ post }) {
 
       <Link
         to={`/dashboard/feed/post/${latestPost?._id}`}
-        className="decoration-none p-6 shadow-[0px_3.31218px_19.8731px_rgba(86,_86,_86,_0.15)] "
+        className={`decoration-none p-6 shadow-[0px_3.31218px_19.8731px_rgba(86,_86,_86,_0.15)] 
+        ${
+          location.pathname.includes('bookmarks')
+            ? 'border-b border-b-neutral-400 px-0 py-4 shadow-none transition-all duration-150 ease-in-out hover:bg-gray-300/25 '
+            : ''
+        }
+        `}
       >
         <div className="flex flex-col gap-4">
           <div className="flex items-start gap-2">
@@ -102,19 +130,21 @@ export default function Postcard({ post }) {
                     ? `/dashboard/account`
                     : `/dashboard/users/${latestPost?.author?._id}`
                 }
-                className="font-semibold text-neutral-900"
+                className="font-semibold text-neutral-900 "
               >
                 {latestPost?.author?.firstName} {latestPost?.author?.lastName}
               </Link>
               <div className="text-[0.8rem] text-neutral-600">
-                {<ReactTimeAgo date={latestPost.createdAt} locale="en-US" />}
+                {latestPost?.createdAt && (
+                  <ReactTimeAgo date={latestPost?.createdAt} locale="en-US" />
+                )}
               </div>
             </div>
           </div>
 
           <div className="flex flex-col gap-3.5 overflow-hidden font-medium text-neutral-900">
             <div className="">
-              <p>{latestPost.content}</p>
+              <p>{latestPost?.content}</p>
             </div>
             {/* <div className={postCardStyles.media}>
             <img src={postMedia} alt='' className='' />
@@ -124,7 +154,11 @@ export default function Postcard({ post }) {
           <div className="flex items-center justify-between">
             <div className="flex gap-[0.8rem] ">
               <Link
-                to={`/dashboard/feed`}
+                to={
+                  location.pathname.includes('bookmarks')
+                    ? `/dashboard/bookmarks`
+                    : `/dashboard/feed`
+                }
                 className="flex items-center gap-[0.3rem] font-medium text-neutral-600 "
               >
                 <svg
@@ -162,7 +196,7 @@ export default function Postcard({ post }) {
                       : '#343A40',
                   }}
                 >
-                  {latestPost.upvotedBy?.length}
+                  {latestPost?.upvotedBy?.length}
                 </div>
               </Link>
               <div className="w-[1px] bg-neutral-600 "></div>
@@ -172,23 +206,30 @@ export default function Postcard({ post }) {
                   color="#555555"
                   className="cursor-pointer"
                 />
-                <div className="">{latestPost.comments?.length}</div>
+                <div className="">{latestPost?.comments?.length}</div>
               </div>
             </div>
             <div className="">
-              <Link to={`/dashboard/feed`} className="w-fit">
-                {!latestPost.isBookmarked ? (
+              <Link
+                to={
+                  location.pathname.includes('bookmarks')
+                    ? `/dashboard/bookmarks`
+                    : `/dashboard/feed`
+                }
+                className="w-fit"
+              >
+                {!bookmarked ? (
                   <BsBookmarkPlus
-                    size={20}
+                    size={17}
                     color="#555555"
                     className="cursor-pointer"
                     onClick={handleToggleBookmarkModal}
                   />
                 ) : (
-                  <BsFillBookmarkFill
+                  <FcBookmark
                     size={20}
-                    color="#555555"
                     className="cursor-pointer"
+                    onClick={handleDeleteBookmark}
                   />
                 )}
               </Link>

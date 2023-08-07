@@ -52,8 +52,8 @@ const url = {
   UPDATE_BOOKMARK_URL(url, bookmarkId) {
     return `${url.BOOKMARKS_URL}/${bookmarkId}`;
   },
-  DELETE_BOOKMARK_URL(url, bookmarkId) {
-    return `${url.BOOKMARKS_URL}/${bookmarkId}`;
+  DELETE_BOOKMARK_URL(url, postId) {
+    return `${url.BOOKMARKS_URL}?postId=${postId}`;
   },
 
   // COMMUNITY URLS

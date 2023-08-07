@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react';
 
 import { Link, useNavigate, useLocation, useParams } from 'react-router-dom';
 
-import { BsFillBookmarkFill, BsBookmarkPlus } from 'react-icons/bs';
+import { BsBookmarkPlus } from 'react-icons/bs';
+
+import { FcBookmark } from 'react-icons/fc';
 
 import {
   ArrowCircleLeft,
@@ -305,17 +307,13 @@ export default function Postpage() {
                     <div className="">
                       {!post.isBookmarked ? (
                         <BsBookmarkPlus
-                          size={20}
+                          size={17}
                           color="#555555"
                           className="cursor-pointer"
                           onClick={handleToggleBookmarkModal}
                         />
                       ) : (
-                        <BsFillBookmarkFill
-                          size={20}
-                          color="#555555"
-                          className="cursor-pointer"
-                        />
+                        <FcBookmark size={20} className="cursor-pointer" />
                       )}
                     </div>
                   </div>

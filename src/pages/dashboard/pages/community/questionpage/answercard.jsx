@@ -4,7 +4,9 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { ArrowDown, ArrowUp, Edit } from 'iconsax-react';
 
-import { BsFillBookmarkFill, BsBookmarkPlus } from 'react-icons/bs';
+import { BsBookmarkPlus } from 'react-icons/bs';
+
+import { FcBookmark } from 'react-icons/fc';
 
 import ReactTimeAgo from 'react-time-ago';
 import DOMPurify from 'isomorphic-dompurify';
@@ -26,10 +28,14 @@ import VerifyEmailPopUp from '../../../components/verifyEmailPopUp';
 // import prsims modules for code highlighting and sytyling
 // import Prism from 'prismjs'
 
-export default function Answercard({ answer }) {
+export default function Answercard({ answer, isBookmarked }) {
   const [content, setContent] = useState(answer?.content);
+  const [latestAnswer, setLatestAnswer] = useState(answer);
   const [editMode, setEditMode] = useState(false);
   const [toggleBookmarkModal, setToggleBookmarkModal] = useState();
+  const [bookmarked, setBookmarked] = useState(
+    isBookmarked || latestAnswer?.isBookmarked
+  );
 
   // stored and passed as props to verifyemailpopup modal
   const [queryError, setQueryError] = useState();
@@ -47,8 +53,16 @@ export default function Answercard({ answer }) {
 
   const answerId = answer?._id;
 
-  const [upvoteAnswer, { data, isSuccess, isLoading, isError, error }] =
-    useUpvoteAnswerMutation();
+  const [
+    upvoteAnswer,
+    {
+      data: upvoteData,
+      isSuccess: upvoteSuccess,
+      isLoading: upvoteLoading,
+      isError: upvoteIsError,
+      error: upvoteError,
+    },
+  ] = useUpvoteAnswerMutation();
 
   const [
     downvoteAnswer,
@@ -90,6 +104,16 @@ export default function Answercard({ answer }) {
   };
 
   useEffect(() => {
+    if (upvoteSuccess) {
+      setLatestAnswer(upvoteData?.data);
+    } else if (downvoteSuccess) {
+      setLatestAnswer(downvoteData?.data);
+    } else {
+      setLatestAnswer(answer);
+    }
+  }, [upvoteData, upvoteSuccess, downvoteData, downvoteSuccess]);
+
+  useEffect(() => {
     if (updateAnswerSuccess) {
       setEditMode(false);
     }
@@ -120,14 +144,14 @@ export default function Answercard({ answer }) {
 
   // grab all the errors from api queries and pass the message to queryError state
   useEffect(() => {
-    if (isError || downvoteIsError || updateAnswerIsError) {
+    if (upvoteIsError || downvoteIsError || updateAnswerIsError) {
       setQueryError(
         error?.data?.message ||
           downvoteError?.data?.message ||
           updateAnswerError?.data.message
       );
     }
-  }, [isError, downvoteIsError, updateAnswerIsError]);
+  }, [upvoteIsError, downvoteIsError, updateAnswerIsError]);
 
   return (
     <>
@@ -143,7 +167,16 @@ export default function Answercard({ answer }) {
       {/* verifyEmailPopUp */}
       <VerifyEmailPopUp queryError={queryError} setQueryError={setQueryError} />
 
-      <div className="flex flex-col gap-2" id={answer?._id}>
+      <div
+        className={`flex flex-col gap-2
+      ${
+        location.pathname.includes('bookmarks')
+          ? ' border-b border-b-neutral-400 px-0 py-4 transition-all duration-150 ease-in-out hover:bg-gray-300/25 '
+          : ''
+      }
+      `}
+        id={answer?._id}
+      >
         {editMode ? (
           <div className="flex w-full flex-col gap-2">
             <RichEditor setBody={setContent} body={content} />
@@ -172,14 +205,15 @@ export default function Answercard({ answer }) {
             <div className="flex items-center gap-2 text-neutral-600 ">
               <Link
                 to={
-                  user?._id === answer?.author?._id
+                  user?._id === latestAnswer?.author?._id
                     ? '/dashboard/account'
-                    : `/dashboard/users/${answer?.author?._id}`
+                    : `/dashboard/users/${latestAnswer?.author?._id}`
                 }
                 className="font-medium text-inherit "
               >
-                {answer?.author?.firstName} {answer?.author?.lastName}{' '}
-                {answer?.author?.accountType == 'Mentor' && (
+                {latestAnswer?.author?.firstName}{' '}
+                {latestAnswer?.author?.lastName}{' '}
+                {latestAnswer?.author?.accountType == 'Mentor' && (
                   <span className="w-fit rounded-[4px] bg-secondary-300 p-1 text-[11px] font-medium uppercase ">
                     Instructor
                   </span>
@@ -187,13 +221,13 @@ export default function Answercard({ answer }) {
               </Link>
               <span className="h-1.5 w-1.5 rounded-full bg-neutral-600 "></span>
               <span className="text-[14px] ">
-                <ReactTimeAgo date={answer?.createdAt} locale="en-US" />
+                <ReactTimeAgo date={latestAnswer?.createdAt} locale="en-US" />
               </span>
             </div>
             <div className="font-light leading-normal text-neutral-900 ">
               <div
                 className="w-full "
-                dangerouslySetInnerHTML={{ __html: answer?.content }}
+                dangerouslySetInnerHTML={{ __html: latestAnswer?.content }}
               />
             </div>
 
@@ -201,7 +235,9 @@ export default function Answercard({ answer }) {
               <div
                 className="flex items-center gap-1 "
                 style={{
-                  color: answer?.upvotes > 0 ? '#0e8a1a' : '#343a40',
+                  color: latestAnswer?.upvotedBy.includes(user?._id)
+                    ? '#0e8a1a'
+                    : '#343a40',
                 }}
               >
                 <Tooltip content="Upvote" placement="top" style="light">
@@ -211,12 +247,14 @@ export default function Answercard({ answer }) {
                     onClick={handleUpvoteAnswer}
                   />
                 </Tooltip>
-                {answer?.upvotes}
+                {latestAnswer?.upvotedBy.length}
               </div>
               <div
                 className="flex items-center gap-1 "
                 style={{
-                  color: answer?.downvotes > 0 ? '#dc3545' : '#343a40',
+                  color: latestAnswer?.downvotedBy.includes(user?._id)
+                    ? '#dc3545'
+                    : '#343a40',
                 }}
               >
                 <Tooltip content="Downvote" placement="top" style="light">
@@ -226,25 +264,21 @@ export default function Answercard({ answer }) {
                     onClick={handleDownvoteAnswer}
                   />
                 </Tooltip>
-                {answer?.downvotes}
+                {latestAnswer?.downvotedBy.length}
               </div>
               <div className="">
-                {!answer.isBookmarked ? (
+                {!bookmarked ? (
                   <BsBookmarkPlus
-                    size={20}
+                    size={17}
                     color="#555555"
                     className="cursor-pointer"
                     onClick={handleToggleBookmarkModal}
                   />
                 ) : (
-                  <BsFillBookmarkFill
-                    size={20}
-                    color="#555555"
-                    className="cursor-pointer"
-                  />
+                  <FcBookmark size={20} className="cursor-pointer" />
                 )}
               </div>
-              {user?._id === answer?.author?._id && (
+              {user?._id === latestAnswer?.author?._id && (
                 <div className="" onClick={() => setEditMode(!editMode)}>
                   <Edit size="19" className="cursor-pointer text-inherit" />
                 </div>
