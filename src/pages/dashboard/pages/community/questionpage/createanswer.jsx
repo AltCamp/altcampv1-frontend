@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import RichEditor from '../richeditor';
 
-import { useCreateAnswerMutation } from '../../../../../app/slices/apiSlices/communitySlice';
+import { useCreateAnswerMutation } from '../../../../../app/slices/apiSlices/contentsSlice';
 
 import VerifyEmailPopUp from '../../../components/verifyEmailPopUp';
 

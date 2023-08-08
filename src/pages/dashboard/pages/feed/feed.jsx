@@ -8,7 +8,7 @@ import { RiImageLine } from 'react-icons/ri';
 
 import Postcard from './postcard';
 
-import { useGetAllPostsQuery } from '../../../../app/slices/apiSlices/feedSlice';
+import { useGetAllPostsQuery } from '../../../../app/slices/apiSlices/contentsSlice';
 
 import { useSelector } from 'react-redux';
 import Createpost from './createpost';
@@ -129,9 +129,7 @@ export default function Feed() {
           )}
           {posts &&
             !isLoading &&
-            allPosts?.map((post) => (
-              <Postcard key={post._id} post={post} postSuccess={isSuccess} />
-            ))}
+            allPosts?.map((post) => <Postcard key={post._id} post={post} />)}
         </div>
 
         {posts && allPosts && (

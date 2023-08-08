@@ -10,22 +10,21 @@ import { FcBookmark } from 'react-icons/fc';
 
 import ReactTimeAgo from 'react-time-ago';
 
-import { useLikePostMutation } from '../../../../app/slices/apiSlices/feedSlice';
-
-import { useDeleteBookmarkMutation } from '../../../../app/slices/apiSlices/bookmarkSlice';
+import {
+  useCreateBookmarkMutation,
+  useLikePostMutation,
+  useDeleteBookmarkMutation,
+} from '../../../../app/slices/apiSlices/contentsSlice';
 
 import { useSelector } from 'react-redux';
 
-import BookmarkModal from '../../components/bookmarkmodal/bookmarkmodal';
-
 import VerifyEmailPopUp from '../../components/verifyEmailPopUp';
 
-export default function Postcard({ post, isBookmarked, postSuccess }) {
+export default function Postcard({ post, isBookmarked }) {
   const [latestPost, setLatestPost] = useState(post);
   const [likeAnimation, setLikeAnimation] = useState(false);
-  const [toggleBookmarkModal, setToggleBookmarkModal] = useState();
   const [bookmarked, setBookmarked] = useState(
-    isBookmarked || latestPost?.isBookmarked
+    isBookmarked || post?.isBookmarked
   );
 
   const [queryError, setQueryError] = useState();
@@ -40,6 +39,17 @@ export default function Postcard({ post, isBookmarked, postSuccess }) {
     useLikePostMutation();
 
   const [
+    createBookmark,
+    {
+      data: createBookData,
+      isSuccess: createBookIsSuccess,
+      isLoading: createBookIsLoading,
+      isError: createBookIsError,
+      error: createBookError,
+    },
+  ] = useCreateBookmarkMutation();
+
+  const [
     deleteBookmark,
     {
       data: deleteBookData,
@@ -49,6 +59,13 @@ export default function Postcard({ post, isBookmarked, postSuccess }) {
       error: deleteBookError,
     },
   ] = useDeleteBookmarkMutation();
+
+  const handleCreateBookmark = () => {
+    createBookmark({
+      postId: post?._id,
+      postType: 'Post',
+    });
+  };
 
   const handleDeleteBookmark = () => {
     deleteBookmark(post._id);
@@ -70,27 +87,23 @@ export default function Postcard({ post, isBookmarked, postSuccess }) {
     if (isError) {
       setQueryError(error?.data.message);
     }
-  }, [isSuccess, isError, data, postSuccess]);
+  }, [isSuccess, isError, data]);
 
-  const handleToggleBookmarkModal = () => {
-    setToggleBookmarkModal(!toggleBookmarkModal);
-  };
+  useEffect(() => {
+    if (post && !isBookmarked) {
+      setBookmarked(post?.isBookmarked);
+    } else if (isBookmarked) {
+      setBookmarked(isBookmarked);
+    }
+  }, [post, isBookmarked]);
 
   return (
     <>
-      {toggleBookmarkModal && (
-        <BookmarkModal
-          handleToggleBookmarkModal={handleToggleBookmarkModal}
-          postId={post?._id}
-          postType={`Post`}
-          postTitle={post?.content}
-        />
-      )}
       {/* verifyEmailPopUp */}
       <VerifyEmailPopUp queryError={queryError} setQueryError={setQueryError} />
 
       <Link
-        to={`/dashboard/feed/post/${latestPost?._id}`}
+        to={`/dashboard/feed/post/${post?._id}`}
         className={`decoration-none p-6 shadow-[0px_3.31218px_19.8731px_rgba(86,_86,_86,_0.15)] 
         ${
           location.pathname.includes('bookmarks')
@@ -103,15 +116,15 @@ export default function Postcard({ post, isBookmarked, postSuccess }) {
           <div className="flex items-start gap-2">
             <Link
               to={
-                user?._id === latestPost?.author?._id
+                user?._id === post?.author?._id
                   ? `/dashboard/account`
-                  : `/dashboard/users/${latestPost?.author?._id}`
+                  : `/dashboard/users/${post?.author?._id}`
               }
               className="h-10 w-10 overflow-hidden rounded-full"
             >
-              {latestPost?.author?.profilePicture ? (
+              {post?.author?.profilePicture ? (
                 <img
-                  src={latestPost?.author?.profilePicture}
+                  src={post?.author?.profilePicture}
                   alt=""
                   className="h-full w-full object-cover"
                 />
@@ -126,17 +139,17 @@ export default function Postcard({ post, isBookmarked, postSuccess }) {
             <div className="flex flex-col">
               <Link
                 to={
-                  user?._id === latestPost?.author?._id
+                  user?._id === post?.author?._id
                     ? `/dashboard/account`
-                    : `/dashboard/users/${latestPost?.author?._id}`
+                    : `/dashboard/users/${post?.author?._id}`
                 }
                 className="font-semibold text-neutral-900 "
               >
-                {latestPost?.author?.firstName} {latestPost?.author?.lastName}
+                {post?.author?.firstName} {post?.author?.lastName}
               </Link>
               <div className="text-[0.8rem] text-neutral-600">
-                {latestPost?.createdAt && (
-                  <ReactTimeAgo date={latestPost?.createdAt} locale="en-US" />
+                {post?.createdAt && (
+                  <ReactTimeAgo date={post?.createdAt} locale="en-US" />
                 )}
               </div>
             </div>
@@ -144,7 +157,7 @@ export default function Postcard({ post, isBookmarked, postSuccess }) {
 
           <div className="flex flex-col gap-3.5 overflow-hidden font-medium text-neutral-900">
             <div className="">
-              <p>{latestPost?.content}</p>
+              <p>{post?.content}</p>
             </div>
             {/* <div className={postCardStyles.media}>
             <img src={postMedia} alt='' className='' />
@@ -167,9 +180,7 @@ export default function Postcard({ post, isBookmarked, postSuccess }) {
                   height="20"
                   viewBox="0 0 24 24"
                   fill={
-                    latestPost?.upvotedBy?.includes(user?._id)
-                      ? 'red'
-                      : '#FFFFFF'
+                    post?.upvotedBy?.includes(user?._id) ? 'red' : '#FFFFFF'
                   }
                   onClick={handleLikePost}
                   className={`cursor-pointer ${
@@ -179,9 +190,7 @@ export default function Postcard({ post, isBookmarked, postSuccess }) {
                   <path
                     d="M12.62 20.81c-.34.12-.9.12-1.24 0C8.48 19.82 2 15.69 2 8.69 2 5.6 4.49 3.1 7.56 3.1c1.82 0 3.43.88 4.44 2.24a5.53 5.53 0 0 1 4.44-2.24C19.51 3.1 22 5.6 22 8.69c0 7-6.48 11.13-9.38 12.12Z"
                     stroke={
-                      latestPost?.upvotedBy?.includes(user?._id)
-                        ? 'red'
-                        : '#343A40'
+                      post?.upvotedBy?.includes(user?._id) ? 'red' : '#343A40'
                     }
                     strokeWidth="1"
                     strokeLinecap="round"
@@ -191,12 +200,12 @@ export default function Postcard({ post, isBookmarked, postSuccess }) {
                 <div
                   className={`${likeAnimation && 'animate-like'}`}
                   style={{
-                    color: latestPost?.upvotedBy?.includes(user?._id)
+                    color: post?.upvotedBy?.includes(user?._id)
                       ? 'red'
                       : '#343A40',
                   }}
                 >
-                  {latestPost?.upvotedBy?.length}
+                  {post?.upvotedBy?.length}
                 </div>
               </Link>
               <div className="w-[1px] bg-neutral-600 "></div>
@@ -206,7 +215,7 @@ export default function Postcard({ post, isBookmarked, postSuccess }) {
                   color="#555555"
                   className="cursor-pointer"
                 />
-                <div className="">{latestPost?.comments?.length}</div>
+                <div className="">{post?.comments?.length}</div>
               </div>
             </div>
             <div className="">
@@ -223,7 +232,7 @@ export default function Postcard({ post, isBookmarked, postSuccess }) {
                     size={17}
                     color="#555555"
                     className="cursor-pointer"
-                    onClick={handleToggleBookmarkModal}
+                    onClick={handleCreateBookmark}
                   />
                 ) : (
                   <FcBookmark

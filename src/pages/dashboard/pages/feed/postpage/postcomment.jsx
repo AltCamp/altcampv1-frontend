@@ -12,7 +12,7 @@ import ReactTimeAgo from 'react-time-ago';
 
 import { useSelector } from 'react-redux';
 
-import { useLikeCommentMutation } from '../../../../../app/slices/apiSlices/feedSlice';
+import { useLikeCommentMutation } from '../../../../../app/slices/apiSlices/contentsSlice';
 
 import BookmarkModal from '../../../components/bookmarkmodal/bookmarkmodal';
 

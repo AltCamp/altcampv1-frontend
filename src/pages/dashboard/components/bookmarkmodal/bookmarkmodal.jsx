@@ -5,7 +5,7 @@ import bookModalStyles from './bookmarkmodal.module.css';
 
 import { CloseCircle } from 'iconsax-react';
 
-import { useCreateBookmarkMutation } from '../../../../app/slices/apiSlices/bookmarkSlice';
+import { useCreateBookmarkMutation } from '../../../../app/slices/apiSlices/contentsSlice';
 
 import Toaster from '../../../../components/Toaster/Toaster';
 import VerifyEmailPopUp from '../verifyEmailPopUp';

@@ -16,7 +16,7 @@ import {
   useUpvoteAnswerMutation,
   useDownvoteAnswerMutation,
   useUpdateAnswerMutation,
-} from '../../../../../app/slices/apiSlices/communitySlice';
+} from '../../../../../app/slices/apiSlices/contentsSlice';
 
 import { useSelector } from 'react-redux';
 import RichEditor from '../richeditor';

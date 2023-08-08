@@ -48,7 +48,9 @@ const url = {
   GET_BOOKMARK_BY_ID_URL(url, bookmarkId) {
     return `${url.BOOKMARKS_URL}/${bookmarkId}`;
   },
-  CREATE_BOOKMARK_URL: '/bookmarks',
+  CREATE_BOOKMARK_URL(url, postId, postType) {
+    return `${url.BOOKMARKS_URL}?postId=${postId}&postType=${postType}`;
+  },
   UPDATE_BOOKMARK_URL(url, bookmarkId) {
     return `${url.BOOKMARKS_URL}/${bookmarkId}`;
   },

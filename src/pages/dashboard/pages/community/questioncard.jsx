@@ -19,7 +19,7 @@ import { useSelector } from 'react-redux';
 
 import BookmarkModal from '../../components/bookmarkmodal/bookmarkmodal';
 
-import { useDeleteBookmarkMutation } from '../../../../app/slices/apiSlices/bookmarkSlice';
+import { useDeleteBookmarkMutation } from '../../../../app/slices/apiSlices/contentsSlice';
 
 export default function Questioncard({ question, isBookmarked }) {
   // console.log(bookmarkState)

@@ -5,7 +5,7 @@ import { ArrowCircleLeft } from 'iconsax-react';
 import { useParams, useNavigate, Link, useLocation } from 'react-router-dom';
 import RichEditor from './richeditor';
 
-import { useUpdateQuestionMutation } from '../../../../app/slices/apiSlices/communitySlice';
+import { useUpdateQuestionMutation } from '../../../../app/slices/apiSlices/contentsSlice';
 
 import VerifyEmailPopUp from '../../components/verifyEmailPopUp';
 

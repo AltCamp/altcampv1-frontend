@@ -8,7 +8,6 @@ import { FcBookmark } from 'react-icons/fc';
 
 import {
   ArrowCircleLeft,
-  ArchiveAdd,
   ProfileCircle,
   MessageText1,
   Send2,
@@ -21,24 +20,19 @@ import {
   useGetPostByIdQuery,
   useGetAllCommentsQuery,
   useCreateCommentMutation,
-} from '../../../../../app/slices/apiSlices/feedSlice';
+  useCreateBookmarkMutation,
+  useDeleteBookmarkMutation,
+} from '../../../../../app/slices/apiSlices/contentsSlice';
 
 import { useSelector } from 'react-redux';
 
 import Postcomment from './postcomment';
 
-import BookmarkModal from '../../../components/bookmarkmodal/bookmarkmodal';
-
 import VerifyEmailPopUp from '../../../components/verifyEmailPopUp';
-
-import Toast from '../../../components/toast';
 
 export default function Postpage() {
   const [likeAnimation, setLikeAnimation] = useState(false);
   const [content, setContent] = useState('');
-  const [toggleBookmarkModal, setToggleBookmarkModal] = useState();
-  const [message, setMessage] = useState();
-  const [messageType, setMessageType] = useState('');
 
   // stored and passed as props to verifyemailpopup modal
   const [queryError, setQueryError] = useState();
@@ -74,19 +68,52 @@ export default function Postpage() {
     },
   ] = useLikePostMutation();
 
+  const [
+    createBookmark,
+    {
+      data: createBookData,
+      isSuccess: createBookIsSuccess,
+      isLoading: createBookIsLoading,
+      isError: createBookIsError,
+      error: createBookError,
+    },
+  ] = useCreateBookmarkMutation();
+
+  const [
+    deleteBookmark,
+    {
+      data: deleteBookData,
+      isLoading: deleteBookIsLoading,
+      isSuccess: deleteBookIsSuccess,
+      isError: deleteBookIsError,
+      error: deleteBookError,
+    },
+  ] = useDeleteBookmarkMutation();
+
+  const handleCreateBookmark = () => {
+    createBookmark({
+      postId: postId,
+      postType: 'Post',
+    });
+  };
+
+  const handleDeleteBookmark = () => {
+    deleteBookmark(postId);
+  };
+
   const handleLikePost = () => {
     likePost(postId);
   };
 
   useEffect(() => {
-    if (likeIsSuccess) {
+    if (likeIsSuccess && singlePost) {
       setLikeAnimation(true);
 
       setTimeout(() => {
         setLikeAnimation(false);
       }, 1000);
     }
-  }, [likeIsSuccess]);
+  }, [singlePost]);
 
   const {
     data: comments,
@@ -97,8 +124,6 @@ export default function Postpage() {
   } = useGetAllCommentsQuery(postId);
 
   const commentList = comments?.data;
-
-  // console.log(commentList)
 
   const [
     createComment,
@@ -112,7 +137,6 @@ export default function Postpage() {
   ] = useCreateCommentMutation();
 
   const handleCreateComment = (e) => {
-    // e.preventDefault()
     createComment({ content, postId });
   };
 
@@ -121,22 +145,10 @@ export default function Postpage() {
       setContent('');
       // scroll to the botttom of the page
       window.scrollTo(0, document.getElementById('postpage').scrollHeight);
-      setMessage(createCommentData?.message);
-      setMessageType('success');
     }
-    if (createCommentIsError) {
-      setMessage(createCommentError?.message);
-      setMessageType('error');
-    }
-  }, [createCommentSuccess, createCommentIsError]);
+  }, [createCommentSuccess]);
 
   const post = singlePost?.data;
-
-  // console.log(post)
-
-  const handleToggleBookmarkModal = () => {
-    setToggleBookmarkModal(!toggleBookmarkModal);
-  };
 
   // grab all the errors from api queries and pass the message to queryError state
   useEffect(() => {
@@ -149,15 +161,6 @@ export default function Postpage() {
 
   return (
     <>
-      {toggleBookmarkModal && (
-        <BookmarkModal
-          handleToggleBookmarkModal={handleToggleBookmarkModal}
-          postId={post?._id}
-          postType={`Post`}
-          postTitle={post?.content}
-        />
-      )}
-
       {/* verifyEmailPopUp */}
       <VerifyEmailPopUp queryError={queryError} setQueryError={setQueryError} />
 
@@ -165,12 +168,6 @@ export default function Postpage() {
         id="postpage"
         className="mx-auto flex h-full w-full flex-col px-6 py-8 dashboard:w-[90%] dashboard:max-w-[35rem] xs:w-full "
       >
-        <Toast
-          message={message}
-          messageType={messageType}
-          setMessage={setMessage}
-        />
-        {/* <ToastError message={message} setMessage={setMessage} /> */}
         <div className="cursor-pointer" onClick={() => navigate(-1)}>
           <ArrowCircleLeft size="24" color="#1E1E1E" />
         </div>
@@ -310,10 +307,14 @@ export default function Postpage() {
                           size={17}
                           color="#555555"
                           className="cursor-pointer"
-                          onClick={handleToggleBookmarkModal}
+                          onClick={handleCreateBookmark}
                         />
                       ) : (
-                        <FcBookmark size={20} className="cursor-pointer" />
+                        <FcBookmark
+                          size={20}
+                          className="cursor-pointer"
+                          onClick={handleDeleteBookmark}
+                        />
                       )}
                     </div>
                   </div>

@@ -31,15 +31,15 @@ import Answercard from './answercard';
 // import createanswer
 import Createanswer from './createanswer';
 
-import { useGetQuestionByIdQuery } from '../../../../../app/slices/apiSlices/communitySlice';
+import { useGetQuestionByIdQuery } from '../../../../../app/slices/apiSlices/contentsSlice';
 
-import { useUpvoteQuestionMutation } from '../../../../../app/slices/apiSlices/communitySlice';
+import { useUpvoteQuestionMutation } from '../../../../../app/slices/apiSlices/contentsSlice';
 
-import { useDownvoteQuestionMutation } from '../../../../../app/slices/apiSlices/communitySlice';
+import { useDownvoteQuestionMutation } from '../../../../../app/slices/apiSlices/contentsSlice';
 
-import { useGetAnswersQuery } from '../../../../../app/slices/apiSlices/communitySlice';
+import { useGetAnswersQuery } from '../../../../../app/slices/apiSlices/contentsSlice';
 
-import { useDeleteQuestionMutation } from '../../../../../app/slices/apiSlices/communitySlice';
+import { useDeleteQuestionMutation } from '../../../../../app/slices/apiSlices/contentsSlice';
 
 import ReactTimeAgo from 'react-time-ago';
 import DOMPurify from 'isomorphic-dompurify';

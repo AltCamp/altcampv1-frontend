@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import BookmarkCard from './bookmarkCard';
 import { RiArrowDownSLine } from 'react-icons/ri';
-import { useGetAllBookmarksQuery } from '../../../../app/slices/apiSlices/bookmarkSlice';
+import { useGetAllBookmarksQuery } from '../../../../app/slices/apiSlices/contentsSlice';
 import EmptyBookmark from '../../../../assets/general/EmptyNotification.png';
 
 import Pagination from '../../components/pagination';

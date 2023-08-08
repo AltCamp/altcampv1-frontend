@@ -8,7 +8,7 @@ import { ArrowRotateLeft, ProfileCircle } from 'iconsax-react';
 
 import { useMediaHandler } from '../account/hooks/useMediaHandler';
 
-import { useCreatePostMutation } from '../../../../app/slices/apiSlices/feedSlice';
+import { useCreatePostMutation } from '../../../../app/slices/apiSlices/contentsSlice';
 
 import VerifyEmailPopUp from '../../components/verifyEmailPopUp';
 

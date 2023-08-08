@@ -9,7 +9,7 @@ import {
   useSearchParams,
 } from 'react-router-dom';
 
-import { useGetAllQuestionsQuery } from '../../../../app/slices/apiSlices/communitySlice';
+import { useGetAllQuestionsQuery } from '../../../../app/slices/apiSlices/contentsSlice';
 
 import { CloseCircle } from 'iconsax-react';
 
