@@ -31,15 +31,15 @@ import Answercard from './answercard';
 // import createanswer
 import Createanswer from './createanswer';
 
-import { useGetQuestionByIdQuery } from '../../../../../app/slices/apiSlices/contentsSlice';
-
-import { useUpvoteQuestionMutation } from '../../../../../app/slices/apiSlices/contentsSlice';
-
-import { useDownvoteQuestionMutation } from '../../../../../app/slices/apiSlices/contentsSlice';
-
-import { useGetAnswersQuery } from '../../../../../app/slices/apiSlices/contentsSlice';
-
-import { useDeleteQuestionMutation } from '../../../../../app/slices/apiSlices/contentsSlice';
+import {
+  useGetQuestionByIdQuery,
+  useUpvoteQuestionMutation,
+  useDownvoteQuestionMutation,
+  useGetAnswersQuery,
+  useDeleteQuestionMutation,
+  useDeleteBookmarkMutation,
+  useCreateBookmarkMutation,
+} from '../../../../../app/slices/apiSlices/contentsSlice';
 
 import ReactTimeAgo from 'react-time-ago';
 import DOMPurify from 'isomorphic-dompurify';
@@ -48,14 +48,12 @@ import { useSelector } from 'react-redux';
 
 import altlogo from '../../../../../assets/general/Authlogo.png';
 
-import BookmarkModal from '../../../components/bookmarkmodal/bookmarkmodal';
-
 import VerifyEmailPopUp from '../../../components/verifyEmailPopUp';
+
 export default function Questionpage() {
   const [deleteQuestionModal, setDeleteQuestionModal] = useState(false);
   const [shareModal, setShareModal] = useState(false);
   const [screenWidthState, setScreenWidthState] = useState(false);
-  const [toggleBookmarkModal, setToggleBookmarkModal] = useState();
 
   const [queryError, setQueryError] = useState();
 
@@ -210,8 +208,37 @@ export default function Questionpage() {
     },
   };
 
-  const handleToggleBookmarkModal = () => {
-    setToggleBookmarkModal(!toggleBookmarkModal);
+  const [
+    createBookmark,
+    {
+      data: createBookData,
+      isSuccess: createBookIsSuccess,
+      isLoading: createBookIsLoading,
+      isError: createBookIsError,
+      error: createBookError,
+    },
+  ] = useCreateBookmarkMutation();
+
+  const [
+    deleteBookmark,
+    {
+      data: deleteBookData,
+      isLoading: deleteBookIsLoading,
+      isSuccess: deleteBookIsSuccess,
+      isError: deleteBookIsError,
+      error: deleteBookError,
+    },
+  ] = useDeleteBookmarkMutation();
+
+  const handleCreateBookmark = () => {
+    createBookmark({
+      postId: questionId,
+      postType: 'Question',
+    });
+  };
+
+  const handleDeleteBookmark = () => {
+    deleteBookmark(questionId);
   };
 
   return (
@@ -237,14 +264,6 @@ export default function Questionpage() {
       {/* verifyEmailPopUp */}
       <VerifyEmailPopUp queryError={queryError} setQueryError={setQueryError} />
 
-      {toggleBookmarkModal && (
-        <BookmarkModal
-          handleToggleBookmarkModal={handleToggleBookmarkModal}
-          postId={questionDetails._id}
-          postType={`Question`}
-          postTitle={questionDetails.title}
-        />
-      )}
       {deleteQuestionModal && (
         <div className="fixed bottom-0 left-0 top-0 z-50 flex h-screen w-screen animate-fadeIn items-center justify-center overflow-hidden bg-black/50 ">
           <div className="relative flex h-[20rem] w-[20rem] flex-col items-center justify-center gap-8 rounded-[4px] bg-white p-8 md:h-[15rem] md:w-[15rem] sm:h-[13rem] sm:w-[13rem] sm:gap-2 sm:p-4 ">
@@ -436,7 +455,7 @@ export default function Questionpage() {
                           className="cursor-pointer text-inherit"
                         />
                       </Tooltip>
-                      {questionDetails?.downvitedBy.length}
+                      {questionDetails?.downvotedBy.length}
                     </div>
                   </div>
                   <div className="flex items-center gap-2 ">
@@ -478,10 +497,14 @@ export default function Questionpage() {
                         size={17}
                         color="#555555"
                         className="cursor-pointer"
-                        onClick={handleToggleBookmarkModal}
+                        onClick={handleCreateBookmark}
                       />
                     ) : (
-                      <FcBookmark size={20} className="cursor-pointer" />
+                      <FcBookmark
+                        size={20}
+                        className="cursor-pointer"
+                        onClick={handleDeleteBookmark}
+                      />
                     )}
                   </div>
                 </div>

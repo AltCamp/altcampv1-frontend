@@ -32,7 +32,7 @@ export const contentsSlice = createApi({
         url: url.GET_POST_BY_ID(url, id),
         method: 'GET',
       }),
-      providesTags: ['Post'],
+      providesTags: (result, error, arg) => ['Post', { type: 'Post', id: arg }],
     }),
     createPost: builder.mutation({
       query: (body) => ({
@@ -57,7 +57,16 @@ export const contentsSlice = createApi({
         url: url.GET_ALL_COMMENTS_URL(url, postId),
         method: 'GET',
       }),
-      providesTags: ['Comment'],
+      providesTags: (result, error, arg) =>
+        result
+          ? [
+              ...result.data.map((comment) => ({
+                type: 'Comment',
+                id: comment?._id,
+              })),
+              'Comment',
+            ]
+          : ['Comment'],
     }),
     createComment: builder.mutation({
       query: (body) => ({
@@ -65,7 +74,11 @@ export const contentsSlice = createApi({
         method: 'POST',
         body,
       }),
-      invalidatesTags: ['Post', 'Comment'],
+      invalidatesTags: (result, error, arg) => [
+        { type: 'Post', id: arg.postId },
+        'Post',
+        'Comment',
+      ],
     }),
     likeComment: builder.mutation({
       query: (id) => ({
@@ -81,14 +94,26 @@ export const contentsSlice = createApi({
         url: url.GET_ALL_QUESTIONS_URL(url, page, true, limit),
         method: 'GET',
       }),
-      providesTags: ['Question'],
+      providesTags: (result, error, arg) =>
+        result
+          ? [
+              ...result.data.map((question) => ({
+                type: 'Question',
+                id: question?._id,
+              })),
+              'Question',
+            ]
+          : ['Question'],
     }),
     getQuestionById: builder.query({
       query: (id) => ({
         url: url.GET_QUESTION_BY_ID_URL(url, id),
         method: 'GET',
       }),
-      providesTags: ['Question'],
+      providesTags: (result, error, arg) => [
+        'Question',
+        { type: 'Question', id: arg },
+      ],
     }),
     createQuestion: builder.mutation({
       query: (body) => ({
@@ -104,7 +129,10 @@ export const contentsSlice = createApi({
         method: 'PATCH',
         body,
       }),
-      invalidatesTags: ['Question'],
+      invalidatesTags: (result, error, arg) => [
+        { type: 'Question', id: arg.id },
+        'Question',
+      ],
     }),
     deleteQuestion: builder.mutation({
       query: (id) => ({
@@ -118,14 +146,20 @@ export const contentsSlice = createApi({
         url: url.UPVOTE_QUESTION_URL(url, id),
         method: 'PATCH',
       }),
-      invalidatesTags: ['Question'],
+      invalidatesTags: (result, error, arg) => [
+        { type: 'Question', id: arg },
+        'Question',
+      ],
     }),
     downvoteQuestion: builder.mutation({
       query: (id) => ({
         url: url.DOWNVOTE_QUESTION_URL(url, id),
         method: 'PATCH',
       }),
-      invalidatesTags: ['Question'],
+      invalidatesTags: (result, error, arg) => [
+        { type: 'Question', id: arg },
+        'Question',
+      ],
     }),
 
     // Answers
@@ -134,7 +168,16 @@ export const contentsSlice = createApi({
         url: url.GET_ALL_ANSWERS_URL(url, questionId),
         method: 'GET',
       }),
-      providesTags: ['Answer'],
+      providesTags: (result, error, arg) =>
+        result
+          ? [
+              ...result.data.map((answer) => ({
+                type: 'Answer',
+                id: answer?._id,
+              })),
+              'Answer',
+            ]
+          : ['Answer'],
     }),
     createAnswer: builder.mutation({
       query: (body) => ({
@@ -142,7 +185,10 @@ export const contentsSlice = createApi({
         method: 'POST',
         body,
       }),
-      invalidatesTags: ['Answer', 'Question'],
+      invalidatesTags: (result, error, arg) => [
+        { type: 'Question', id: arg.questionId },
+        'Answer',
+      ],
     }),
     updateAnswer: builder.mutation({
       query: ({ answerId, body }) => ({
@@ -150,21 +196,30 @@ export const contentsSlice = createApi({
         method: 'PATCH',
         body,
       }),
-      invalidatesTags: ['Answer'],
+      invalidatesTags: (result, error, arg) => [
+        { type: 'Answer', id: arg.answerId },
+        'Answer',
+      ],
     }),
     upvoteAnswer: builder.mutation({
       query: (answerId) => ({
         url: url.UPVOTE_ANSWER_URL(url, answerId),
         method: 'PATCH',
       }),
-      invalidatesTags: ['Answer'],
+      invalidatesTags: (result, error, arg) => [
+        { type: 'Answer', id: arg },
+        'Answer',
+      ],
     }),
     downvoteAnswer: builder.mutation({
       query: (answerId) => ({
         url: url.DOWNVOTE_ANSWER_URL(url, answerId),
         method: 'PATCH',
       }),
-      invalidatesTags: ['Answer'],
+      invalidatesTags: (result, error, arg) => [
+        { type: 'Answer', id: arg },
+        'Answer',
+      ],
     }),
 
     // BOOKMARK RELATED QUERIES AND MUTATIONS

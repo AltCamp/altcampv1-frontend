@@ -16,12 +16,12 @@ import {
   useUpvoteAnswerMutation,
   useDownvoteAnswerMutation,
   useUpdateAnswerMutation,
+  useCreateBookmarkMutation,
+  useDeleteBookmarkMutation,
 } from '../../../../../app/slices/apiSlices/contentsSlice';
 
 import { useSelector } from 'react-redux';
 import RichEditor from '../richeditor';
-
-import BookmarkModal from '../../../components/bookmarkmodal/bookmarkmodal';
 
 import VerifyEmailPopUp from '../../../components/verifyEmailPopUp';
 
@@ -32,7 +32,6 @@ export default function Answercard({ answer, isBookmarked }) {
   const [content, setContent] = useState(answer?.content);
   const [latestAnswer, setLatestAnswer] = useState(answer);
   const [editMode, setEditMode] = useState(false);
-  const [toggleBookmarkModal, setToggleBookmarkModal] = useState();
   const [bookmarked, setBookmarked] = useState(
     isBookmarked || latestAnswer?.isBookmarked
   );
@@ -119,10 +118,6 @@ export default function Answercard({ answer, isBookmarked }) {
     }
   }, [updateAnswerSuccess]);
 
-  const handleToggleBookmarkModal = () => {
-    setToggleBookmarkModal(!toggleBookmarkModal);
-  };
-
   const highlight = `bg-neutral-400 rounded-2 p-2 animate-highlights`;
 
   useEffect(() => {
@@ -153,17 +148,49 @@ export default function Answercard({ answer, isBookmarked }) {
     }
   }, [upvoteIsError, downvoteIsError, updateAnswerIsError]);
 
+  const [
+    createBookmark,
+    {
+      data: createBookData,
+      isSuccess: createBookIsSuccess,
+      isLoading: createBookIsLoading,
+      isError: createBookIsError,
+      error: createBookError,
+    },
+  ] = useCreateBookmarkMutation();
+
+  const [
+    deleteBookmark,
+    {
+      data: deleteBookData,
+      isLoading: deleteBookIsLoading,
+      isSuccess: deleteBookIsSuccess,
+      isError: deleteBookIsError,
+      error: deleteBookError,
+    },
+  ] = useDeleteBookmarkMutation();
+
+  const handleCreateBookmark = () => {
+    createBookmark({
+      postId: answer?._id,
+      postType: 'Answer',
+    });
+  };
+
+  const handleDeleteBookmark = () => {
+    deleteBookmark(answer._id);
+  };
+
+  useEffect(() => {
+    if (answer && !isBookmarked) {
+      setBookmarked(answer?.isBookmarked);
+    } else if (isBookmarked) {
+      setBookmarked(isBookmarked);
+    }
+  }, [answer, isBookmarked]);
+
   return (
     <>
-      {toggleBookmarkModal && (
-        <BookmarkModal
-          handleToggleBookmarkModal={handleToggleBookmarkModal}
-          postId={answer._id}
-          postType={`Answer`}
-          postTitle={answer?.content}
-        />
-      )}
-
       {/* verifyEmailPopUp */}
       <VerifyEmailPopUp queryError={queryError} setQueryError={setQueryError} />
 
@@ -224,12 +251,24 @@ export default function Answercard({ answer, isBookmarked }) {
                 <ReactTimeAgo date={latestAnswer?.createdAt} locale="en-US" />
               </span>
             </div>
-            <div className="font-light leading-normal text-neutral-900 ">
-              <div
-                className="w-full "
-                dangerouslySetInnerHTML={{ __html: latestAnswer?.content }}
-              />
-            </div>
+            {location.pathname.includes('bookmarks') ? (
+              <Link
+                to={`/dashboard/community/question/${latestAnswer?.question?._id}/${latestAnswer?.question?.slug}`}
+                className="font-light leading-normal text-neutral-900 "
+              >
+                <div
+                  className="w-full "
+                  dangerouslySetInnerHTML={{ __html: latestAnswer?.content }}
+                />
+              </Link>
+            ) : (
+              <div className="font-light leading-normal text-neutral-900 ">
+                <div
+                  className="w-full "
+                  dangerouslySetInnerHTML={{ __html: latestAnswer?.content }}
+                />
+              </div>
+            )}
 
             <div className="flex items-center justify-end gap-3">
               <div
@@ -272,10 +311,14 @@ export default function Answercard({ answer, isBookmarked }) {
                     size={17}
                     color="#555555"
                     className="cursor-pointer"
-                    onClick={handleToggleBookmarkModal}
+                    onClick={handleCreateBookmark}
                   />
                 ) : (
-                  <FcBookmark size={20} className="cursor-pointer" />
+                  <FcBookmark
+                    size={20}
+                    className="cursor-pointer"
+                    onClick={handleDeleteBookmark}
+                  />
                 )}
               </div>
               {user?._id === latestAnswer?.author?._id && (

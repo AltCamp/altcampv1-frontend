@@ -144,7 +144,7 @@ export default function Postpage() {
     if (createCommentSuccess) {
       setContent('');
       // scroll to the botttom of the page
-      window.scrollTo(0, document.getElementById('postpage').scrollHeight);
+      scrollTo(100, 200);
     }
   }, [createCommentSuccess]);
 
@@ -166,7 +166,7 @@ export default function Postpage() {
 
       <div
         id="postpage"
-        className="mx-auto flex h-full w-full flex-col px-6 py-8 dashboard:w-[90%] dashboard:max-w-[35rem] xs:w-full "
+        className="mx-auto flex h-[calc(100vh-2rem)] w-full flex-col px-6 py-8 dashboard:w-[90%] dashboard:max-w-[35rem] xs:w-full "
       >
         <div className="cursor-pointer" onClick={() => navigate(-1)}>
           <ArrowCircleLeft size="24" color="#1E1E1E" />

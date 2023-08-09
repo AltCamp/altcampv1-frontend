@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
@@ -12,16 +12,18 @@ import ReactTimeAgo from 'react-time-ago';
 
 import { useSelector } from 'react-redux';
 
-import { useLikeCommentMutation } from '../../../../../app/slices/apiSlices/contentsSlice';
-
-import BookmarkModal from '../../../components/bookmarkmodal/bookmarkmodal';
+import {
+  useLikeCommentMutation,
+  useCreateBookmarkMutation,
+  useDeleteBookmarkMutation,
+} from '../../../../../app/slices/apiSlices/contentsSlice';
 
 import VerifyEmailPopUp from '../../../components/verifyEmailPopUp';
+
 export default function Postcomment({ comment, isBookmarked }) {
   const [latestComment, setLatestComment] = useState(comment);
 
   const [likeAnimation, setLikeAnimation] = useState(false);
-  const [toggleBookmarkModal, setToggleBookmarkModal] = useState();
 
   const [bookmarked, setBookmarked] = useState(
     isBookmarked || latestComment?.isBookmarked
@@ -46,6 +48,39 @@ export default function Postcomment({ comment, isBookmarked }) {
     },
   ] = useLikeCommentMutation();
 
+  const [
+    createBookmark,
+    {
+      data: createBookData,
+      isSuccess: createBookIsSuccess,
+      isLoading: createBookIsLoading,
+      isError: createBookIsError,
+      error: createBookError,
+    },
+  ] = useCreateBookmarkMutation();
+
+  const [
+    deleteBookmark,
+    {
+      data: deleteBookData,
+      isLoading: deleteBookIsLoading,
+      isSuccess: deleteBookIsSuccess,
+      isError: deleteBookIsError,
+      error: deleteBookError,
+    },
+  ] = useDeleteBookmarkMutation();
+
+  const handleCreateBookmark = () => {
+    createBookmark({
+      postId: comment?._id,
+      postType: 'Comment',
+    });
+  };
+
+  const handleDeleteBookmark = () => {
+    deleteBookmark(comment._id);
+  };
+
   const handleLikeComment = () => {
     likeComment(comment?._id);
   };
@@ -63,10 +98,6 @@ export default function Postcomment({ comment, isBookmarked }) {
       setQueryError(likeCommentError?.message);
     }
   }, [likeCommentIsSuccess, likeCommentIsError.likeCommentData]);
-
-  const handleToggleBookmarkModal = () => {
-    setToggleBookmarkModal(!toggleBookmarkModal);
-  };
 
   const highlight = `bg-neutral-400 rounded-2 p-2 animate-highlights`;
 
@@ -88,17 +119,16 @@ export default function Postcomment({ comment, isBookmarked }) {
     navigate(location?.pathname, { replace: true });
   }, [location?.state?.postId]);
 
+  useEffect(() => {
+    if (comment && !isBookmarked) {
+      setBookmarked(comment?.isBookmarked);
+    } else if (isBookmarked) {
+      setBookmarked(isBookmarked);
+    }
+  }, [comment, isBookmarked]);
+
   return (
     <>
-      {toggleBookmarkModal && (
-        <BookmarkModal
-          handleToggleBookmarkModal={handleToggleBookmarkModal}
-          postId={comment?._id}
-          postType={`Comment`}
-          postTitle={comment?.content}
-        />
-      )}
-
       {/* verifyEmailPopUp */}
       <VerifyEmailPopUp queryError={queryError} setQueryError={setQueryError} />
 
@@ -152,14 +182,22 @@ export default function Postcomment({ comment, isBookmarked }) {
           </div>
         </div>
 
-        <div className="flex flex-col gap-[0.8rem] overflow-hidden font-medium text-neutral-900 ">
-          <div className="">
-            <p>{latestComment?.content}</p>
+        {location.pathname.includes('bookmarks') ? (
+          <Link
+            to={`/dashboard/feed/post/${latestComment?.post}`}
+            className="flex flex-col gap-[0.8rem] overflow-hidden font-medium text-neutral-900 "
+          >
+            <div className="">
+              <p>{latestComment?.content}</p>
+            </div>
+          </Link>
+        ) : (
+          <div className="flex flex-col gap-[0.8rem] overflow-hidden font-medium text-neutral-900 ">
+            <div className="">
+              <p>{latestComment?.content}</p>
+            </div>
           </div>
-          {/* <div className={postlatestCommentStyles.media}>
-                <img src={postMedia} alt='' className='' />
-              </div> */}
-        </div>
+        )}
 
         <div className="flex items-center justify-between ">
           <div className="flex items-center gap-[0.8rem] ">
@@ -208,10 +246,14 @@ export default function Postcomment({ comment, isBookmarked }) {
                   size={17}
                   color="#555555"
                   className="cursor-pointer"
-                  onClick={handleToggleBookmarkModal}
+                  onClick={handleCreateBookmark}
                 />
               ) : (
-                <FcBookmark size={20} className="cursor-pointer" />
+                <FcBookmark
+                  size={20}
+                  className="cursor-pointer"
+                  onClick={handleDeleteBookmark}
+                />
               )}
             </div>
           </div>

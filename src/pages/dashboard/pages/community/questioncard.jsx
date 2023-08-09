@@ -17,38 +17,62 @@ import ReactTimeAgo from 'react-time-ago';
 
 import { useSelector } from 'react-redux';
 
-import BookmarkModal from '../../components/bookmarkmodal/bookmarkmodal';
-
-import { useDeleteBookmarkMutation } from '../../../../app/slices/apiSlices/contentsSlice';
+import {
+  useDeleteBookmarkMutation,
+  useCreateBookmarkMutation,
+} from '../../../../app/slices/apiSlices/contentsSlice';
 
 export default function Questioncard({ question, isBookmarked }) {
-  // console.log(bookmarkState)
-
-  const [toggleBookmarkModal, setToggleBookmarkModal] = useState();
   const [bookmarked, setBookmarked] = useState(
     isBookmarked || question?.isBookmarked
   );
   const { user } = useSelector((state) => state?.user?.user);
 
-  const handleToggleBookmarkModal = () => {
-    setToggleBookmarkModal(!toggleBookmarkModal);
+  const [
+    createBookmark,
+    {
+      data: createBookData,
+      isSuccess: createBookIsSuccess,
+      isLoading: createBookIsLoading,
+      isError: createBookIsError,
+      error: createBookError,
+    },
+  ] = useCreateBookmarkMutation();
+
+  const [
+    deleteBookmark,
+    {
+      data: deleteBookData,
+      isLoading: deleteBookIsLoading,
+      isSuccess: deleteBookIsSuccess,
+      isError: deleteBookIsError,
+      error: deleteBookError,
+    },
+  ] = useDeleteBookmarkMutation();
+
+  const handleCreateBookmark = () => {
+    createBookmark({
+      postId: question?._id,
+      postType: 'Question',
+    });
   };
 
-  const [deleteBookmark, { isSuccess, isLoading, isError, error }] =
-    useDeleteBookmarkMutation();
+  const handleDeleteBookmark = () => {
+    deleteBookmark(question._id);
+  };
 
   const location = useLocation();
 
+  useEffect(() => {
+    if (question && !isBookmarked) {
+      setBookmarked(question?.isBookmarked);
+    } else if (isBookmarked) {
+      setBookmarked(isBookmarked);
+    }
+  }, [question, isBookmarked]);
+
   return (
     <>
-      {toggleBookmarkModal && (
-        <BookmarkModal
-          handleToggleBookmarkModal={handleToggleBookmarkModal}
-          postId={question._id}
-          postType={`Question`}
-          postTitle={question.title}
-        />
-      )}
       <div
         className={`flex h-fit w-full flex-col gap-[0.2rem] rounded-[5px] px-3 py-4 shadow-[0px_0px_10px_rgba(0,_0,_0,_0.1)] sm:h-auto sm:gap-4 
       ${
@@ -118,10 +142,14 @@ export default function Questioncard({ question, isBookmarked }) {
                     size={17}
                     color="#555555"
                     className="cursor-pointer"
-                    onClick={handleToggleBookmarkModal}
+                    onClick={handleCreateBookmark}
                   />
                 ) : (
-                  <FcBookmark size={20} className="cursor-pointer" />
+                  <FcBookmark
+                    size={20}
+                    className="cursor-pointer"
+                    onClick={handleDeleteBookmark}
+                  />
                 )}
               </div>
             </div>
