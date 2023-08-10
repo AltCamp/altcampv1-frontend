@@ -329,7 +329,7 @@ export default function Questionpage() {
         <div className="relative flex h-full w-full flex-col px-12 py-8 sm:px-3">
           <div className="flex w-full flex-col gap-8 border-b-2 border-neutral-300 pb-5 ">
             <div
-              className="items-cenetr flex cursor-pointer gap-2 text-[14px] font-medium text-neutral-700 "
+              className="flex cursor-pointer items-center gap-2 text-[14px] font-medium text-neutral-700 "
               onClick={() => navigate(-1)}
             >
               <ArrowCircleLeft size="23" className="" />

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 
 import { ProfileCircle, CloseCircle } from 'iconsax-react';
 
@@ -11,12 +11,11 @@ import Postcard from './postcard';
 import { useGetAllPostsQuery } from '../../../../app/slices/apiSlices/contentsSlice';
 
 import { useSelector } from 'react-redux';
-import Createpost from './createpost';
 
 export default function Feed() {
-  const [toggleCreatePost, setToggleCreatePost] = useState(false);
-
   const { user } = useSelector((state) => state?.user?.user);
+
+  const navigate = useNavigate();
 
   const [page, setPage] = useState(1);
 
@@ -36,32 +35,9 @@ export default function Feed() {
     }
   }, [data, isSuccess]);
 
-  const handleToggleCreatePost = () => {
-    setToggleCreatePost(!toggleCreatePost);
-  };
-
-  useEffect(() => {
-    if (toggleCreatePost) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-  }, [toggleCreatePost]);
-
   return (
     <div className="mx-auto mb-16 flex h-full w-full overflow-y-scroll p-8 tab:w-[75%] md:p-4 sm:w-full ">
-      {toggleCreatePost && (
-        <div className="fixed left-0 top-0 z-50 flex h-full  w-screen items-center justify-center overflow-hidden bg-black/50 xs:overflow-scroll ">
-          <div className="relative flex h-[80%] w-1/2 flex-col items-center justify-center gap-6 rounded-[4px] bg-white p-8 tab:h-auto tab:w-[70%] md:w-[80%] md:p-3 xs:w-[95%] ">
-            <CloseCircle
-              size="20"
-              className="absolute -right-8 top-0 cursor-pointer text-white xs:-top-8 xs:left-1/2 xs:-translate-x-1/2 "
-              onClick={handleToggleCreatePost}
-            />
-            <Createpost setToggleCreatePost={setToggleCreatePost} />
-          </div>
-        </div>
-      )}
+      <Outlet />
       <div className="flex w-full flex-col gap-4 md:gap-8">
         <div className="">
           <h1 className="text-[20px] font-medium text-neutral-900 ">Feed</h1>
@@ -95,8 +71,8 @@ export default function Feed() {
             type="text"
             placeholder="What's on your mind?"
             className="h-full w-full cursor-text rounded-[8px] 
-            border-[1px] border-neutral-400 bg-white px-4 py-2 text-[0.9rem] text-neutral-600 placeholder-neutral-500 shadow-[0px_2px_2px_rgba(33,_37,_41,_0.06),0px_0px_1px_rgba(33,_37,_41,_0.08)] outline-none"
-            onFocus={handleToggleCreatePost}
+            border-[1px] border-neutral-400 bg-white px-4 py-2 text-[0.9rem] text-neutral-600 placeholder-neutral-500 shadow-[0px_2px_2px_rgba(33,_37,_41,_0.06),0px_0px_1px_rgba(33,_37,_41,_0.08)] outline-none "
+            onFocus={() => navigate('/dashboard/feed/createpost')}
           />
           <div className="w-10 cursor-pointer">
             <RiImageLine size="24" color="#555555" />

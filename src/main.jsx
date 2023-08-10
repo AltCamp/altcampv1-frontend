@@ -77,7 +77,9 @@ import {
 
   // subpages of feed
   Postpage,
+  Createpost,
 } from './pages/dashboard/pages';
+
 import Updatebio from './pages/dashboard/pages/account/updatebio/updateBio';
 import UserProfile from './pages/dashboard/pages/users/userProfile/userProfile';
 import MyActivities from './pages/dashboard/pages/account/myActivities/myActivities';
@@ -174,6 +176,9 @@ const router = createBrowserRouter([
       {
         path: '/dashboard/feed',
         element: <Feed />,
+        children: [
+          { path: '/dashboard/feed/createpost', element: <Createpost /> },
+        ],
       },
       {
         path: '/dashboard/feed/post/:postId',

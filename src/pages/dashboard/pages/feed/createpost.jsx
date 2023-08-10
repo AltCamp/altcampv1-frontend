@@ -4,7 +4,11 @@ import { useNavigate } from 'react-router-dom';
 
 import { LuShare } from 'react-icons/lu';
 
-import { ArrowRotateLeft, ProfileCircle } from 'iconsax-react';
+import { BiSolidImageAdd } from 'react-icons/bi';
+
+import { IoMdClose } from 'react-icons/io';
+
+import { ArrowCircleLeft, ProfileCircle, CloseCircle } from 'iconsax-react';
 
 import { useMediaHandler } from '../account/hooks/useMediaHandler';
 
@@ -14,8 +18,8 @@ import VerifyEmailPopUp from '../../components/verifyEmailPopUp';
 
 import { useSelector } from 'react-redux';
 
-export default function Createpost({ setToggleCreatePost }) {
-  const [content, setContent] = useState(false);
+export default function Createpost() {
+  const [content, setContent] = useState('');
 
   const [queryError, setQueryError] = useState();
 
@@ -31,27 +35,25 @@ export default function Createpost({ setToggleCreatePost }) {
 
   const navigate = useNavigate();
   // custom hook for uploading image
-  const { image, video, caption, error, handleMedia, createFormData } =
-    useMediaHandler();
+  const { image, video, error, handleMedia, removeMedia } = useMediaHandler();
 
   // style format for drag and drop
   const handleStyleEnter = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    dropRef.current.style.border =
-      '2px dashed var(--secondary-clr-lter-purple)';
+    dropRef.current.style.border = '2px dashed var(--secondary-clr-lter-blue)';
   };
 
   const handleStyleLeave = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    dropRef.current.style.border = '1px solid var(--secondary-clr-lter-purple)';
+    dropRef.current.style.border = '';
   };
 
   const handleStyleDrop = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    dropRef.current.style.border = '1px solid var(--secondary-clr-lter-purple)';
+    dropRef.current.style.border = '';
     handleMedia(e.dataTransfer.files[0]);
   };
 
@@ -69,7 +71,7 @@ export default function Createpost({ setToggleCreatePost }) {
 
   useEffect(() => {
     if (isSuccess) {
-      setToggleCreatePost(false);
+      navigate('/dashboard/feed');
     }
     if (isError) {
       setQueryError(createPostError?.data.message);
@@ -77,150 +79,152 @@ export default function Createpost({ setToggleCreatePost }) {
   }, [isSuccess]);
 
   return (
-    <div className="flex w-full flex-col">
-      {/* verifyEmailPopUp */}
-      <VerifyEmailPopUp queryError={queryError} setQueryError={setQueryError} />
+    <div className="fixed left-0 top-0 z-50 flex h-screen  w-screen items-center justify-center overflow-hidden bg-black/50 sm:overflow-scroll xs:mt-[4.9rem]  ">
+      <div className="relative flex h-fit w-[30rem] flex-col items-center gap-3 rounded-[4px] bg-white p-4 md:p-3 xs:h-full xs:w-full ">
+        <CloseCircle
+          size="20"
+          className="absolute -right-8 top-0 cursor-pointer text-white sm:-top-8 sm:left-1/2 sm:-translate-x-1/2 "
+          onClick={() => navigate('/dashboard/feed')}
+        />
+        <div className="flex w-full flex-col">
+          {/* verifyEmailPopUp */}
+          <VerifyEmailPopUp
+            queryError={queryError}
+            setQueryError={setQueryError}
+          />
 
-      <div className="flex w-full flex-col gap-4 pb-4">
-        <h1 className="text-[18px] font-semibold text-neutral-900">
-          Add a post
-        </h1>
-        <p className="text-[14px] font-normal text-neutral-600">
-          To successfully upload your file, make sure they follow the
-          guidelines.
-        </p>
+          <div className="flex w-full flex-col gap-1 pb-4">
+            <div
+              className="hidden cursor-pointer items-center gap-2 text-[14px] font-medium text-neutral-700 xs:flex "
+              onClick={() => navigate('/dashboard/feed')}
+            >
+              <ArrowCircleLeft
+                size="20"
+                className=" cursor-pointer text-black "
+              />
+              <div className="">Back to Feed</div>
+            </div>
+            <h1 className="text-[18px] font-semibold text-neutral-900">
+              Add a post
+            </h1>
+            <p className="hidden text-[14px] font-normal text-neutral-600">
+              To successfully upload your file, make sure they follow the
+              guidelines.
+            </p>
+          </div>
+
+          <div className="mb-2 flex items-center gap-3">
+            <div className="h-10 w-10 overflow-hidden rounded-full">
+              {user?.profilePicture ? (
+                <img
+                  src={user?.profilePicture}
+                  alt=""
+                  className="h-full w-full object-cover"
+                />
+              ) : (
+                <ProfileCircle
+                  size={45}
+                  color="#555555"
+                  className="h-full w-full object-cover"
+                />
+              )}
+            </div>
+            <div className="font-semibold text-neutral-900 ">
+              {user?.firstName} {user?.lastName}
+            </div>
+          </div>
+
+          <form
+            action=""
+            className="flex w-full flex-col gap-3 py-2"
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleCreatePost();
+            }}
+          >
+            <div
+              className="flex h-auto w-full flex-col gap-1  rounded-lg border border-neutral-200 p-2 focus-within:ring-2 focus-within:ring-secondary-400 focus-within:ring-offset-2 focus:border-primary-600"
+              ref={dropRef}
+              onDragEnter={(e) => handleStyleEnter(e)}
+              onDragLeave={(e) => handleStyleLeave(e)}
+              onDragOver={(e) => handleStyleEnter(e)}
+              onDrop={(e) => handleStyleDrop(e)}
+            >
+              <textarea
+                name="text"
+                id="text"
+                cols="30"
+                rows="10"
+                placeholder="Write something..."
+                ref={inputRef}
+                value={content}
+                className="h-16 w-full resize-none border-none p-0 outline-none focus:outline-none focus:ring-0 "
+                onChange={(e) => setContent(e.target.value)}
+              ></textarea>
+              <div
+                className={`flex h-auto w-full flex-col items-center justify-center 
+            ${image || video ? 'h-[15rem] ' : 'h-auto'}
+            `}
+              >
+                {image ? (
+                  <div className="relative h-full w-full">
+                    <div
+                      className="absolute right-1 top-1 flex h-8 w-8 cursor-pointer items-center justify-center  rounded-full  bg-black/50  text-white transition-all hover:shadow-md"
+                      onClick={() => removeMedia()}
+                    >
+                      <IoMdClose size={25} />
+                    </div>
+                    <img
+                      src={image}
+                      alt="media"
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                ) : video ? (
+                  <div className="relative h-full w-full">
+                    <div
+                      className="absolute right-1 top-1 flex h-8 w-8 cursor-pointer items-center justify-center  rounded-full  bg-black/50  text-white transition-all hover:shadow-md"
+                      onClick={() => removeMedia()}
+                    >
+                      <IoMdClose size={25} />
+                    </div>
+                    <video
+                      className="h-full w-full object-cover"
+                      controls
+                      width="250"
+                    >
+                      <source src={video} type="video/*" />
+                    </video>
+                  </div>
+                ) : null}
+              </div>
+
+              <label
+                htmlFor="media"
+                className="w-fit cursor-pointer text-secondary-400"
+              >
+                <BiSolidImageAdd size={28} />
+                <input
+                  type="file"
+                  name="media"
+                  id="media"
+                  ref={chooseref}
+                  onChange={(e) => handleMedia(e.target.files[0])}
+                  className="hidden"
+                />
+              </label>
+            </div>
+
+            <button
+              type="submit"
+              className="auth-btn mt-0 w-fit self-end px-9 py-2"
+              disabled={isLoading}
+            >
+              {isLoading ? 'Posting...' : 'Post'}
+            </button>
+          </form>
+        </div>
       </div>
-
-      <div className="flex items-center gap-3">
-        <div className="h-10 w-10 overflow-hidden rounded-full">
-          {user?.profilePicture ? (
-            <img
-              src={user?.profilePicture}
-              alt=""
-              className="h-full w-full object-cover"
-            />
-          ) : (
-            <ProfileCircle
-              size={45}
-              color="#555555"
-              className="h-full w-full object-cover"
-            />
-          )}
-        </div>
-        <div className="font-semibold text-neutral-900 ">
-          {user?.firstName} {user?.lastName}
-        </div>
-      </div>
-
-      <form
-        action=""
-        className="flex w-full flex-col gap-4 py-4"
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleCreatePost();
-        }}
-      >
-        <div className="flex w-full flex-col gap-4">
-          <textarea
-            name="text"
-            id="text"
-            cols="30"
-            rows="10"
-            placeholder="Write something..."
-            ref={inputRef}
-            className="h-16 w-full resize-none rounded-lg border border-neutral-200 p-4 focus:border-primary-600 focus:outline-none focus:ring-2 focus:ring-secondary-400 focus:ring-offset-2"
-            onChange={(e) => setContent(e.target.value)}
-          ></textarea>
-        </div>
-        <div
-          className={`flex h-[15rem] w-full flex-col items-center justify-center border-2
-          border-dashed border-secondary-50 
-          `}
-          ref={dropRef}
-          onDragEnter={(e) => handleStyleEnter(e)}
-          onDragLeave={(e) => handleStyleLeave(e)}
-          onDragOver={(e) => handleStyleEnter(e)}
-          onDrop={(e) => handleStyleDrop(e)}
-        >
-          {image ? (
-            <div className="relative h-full w-full">
-              <label
-                htmlFor="media"
-                className="absolute right-1 top-1 flex h-8 w-24 cursor-pointer items-center justify-center gap-1 rounded-md border border-secondary-400 bg-white text-[14px] font-medium text-secondary-400 transition-all hover:shadow-md"
-              >
-                Change <ArrowRotateLeft size="18" color="#585DCC" />
-              </label>
-              <input
-                type="file"
-                name="media"
-                id="media"
-                ref={chooseref}
-                onChange={(e) => handleMedia(e.target.files[0])}
-                className="hidden"
-              />
-              <img
-                src={image}
-                alt="media"
-                className="h-full w-full object-cover"
-              />
-            </div>
-          ) : video ? (
-            <div className="relative h-full w-full">
-              <label
-                htmlFor="media"
-                className="absolute right-1 top-1 flex h-8 w-24 cursor-pointer items-center justify-center gap-1 rounded-md border border-secondary-400 bg-white text-[14px] font-medium text-secondary-400 transition-all hover:shadow-md"
-              >
-                Change <ArrowRotateLeft size="18" color="#585DCC" />
-              </label>
-              <input
-                type="file"
-                name="media"
-                id="media"
-                ref={chooseref}
-                onChange={(e) => handleMedia(e.target.files[0])}
-                className="hidden"
-              />
-              <video
-                className="h-full w-full object-cover"
-                controls
-                width="250"
-              >
-                <source src={video} type="video/*" />
-              </video>
-            </div>
-          ) : (
-            <div className="flex w-[60%] flex-col items-center justify-center gap-4 text-center tab:w-full">
-              <LuShare className="text-[2rem] text-secondary-500 " />
-              <p className="text-[14px] font-normal text-neutral-600 ">
-                Drag and drop files to upload resources. For photo, use JPG or
-                PNG. For videos, use MP4 or MOV.
-              </p>
-              <label
-                htmlFor="media"
-                className="auth-btn flex w-fit items-center justify-center px-4 py-2"
-              >
-                Select from your device
-              </label>
-              <input
-                type="file"
-                name="media"
-                id="media"
-                ref={chooseref}
-                onChange={(e) => handleMedia(e.target.files[0])}
-                className="hidden"
-              />
-            </div>
-          )}
-        </div>
-
-        <button
-          type="submit"
-          className="auth-btn w-fit self-end px-9 py-2"
-          disabled={isLoading}
-        >
-          {isLoading ? 'Posting...' : 'Post'}
-        </button>
-      </form>
     </div>
   );
 }
