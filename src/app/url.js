@@ -118,6 +118,12 @@ const url = {
   LIKE_COMMENT_URL(url, id) {
     return `${url.COMMENTS_URL}/${id}/upvote`;
   },
+
+  // TAGS
+  TAGS_URL: '/tags',
+  GET_SEARCHED_TAGS_URL(url, tagName) {
+    return `${url.TAGS_URL}?tagName=${tagName}`;
+  },
 };
 
 export default url;

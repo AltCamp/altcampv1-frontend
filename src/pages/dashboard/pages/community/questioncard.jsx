@@ -90,12 +90,14 @@ export default function Questioncard({ question, isBookmarked }) {
             <h3 className="text-[18px] text-neutral-900">{question.title}</h3>
           </Link>
           <div className="flex gap-1">
-            <span className="cursor-pointer rounded-[4px] bg-primary-400 px-1 py-[0.2rem] text-center text-[12px] font-medium text-neutral-900 transition-all duration-200 ease-in-out hover:bg-primary-300 ">
-              UI/UX
-            </span>
-            <span className="cursor-pointer rounded-[4px] bg-primary-400 px-1 py-[0.2rem] text-center text-[12px] font-medium text-neutral-900 transition-all duration-200 ease-in-out hover:bg-primary-300 ">
-              Design
-            </span>
+            {question?.tags?.map((tag) => (
+              <span
+                key={tag}
+                className="cursor-pointer rounded-[4px] bg-primary-400 px-1 py-[0.2rem] text-center text-[12px] font-medium text-neutral-900 transition-all duration-200 ease-in-out hover:bg-primary-300 "
+              >
+                {tag.name}
+              </span>
+            ))}
           </div>
         </div>
 

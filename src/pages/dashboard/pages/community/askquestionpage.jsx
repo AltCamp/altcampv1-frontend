@@ -2,13 +2,15 @@ import { useState, useRef, useEffect } from 'react';
 
 import { ArrowCircleLeft } from 'iconsax-react';
 
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import RichEditor from './richeditor';
 
 import { useCreateQuestionMutation } from '../../../../app/slices/apiSlices/contentsSlice';
 import Toaster from '../../../../components/Toaster/Toaster';
 
 import VerifyEmailPopUp from '../../components/verifyEmailPopUp';
+
+import TagInput from './taginput';
 
 export default function AskQuestionPage() {
   const [title, setTitle] = useState('');
@@ -20,10 +22,11 @@ export default function AskQuestionPage() {
 
   const [queryError, setQueryError] = useState();
 
-  const { question } = useParams();
-  const navigate = useNavigate();
+  // tag states
+  const [tags, setTags] = useState([]);
+  const tagInputRef = useRef(null);
 
-  const ref = useRef(null);
+  const navigate = useNavigate();
 
   const [createQuestion, { data, isLoading, isSuccess, isError, error }] =
     useCreateQuestionMutation();
@@ -32,13 +35,12 @@ export default function AskQuestionPage() {
     createQuestion({
       title,
       body,
-      // tags: ['react', 'javascript', 'nodejs', 'express']
+      tags,
     });
   };
 
   useEffect(() => {
     if (isSuccess) {
-      // console.log('data:', data)
       setToastText(data.message);
       setToastType('success');
       setTimeout(() => navigate('/dashboard/community'), 1000);
@@ -123,8 +125,8 @@ export default function AskQuestionPage() {
                 className="auth-btn w-fit self-end px-3 py-2 "
                 onClick={() => {
                   if (body !== '') {
-                    // document.querySelector('.submit').focus()
-                    ref.current.scrollIntoView();
+                    tagInputRef.current.focus();
+                    tagInputRef.current.scrollIntoView();
                   }
                 }}
               >
@@ -138,16 +140,11 @@ export default function AskQuestionPage() {
               <h3 className="font-medium text-neutral-900 ">Tags</h3>
               <p className="text-[14px] text-neutral-600 ">
                 These show the category and the specifics of your question
-                (Maximum of 4)
+                (Maximum of 3)
               </p>
             </div>
             <div className="flex flex-col items-end gap-3 ">
-              <input
-                type="text"
-                placeholder=""
-                className="input focus:border-2 focus:border-secondary-400"
-                disabled={true}
-              />
+              <TagInput ref={tagInputRef} tags={tags} setTags={setTags} />
             </div>
           </div>
 
@@ -161,7 +158,6 @@ export default function AskQuestionPage() {
 
           <div className="self-end">
             <button
-              ref={ref}
               className="auth-btn px-3 py-2"
               onClick={handleCreateQuestion}
               disabled={isLoading}

@@ -79,7 +79,7 @@ export default function Createpost() {
   }, [isSuccess]);
 
   return (
-    <div className="fixed left-0 top-0 z-50 flex h-screen  w-screen items-center justify-center overflow-hidden bg-black/50 sm:overflow-scroll xs:mt-[4.9rem]  ">
+    <div className="z-3 0 fixed left-0  top-0 flex h-screen  w-screen items-center justify-center overflow-hidden bg-black/50 sm:overflow-scroll xs:mt-[4.9rem]  ">
       <div className="relative flex h-fit w-[30rem] flex-col items-center gap-3 rounded-[4px] bg-white p-4 md:p-3 xs:h-full xs:w-full ">
         <CloseCircle
           size="20"
@@ -95,7 +95,7 @@ export default function Createpost() {
 
           <div className="flex w-full flex-col gap-1 pb-4">
             <div
-              className="hidden cursor-pointer items-center gap-2 text-[14px] font-medium text-neutral-700 xs:flex "
+              className="mb-5 hidden cursor-pointer items-center gap-2 text-[14px] font-medium text-neutral-700 xs:flex "
               onClick={() => navigate('/dashboard/feed')}
             >
               <ArrowCircleLeft
@@ -158,7 +158,7 @@ export default function Createpost() {
                 placeholder="Write something..."
                 ref={inputRef}
                 value={content}
-                className="h-16 w-full resize-none border-none p-0 outline-none focus:outline-none focus:ring-0 "
+                className="h-16 w-full resize-none border-none p-0 outline-none focus:outline-none focus:ring-0 xs:h-28"
                 onChange={(e) => setContent(e.target.value)}
               ></textarea>
               <div

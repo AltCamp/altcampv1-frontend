@@ -279,6 +279,14 @@ export const contentsSlice = createApi({
         'Answer',
       ],
     }),
+
+    // TAGS
+    getSearchedTags: builder.query({
+      query: (tagName) => ({
+        url: url.GET_SEARCHED_TAGS_URL(url, tagName),
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
@@ -315,4 +323,7 @@ export const {
   useCreateBookmarkMutation,
   useUpdateBookmarkMutation,
   useDeleteBookmarkMutation,
+
+  // TAGS
+  useGetSearchedTagsQuery,
 } = contentsSlice;

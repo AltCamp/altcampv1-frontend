@@ -343,12 +343,14 @@ export default function Questionpage() {
                       {questionDetails?.title}
                     </h3>
                     <div className="flex gap-2">
-                      <span className="cursor-pointer rounded-[4px] bg-primary-400 px-1 py-[0.2rem] text-center text-[12px] font-medium text-neutral-900 transition-all duration-200 ease-in-out hover:bg-primary-300 ">
-                        UI/UX
-                      </span>
-                      <span className="cursor-pointer rounded-[4px] bg-primary-400 px-1 py-[0.2rem] text-center text-[12px] font-medium text-neutral-900 transition-all duration-200 ease-in-out hover:bg-primary-300 ">
-                        Design
-                      </span>
+                      {questionDetails?.tags?.map((tag) => (
+                        <span
+                          key={tag}
+                          className="cursor-pointer rounded-[4px] bg-primary-400 px-1 py-[0.2rem] text-center text-[12px] font-medium text-neutral-900 transition-all duration-200 ease-in-out hover:bg-primary-300 "
+                        >
+                          {tag.name}
+                        </span>
+                      ))}
                     </div>
                   </div>
                   <Link
