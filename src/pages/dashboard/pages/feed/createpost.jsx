@@ -79,7 +79,7 @@ export default function Createpost() {
   }, [isSuccess]);
 
   return (
-    <div className="z-3 0 fixed left-0  top-0 flex h-screen  w-screen items-center justify-center overflow-hidden bg-black/50 sm:overflow-scroll xs:mt-[4.9rem]  ">
+    <div className="fixed left-0 top-0  z-30 flex h-screen  w-screen items-center justify-center overflow-hidden bg-black/50 sm:overflow-scroll xs:mt-[4.9rem]  ">
       <div className="relative flex h-fit w-[30rem] flex-col items-center gap-3 rounded-[4px] bg-white p-4 md:p-3 xs:h-full xs:w-full ">
         <CloseCircle
           size="20"

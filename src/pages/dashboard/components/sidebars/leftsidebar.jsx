@@ -151,7 +151,7 @@ export default function LeftSidebar({ toggleSideBar, handleSideBar }) {
 
   return (
     <div
-      className={` h-auto min-w-[16rem] overflow-auto bg-white px-4 py-8
+      className={`z-10 h-auto min-w-[16rem] overflow-auto bg-white px-4 py-8
       shadow-[0px_2px_12px_0px_#56565626] xl:min-w-fit 
       tab:fixed tab:left-0 tab:top-0 tab:z-50 tab:h-full tab:-translate-x-full tab:overflow-y-scroll tab:pt-[6rem] tab:transition-all tab:duration-300 ${
         toggleSideBar && 'tab:translate-x-0'
@@ -168,7 +168,8 @@ export default function LeftSidebar({ toggleSideBar, handleSideBar }) {
               <div key={index} className="flex flex-col gap-5 pl-5">
                 <NavLink
                   to={link.to}
-                  className="font-regular flex items-center gap-[0.9rem] text-[15px] text-neutral-600"
+                  className="font-regular flex items-center gap-[0.9rem] text-[15px] text-neutral-600 
+                  transition-all duration-200 hover:text-secondary-600"
                   style={({ isActive }) => (isActive ? activeStyle : undefined)}
                   onClick={toggleWidth && handleSideBar}
                 >
@@ -189,7 +190,8 @@ export default function LeftSidebar({ toggleSideBar, handleSideBar }) {
                     >
                       <NavLink
                         to={childLink.to}
-                        className="font-regular flex items-center gap-[0.9rem] text-[15px] text-neutral-600"
+                        className="font-regular flex items-center gap-[0.9rem] text-[15px] text-neutral-600
+                        transition-all duration-200 hover:text-secondary-600"
                         style={({ isActive }) =>
                           isActive ? activeStyle : undefined
                         }

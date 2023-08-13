@@ -36,7 +36,7 @@ export default function Feed() {
   }, [data, isSuccess]);
 
   return (
-    <div className="mx-auto mb-16 flex h-full w-full overflow-y-scroll p-8 tab:w-[75%] md:p-4 sm:w-full ">
+    <div className="mx-auto mb-16 flex h-full w-full max-w-[40rem] overflow-y-scroll p-8  md:p-4 sm:w-full ">
       <Outlet />
       <div className="flex w-full flex-col gap-4 md:gap-8">
         <div className="">

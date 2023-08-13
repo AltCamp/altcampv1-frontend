@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import { Link, useNavigate, useLocation, useParams } from 'react-router-dom';
 
@@ -36,6 +36,10 @@ export default function Postpage() {
 
   // stored and passed as props to verifyemailpopup modal
   const [queryError, setQueryError] = useState();
+
+  // refs
+  const commentsRef = useRef([]);
+  const commentWrapperRef = useRef(null);
 
   const navigate = useNavigate();
 
@@ -144,9 +148,12 @@ export default function Postpage() {
     if (createCommentSuccess) {
       setContent('');
       // scroll to the botttom of the page
-      scrollTo(100, 200);
+      commentWrapperRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'end',
+      });
     }
-  }, [createCommentSuccess]);
+  }, [createCommentData]);
 
   const post = singlePost?.data;
 
@@ -166,7 +173,7 @@ export default function Postpage() {
 
       <div
         id="postpage"
-        className="mx-auto flex h-[calc(100vh-2rem)] w-full flex-col px-6 py-8 dashboard:w-[90%] dashboard:max-w-[35rem] xs:w-full "
+        className="mx-auto flex h-screen w-full max-w-[40rem] flex-col px-6 py-8 xs:w-full "
       >
         <div className="cursor-pointer" onClick={() => navigate(-1)}>
           <ArrowCircleLeft size="24" color="#1E1E1E" />
@@ -197,9 +204,9 @@ export default function Postpage() {
         )}
 
         {singlePostSuccess && (
-          <div className="mt-8 flex w-full flex-col gap-8 md:mt-4">
-            <div className="">
-              <div className="mt-8 flex w-full flex-col gap-8 ">
+          <div className="flex h-screen w-full flex-col gap-8 md:mt-4">
+            <div className="h-full">
+              <div className="mt-6 flex w-full flex-col gap-8 ">
                 <div className="flex items-start gap-2">
                   <Link
                     to={
@@ -324,7 +331,7 @@ export default function Postpage() {
 
             <div className="h-[1px] w-full bg-neutral-400 "></div>
 
-            <div className="mb-20">
+            <div ref={commentWrapperRef} className="mb-0">
               <div className="">All Comments</div>
 
               <div className="flex flex-col items-center gap-[0.3rem] font-medium text-neutral-600 ">
@@ -334,7 +341,7 @@ export default function Postpage() {
               </div>
             </div>
 
-            <div className="sticky bottom-8 z-10 flex h-14 w-full items-center justify-between gap-2 overscroll-none border border-neutral-400 bg-white px-4 py-[0.8rem] text-[0.9rem] text-neutral-600 shadow-[0px_0px_10px_rgba(0,_0,_0,_0.1)] outline-none transition-all duration-200 ease-in-out focus-within:border-secondary-400 ">
+            <div className="sticky bottom-6 z-10 flex h-14 w-full items-center justify-between gap-2 overscroll-none border border-neutral-400 bg-white px-4 py-[0.8rem] text-[0.9rem] text-neutral-600 shadow-[0px_0px_10px_rgba(0,_0,_0,_0.1)] outline-none transition-all duration-200 ease-in-out focus-within:border-secondary-400 ">
               <div className="flex h-full w-[3rem] items-center justify-center">
                 <div className="h-10 w-10 overflow-hidden rounded-full ">
                   {user?.profilePicture ? (

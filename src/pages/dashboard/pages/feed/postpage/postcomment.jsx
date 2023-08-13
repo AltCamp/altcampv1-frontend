@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, forwardRef } from 'react';
 
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
@@ -20,7 +20,9 @@ import {
 
 import VerifyEmailPopUp from '../../../components/verifyEmailPopUp';
 
-export default function Postcomment({ comment, isBookmarked }) {
+const Postcomment = forwardRef((props, ref) => {
+  Postcomment.displayName = 'Postcomment';
+  const { comment, isBookmarked } = props;
   const [latestComment, setLatestComment] = useState(comment);
 
   const [likeAnimation, setLikeAnimation] = useState(false);
@@ -99,25 +101,23 @@ export default function Postcomment({ comment, isBookmarked }) {
     }
   }, [likeCommentIsSuccess, likeCommentIsError.likeCommentData]);
 
-  const highlight = `bg-neutral-400 rounded-2 p-2 animate-highlights`;
-
   // handle scroll to the comment
   useEffect(() => {
-    if (location?.state?.postId) {
+    if (location?.state?.postId && location?.pathname.includes('post')) {
       const postElement = document.getElementById(location?.state?.postId);
       postElement?.scrollIntoView({
         behavior: 'smooth',
         block: 'center',
       });
 
-      postElement?.classList.add(highlight);
+      postElement?.classList.add('highlight');
       setTimeout(() => {
-        postElement?.classList.remove(highlight);
+        postElement?.classList.remove('highlight');
       }, 7000);
     }
     // remove the postId from the location state
     navigate(location?.pathname, { replace: true });
-  }, [location?.state?.postId]);
+  }, [location?.state]);
 
   useEffect(() => {
     if (comment && !isBookmarked) {
@@ -186,6 +186,7 @@ export default function Postcomment({ comment, isBookmarked }) {
           <Link
             to={`/dashboard/feed/post/${latestComment?.post}`}
             className="flex flex-col gap-[0.8rem] overflow-hidden font-medium text-neutral-900 "
+            state={{ postId: latestComment?._id }}
           >
             <div className="">
               <p>{latestComment?.content}</p>
@@ -261,4 +262,6 @@ export default function Postcomment({ comment, isBookmarked }) {
       </div>
     </>
   );
-}
+});
+
+export default Postcomment;

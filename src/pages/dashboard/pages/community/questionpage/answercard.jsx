@@ -118,8 +118,6 @@ export default function Answercard({ answer, isBookmarked }) {
     }
   }, [updateAnswerSuccess]);
 
-  const highlight = `bg-neutral-400 rounded-2 p-2 animate-highlights`;
-
   useEffect(() => {
     if (location?.state?.postId) {
       const postElement = document.getElementById(location?.state?.postId);
@@ -128,14 +126,14 @@ export default function Answercard({ answer, isBookmarked }) {
         block: 'center',
       });
 
-      postElement?.classList.add(highlight);
+      postElement?.classList.add('highlight');
       setTimeout(() => {
-        postElement?.classList.remove(highlight);
+        postElement?.classList.remove('highlight');
       }, 7000);
     }
     // remove the postId from the location state
     navigate(location?.pathname, { replace: true });
-  }, [location?.state?.postId]);
+  }, [location?.state]);
 
   // grab all the errors from api queries and pass the message to queryError state
   useEffect(() => {
@@ -255,6 +253,7 @@ export default function Answercard({ answer, isBookmarked }) {
               <Link
                 to={`/dashboard/community/question/${latestAnswer?.question?._id}/${latestAnswer?.question?.slug}`}
                 className="font-light leading-normal text-neutral-900 "
+                state={{ postId: answer?._id }}
               >
                 <div
                   className="w-full "
