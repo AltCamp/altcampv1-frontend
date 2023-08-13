@@ -239,7 +239,7 @@ export default function Answercard({ answer, isBookmarked }) {
                 {latestAnswer?.author?.firstName}{' '}
                 {latestAnswer?.author?.lastName}{' '}
                 {latestAnswer?.author?.accountType == 'Mentor' && (
-                  <span className="w-fit rounded-[4px] bg-secondary-300 p-1 text-[11px] font-medium uppercase ">
+                  <span className="w-fit rounded-[4px] bg-secondary-300 p-1 text-[11px] font-medium uppercase">
                     Instructor
                   </span>
                 )}
