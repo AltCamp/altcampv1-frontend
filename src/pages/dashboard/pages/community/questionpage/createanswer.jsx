@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
 
-import createAnswerStyles from './createanswer.module.css';
-import RichEditor from './../../richeditor/richeditor';
+import RichEditor from '../richeditor';
 
-import { useCreateAnswerMutation } from '../../../../../../app/slices/apiSlices/communitySlice';
+import { useCreateAnswerMutation } from '../../../../../app/slices/apiSlices/contentsSlice';
 
-import VerifyEmailPopUp from '../../../../components/verifyEmailPopUp';
+import VerifyEmailPopUp from '../../../components/verifyEmailPopUp';
 
 export default function Createanswer({ questionId }) {
   const [content, setContent] = useState('');
@@ -36,16 +35,22 @@ export default function Createanswer({ questionId }) {
   }, [isSuccess, isError]);
 
   return (
-    <div className={createAnswerStyles.container}>
+    <div className="mb-[10rem] flex w-full flex-col ">
       {/* verifyEmailPopUp */}
       <VerifyEmailPopUp queryError={queryError} setQueryError={setQueryError} />
 
-      <form className={createAnswerStyles.form} onSubmit={handleCreateAnswer}>
+      <form
+        className="flex w-full flex-col gap-4 "
+        onSubmit={handleCreateAnswer}
+      >
         <label htmlFor="answer" className="">
           Your Answer
         </label>
         <RichEditor setBody={setContent} body={content} isSuccess={isSuccess} />
-        <button className={createAnswerStyles.submitBtn} disabled={isLoading}>
+        <button
+          className="auth-btn w-fit self-end px-4 py-2 sm:px-2 sm:py-1 "
+          disabled={isLoading}
+        >
           Send Answer
         </button>
       </form>

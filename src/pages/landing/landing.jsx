@@ -31,7 +31,7 @@ const Landing = () => {
     'Access and share resources',
     'Create and join communities of like minds',
     'Collaborate with students from other tracks',
-  ]
+  ];
 
   const settings = {
     dots: false,
@@ -42,7 +42,7 @@ const Landing = () => {
     autoplay: true,
     autoplaySpeed: 4000, // Adjust the speed as needed
     nextArrow: <></>,
-    prevArrow: <></>
+    prevArrow: <></>,
   };
 
   const settings2 = {
@@ -54,8 +54,8 @@ const Landing = () => {
     autoplay: true,
     autoplaySpeed: 2800, // Adjust the speed as needed
     nextArrow: <></>,
-    prevArrow: <></>
-  }
+    prevArrow: <></>,
+  };
   return (
     <>
       <Navbar />
@@ -104,9 +104,19 @@ const Landing = () => {
           <h2>About Us</h2>
           <h3>LEARN WITH OTHERS</h3>
           <p>
-            With the increasing desire to move formal education from the regular four walls to virtual spaces comes the need to improve virtual communication to suit academic purposes. More than ever, there’s a need to ensure that students from various locations do not learn in isolation. There is a need to ensure that students in a virtual school can co-learn and even build interpersonal relationships outside of the academic content they consume.
+            With the increasing desire to move formal education from the regular
+            four walls to virtual spaces comes the need to improve virtual
+            communication to suit academic purposes. More than ever, there’s a
+            need to ensure that students from various locations do not learn in
+            isolation. There is a need to ensure that students in a virtual
+            school can co-learn and even build interpersonal relationships
+            outside of the academic content they consume.
           </p>
-          <p>AltCamp is a computer-mediated communication (CMC) product by AltSchool. It allows smooth communication among students and lecturers.</p>
+          <p>
+            AltCamp is a computer-mediated communication (CMC) product by
+            AltSchool. It allows smooth communication among students and
+            lecturers.
+          </p>
         </div>
       </div>
       <div className={landingPageStyles['tracks-area']}>

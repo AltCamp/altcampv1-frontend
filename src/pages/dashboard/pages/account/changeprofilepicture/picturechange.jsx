@@ -15,7 +15,7 @@ export default function Picturechange() {
   const [handleEdit, handleCancel] = useOutletContext();
 
   // custom hook for uploading image
-  const { image, handleMedia, removeImage } = useMediaHandler();
+  const { image, handleMedia, removeMedia } = useMediaHandler();
 
   // style format for drag and drop
   const handleStyleEnter = (e) => {
@@ -93,7 +93,7 @@ export default function Picturechange() {
           type: 'error',
         },
       });
-      removeImage();
+      removeMedia();
       setTimeout(() => handleCloseToast(), 3000);
     }
   }, [isSuccess, isError]);

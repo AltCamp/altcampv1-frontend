@@ -11,7 +11,7 @@ export default function RichEditor({ setBody, body, isSuccess }) {
         // initialValue={body}
         value={body}
         init={{
-          height: 500,
+          height: 300,
           menubar: false,
           plugins: [
             'advlist',

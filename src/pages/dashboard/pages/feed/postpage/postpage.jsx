@@ -1,12 +1,13 @@
-import { useState, useEffect } from 'react';
-
-import postPageStyles from './postpage.module.css';
+import { useState, useEffect, useRef } from 'react';
 
 import { Link, useNavigate, useLocation, useParams } from 'react-router-dom';
 
+import { BsBookmarkPlus } from 'react-icons/bs';
+
+import { FcBookmark } from 'react-icons/fc';
+
 import {
   ArrowCircleLeft,
-  ArchiveAdd,
   ProfileCircle,
   MessageText1,
   Send2,
@@ -19,23 +20,26 @@ import {
   useGetPostByIdQuery,
   useGetAllCommentsQuery,
   useCreateCommentMutation,
-} from '../../../../../app/slices/apiSlices/feedSlice';
+  useCreateBookmarkMutation,
+  useDeleteBookmarkMutation,
+} from '../../../../../app/slices/apiSlices/contentsSlice';
 
 import { useSelector } from 'react-redux';
 
-import Postcomment from './postcomment/postcomment';
-
-import BookmarkModal from '../../../components/bookmarkmodal/bookmarkmodal';
+import Postcomment from './postcomment';
 
 import VerifyEmailPopUp from '../../../components/verifyEmailPopUp';
 
 export default function Postpage() {
   const [likeAnimation, setLikeAnimation] = useState(false);
   const [content, setContent] = useState('');
-  const [toggleBookmarkModal, setToggleBookmarkModal] = useState();
 
   // stored and passed as props to verifyemailpopup modal
   const [queryError, setQueryError] = useState();
+
+  // refs
+  const commentsRef = useRef([]);
+  const commentWrapperRef = useRef(null);
 
   const navigate = useNavigate();
 
@@ -68,19 +72,52 @@ export default function Postpage() {
     },
   ] = useLikePostMutation();
 
+  const [
+    createBookmark,
+    {
+      data: createBookData,
+      isSuccess: createBookIsSuccess,
+      isLoading: createBookIsLoading,
+      isError: createBookIsError,
+      error: createBookError,
+    },
+  ] = useCreateBookmarkMutation();
+
+  const [
+    deleteBookmark,
+    {
+      data: deleteBookData,
+      isLoading: deleteBookIsLoading,
+      isSuccess: deleteBookIsSuccess,
+      isError: deleteBookIsError,
+      error: deleteBookError,
+    },
+  ] = useDeleteBookmarkMutation();
+
+  const handleCreateBookmark = () => {
+    createBookmark({
+      postId: postId,
+      postType: 'Post',
+    });
+  };
+
+  const handleDeleteBookmark = () => {
+    deleteBookmark(postId);
+  };
+
   const handleLikePost = () => {
     likePost(postId);
   };
 
   useEffect(() => {
-    if (likeIsSuccess) {
+    if (likeIsSuccess && singlePost) {
       setLikeAnimation(true);
 
       setTimeout(() => {
         setLikeAnimation(false);
       }, 1000);
     }
-  }, [likeIsSuccess]);
+  }, [singlePost]);
 
   const {
     data: comments,
@@ -91,8 +128,6 @@ export default function Postpage() {
   } = useGetAllCommentsQuery(postId);
 
   const commentList = comments?.data;
-
-  // console.log(commentList)
 
   const [
     createComment,
@@ -106,7 +141,6 @@ export default function Postpage() {
   ] = useCreateCommentMutation();
 
   const handleCreateComment = (e) => {
-    // e.preventDefault()
     createComment({ content, postId });
   };
 
@@ -114,17 +148,14 @@ export default function Postpage() {
     if (createCommentSuccess) {
       setContent('');
       // scroll to the botttom of the page
-      window.scrollTo(0, document.body.scrollHeight);
+      commentWrapperRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'end',
+      });
     }
-  }, [createCommentSuccess]);
+  }, [createCommentData]);
 
   const post = singlePost?.data;
-
-  // console.log(post)
-
-  const handleToggleBookmarkModal = () => {
-    setToggleBookmarkModal(!toggleBookmarkModal);
-  };
 
   // grab all the errors from api queries and pass the message to queryError state
   useEffect(() => {
@@ -137,77 +168,87 @@ export default function Postpage() {
 
   return (
     <>
-      {toggleBookmarkModal && (
-        <BookmarkModal
-          handleToggleBookmarkModal={handleToggleBookmarkModal}
-          postId={post?._id}
-          postType={`Post`}
-          postTitle={post?.content}
-        />
-      )}
-
       {/* verifyEmailPopUp */}
       <VerifyEmailPopUp queryError={queryError} setQueryError={setQueryError} />
 
-      <div className={postPageStyles.container}>
-        <div className={postPageStyles.back} onClick={() => navigate(-1)}>
+      <div
+        id="postpage"
+        className="mx-auto flex h-screen w-full max-w-[40rem] flex-col px-6 py-8 xs:w-full "
+      >
+        <div className="cursor-pointer" onClick={() => navigate(-1)}>
           <ArrowCircleLeft size="24" color="#1E1E1E" />
         </div>
 
         {singlePostLoading && (
-          <div className={postPageStyles.container}>
-            <div className={postPageStyles.loading}>
-              <div className={postPageStyles.loader}></div>
+          <div className="text-center">
+            <div role="status">
+              <svg
+                aria-hidden="true"
+                className="mr-2 inline h-8 w-8 animate-spin fill-blue-600 text-gray-200 dark:text-gray-600"
+                viewBox="0 0 100 101"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                  fill="currentFill"
+                />
+              </svg>
+              <span className="sr-only">Loading...</span>
             </div>
           </div>
         )}
 
         {singlePostSuccess && (
-          <div className={postPageStyles.content}>
-            <div className={postPageStyles.post}>
-              <div className={postPageStyles.content}>
-                <div className={postPageStyles.header}>
+          <div className="flex h-screen w-full flex-col gap-8 md:mt-4">
+            <div className="h-full">
+              <div className="mt-6 flex w-full flex-col gap-8 ">
+                <div className="flex items-start gap-2">
                   <Link
                     to={
                       post?.author?._id === user?._id
                         ? '/dashboard/account'
                         : `/dashboard/users/${post?.author._id}`
                     }
-                    className={postPageStyles.avatar}
+                    className="h-10 w-10 overflow-hidden rounded-full"
                   >
                     {post?.author?.profilePicture ? (
                       <img
                         src={post?.author?.profilePicture}
                         alt=""
-                        className={postPageStyles.img}
+                        className="h-full w-full object-cover"
                       />
                     ) : (
                       <ProfileCircle
                         size={45}
                         color="#555555"
-                        className={postPageStyles.iconAvatar}
+                        className="h-full w-full object-cover"
                       />
                     )}
                   </Link>
-                  <div className={postPageStyles.info}>
+                  <div className="flex flex-col">
                     <Link
                       to={
                         post?.author?._id === user?._id
                           ? '/dashboard/account'
                           : `/dashboard/users/${post?.author._id}`
                       }
-                      className={postPageStyles.name}
+                      className="font-semibold text-neutral-900"
                     >
                       {post?.author.firstName} {post?.author.lastName}
                     </Link>
-                    <div className={postPageStyles.timePosted}>
+                    <div className="text-[0.8rem] text-neutral-600 ">
                       {<ReactTimeAgo date={post?.createdAt} locale="en-US" />}
                     </div>
                   </div>
                 </div>
 
-                <div className={postPageStyles.body}>
-                  <div className={postPageStyles.text}>
+                <div className="flex flex-col gap-[0.8rem] overflow-hidden font-medium text-neutral-900 ">
+                  <div className="">
                     <p>{post?.content}</p>
                   </div>
                   {/* <div className={postPageStyles.media}>
@@ -215,9 +256,9 @@ export default function Postpage() {
               </div> */}
                 </div>
 
-                <div className={postPageStyles.icons}>
-                  <div className={postPageStyles.left}>
-                    <div className={postPageStyles.like}>
+                <div className="flex items-center justify-between">
+                  <div className="flex gap-[0.8rem] ">
+                    <div className="flex items-center gap-[0.3rem] font-medium text-neutral-600 ">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="20"
@@ -229,8 +270,8 @@ export default function Postpage() {
                             : '#FFFFFF'
                         }
                         onClick={handleLikePost}
-                        className={`${postPageStyles.icon} ${
-                          likeAnimation && postPageStyles.likeAnimation
+                        className={`cursor-pointer ${
+                          likeAnimation && 'animate-like'
                         }`}
                       >
                         <path
@@ -246,9 +287,7 @@ export default function Postpage() {
                         ></path>
                       </svg>
                       <div
-                        className={`${postPageStyles.count} ${
-                          likeAnimation && postPageStyles.likeAnimation
-                        }`}
+                        className={`${likeAnimation && 'animate-like'}`}
                         style={{
                           color: post?.upvotedBy?.includes(user?._id)
                             ? 'red'
@@ -258,65 +297,73 @@ export default function Postpage() {
                         {post?.upvotedBy?.length}
                       </div>
                     </div>
-                    <div className={postPageStyles.divider}></div>
-                    <div className={postPageStyles.comment}>
+                    <div className="w-[1px] bg-neutral-600 "></div>
+                    <div className="flex items-center gap-[0.3rem] font-medium text-neutral-600 ">
                       <MessageText1
                         size={20}
                         color="#555555"
-                        className={postPageStyles.icon}
+                        className="cursor-pointer"
                       />
-                      <div className={postPageStyles.count}>
-                        {post?.comments?.length}
-                      </div>
+                      <div className="">{post?.comments?.length}</div>
                     </div>
                   </div>
-                  <div className={postPageStyles.right}>
-                    <div className={postPageStyles.bookmark}>
-                      <ArchiveAdd
-                        size={20}
-                        color="#555555"
-                        className={postPageStyles.icon}
-                        onClick={handleToggleBookmarkModal}
-                      />
+                  <div className="">
+                    <div className="">
+                      {!post.isBookmarked ? (
+                        <BsBookmarkPlus
+                          size={17}
+                          color="#555555"
+                          className="cursor-pointer"
+                          onClick={handleCreateBookmark}
+                        />
+                      ) : (
+                        <FcBookmark
+                          size={20}
+                          className="cursor-pointer"
+                          onClick={handleDeleteBookmark}
+                        />
+                      )}
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className={postPageStyles.divider}></div>
+            <div className="h-[1px] w-full bg-neutral-400 "></div>
 
-            <div className={postPageStyles.commentSection}>
-              <div className={postPageStyles.commentHeader}>All Comments</div>
+            <div ref={commentWrapperRef} className="mb-0">
+              <div className="">All Comments</div>
 
-              <div className={postPageStyles.comments}>
+              <div className="flex flex-col items-center gap-[0.3rem] font-medium text-neutral-600 ">
                 {commentList?.map((comment) => (
                   <Postcomment key={comment._id} comment={comment} />
                 ))}
               </div>
             </div>
 
-            <div className={postPageStyles.commentInput}>
-              <div className={postPageStyles.avatar}>
-                {user?.profilePicture ? (
-                  <img
-                    src={user?.profilePicture}
-                    alt=""
-                    className={postPageStyles.img}
-                  />
-                ) : (
-                  <ProfileCircle
-                    size={45}
-                    color="#555555"
-                    className={postPageStyles.iconAvatar}
-                  />
-                )}
+            <div className="sticky bottom-6 z-10 flex h-14 w-full items-center justify-between gap-2 overscroll-none border border-neutral-400 bg-white px-4 py-[0.8rem] text-[0.9rem] text-neutral-600 shadow-[0px_0px_10px_rgba(0,_0,_0,_0.1)] outline-none transition-all duration-200 ease-in-out focus-within:border-secondary-400 ">
+              <div className="flex h-full w-[3rem] items-center justify-center">
+                <div className="h-10 w-10 overflow-hidden rounded-full ">
+                  {user?.profilePicture ? (
+                    <img
+                      src={user?.profilePicture}
+                      alt=""
+                      className="h-full w-full object-cover"
+                    />
+                  ) : (
+                    <ProfileCircle
+                      size={45}
+                      color="#555555"
+                      className="h-full w-full object-cover"
+                    />
+                  )}
+                </div>
               </div>
               <input
                 type="text"
                 placeholder="Write a comment..."
                 value={content}
-                className={postPageStyles.inputField}
+                className="h-full w-full border-none text-[0.9rem] text-neutral-600 outline-none focus:ring-0 "
                 onChange={(e) => setContent(e.target.value)}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
@@ -326,14 +373,34 @@ export default function Postpage() {
                 }}
                 disabled={createCommentLoading}
               />
-              <div className={postPageStyles.send}>
+              <div className="transistion-all cursor-pointer text-[#555555] ">
                 {createCommentLoading ? (
-                  <div className={postPageStyles.loaderSend}></div>
+                  <div className="text-center">
+                    <div role="status">
+                      <svg
+                        aria-hidden="true"
+                        className="mr-2 inline h-8 w-8 animate-spin fill-blue-600 text-gray-200 dark:text-gray-600"
+                        viewBox="0 0 100 101"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                          fill="currentColor"
+                        />
+                        <path
+                          d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                          fill="currentFill"
+                        />
+                      </svg>
+                      <span className="sr-only">Loading...</span>
+                    </div>
+                  </div>
                 ) : (
                   <Send2
                     size="32"
                     color="#555555"
-                    className={postPageStyles.send}
+                    className=""
                     onClick={handleCreateComment}
                   />
                 )}

@@ -33,8 +33,9 @@ export const useMediaHandler = () => {
     }
   };
 
-  const removeImage = () => {
+  const removeMedia = () => {
     setImage('');
+    setVideo('');
   };
-  return { image, caption, error, handleMedia, video, removeImage };
+  return { image, caption, error, handleMedia, video, removeMedia };
 };

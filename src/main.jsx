@@ -76,9 +76,10 @@ import {
   EditQuestionPage,
 
   // subpages of feed
-  Createpost,
   Postpage,
+  Createpost,
 } from './pages/dashboard/pages';
+
 import Updatebio from './pages/dashboard/pages/account/updatebio/updateBio';
 import UserProfile from './pages/dashboard/pages/users/userProfile/userProfile';
 import MyActivities from './pages/dashboard/pages/account/myActivities/myActivities';
@@ -99,7 +100,7 @@ const router = createBrowserRouter([
     element: <AuthLayout />,
     loader: () => {
       if (localStorage.getItem('user')) {
-        return redirect('/dashboard');
+        return redirect('/dashboard/feed');
       }
       return null;
     },
@@ -173,11 +174,14 @@ const router = createBrowserRouter([
     },
     children: [
       {
-        index: true,
+        path: '/dashboard/feed',
         element: <Feed />,
+        children: [
+          { path: '/dashboard/feed/createpost', element: <Createpost /> },
+        ],
       },
       {
-        path: '/dashboard/post/:postId',
+        path: '/dashboard/feed/post/:postId',
         element: <Postpage />,
       },
       {

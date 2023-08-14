@@ -15,43 +15,42 @@
   /* 585DCC this color is missing */
 
   /* Primary Colors */
-  --primary-clr-black: #333130;
-  --primary-clr-drkst-brown: #55524f;
-  --primary-clr-drker-brown: #807b77;
-  --primary-clr-drk-brown: #aaa49f;
-  --primary-clr-lt-brown: #d4cdc6;
-  --primary-clr-pink-1: #f7f2ed;
-  --primary-clr-pink-2: #fff7f1;
-  --primary-clr-pink-3: #fff9f4;
-  --primary-clr-pink-4: #fffaf6;
-  
+  --primary-clr-black: #333130; /*900 */
+  --primary-clr-drkst-brown: #55524f; /*800 */
+  --primary-clr-drker-brown: #807b77; /*700 */
+  --primary-clr-drk-brown: #aaa49f; /*600 */
+  --primary-clr-lt-brown: #d4cdc6; /*500 */
+  --primary-clr-pink-1: #f7f2ed; /*400 */
+  --primary-clr-pink-2: #fff7f1; /* 300*/
+  --primary-clr-pink-3: #fff9f4; /*200 */
+  --primary-clr-pink-4: #fffaf6; /*100 */
+
   /* Neutral Colors */
   --neutral-clr-black: #000;
   --neutral-clr-white: #fff;
-  
-  --neutral-clr-deep-grey: #212529;
-  --neutral-clr-drkst-grey: #343a40;
-  --neutral-clr-drker-grey: #495057;
-  --neutral-clr-drk-grey: #6c757d;
-  --neutral-clr-grey-1: #adb5bd;
-  --neutral-clr-grey-2: #ced4da;
-  --neutral-clr-lt-grey: #dee2e6;
-  --neutral-clr-lter-grey: #e9ecef;
-  --neutral-clr-ltest-grey: #f8f9fa;
+
+  --neutral-clr-deep-grey: #212529; /* 900 */
+  --neutral-clr-drkst-grey: #343a40; /*800*/
+  --neutral-clr-drker-grey: #495057; /*700*/
+  --neutral-clr-drk-grey: #6c757d; /* 600 */
+  --neutral-clr-grey-1: #adb5bd; /*500 */
+  --neutral-clr-grey-2: #ced4da; /* 400*/
+  --neutral-clr-lt-grey: #dee2e6; /*300 */
+  --neutral-clr-lter-grey: #e9ecef; /*200 */
+  --neutral-clr-ltest-grey: #f8f9fa; /*100 */
 
   /* Secondary Colors */
-  --secondary-clr-deep-blue: #151631;
-  --secondary-clr-drkst-blue: #232552;
-  --secondary-clr-drkr-blue: #35377a;
-  --secondary-clr-drk-blue: #474aa3;
-  --secondary-clr-lt-blue: #585ccc;
-  --secondary-clr-lter-blue: #6a6ff5;
-  --secondary-clr-ltest-blue: #8387f7;
-  --secondary-clr-ltester-blue: #f0f1fe;
-  --secondary-clr-lt-purple: #9c9ff8;
-  --secondary-clr-lter-purple: #cdcffc;
+  --secondary-clr-deep-blue: #151631; /*900 */
+  --secondary-clr-drkst-blue: #232552; /*800 */
+  --secondary-clr-drkr-blue: #35377a; /*700 */
+  --secondary-clr-drk-blue: #474aa3; /*600 */
+  --secondary-clr-lt-blue: #585ccc; /*500 */
+  --secondary-clr-lter-blue: #6a6ff5; /*400 */
+  --secondary-clr-ltest-blue: #8387f7; /*300 */
+  --secondary-clr-ltester-blue: #f0f1fe; /*200 */
+  --secondary-clr-lt-purple: #9c9ff8; /*100 */
+  --secondary-clr-lter-purple: #cdcffc; /*50 */
 }
-
 
 /* secondary-blue-100 #F0F1FE */
 /* spacing between Benefit and items below */
@@ -87,6 +86,12 @@ html {
   scroll-behavior: smooth;
 }
 
+#pageCount input::-webkit-outer-spin-button,
+#pageCount input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .container {
   width: 100%;
   max-width: 1440px;
@@ -112,7 +117,7 @@ a {
 
   /* CUSTOM CLASSNAME FOR INPUT ELEMENTS */
   .input {
-    @apply h-[2.5rem] w-full rounded-[4px] border-[1px] border-neutral-400 p-[0.5rem] font-normal text-neutral-800 shadow-[0px_2px_2px_rgba(33,37,41,0.06),0px_0px_1px_rgba(33,37,41,0.08)] focus:border-primary-800 focus:outline-none;
+    @apply h-[2.5rem] w-full rounded-[4px] border-[1px] border-neutral-400 p-[0.5rem] font-normal text-neutral-800 shadow-[0px_2px_2px_rgba(33,37,41,0.06),0px_0px_1px_rgba(33,37,41,0.08)] focus:border-primary-800 focus:outline-none focus:ring-0;
   }
 
   /* CUSTOM CLASSNAME FOR PASSWORD GROUP i.e input element with eye icon */
@@ -122,7 +127,7 @@ a {
 
   /* CUSTOM CLASSNAME FOR PASSWORD INPUT ELEMENT */
   .password-input {
-    @apply h-full w-full font-normal text-neutral-800 focus:outline-none;
+    @apply h-full w-full border-none font-normal text-neutral-800 focus:outline-none focus:ring-0;
   }
 
   /* CUSTOM CLASSNAME FOR AUTH BUTTONS */
@@ -136,12 +141,16 @@ a {
   }
 
   .otp-input {
-    @apply h-[3.5rem] !w-[5rem] rounded-[4px] border-[1px] border-neutral-400 p-[0.5rem] font-normal text-neutral-800 shadow-[0px_2px_2px_rgba(33,37,41,0.06),0px_0px_1px_rgba(33,37,41,0.08)] focus:border-primary-800 focus:outline-none xs:!w-[3.5rem];
+    @apply h-[3.5rem] !w-[5rem] rounded-[4px] border-[1px] border-neutral-400 p-[0.5rem] font-normal text-neutral-800 shadow-[0px_2px_2px_rgba(33,37,41,0.06),0px_0px_1px_rgba(33,37,41,0.08)] focus:border-primary-800 focus:outline-none focus:ring-0 xs:!w-[3.5rem];
+  }
+
+  .highlight {
+    @apply animate-highlights rounded-md bg-neutral-400 p-2;
   }
 }
 
 /* CAROUSEL STYLING */
 
-.slick-dots{
+.slick-dots {
   position: static !important;
 }
