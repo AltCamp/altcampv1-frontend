@@ -12,7 +12,7 @@ export const contentsSlice = createApi({
   endpoints: (builder) => ({
     // POSTS RELATED QUERIES AND MUTATION
     getAllPosts: builder.query({
-      query: ({ page, limit = 15 }) => ({
+      query: ({ page, limit = 25 }) => ({
         url: url.GET_ALL_POSTS_URL(url, true, page, limit),
         method: 'GET',
       }),
