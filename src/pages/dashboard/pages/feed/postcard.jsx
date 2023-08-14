@@ -102,8 +102,7 @@ export default function Postcard({ post, isBookmarked }) {
       {/* verifyEmailPopUp */}
       <VerifyEmailPopUp queryError={queryError} setQueryError={setQueryError} />
 
-      <Link
-        to={`/dashboard/feed/post/${post?._id}`}
+      <div
         className={`decoration-none p-6 shadow-[0px_3.31218px_19.8731px_rgba(86,_86,_86,_0.15)] 
         ${
           location.pathname.includes('bookmarks')
@@ -155,25 +154,21 @@ export default function Postcard({ post, isBookmarked }) {
             </div>
           </div>
 
-          <div className="flex flex-col gap-3.5 overflow-hidden font-medium text-neutral-900">
+          <Link
+            to={`/dashboard/feed/post/${post?._id}`}
+            className="flex flex-col gap-3.5 overflow-hidden font-medium text-neutral-900"
+          >
             <div className="">
               <p>{post?.content}</p>
             </div>
             {/* <div className={postCardStyles.media}>
             <img src={postMedia} alt='' className='' />
           </div> */}
-          </div>
+          </Link>
 
           <div className="flex items-center justify-between">
             <div className="flex gap-[0.8rem] ">
-              <Link
-                to={
-                  location.pathname.includes('bookmarks')
-                    ? `/dashboard/bookmarks`
-                    : `/dashboard/feed`
-                }
-                className="flex items-center gap-[0.3rem] font-medium text-neutral-600 "
-              >
+              <div className="flex items-center gap-[0.3rem] font-medium text-neutral-600 ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
@@ -207,7 +202,7 @@ export default function Postcard({ post, isBookmarked }) {
                 >
                   {post?.upvotedBy?.length}
                 </div>
-              </Link>
+              </div>
               <div className="w-[1px] bg-neutral-600 "></div>
               <div className="flex items-center gap-[0.3rem] font-medium text-neutral-600 ">
                 <MessageText1
@@ -219,14 +214,7 @@ export default function Postcard({ post, isBookmarked }) {
               </div>
             </div>
             <div className="">
-              <Link
-                to={
-                  location.pathname.includes('bookmarks')
-                    ? `/dashboard/bookmarks`
-                    : `/dashboard/feed`
-                }
-                className="w-fit"
-              >
+              <div className="w-fit">
                 {!bookmarked ? (
                   <BsBookmarkPlus
                     size={17}
@@ -241,11 +229,11 @@ export default function Postcard({ post, isBookmarked }) {
                     onClick={handleDeleteBookmark}
                   />
                 )}
-              </Link>
+              </div>
             </div>
           </div>
         </div>
-      </Link>
+      </div>
     </>
   );
 }

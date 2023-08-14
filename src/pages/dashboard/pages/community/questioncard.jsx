@@ -21,6 +21,7 @@ import {
   useDeleteBookmarkMutation,
   useCreateBookmarkMutation,
 } from '../../../../app/slices/apiSlices/contentsSlice';
+import { IndexKind } from 'typescript';
 
 export default function Questioncard({ question, isBookmarked }) {
   const [bookmarked, setBookmarked] = useState(
@@ -85,14 +86,13 @@ export default function Questioncard({ question, isBookmarked }) {
         <div className="flex flex-col items-start justify-between gap-1 ">
           <Link
             to={`/dashboard/community/question/${question._id}/${question.slug}`}
-            // state={{ question: question._id }}
           >
             <h3 className="text-[18px] text-neutral-900">{question.title}</h3>
           </Link>
           <div className="flex gap-1">
-            {question?.tags?.map((tag) => (
+            {question?.tags?.map((tag, index) => (
               <span
-                key={tag}
+                key={index}
                 className="cursor-pointer rounded-[4px] bg-primary-400 px-1 py-[0.2rem] text-center text-[12px] font-medium text-neutral-900 transition-all duration-200 ease-in-out hover:bg-primary-300 "
               >
                 {tag.name}
@@ -111,7 +111,9 @@ export default function Questioncard({ question, isBookmarked }) {
               <span className="">|</span>
               <span className="">
                 <span className="xs:hidden">Requested </span>
-                {<ReactTimeAgo date={question.createdAt} locale="en-US" />}
+                {question && question.createdAt && (
+                  <ReactTimeAgo date={question.createdAt} locale="en-US" />
+                )}
               </span>
             </div>
 
@@ -194,7 +196,6 @@ export default function Questioncard({ question, isBookmarked }) {
             <span className="sm:hidden">|</span>
             <Link
               to={`/dashboard/community/question/${question._id}/${question.slug}`}
-              // state={{ question: question._id }}
               className="flex cursor-pointer items-center justify-center gap-2 rounded-[1rem] border-2 border-secondary-400 px-3 py-1.5 text-[12px] font-medium transition-all duration-200 ease-in-out hover:bg-secondary-400 hover:text-white sm:hidden "
             >
               <Edit size="17" className="" />

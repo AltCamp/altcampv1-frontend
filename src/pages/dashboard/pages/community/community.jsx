@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 import Questioncard from './questioncard';
 
@@ -20,13 +20,12 @@ import Pagination from '../../components/pagination';
 import { Helmet } from 'react-helmet-async';
 
 export default function Community() {
-  const [sortedQuestions, setSortedQuestions] = useState();
   const [createDeleteModal, setCreateDeleteModal] = useState(false);
   const [page, setPage] = useState(1);
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  // console.log(searchParams.get('page'))
+  const communityRef = useRef(null);
 
   const { data, isLoading, isSuccess, isError, error } =
     useGetAllQuestionsQuery({
@@ -37,13 +36,14 @@ export default function Community() {
 
   const meta = data?.meta;
 
-  // console.log(meta)
-
   useEffect(() => {
     if (data) {
-      window.scrollTo(0, 0);
+      communityRef.current.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
     }
-  }, [searchParams.get('page'), data]);
+  }, [searchParams.get('page')]);
 
   const navigate = useNavigate();
 
@@ -63,8 +63,6 @@ export default function Community() {
 
   const handleCreateDeleteModal = () => {
     setCreateDeleteModal(!createDeleteModal);
-    // reload the page
-    // window.location.reload()
     navigate(location.pathname, { state: {} });
   };
 
@@ -77,15 +75,18 @@ export default function Community() {
   }, [createDeleteModal]);
 
   return (
-    <div className="mb-16 flex h-full w-full overflow-scroll p-8 md:p-4 ">
-      {/* <Helmet>
+    <div
+      ref={communityRef}
+      className="mb-16 flex h-full w-full overflow-scroll p-8 md:p-4 "
+    >
+      <Helmet>
         <title>{`AltCamp-Dashboard-Community`}</title>
         <meta
-          name='description'
+          name="description"
           content={`A repository of questions and answers`}
         />
-        <link rel='canonical' href={`dashboard/community`} />
-      </Helmet> */}
+        <link rel="canonical" href={`dashboard/community`} />
+      </Helmet>
       {createDeleteModal && (
         <div className="fixed bottom-0 left-0 top-0 z-50 flex h-screen w-screen animate-fadeIn items-center justify-center overflow-hidden bg-black/50 ">
           <div className="relative flex h-[20rem] w-[20rem] flex-col items-center justify-center gap-8 rounded-[4px] bg-white p-8 md:h-[15rem] md:w-[15rem] xs:h-[12rem] xs:w-[12rem] xs:gap-2 xs:p-4 ">

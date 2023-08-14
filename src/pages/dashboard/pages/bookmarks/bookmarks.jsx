@@ -1,15 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+
 import { useSearchParams, useNavigate } from 'react-router-dom';
+
 import BookmarkCard from './bookmarkCard';
+
 import { RiArrowDownSLine } from 'react-icons/ri';
+
 import { useGetAllBookmarksQuery } from '../../../../app/slices/apiSlices/contentsSlice';
+
 import EmptyBookmark from '../../../../assets/general/EmptyNotification.png';
 
 import Pagination from '../../components/pagination';
 
 export default function Bookmarks() {
   const [isActionOpen, setActionOpen] = useState(false);
-  const [isFilterOpen, setFilterOpen] = useState(false);
   const [emptyBookmark, setEmptyBookmark] = useState(false);
   const [page, setPage] = useState(1);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -20,12 +24,10 @@ export default function Bookmarks() {
   const bookmarks = data?.data;
   const meta = data?.meta;
 
+  const bookmarkRef = useRef(null);
+
   const handleToggleAction = () => {
     setActionOpen(!isActionOpen);
-  };
-
-  const handleToggleFilter = () => {
-    setFilterOpen(!isFilterOpen);
   };
 
   useEffect(() => {
@@ -38,14 +40,20 @@ export default function Bookmarks() {
 
   useEffect(() => {
     if (data) {
-      window.scrollTo(0, 0);
+      bookmarkRef.current.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
     }
-  }, [searchParams.get('page'), data]);
+  }, [searchParams.get('page')]);
 
   const navigate = useNavigate();
 
   return (
-    <div className="relative mx-auto mb-16 h-full w-full overflow-y-scroll p-8 tab:w-[75%] md:p-4 sm:w-full ">
+    <div
+      ref={bookmarkRef}
+      className="relative mx-auto mb-16 h-full w-full overflow-y-scroll p-8 tab:w-[75%] md:p-4 sm:w-full "
+    >
       <div className="flex w-full flex-col gap-4">
         <h2 className="text-[1.2rem] font-semibold ">Bookmarks</h2>
 
@@ -83,30 +91,6 @@ export default function Bookmarks() {
             className="input"
             placeholder="Search bookmarks ..."
           />
-          {/* <div className={bookmarksStyles.filter}>
-            <div className={bookmarksStyles.select}>
-              <button
-                className={bookmarksStyles.bookButton}
-                onClick={handleToggleFilter}
-              >
-                <span>Filter</span>{' '}
-                <RiArrowDownSLine
-                  className={bookmarksStyles.bookIcon}
-                  size="20"
-                  color="#fff"
-                />
-              </button>
-              {isFilterOpen && (
-                <div className={bookmarksStyles.btnMenu}>
-                  <a href="#">All Bookmarks</a>
-                  <a className={bookmarksStyles.lastMenu} href="#">
-                    Highest Likes
-                  </a>
-                </div>
-              )}
-            </div>
-            <button className={bookmarksStyles.allButton}>All</button>
-          </div> */}
         </div>
 
         {isLoading && (
@@ -156,7 +140,7 @@ export default function Bookmarks() {
       </div>
 
       {emptyBookmark && !isLoading && (
-        <div className="flex w-full flex-col items-center gap-4 ">
+        <div className="mt-8 flex w-full flex-col items-center gap-4 ">
           <img
             src={EmptyBookmark}
             alt="empty bookmark"

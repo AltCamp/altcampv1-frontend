@@ -50,8 +50,14 @@ button:hover {
   height: 72%;
 }
 
+.intro-area .slider-area {
+  height: max-content;
+  padding: 1rem 0;
+  width: 100%;
+}
+
 .intro-area h1 {
-  font-size: 50px;
+  font-size: 40px;
   font-weight: bold;
   z-index: 10;
   /* background-color: green; */
@@ -91,7 +97,7 @@ button:hover {
   width: 50%;
   max-height: 448px;
   text-align: left;
-  padding: 1rem;
+  padding: 0.2rem;
   padding-left: 3rem;
 }
 
@@ -99,14 +105,19 @@ button:hover {
   /* background-color: crimson; */
   font-size: 48px;
   padding-top: 0;
-  margin: 0 0 25px;
+  margin: 0 0 5px;
+  color: var(--neutral-clr-drkst-grey);
+}
+
+.about-us-text h3 {
+  font-size: 25px;
   color: var(--neutral-clr-drkst-grey);
 }
 
 .about-us-text p {
   color: var(--neutral-clr-drkst-grey);
   /* background-color: aqua; */
-  font-size: 24px;
+  font-size: 18px;
   line-height: 1.75;
   /* width: 500px; */
 }
@@ -176,7 +187,7 @@ button:hover {
   color: white;
   text-align: center;
   font-size: 40px;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
 
 .tracks-container {
@@ -203,6 +214,7 @@ button:hover {
 .track svg {
   vertical-align: middle;
   color: #556aeb;
+  display: inline;
   /* background-color: white; */
   margin: 0 2px;
 }
@@ -249,7 +261,9 @@ button:hover {
 }
 
 .benefit-icon {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 20px 0;
   width: 84px;
   height: 84px;
@@ -311,7 +325,10 @@ button:hover {
 
 .call-to-action-area h1 {
   font-size: 48px;
-  margin: 20px 0;
+}
+
+.call-to-action-area .slider-area {
+  padding: 5px 0;
 }
 
 .call-to-action-area p {
@@ -359,6 +376,7 @@ button:hover {
 
   .about-us-area {
     height: 614px;
+    height: max-content;
     padding: 60px 6% 250px;
   }
 
@@ -374,8 +392,13 @@ button:hover {
     margin: 0 0 20px;
   }
 
+  .about-us-text h3 {
+    font-size: 17px;
+    margin: 0 0 5px;
+  }
+
   .about-us-text p {
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .about-us-image-area {
@@ -598,6 +621,7 @@ button:hover {
   }
 
   .about-us-text h2 {
+    font-weight: bold;
     font-size: 24px;
     padding-top: 0;
     margin: 0 0 20px;
@@ -606,7 +630,7 @@ button:hover {
 
   .about-us-text p {
     color: var(--neutral-clr-drkst-grey);
-    font-size: 24px;
+    font-size: 19px;
     line-height: 1.7;
     /* width: 500px; */
   }

@@ -148,3 +148,9 @@ a {
     @apply animate-highlights rounded-md bg-neutral-400 p-2;
   }
 }
+
+/* CAROUSEL STYLING */
+
+.slick-dots {
+  position: static !important;
+}
