@@ -10,7 +10,7 @@ export const useMediaHandler = () => {
     let files = file;
     let fileType = files.type;
     let filename = files.name;
-    let validExtension = ['image/png', 'image/jpeg', 'image/webp'];
+    let validExtension = ['image/png', 'image/jpeg', 'image/webp', 'image/gif'];
     let validVideoExtension = ['video/webm', 'video/mp4', 'video/*'];
 
     if (validExtension.includes(fileType)) {

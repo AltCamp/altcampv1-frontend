@@ -4,9 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { ProfileCircle } from 'iconsax-react';
 
-import { BsBookmarkPlus } from 'react-icons/bs';
-
-import { FcBookmark } from 'react-icons/fc';
+import { BsBookmarkPlus, BsFillBookmarkFill } from 'react-icons/bs';
 
 import ReactTimeAgo from 'react-time-ago';
 
@@ -250,7 +248,7 @@ const Postcomment = forwardRef((props, ref) => {
                   onClick={handleCreateBookmark}
                 />
               ) : (
-                <FcBookmark
+                <BsFillBookmarkFill
                   size={20}
                   className="cursor-pointer"
                   onClick={handleDeleteBookmark}
