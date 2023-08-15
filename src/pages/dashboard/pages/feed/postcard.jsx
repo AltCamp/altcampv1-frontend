@@ -4,9 +4,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 import { ProfileCircle, MessageText1 } from 'iconsax-react';
 
-import { BsBookmarkPlus } from 'react-icons/bs';
-
-import { FcBookmark } from 'react-icons/fc';
+import { BsBookmarkPlus, BsFillBookmarkFill } from 'react-icons/bs';
 
 import ReactTimeAgo from 'react-time-ago';
 
@@ -223,7 +221,7 @@ export default function Postcard({ post, isBookmarked }) {
                     onClick={handleCreateBookmark}
                   />
                 ) : (
-                  <FcBookmark
+                  <BsFillBookmarkFill
                     size={20}
                     className="cursor-pointer"
                     onClick={handleDeleteBookmark}

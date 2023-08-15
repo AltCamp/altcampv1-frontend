@@ -9,9 +9,7 @@ import {
   ProfileCircle,
 } from 'iconsax-react';
 
-import { BsBookmarkPlus } from 'react-icons/bs';
-
-import { FcBookmark } from 'react-icons/fc';
+import { BsBookmarkPlus, BsFillBookmarkFill } from 'react-icons/bs';
 
 import ReactTimeAgo from 'react-time-ago';
 
@@ -149,7 +147,7 @@ export default function Questioncard({ question, isBookmarked }) {
                     onClick={handleCreateBookmark}
                   />
                 ) : (
-                  <FcBookmark
+                  <BsFillBookmarkFill
                     size={20}
                     className="cursor-pointer"
                     onClick={handleDeleteBookmark}

@@ -14,9 +14,7 @@ import {
   ProfileCircle,
 } from 'iconsax-react';
 
-import { BsBookmarkPlus } from 'react-icons/bs';
-
-import { FcBookmark } from 'react-icons/fc';
+import { BsBookmarkPlus, BsFillBookmarkFill } from 'react-icons/bs';
 
 import { AiOutlineShareAlt } from 'react-icons/ai';
 
@@ -502,7 +500,7 @@ export default function Questionpage() {
                         onClick={handleCreateBookmark}
                       />
                     ) : (
-                      <FcBookmark
+                      <BsFillBookmarkFill
                         size={20}
                         className="cursor-pointer"
                         onClick={handleDeleteBookmark}

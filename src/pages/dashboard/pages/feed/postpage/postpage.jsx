@@ -2,9 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 
 import { Link, useNavigate, useLocation, useParams } from 'react-router-dom';
 
-import { BsBookmarkPlus } from 'react-icons/bs';
-
-import { FcBookmark } from 'react-icons/fc';
+import { BsBookmarkPlus, BsFillBookmarkFill } from 'react-icons/bs';
 
 import {
   ArrowCircleLeft,
@@ -317,7 +315,7 @@ export default function Postpage() {
                           onClick={handleCreateBookmark}
                         />
                       ) : (
-                        <FcBookmark
+                        <BsFillBookmarkFill
                           size={20}
                           className="cursor-pointer"
                           onClick={handleDeleteBookmark}
