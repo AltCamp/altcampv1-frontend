@@ -52,7 +52,7 @@ export default function Bookmarks() {
   return (
     <div
       ref={bookmarkRef}
-      className="relative mx-auto mb-16 h-full w-full overflow-y-scroll p-8 tab:w-[75%] md:p-4 sm:w-full "
+      className="relative mx-auto mb-16 h-auto w-full overflow-y-scroll p-8 tab:w-[75%] md:p-4 sm:w-full xs:pb-32"
     >
       <div className="flex w-full flex-col gap-4">
         <h2 className="text-[1.2rem] font-semibold ">Bookmarks</h2>

@@ -33,12 +33,12 @@ export default function Feed() {
     if (isSuccess) {
       setAllPosts(posts);
     }
-  }, [data, isSuccess]);
+  }, [data]);
 
   return (
-    <div className="mx-auto mb-16 flex h-full w-full max-w-[40rem] overflow-y-scroll p-8  md:p-4 sm:w-full ">
+    <div className="h-auto  w-full overflow-scroll p-8 pb-11 md:p-2 xs:p-0 xs:pb-36">
       <Outlet />
-      <div className="flex w-full flex-col gap-4 md:gap-8">
+      <div className="mx-auto flex h-full w-full max-w-[40rem] flex-col gap-4 pt-4 md:gap-8 md:p-4">
         <div className="">
           <h1 className="text-[20px] font-medium text-neutral-900 ">Feed</h1>
           <p className="text-[14px] text-neutral-600 ">
@@ -109,9 +109,9 @@ export default function Feed() {
         </div>
 
         {posts && allPosts && (
-          <div className="flex w-full justify-center">
+          <div className="items-centerw-full flex justify-center">
             <button
-              className="ease w-fit cursor-pointer rounded-[8px] border border-secondary-400 bg-transparent px-3 py-1 text-[0.9rem] text-secondary-400 outline-none transition-all duration-200 hover:border-none hover:bg-secondary-400 hover:text-white "
+              className="ease h-fit w-fit cursor-pointer rounded-[8px] border border-secondary-400 bg-transparent px-3 py-1 text-[0.9rem] text-secondary-400 outline-none transition-all duration-200 hover:border-none hover:bg-secondary-400 hover:text-white "
               // onclick set page to current page + 1 and set allPosts to allPosts + posts
               onClick={() => {
                 setPage(page + 1);

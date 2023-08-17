@@ -77,7 +77,7 @@ export default function Community() {
   return (
     <div
       ref={communityRef}
-      className="mb-16 flex h-full w-full overflow-scroll p-8 md:p-4 "
+      className="flex h-auto w-full overflow-scroll p-8 pb-11 md:p-2 xs:p-0 xs:pb-32"
     >
       <Helmet>
         <title>{`AltCamp-Dashboard-Community`}</title>
@@ -111,7 +111,7 @@ export default function Community() {
           </div>
         </div>
       )}
-      <div className="flex w-full flex-col gap-8">
+      <div className="mx-auto flex h-full w-full max-w-[40rem] flex-col gap-4 pt-4 md:gap-8 md:p-2">
         <div className="flex w-full items-center justify-between  ">
           <div className="w-fit">
             <h1 className="text-[20px] font-semibold text-neutral-900 ">
