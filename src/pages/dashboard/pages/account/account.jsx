@@ -57,7 +57,7 @@ export default function Account() {
     fontWeight: '600',
   };
 
-  const { user } = useSelector((state) => state?.user.user);
+  const { user } = useSelector((state) => state?.user);
 
   // console.log(user)
 
@@ -66,8 +66,8 @@ export default function Account() {
       <main className={accountStyles['main']}>
         <section className={accountStyles['sidePanel']}>
           <article>
-            <div className='w-full flex flex-col justify-center mb-4'>
-              <div className="h-[3.5rem] w-[3.5rem] mx-auto mb-2">
+            <div className="mb-4 flex w-full flex-col justify-center">
+              <div className="mx-auto mb-2 h-[3.5rem] w-[3.5rem]">
                 {user.profilePicture ? (
                   <img
                     src={user.profilePicture}
@@ -78,7 +78,7 @@ export default function Account() {
                   <ProfileCircle size={50} />
                 )}
               </div>
-              <h1 className="text-sm font-medium text-neutral-600 text-center">
+              <h1 className="text-center text-sm font-medium text-neutral-600">
                 {user?.firstName} {user?.lastName}
               </h1>
             </div>
@@ -157,7 +157,7 @@ export default function Account() {
             <Myprojects />
           ) : location.pathname === '/dashboard/account/myactivities' ? (
             <MyActivities />
-          ) :  (
+          ) : (
             <Myprofile
               edit={handleEditProfile}
               picUpdate={updateProfilePicture}

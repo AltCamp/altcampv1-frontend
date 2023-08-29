@@ -74,7 +74,7 @@ const Landing = () => {
               A community for Altschoolers that provides easy access to
               assistance from peers and mentors.
             </p>
-            <Link to="/account">
+            <Link to="/account/login">
               <button>Get Started</button>
             </Link>
           </div>
@@ -225,7 +225,7 @@ const Landing = () => {
             </p>
           </div>
         </div>
-        <Link to="/account">
+        <Link to="/account/login">
           <button>Get Started</button>
         </Link>
       </div>
@@ -251,7 +251,7 @@ const Landing = () => {
             Share what you know even as you learn what you do not know in the
             most convenient way.
           </p>
-          <Link to="/account">
+          <Link to="/account/login">
             <button>Get Started</button>
           </Link>
         </div>

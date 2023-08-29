@@ -12,14 +12,19 @@ import Toaster from '../../../components/Toaster/Toaster';
 
 import { useNavigate } from 'react-router-dom';
 
+import { useDispatch } from 'react-redux';
+import { setVerified } from '../../../app/slices/generalSlices/userSlice';
+
 export default function VerifyEmail() {
   const [otp, setOtp] = useState('');
   const [otpSent, setOtpSent] = useState(false);
 
   const [toastText, setToastText] = useState('');
-  const [toastType, setToastType] = useState('info');
+  const [toastType, setToastType] = useState('');
 
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   const handleSetOtp = (otp) => {
     setOtp(otp);
@@ -30,6 +35,7 @@ export default function VerifyEmail() {
     {
       data: startVerifyEmailData,
       isSuccess: startVerifyEmailSuccess,
+      isLoading: startVerifyEmailLoading,
       isError: startVerifyEmailError,
       error: startVerifyEmailErrors,
     },
@@ -40,16 +46,8 @@ export default function VerifyEmail() {
     setOtpSent(true);
   };
 
-  const [
-    verifyEmail,
-    {
-      data: verifyEmailData,
-      isLoading: verifyEmailIsLoading,
-      isSuccess: verifyEmailSuccess,
-      isError: verifyEmailError,
-      error: verifyEmailErrors,
-    },
-  ] = useVerifyEmailMutation();
+  const [verifyEmail, { data, isLoading, isSuccess, isError, error }] =
+    useVerifyEmailMutation();
 
   const handleVerifyEmail = () => {
     if (otp.length < 4) {
@@ -75,20 +73,26 @@ export default function VerifyEmail() {
   }, [startVerifyEmailSuccess]);
 
   useEffect(() => {
-    if (verifyEmailSuccess) {
+    if (isSuccess) {
       // remove saved values in localStorage
       localStorage.removeItem('requestIdForEmail');
-      setToastText(verifyEmailData.message);
+      localStorage.removeItem('aboutToRegister');
+      setToastText(data?.message);
       setToastType('success');
+      dispatch(setVerified(true));
       setTimeout(() => {
-        navigate('/dashboard');
+        navigate('/dashboard/feed');
       }, 2000);
     }
-    if (verifyEmailError) {
-      setToastText(verifyEmailErrors?.message);
+    if (isError) {
+      setToastText(error?.data.message);
       setToastType('error');
+      setTimeout(() => {
+        setToastType('');
+        setToastText('');
+      }, 2000);
     }
-  }, [verifyEmailSuccess, verifyEmailError]);
+  }, [isSuccess, isError, data]);
 
   return (
     <div className="flex h-screen w-full flex-col items-center justify-center">
@@ -100,7 +104,9 @@ export default function VerifyEmail() {
           Verify Email
         </h2>
         <p className="mb-[2.5rem] text-center sm:text-[0.875rem] ">
-          We emailed you a code. Please input it.
+          {startVerifyEmailSuccess
+            ? `We have sent you a new code. Please input it.`
+            : `We emailed you a code. Please input it.`}
         </p>
         <div className="mt-[3rem] flex w-full flex-col gap-[1rem]">
           <OtpInput
@@ -123,9 +129,9 @@ export default function VerifyEmail() {
           onClick={() => {
             handleVerifyEmail();
           }}
-          disabled={verifyEmailIsLoading}
+          disabled={isLoading}
         >
-          {verifyEmailIsLoading ? 'Verifying...' : 'Verify'}
+          {isLoading ? 'Verifying...' : 'Verify'}
         </button>
         <p className="mt-3 flex w-fit gap-[0.5rem] self-center font-medium text-primary-800 sm:text-[0.875rem]">
           Didn&apos;t receive the code?{' '}
@@ -133,7 +139,7 @@ export default function VerifyEmail() {
             onClick={handleStartVerifyEmail}
             className="underline-primary-800 cursor-pointer font-semibold underline underline-offset-2 hover:no-underline"
           >
-            Resend
+            {startVerifyEmailLoading ? `Resending...` : `Resend`}
           </span>
         </p>
       </div>
