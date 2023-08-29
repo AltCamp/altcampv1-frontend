@@ -6,7 +6,9 @@ import { useStartVerifyEmailMutation } from '../../../app/slices/apiSlices/accou
 
 import { useVerifyEmailMutation } from '../../../app/slices/apiSlices/accountSlice';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { setVerified } from '../../../app/slices/generalSlices/userSlice';
 
 import Toaster from '../../../components/Toaster/Toaster';
 
@@ -15,7 +17,9 @@ import wave from '../../../assets/icons/wave.png';
 import { CloseCircle } from 'iconsax-react';
 
 export default function VerifyEmailPopUp({ queryError, setQueryError }) {
-  const { user } = useSelector((state) => state?.user.user);
+  const { user } = useSelector((state) => state?.user);
+
+  const dispatch = useDispatch();
 
   const [otp, setOtp] = useState('');
 
@@ -81,13 +85,17 @@ export default function VerifyEmailPopUp({ queryError, setQueryError }) {
       localStorage.removeItem('requestIdForEmail');
       setToastText(verifyEmailData.message);
       setToastType('success');
+      dispatch(setVerified(true));
       setTimeout(() => {
         setQueryError('');
       }, 2000);
     }
     if (verifyEmailError) {
-      setToastText(verifyEmailErrors?.message);
+      setToastText(verifyEmailErrors?.data.message);
       setToastType('error');
+      setTimeout(() => {
+        setToastText('');
+      }, 2000);
     }
   }, [verifyEmailSuccess, verifyEmailError]);
 
@@ -162,7 +170,7 @@ export default function VerifyEmailPopUp({ queryError, setQueryError }) {
                     onClick={handleStartVerifyEmail}
                     className="underline-primary-800 cursor-pointer font-semibold underline underline-offset-2 hover:no-underline"
                   >
-                    Resend
+                    {startVerifyEmailIsLoading ? `Resending...` : `Resend`}
                   </span>
                 </p>
               </>

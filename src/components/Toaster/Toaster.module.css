@@ -34,7 +34,7 @@
   animation-duration: 0.5s;
   animation-fill-mode: forwards;
   animation-timing-function: ease-in-out;
-  animation-delay: 0s, 4s;
+  animation-delay: 0s, 1.5s;
 }
 
 .toastTitle {

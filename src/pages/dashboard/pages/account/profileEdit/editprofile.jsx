@@ -8,7 +8,7 @@ import { setUpdateDetails } from '../../../../../app/slices/generalSlices/userSl
 import Toaster from '../../../../../components/Toaster/Toaster';
 
 export default function Editprofile() {
-  const { user } = useSelector((state) => state?.user.user);
+  const { user } = useSelector((state) => state?.user);
 
   const [handleEdit, handleCancel] = useOutletContext();
   const dispatch = useDispatch();

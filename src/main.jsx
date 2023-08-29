@@ -98,16 +98,16 @@ const router = createBrowserRouter([
   {
     path: '/account',
     element: <AuthLayout />,
-    loader: () => {
-      if (localStorage.getItem('user')) {
-        return redirect('/dashboard/feed');
-      }
-      return null;
-    },
     children: [
       {
         path: '/account/login',
         element: <LoginLayout />,
+        loader: () => {
+          if (localStorage.getItem('user')) {
+            return redirect('/dashboard/feed');
+          }
+          return null;
+        },
         errorElement: <Error />,
         children: [
           {
