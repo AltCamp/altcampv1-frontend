@@ -18,7 +18,7 @@ import iconLogo from '../../../assets/general/logonotext.svg';
 import { useSelector } from 'react-redux';
 
 export default function Topbar({ toggleSideBar, handleSideBar }) {
-  const { user } = useSelector((state) => state?.user.user);
+  const { user } = useSelector((state) => state?.user);
 
   const [showSearch, setShowSearch] = useState(false);
 

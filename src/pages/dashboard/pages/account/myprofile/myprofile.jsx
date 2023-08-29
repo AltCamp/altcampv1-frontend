@@ -10,11 +10,11 @@ export default function Myprofile({ edit, picUpdate, updateBio }) {
   const nav = useNavigate();
   const [queryError, setQueryError] = useState('');
 
-  const { user } = useSelector((state) => state?.user.user);
+  const { user } = useSelector((state) => state?.user);
 
   const handleVerify = () => {
     setQueryError('Email is not verified');
-  }
+  };
   return (
     <>
       <article>
@@ -95,8 +95,10 @@ export default function Myprofile({ edit, picUpdate, updateBio }) {
                       Verified
                     </p>
                   ) : (
-                    <p className="cursor-pointer rounded-full border border-orange-500 px-1 text-orange-900"
-                    onClick={handleVerify}>
+                    <p
+                      className="cursor-pointer rounded-full border border-orange-500 px-1 text-orange-900"
+                      onClick={handleVerify}
+                    >
                       Not verified
                     </p>
                   )}
@@ -107,7 +109,10 @@ export default function Myprofile({ edit, picUpdate, updateBio }) {
           <p className={accountStyles['edit']} onClick={edit}>
             Edit details
           </p>
-          <VerifyEmailPopUp queryError={queryError} setQueryError={setQueryError} />
+          <VerifyEmailPopUp
+            queryError={queryError}
+            setQueryError={setQueryError}
+          />
         </div>
       </article>
     </>

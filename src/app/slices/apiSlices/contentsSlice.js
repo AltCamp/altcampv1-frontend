@@ -90,7 +90,7 @@ export const contentsSlice = createApi({
 
     //   QUESTIONS RELATED QUERIES AND MUTATION
     getAllQuestions: builder.query({
-      query: ({ page, limit = 10 }) => ({
+      query: ({ page, limit = 18 }) => ({
         url: url.GET_ALL_QUESTIONS_URL(url, page, true, limit),
         method: 'GET',
       }),

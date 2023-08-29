@@ -42,7 +42,7 @@ export default function Answercard({ answer, isBookmarked }) {
     ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling'],
   });
 
-  const { user } = useSelector((state) => state?.user.user);
+  const { user } = useSelector((state) => state?.user);
 
   const location = useLocation();
 

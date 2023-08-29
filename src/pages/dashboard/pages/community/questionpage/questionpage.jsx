@@ -63,7 +63,7 @@ export default function Questionpage() {
   // get currnet page address
   const shareLink = window.location.href;
 
-  const { user } = useSelector((state) => state?.user.user);
+  const { user } = useSelector((state) => state?.user);
 
   const {
     data: questionData,
