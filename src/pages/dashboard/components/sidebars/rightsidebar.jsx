@@ -142,14 +142,16 @@ export default function RightSidebar() {
                             </a>
                           </Tooltip>
                         ))}
-                        <a
-                          className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-white bg-gray-700 text-xs font-medium text-white hover:bg-gray-600 dark:border-gray-800"
-                          href="https://github.com/AltCamp/altcampv1-frontend/graphs/contributors"
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          {`+${frontendContributors.length}`}
-                        </a>
+                        {/* {frontendContributors && (
+                          <a
+                            className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-white bg-gray-700 text-xs font-medium text-white hover:bg-gray-600 dark:border-gray-800"
+                            href="https://github.com/AltCamp/altcampv1-frontend/graphs/contributors"
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            {`+${frontendContributors.length}`}
+                          </a>
+                        )} */}
                       </div>
                     </div>
                   </div>
@@ -224,14 +226,16 @@ export default function RightSidebar() {
                             </a>
                           </Tooltip>
                         ))}
-                        <a
-                          className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-white bg-gray-700 text-xs font-medium text-white hover:bg-gray-600 dark:border-gray-800"
-                          href="https://github.com/AltCamp/altcampv1-backend/graphs/contributors"
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          {`+${backendContributors.length}`}
-                        </a>
+                        {/* {backendContributors && (
+                          <a
+                            className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-white bg-gray-700 text-xs font-medium text-white hover:bg-gray-600 dark:border-gray-800"
+                            href="https://github.com/AltCamp/altcampv1-backend/graphs/contributors"
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            {`+${backendContributors.length}`}
+                          </a>
+                        )} */}
                       </div>
                     </div>
                   </div>
