@@ -10,6 +10,8 @@ import { accountSlice } from './slices/apiSlices/accountSlice';
 
 import { forgotPasswordSlice } from './slices/apiSlices/forgotPasswordSlice';
 
+import { githubApiSlice } from './slices/apiSlices/githubApiSlice';
+
 export const store = configureStore({
   reducer: {
     // Add your reducers here
@@ -17,6 +19,7 @@ export const store = configureStore({
     [contentsSlice.reducerPath]: contentsSlice.reducer,
     [accountSlice.reducerPath]: accountSlice.reducer,
     [forgotPasswordSlice.reducerPath]: forgotPasswordSlice.reducer,
+    [githubApiSlice.reducerPath]: githubApiSlice.reducer,
     user: userSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
@@ -25,5 +28,6 @@ export const store = configureStore({
       contentsSlice.middleware,
       accountSlice.middleware,
       forgotPasswordSlice.middleware,
+      githubApiSlice.middleware,
     ]),
 });

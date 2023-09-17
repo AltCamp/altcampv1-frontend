@@ -1,8 +1,17 @@
 // THIS FILE IS FOR URLS THAT WILL BE USED IN THE APP
 
 const url = {
-  // API URL
+  // API URL ENDPOINT
   BASE_URL: import.meta.env.VITE_BASE_URL,
+
+  // GITHUB API ENDPOINT
+  GITHUB_API_URL: 'https://api.github.com/repos/AltCamp',
+
+  // GITHUB FRONTEND REPO URL
+  FRONTEND_URL: '/altcampv1-frontend',
+
+  // GITHUB BACKEND REPO URL
+  BACKEND_URL: '/altcampv1-backend',
 
   // AUTH URLS
   LOGIN_URL: '/auth/login',
