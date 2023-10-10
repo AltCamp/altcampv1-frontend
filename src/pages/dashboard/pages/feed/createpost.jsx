@@ -79,8 +79,8 @@ export default function Createpost() {
   }, [isSuccess]);
 
   return (
-    <div className="fixed left-0 top-[4.9rem]  z-30 flex h-screen  w-screen items-center justify-center overflow-hidden bg-black/50 sm:h-full sm:overflow-scroll xs:pb-16   ">
-      <div className="relative flex h-fit w-[30rem] flex-col items-center gap-3 rounded-[4px] bg-white p-4 md:p-3 xs:h-full xs:w-full xs:overflow-scroll ">
+    <div className="fixed bottom-0 left-0 top-0 z-50 flex h-screen  w-screen items-center justify-center overflow-hidden bg-black/50 sm:top-[4.9rem] sm:h-full sm:overflow-scroll xs:pb-16  ">
+      <div className="relative flex h-fit max-h-[30rem] w-[35rem] max-w-[35rem] flex-col items-center gap-3 rounded-[14px] bg-white p-4 md:p-3 xs:h-full xs:w-full xs:overflow-scroll ">
         <CloseCircle
           size="20"
           className="absolute -right-8 top-0 cursor-pointer text-white sm:-top-8 sm:left-1/2 sm:-translate-x-1/2 "
@@ -136,14 +136,14 @@ export default function Createpost() {
 
           <form
             action=""
-            className="flex w-full flex-col gap-3 py-2"
+            className="flex h-full w-full flex-col gap-3 py-2"
             onSubmit={(e) => {
               e.preventDefault();
               handleCreatePost();
             }}
           >
             <div
-              className="flex h-auto w-full flex-col gap-1  rounded-lg border border-neutral-200 p-2 focus-within:ring-2 focus-within:ring-secondary-400 focus-within:ring-offset-2 focus:border-primary-600"
+              className="flex h-auto w-full flex-col gap-1 rounded-lg border border-neutral-200 p-2 focus-within:ring-2 focus-within:ring-secondary-400 focus-within:ring-offset-2 focus:border-primary-600"
               ref={dropRef}
               onDragEnter={(e) => handleStyleEnter(e)}
               onDragLeave={(e) => handleStyleLeave(e)}
@@ -158,16 +158,16 @@ export default function Createpost() {
                 placeholder="Write something..."
                 ref={inputRef}
                 value={content}
-                className="h-16 w-full resize-none border-none p-0 outline-none focus:outline-none focus:ring-0 xs:h-28"
+                className="h-[20%] w-full resize-none border-none bg-red-300 p-0 outline-none focus:outline-none focus:ring-0 xs:h-28"
                 onChange={(e) => setContent(e.target.value)}
               ></textarea>
               <div
                 className={`flex h-auto w-full flex-col items-center justify-center 
-            ${image || video ? 'h-[15rem] ' : 'h-auto'}
+            ${image || video ? 'max-h-[10rem] ' : 'h-auto'}
             `}
               >
                 {image ? (
-                  <div className="relative h-full w-full">
+                  <div className="relative aspect-video h-full w-full">
                     <div
                       className="absolute right-1 top-1 flex h-8 w-8 cursor-pointer items-center justify-center  rounded-full  bg-black/50  text-white transition-all hover:shadow-md"
                       onClick={() => removeMedia()}
@@ -177,7 +177,7 @@ export default function Createpost() {
                     <img
                       src={image}
                       alt="media"
-                      className="h-full w-full object-cover"
+                      className="h-full w-full overflow-hidden object-cover"
                     />
                   </div>
                 ) : video ? (

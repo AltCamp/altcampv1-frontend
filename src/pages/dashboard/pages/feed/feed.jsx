@@ -32,6 +32,7 @@ export default function Feed() {
   useEffect(() => {
     if (isSuccess) {
       setAllPosts(posts);
+      console.log(allPosts);
     }
   }, [data]);
 
