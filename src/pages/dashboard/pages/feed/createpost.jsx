@@ -10,7 +10,7 @@ import { IoMdClose } from 'react-icons/io';
 
 import { ArrowCircleLeft, ProfileCircle, CloseCircle } from 'iconsax-react';
 
-import { useMediaHandler } from '../account/hooks/useMediaHandler';
+import { useCreatePostHandler } from '../../../../hooks/useCreatePostHandler';
 
 import { useCreatePostMutation } from '../../../../app/slices/apiSlices/contentsSlice';
 
@@ -19,11 +19,21 @@ import VerifyEmailPopUp from '../../components/verifyEmailPopUp';
 import { useSelector } from 'react-redux';
 
 export default function Createpost() {
-  const [content, setContent] = useState('');
-
   const [queryError, setQueryError] = useState();
 
-  const { user } = useSelector((state) => state?.user?.user);
+  const { user } = useSelector((state) => state?.user);
+
+  const {
+    content,
+    // tags,
+    files,
+    imagePreviews,
+    handleContentChange,
+    handleTagsChange,
+    handleFileChange,
+    removeFile,
+    getFormData,
+  } = useCreatePostHandler();
 
   const chooseref = useRef(null);
   const dropRef = useRef(null);
@@ -34,8 +44,6 @@ export default function Createpost() {
   }, []);
 
   const navigate = useNavigate();
-  // custom hook for uploading image
-  const { image, video, error, handleMedia, removeMedia } = useMediaHandler();
 
   // style format for drag and drop
   const handleStyleEnter = (e) => {
@@ -54,7 +62,7 @@ export default function Createpost() {
     e.preventDefault();
     e.stopPropagation();
     dropRef.current.style.border = '';
-    handleMedia(e.dataTransfer.files[0]);
+    handleFileChange(e.dataTransfer.files[0]);
   };
 
   const [
@@ -62,11 +70,15 @@ export default function Createpost() {
     { data, isSuccess, isLoading, isError, error: createPostError },
   ] = useCreatePostMutation();
 
+  useEffect(() => {
+    const formData = getFormData();
+    console.log(formData);
+    console.log(files);
+  }, [content, files]);
+
   const handleCreatePost = () => {
-    createPost({
-      content,
-      // media: image
-    });
+    const formData = getFormData();
+    createPost(formData);
   };
 
   useEffect(() => {
@@ -79,8 +91,8 @@ export default function Createpost() {
   }, [isSuccess]);
 
   return (
-    <div className="fixed bottom-0 left-0 top-0 z-50 flex h-screen  w-screen items-center justify-center overflow-hidden bg-black/50 sm:top-[4.9rem] sm:h-full sm:overflow-scroll xs:pb-16  ">
-      <div className="relative flex h-fit max-h-[30rem] w-[35rem] max-w-[35rem] flex-col items-center gap-3 rounded-[14px] bg-white p-4 md:p-3 xs:h-full xs:w-full xs:overflow-scroll ">
+    <div className="fixed bottom-0 left-0 top-0 z-50 flex h-screen w-screen items-center justify-center overflow-scroll bg-black/50 sm:top-[4.9rem] sm:h-full xs:pb-16  ">
+      <div className="relative flex h-fit w-[35rem] max-w-[35rem] flex-col items-center gap-2 rounded-[14px] bg-white p-4 md:p-3 xs:h-full xs:w-full xs:overflow-scroll ">
         <CloseCircle
           size="20"
           className="absolute -right-8 top-0 cursor-pointer text-white sm:-top-8 sm:left-1/2 sm:-translate-x-1/2 "
@@ -93,7 +105,7 @@ export default function Createpost() {
             setQueryError={setQueryError}
           />
 
-          <div className="flex w-full flex-col gap-1 pb-4">
+          <div className="flex w-full flex-col gap-1 pb-2">
             <div
               className="mb-5 hidden cursor-pointer items-center gap-2 text-[14px] font-medium text-neutral-700 xs:flex "
               onClick={() => navigate('/dashboard/feed')}
@@ -104,7 +116,7 @@ export default function Createpost() {
               />
               <div className="">Back to Feed</div>
             </div>
-            <h1 className="text-[18px] font-semibold text-neutral-900">
+            <h1 className="w-fit text-[18px] font-semibold text-neutral-900">
               Add a post
             </h1>
             <p className="hidden text-[14px] font-normal text-neutral-600">
@@ -136,14 +148,15 @@ export default function Createpost() {
 
           <form
             action=""
-            className="flex h-full w-full flex-col gap-3 py-2"
+            className="flex h-full w-full flex-col gap-3 overflow-scroll p-2"
             onSubmit={(e) => {
               e.preventDefault();
               handleCreatePost();
             }}
+            encType="multipart/form-data"
           >
             <div
-              className="flex h-auto w-full flex-col gap-1 rounded-lg border border-neutral-200 p-2 focus-within:ring-2 focus-within:ring-secondary-400 focus-within:ring-offset-2 focus:border-primary-600"
+              className="flex h-full w-full flex-col gap-1 rounded-lg border border-neutral-200 p-1 focus-within:ring-2 focus-within:ring-secondary-400 focus-within:ring-offset-2 focus:border-primary-600"
               ref={dropRef}
               onDragEnter={(e) => handleStyleEnter(e)}
               onDragLeave={(e) => handleStyleLeave(e)}
@@ -153,52 +166,36 @@ export default function Createpost() {
               <textarea
                 name="text"
                 id="text"
-                cols="30"
-                rows="10"
                 placeholder="Write something..."
                 ref={inputRef}
                 value={content}
-                className="h-[20%] w-full resize-none border-none bg-red-300 p-0 outline-none focus:outline-none focus:ring-0 xs:h-28"
-                onChange={(e) => setContent(e.target.value)}
+                className="h-[4rem] w-full resize-none border-none p-0 outline-none focus:outline-none focus:ring-0 xs:h-28"
+                onChange={(e) => handleContentChange(e.target.value)}
               ></textarea>
               <div
-                className={`flex h-auto w-full flex-col items-center justify-center 
-            ${image || video ? 'max-h-[10rem] ' : 'h-auto'}
+                className={`flex h-auto max-h-[18rem] w-full items-center justify-between gap-2
+           
             `}
               >
-                {image ? (
-                  <div className="relative aspect-video h-full w-full">
+                {imagePreviews?.map((preview, index) => (
+                  <div
+                    key={index}
+                    className="relative aspect-video h-full w-full"
+                  >
                     <div
                       className="absolute right-1 top-1 flex h-8 w-8 cursor-pointer items-center justify-center  rounded-full  bg-black/50  text-white transition-all hover:shadow-md"
-                      onClick={() => removeMedia()}
+                      onClick={() => removeFile(index)}
                     >
                       <IoMdClose size={25} />
                     </div>
                     <img
-                      src={image}
-                      alt="media"
+                      src={preview}
+                      alt={`Preview ${index}`}
                       className="h-full w-full overflow-hidden object-cover"
                     />
                   </div>
-                ) : video ? (
-                  <div className="relative h-full w-full">
-                    <div
-                      className="absolute right-1 top-1 flex h-8 w-8 cursor-pointer items-center justify-center  rounded-full  bg-black/50  text-white transition-all hover:shadow-md"
-                      onClick={() => removeMedia()}
-                    >
-                      <IoMdClose size={25} />
-                    </div>
-                    <video
-                      className="h-full w-full object-cover"
-                      controls
-                      width="250"
-                    >
-                      <source src={video} type="video/*" />
-                    </video>
-                  </div>
-                ) : null}
+                ))}
               </div>
-
               <label
                 htmlFor="media"
                 className="w-fit cursor-pointer text-secondary-400"
@@ -208,8 +205,9 @@ export default function Createpost() {
                   type="file"
                   name="media"
                   id="media"
+                  accept="image/png, image/jpeg, image/gif, image/webp"
                   ref={chooseref}
-                  onChange={(e) => handleMedia(e.target.files[0])}
+                  onChange={(e) => handleFileChange(e.target.files[0])}
                   className="hidden"
                 />
               </label>

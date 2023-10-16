@@ -159,9 +159,24 @@ export default function Postcard({ post, isBookmarked }) {
             <div className="">
               <p>{post?.content}</p>
             </div>
-            {/* <div className={postCardStyles.media}>
-            <img src={postMedia} alt='' className='' />
-          </div> */}
+            <div
+              className={`flex h-auto max-h-[18rem] w-full items-center justify-between gap-2
+           
+            `}
+            >
+              {post?.media.map((media, index) => (
+                <div
+                  key={index}
+                  className="relative aspect-video h-full w-full"
+                >
+                  <img
+                    src={media.url}
+                    alt={`Post media`}
+                    className="h-full w-full overflow-hidden object-cover"
+                  />
+                </div>
+              ))}
+            </div>
           </Link>
 
           <div className="flex items-center justify-between">

@@ -249,9 +249,22 @@ export default function Postpage() {
                   <div className="">
                     <p>{post?.content}</p>
                   </div>
-                  {/* <div className={postPageStyles.media}>
-                <img src={postMedia} alt='' className='' />
-              </div> */}
+                  <div
+                    className={`flex h-auto max-h-[22rem] w-full items-center justify-between gap-2
+           
+            `}
+                  >
+                    {post?.media.map((media, index) => (
+                      // <div key={index} className="relative h-full w-full">
+                      <img
+                        key={index}
+                        src={media.url}
+                        alt={`Post media`}
+                        className="h-full w-full overflow-hidden object-cover"
+                      />
+                      // </div>
+                    ))}
+                  </div>
                 </div>
 
                 <div className="flex items-center justify-between">

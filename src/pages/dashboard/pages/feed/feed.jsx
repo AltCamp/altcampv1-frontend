@@ -13,7 +13,7 @@ import { useGetAllPostsQuery } from '../../../../app/slices/apiSlices/contentsSl
 import { useSelector } from 'react-redux';
 
 export default function Feed() {
-  const { user } = useSelector((state) => state?.user?.user);
+  const { user } = useSelector((state) => state?.user);
 
   const navigate = useNavigate();
 
@@ -37,7 +37,7 @@ export default function Feed() {
   }, [data]);
 
   return (
-    <div className="h-auto  w-full overflow-scroll p-8 pb-11 md:p-2 xs:p-0 xs:pb-36">
+    <div className="h-auto w-full overflow-scroll p-8 pb-11 md:p-2 xs:p-0 xs:pb-36">
       <Outlet />
       <div className="mx-auto flex h-full w-full max-w-[40rem] flex-col gap-4 pt-4 md:gap-8 md:p-4">
         <div className="">
