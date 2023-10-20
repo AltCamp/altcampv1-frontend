@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation, Outlet } from 'react-router-dom';
 
 import { ProfileCircle, MessageText1 } from 'iconsax-react';
 
@@ -27,7 +27,7 @@ export default function Postcard({ post, isBookmarked }) {
 
   const [queryError, setQueryError] = useState();
 
-  const { user } = useSelector((state) => state?.user?.user);
+  const { user } = useSelector((state) => state?.user);
 
   const navigate = useNavigate();
 
@@ -99,7 +99,6 @@ export default function Postcard({ post, isBookmarked }) {
     <>
       {/* verifyEmailPopUp */}
       <VerifyEmailPopUp queryError={queryError} setQueryError={setQueryError} />
-
       <div
         className={`decoration-none p-6 shadow-[0px_3.31218px_19.8731px_rgba(86,_86,_86,_0.15)] 
         ${
@@ -152,32 +151,33 @@ export default function Postcard({ post, isBookmarked }) {
             </div>
           </div>
 
-          <Link
-            to={`/dashboard/feed/post/${post?._id}`}
-            className="flex flex-col gap-3.5 overflow-hidden font-medium text-neutral-900"
-          >
-            <div className="">
+          <div className="flex flex-col gap-3.5  font-medium text-neutral-900">
+            <Link to={`/dashboard/feed/post/${post?._id}`}>
               <p>{post?.content}</p>
-            </div>
+            </Link>
             <div
-              className={`flex h-auto max-h-[18rem] w-full items-center justify-between gap-2
+              className={`flex h-full max-h-[20rem] w-full items-center justify-between gap-2 overflow-hidden
            
             `}
             >
               {post?.media.map((media, index) => (
-                <div
+                <Link
+                  to={`/dashboard/feed/post/${post?._id}/images/${index + 1}`}
+                  className={`aspect-video h-full w-full  overflow-hidden`}
+                  state={{
+                    media: media.url,
+                  }}
                   key={index}
-                  className="relative aspect-video h-full w-full"
                 >
                   <img
                     src={media.url}
                     alt={`Post media`}
-                    className="h-full w-full overflow-hidden object-cover"
+                    className={`h-full max-h-[20rem] w-full object-cover`}
                   />
-                </div>
+                </Link>
               ))}
             </div>
-          </Link>
+          </div>
 
           <div className="flex items-center justify-between">
             <div className="flex gap-[0.8rem] ">

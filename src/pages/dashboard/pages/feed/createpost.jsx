@@ -72,8 +72,6 @@ export default function Createpost() {
 
   useEffect(() => {
     const formData = getFormData();
-    console.log(formData);
-    console.log(files);
   }, [content, files]);
 
   const handleCreatePost = () => {
