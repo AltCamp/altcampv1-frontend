@@ -41,7 +41,7 @@ export default function Postpage() {
 
   const navigate = useNavigate();
 
-  const { user } = useSelector((state) => state?.user?.user);
+  const { user } = useSelector((state) => state?.user);
 
   const { postId } = useParams();
 
@@ -173,7 +173,10 @@ export default function Postpage() {
         id="postpage"
         className="mx-auto flex h-screen w-full max-w-[40rem] flex-col px-6 py-8 xs:w-full "
       >
-        <div className="cursor-pointer" onClick={() => navigate(-1)}>
+        <div
+          className="cursor-pointer"
+          onClick={() => navigate(`/dashboard/feed`)}
+        >
           <ArrowCircleLeft size="24" color="#1E1E1E" />
         </div>
 
@@ -255,14 +258,22 @@ export default function Postpage() {
             `}
                   >
                     {post?.media.map((media, index) => (
-                      // <div key={index} className="relative h-full w-full">
-                      <img
+                      <Link
+                        to={`/dashboard/feed/post/${post?._id}/images/${
+                          index + 1
+                        }`}
+                        className={`aspect-video h-full w-full  overflow-hidden`}
+                        state={{
+                          media: media.url,
+                        }}
                         key={index}
-                        src={media.url}
-                        alt={`Post media`}
-                        className="h-full w-full overflow-hidden object-cover"
-                      />
-                      // </div>
+                      >
+                        <img
+                          src={media.url}
+                          alt={`Post media`}
+                          className={`h-full max-h-[20rem] w-full object-cover`}
+                        />
+                      </Link>
                     ))}
                   </div>
                 </div>
