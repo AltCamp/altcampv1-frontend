@@ -78,6 +78,7 @@ import {
   // subpages of feed
   Postpage,
   Createpost,
+  ViewImage,
 } from './pages/dashboard/pages';
 
 import Updatebio from './pages/dashboard/pages/account/updatebio/updateBio';
@@ -178,6 +179,10 @@ const router = createBrowserRouter([
         element: <Feed />,
         children: [
           { path: '/dashboard/feed/createpost', element: <Createpost /> },
+          {
+            path: '/dashboard/feed/post/:postId/images/:imageId',
+            element: <ViewImage />,
+          },
         ],
       },
       {

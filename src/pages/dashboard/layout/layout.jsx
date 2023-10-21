@@ -36,9 +36,9 @@ export default function Layout() {
   }, []);
 
   return (
-    <div className="fixed flex h-screen w-screen flex-col items-center ">
+    <div className=" flex h-screen w-screen flex-col items-center ">
       <Topbar toggleSideBar={toggleSideBar} handleSideBar={handleSideBar} />
-      <div className="sticky mx-auto flex h-full w-[80%] min-w-[1200px] max-w-full overflow-y-scroll px-2 dashboard:w-full dashboard:min-w-full dashboard:px-0 xl:w-[90%] xl:min-w-[90%] tab:w-full tab:min-w-full ">
+      <div className=" mx-auto flex h-full w-[80%] min-w-[1200px] max-w-full overflow-y-scroll px-2 dashboard:w-full dashboard:min-w-full dashboard:px-0 xl:w-[90%] xl:min-w-[90%] tab:w-full tab:min-w-full ">
         <LeftSidebar
           toggleSideBar={toggleSideBar}
           handleSideBar={handleSideBar}

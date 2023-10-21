@@ -15,5 +15,6 @@ export { default as Questionpage } from './community/questionpage/questionpage';
 export { default as AskQuestionPage } from './community/askquestionpage';
 export { default as EditQuestionPage } from './community/editquestionpage';
 export { default as Createpost } from './feed/createpost';
+export { default as ViewImage } from './feed/viewimage';
 
 export { default as Postpage } from './feed/postpage/postpage';

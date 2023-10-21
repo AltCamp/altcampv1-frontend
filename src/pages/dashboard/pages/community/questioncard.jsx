@@ -25,7 +25,7 @@ export default function Questioncard({ question, isBookmarked }) {
   const [bookmarked, setBookmarked] = useState(
     isBookmarked || question?.isBookmarked
   );
-  const { user } = useSelector((state) => state?.user?.user);
+  const { user } = useSelector((state) => state?.user);
 
   const [
     createBookmark,
