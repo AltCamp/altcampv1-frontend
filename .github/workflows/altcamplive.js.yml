@@ -20,9 +20,11 @@ jobs:
             echo VITE_TINY_KEY=${{ secrets.VITE_TINY_KEY }} >> .env
             echo VITE_GA_ID=${{ secrets.VITE_GA_ID }} >> .env
             echo VITE_BASE_URL=${{ secrets.VITE_BASE_URL }} >> .env
+      - name: "Increase node space"
+        run: |
+            export NODE_OPTIONS=–max-old-space-size=8192
       - name: "Install dependencies"
         run: |
-            export NODE_OPTIONS=–max-old-space-size=4096
             npm install
       - name: "Build"
         run: |
