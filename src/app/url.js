@@ -1,8 +1,17 @@
 // THIS FILE IS FOR URLS THAT WILL BE USED IN THE APP
 
 const url = {
-  // API URL
-  BASE_URL: 'https://api.thealtcamp.com',
+  // API URL ENDPOINT
+  BASE_URL: import.meta.env.VITE_BASE_URL,
+
+  // GITHUB API ENDPOINT
+  GITHUB_API_URL: 'https://api.github.com/repos/AltCamp',
+
+  // GITHUB FRONTEND REPO URL
+  FRONTEND_URL: '/altcampv1-frontend',
+
+  // GITHUB BACKEND REPO URL
+  BACKEND_URL: '/altcampv1-backend',
 
   // AUTH URLS
   LOGIN_URL: '/auth/login',
@@ -48,12 +57,14 @@ const url = {
   GET_BOOKMARK_BY_ID_URL(url, bookmarkId) {
     return `${url.BOOKMARKS_URL}/${bookmarkId}`;
   },
-  CREATE_BOOKMARK_URL: '/bookmarks',
+  CREATE_BOOKMARK_URL(url, postId, postType) {
+    return `${url.BOOKMARKS_URL}?postId=${postId}&postType=${postType}`;
+  },
   UPDATE_BOOKMARK_URL(url, bookmarkId) {
     return `${url.BOOKMARKS_URL}/${bookmarkId}`;
   },
-  DELETE_BOOKMARK_URL(url, bookmarkId) {
-    return `${url.BOOKMARKS_URL}/${bookmarkId}`;
+  DELETE_BOOKMARK_URL(url, postId) {
+    return `${url.BOOKMARKS_URL}?postId=${postId}`;
   },
 
   // COMMUNITY URLS
@@ -115,6 +126,12 @@ const url = {
   CREATE_COMMENT_URL: '/comments',
   LIKE_COMMENT_URL(url, id) {
     return `${url.COMMENTS_URL}/${id}/upvote`;
+  },
+
+  // TAGS
+  TAGS_URL: '/tags',
+  GET_SEARCHED_TAGS_URL(url, tagName) {
+    return `${url.TAGS_URL}?tagName=${tagName}`;
   },
 };
 

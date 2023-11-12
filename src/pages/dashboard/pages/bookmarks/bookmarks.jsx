@@ -1,14 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import BookmarkCard from './bookmarkCard/bookmarkCard';
-import bookmarksStyles from './bookmarks.module.css';
+
+import BookmarkCard from './bookmarkCard';
+
 import { RiArrowDownSLine } from 'react-icons/ri';
-import { useGetAllBookmarksQuery } from '../../../../app/slices/apiSlices/bookmarkSlice';
+
+import { useGetAllBookmarksQuery } from '../../../../app/slices/apiSlices/contentsSlice';
+
 import EmptyBookmark from '../../../../assets/general/EmptyNotification.png';
+
+import Pagination from '../../components/pagination';
 
 export default function Bookmarks() {
   const [isActionOpen, setActionOpen] = useState(false);
-  const [isFilterOpen, setFilterOpen] = useState(false);
   const [emptyBookmark, setEmptyBookmark] = useState(false);
   const [page, setPage] = useState(1);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -19,12 +24,10 @@ export default function Bookmarks() {
   const bookmarks = data?.data;
   const meta = data?.meta;
 
+  const bookmarkRef = useRef(null);
+
   const handleToggleAction = () => {
     setActionOpen(!isActionOpen);
-  };
-
-  const handleToggleFilter = () => {
-    setFilterOpen(!isFilterOpen);
   };
 
   useEffect(() => {
@@ -37,160 +40,120 @@ export default function Bookmarks() {
 
   useEffect(() => {
     if (data) {
-      window.scrollTo(0, 0);
+      bookmarkRef.current.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
     }
-  }, [searchParams.get('page'), data]);
+  }, [searchParams.get('page')]);
 
   const navigate = useNavigate();
 
   return (
-    <div className={bookmarksStyles.bookmarkContainer}>
-      {isLoading && (
-        <div className={bookmarksStyles.loading}>
-          <div className={bookmarksStyles.loader}></div>
-        </div>
-      )}
-      {isSuccess && bookmarks.length > 0 && (
-        <div className={bookmarksStyles.bookmarkContent}>
-          <h2>Bookmarks</h2>
+    <div
+      ref={bookmarkRef}
+      className="relative mx-auto mb-16 h-auto w-full overflow-y-scroll p-8 tab:w-[75%] md:p-4 sm:w-full xs:pb-32"
+    >
+      <div className="flex w-full flex-col gap-4">
+        <h2 className="text-[1.2rem] font-semibold ">Bookmarks</h2>
 
-          {/* NavBar */}
-          <div className={bookmarksStyles.bookmarkNav}>
-            <div className={bookmarksStyles.select}>
-              <button
-                className={bookmarksStyles.bookButton}
-                onClick={handleToggleAction}
-              >
-                <span>Action</span>{' '}
-                <RiArrowDownSLine
-                  className={bookmarksStyles.bookIcon}
-                  size="20"
-                  color="#fff"
-                />
-              </button>
-              {isActionOpen && (
-                <div className={bookmarksStyles.btnMenu}>
-                  <a href="#">Remove Bookmark</a>
-                  <a className={bookmarksStyles.lastMenu} href="#">
-                    Forward
-                  </a>
-                </div>
-              )}
-            </div>
-            <div className={bookmarksStyles.search}>
-              <input
-                type="text"
-                id="search"
-                name="search"
-                placeholder="Search bookmarks ..."
-              />
-            </div>
-            <div className={bookmarksStyles.filter}>
-              <div className={bookmarksStyles.select}>
-                <button
-                  className={bookmarksStyles.bookButton}
-                  onClick={handleToggleFilter}
+        {/* NavBar */}
+        <div className="flex w-full items-center gap-2 font-poppins  ">
+          <div className="relative h-full ">
+            <button
+              className="auth-btn mt-0 flex items-center gap-1 px-2 sm:px-1 sm:text-[13px]  "
+              onClick={handleToggleAction}
+            >
+              <span>Action</span>
+              <RiArrowDownSLine className="" size="20" color="#fff" />
+            </button>
+            {isActionOpen && (
+              <div className="absolute z-10 mt-1 flex w-[10rem] flex-col overflow-hidden rounded-br-lg border border-neutral-500 bg-[#fafafa] text-[14px] shadow-lg ">
+                <span
+                  className="cursor-pointer border border-b border-neutral-500 p-1 transition-all duration-100 hover:bg-yellow-100  "
+                  onClick={handleToggleAction}
                 >
-                  <span>Filter</span>{' '}
-                  <RiArrowDownSLine
-                    className={bookmarksStyles.bookIcon}
-                    size="20"
-                    color="#fff"
-                  />
-                </button>
-                {isFilterOpen && (
-                  <div className={bookmarksStyles.btnMenu}>
-                    <a href="#">All Bookmarks</a>
-                    <a href="#">Recent Bookmarks</a>
-                    <a href="#">Older Bookmarks</a>
-                    <a href="#">Highest Comments</a>
-                    <a className={bookmarksStyles.lastMenu} href="#">
-                      Highest Likes
-                    </a>
-                  </div>
-                )}
-              </div>
-              <button className={bookmarksStyles.allButton}>All</button>
-            </div>
-          </div>
-
-          {/* Card */}
-          <div className={bookmarksStyles.bookmarkMain}>
-            {bookmarks.map((bookmark) => (
-              <BookmarkCard bookmark={bookmark} key={bookmark._id} />
-            ))}
-          </div>
-
-          {/* Pagination */}
-
-          {bookmarks.length > 0 && (
-            <div className={bookmarksStyles.pagination}>
-              <button
-                className={bookmarksStyles.previousBtn}
-                onClick={() => setSearchParams({ page: meta?.currentPage - 1 })}
-                disabled={meta?.currentPage === 1}
-              >
-                Previous
-              </button>
-              {[...Array(meta?.totalPages)].map((_, index) => (
-                <button
-                  key={index}
-                  className={
-                    meta?.currentPage === index + 1
-                      ? bookmarksStyles.active
-                      : bookmarksStyles.pageBtn
-                  }
-                  onClick={() => setSearchParams({ page: index + 1 })}
+                  Select Bookmarks
+                </span>
+                <span
+                  className="cursor-pointer border border-b border-neutral-500 p-1 transition-all duration-100 hover:bg-yellow-100 "
+                  onClick={handleToggleAction}
                 >
-                  {index + 1}
-                </button>
-              ))}
-              <button
-                className={bookmarksStyles.nextBtn}
-                onClick={() => setSearchParams({ page: meta?.currentPage + 1 })}
-                disabled={meta?.currentPage === meta?.totalPages}
-              >
-                Next
-              </button>
-              <div className={bookmarksStyles.pageCount}>
-                <input
-                  type="number"
-                  className={bookmarksStyles.currentPage}
-                  value={page}
-                  onChange={(e) => setPage(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                      setSearchParams({ page });
-                    }
-                  }}
-                  onKeyUp={(e) => {
-                    if (Number(e.target.value) > meta?.totalPages) {
-                      setPage(meta?.totalPages);
-                    }
-                  }}
-                />
-                <span className={bookmarksStyles.divider}>/ </span>
-                <span className={bookmarksStyles.totalPage}>
-                  {meta?.totalPages}
+                  Forward
                 </span>
               </div>
-            </div>
-          )}
+            )}
+          </div>
+          <input
+            type="text"
+            id="search"
+            name="search"
+            className="input"
+            placeholder="Search bookmarks ..."
+          />
         </div>
-      )}
+
+        {isLoading && (
+          <div className="text-center">
+            <div role="status">
+              <svg
+                aria-hidden="true"
+                className="mr-2 inline h-8 w-8 animate-spin fill-blue-600 text-gray-200 dark:text-gray-600"
+                viewBox="0 0 100 101"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                  fill="currentFill"
+                />
+              </svg>
+              <span className="sr-only">Loading...</span>
+            </div>
+          </div>
+        )}
+        {isSuccess && bookmarks.length > 0 && (
+          <>
+            {/* Card */}
+            <div className="my-8 flex w-full flex-col ">
+              {bookmarks.map((bookmark) => (
+                <BookmarkCard bookmark={bookmark} key={bookmark?._id} />
+              ))}
+            </div>
+
+            {/* Pagination */}
+
+            {bookmarks.length > 0 && (
+              <Pagination
+                meta={meta}
+                page={page}
+                setPage={setPage}
+                setSearchParams={setSearchParams}
+              />
+            )}
+          </>
+        )}
+      </div>
 
       {emptyBookmark && !isLoading && (
-        <div className={bookmarksStyles.emptyBookmark}>
-          <div className={bookmarksStyles.noBookmarkHeader}>
-            <h2>Bookmarks</h2>
-          </div>
-          <div className={bookmarksStyles.noBookmark}>
-            <img src={EmptyBookmark} alt="empty bookmark" />
-            <p>
-              No bookmarks here yet!{' '}
-              <span>Bookmark your favorite posts, questions, and answers</span>
-            </p>
-          </div>
+        <div className="mt-8 flex w-full flex-col items-center gap-4 ">
+          <img
+            src={EmptyBookmark}
+            alt="empty bookmark"
+            className="mx-auto w-[14rem]"
+          />
+          <p className="flex flex-col items-center gap-2">
+            <span className="text-center font-medium">
+              No bookmarks here yet!
+            </span>
+            <span className="text-center ">
+              Bookmark your favorite posts, questions, and answers
+            </span>
+          </p>
         </div>
       )}
     </div>

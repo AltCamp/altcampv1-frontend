@@ -33,10 +33,11 @@ export default function ForgotPassword() {
       }, 1000);
     }
     if (isError) {
-      setToastText(error?.message);
+      setToastText(error?.data?.message);
       setToastType('error');
+      setTimeout(() => setToastText(''), 3000);
     }
-  }, [data]);
+  }, [isSuccess, isError]);
 
   return (
     <div className="mt-[3rem] flex flex-col justify-center gap-[1rem] ">

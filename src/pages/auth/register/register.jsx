@@ -6,7 +6,7 @@ import Toaster from '../../../components/Toaster/Toaster';
 
 import { AiFillCheckSquare } from 'react-icons/ai';
 
-import { setUser } from '../../../app/slices/generalSlices/userSlice';
+import { setUser, setToken } from '../../../app/slices/generalSlices/userSlice';
 
 import { useDispatch } from 'react-redux';
 
@@ -86,22 +86,26 @@ export default function Register() {
     if (verifyIsSuccess) {
       // save requestId to localStorage
       localStorage.setItem('requestIdForEmail', verifyEmailData.data.requestId);
+      setTimeout(() => navigate('/account/verifyemail'), 1000);
     }
   }, [verifyIsSuccess]);
 
   useEffect(() => {
     if (isSuccess) {
-      setToastText(data.message);
+      setToastText(data?.message);
       setToastType('success');
-      dispatch(setUser(data?.data));
+      dispatch(setUser(data?.data.user));
+      dispatch(setToken(data?.data.token));
       startVerifyEmail();
-      setTimeout(() => navigate('/account/verifyemail'), 2000);
     } else if (isError) {
-      setToastText(error?.message);
+      setToastText(error?.data?.message);
       setToastType('error');
-      setTimeout(() => setToastText(''), 3000);
+      setTimeout(() => {
+        setToastType('');
+        setToastText('');
+      }, 2000);
     }
-  }, [isSuccess, isError]);
+  }, [isSuccess, isError, data]);
 
   useEffect(() => {
     const media = window.innerWidth;
@@ -109,10 +113,6 @@ export default function Register() {
       setScreenWidthState(true);
     }
   }, []);
-
-  const passwordPattern = new RegExp(
-    '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}'
-  );
 
   useEffect(() => {
     const eightormore = /.{8,}/;
@@ -342,7 +342,7 @@ export default function Register() {
           </div>
         </div>
 
-        {/* error ui */}
+        {/* toast */}
         <Toaster
           show={!!toastText}
           type={toastType}

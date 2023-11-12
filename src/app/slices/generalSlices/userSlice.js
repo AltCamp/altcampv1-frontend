@@ -1,9 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  user: localStorage.getItem('user')
-    ? JSON.parse(localStorage.getItem('user'))
-    : null,
+  user: JSON.parse(localStorage.getItem('user')),
+  token: JSON.parse(localStorage.getItem('token')),
 };
 
 export const userSlice = createSlice({
@@ -14,22 +13,32 @@ export const userSlice = createSlice({
       localStorage.setItem('user', JSON.stringify(action.payload));
       state.user = JSON.parse(localStorage.getItem('user'));
     },
+    setToken: (state, action) => {
+      localStorage.setItem('token', JSON.stringify(action.payload));
+      state.token = JSON.parse(localStorage.getItem('token'));
+    },
     removeUser: (state) => {
       state.user = null;
+      state.token = null;
       localStorage.removeItem('user');
+      localStorage.removeItem('token');
+    },
+    setVerified: (state, action) => {
+      state.user.emailIsVerified = action.payload;
+      localStorage.setItem('user', JSON.stringify(state.user));
     },
     setUserBio: (state, action) => {
-      state.user.user.bio = action.payload;
+      state.user.bio = action.payload;
       localStorage.setItem('user', JSON.stringify(state.user));
     },
     setProfilePicture: (state, action) => {
-      state.user.user.profilePicture = action.payload;
+      state.user.profilePicture = action.payload;
       localStorage.setItem('user', JSON.stringify(state.user));
     },
     setUpdateDetails: (state, action) => {
-      state.user.user.firstName = action.payload.firstName;
-      state.user.user.lastName = action.payload.lastName;
-      state.user.user.track = action.payload.track;
+      state.user.firstName = action.payload.firstName;
+      state.user.lastName = action.payload.lastName;
+      state.user.track = action.payload.track;
       localStorage.setItem('user', JSON.stringify(state.user));
     },
   },
@@ -37,6 +46,8 @@ export const userSlice = createSlice({
 
 export const {
   setUser,
+  setToken,
+  setVerified,
   removeUser,
   setUserBio,
   setProfilePicture,

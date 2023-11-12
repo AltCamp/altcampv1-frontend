@@ -1,6 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  content: [
+    './index.html',
+    './src/**/*.{js,ts,jsx,tsx}',
+    'node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}',
+  ],
   theme: {
     extend: {
       fontFamily: {
@@ -36,7 +40,7 @@ export default {
           800: '#343a40',
           900: '#212529',
         },
-        
+
         // secondary colors
         secondary: {
           50: '#cdcffc',
@@ -50,17 +54,80 @@ export default {
           800: '#232552',
           900: '#151631',
         },
-        
+
         // toaster colors
         success: '#55b938',
         info: '#6a6ff5',
         error: '#d10909',
         warning: '#f38920',
       },
+      keyframes: {
+        showSearch: {
+          '0%': {
+            opacity: 0,
+            transform: 'translateX(-50%) scale(0.5)',
+          },
+          '100%': {
+            opacity: 1,
+            transform: 'translateX(-50%) scale(1)',
+          },
+        },
+        like: {
+          '0%': {
+            transform: 'scale(1)',
+          },
+          '25%': {
+            transform: 'scale(1.5)',
+          },
+          '50%': {
+            transform: 'scale(1.2)',
+          },
+          '75%': {
+            transform: 'scale(1.4)',
+          },
+          '100%': {
+            transform: 'scale(1)',
+          },
+        },
+        highlights: {
+          '0%': {
+            backgroundColor: 'var(--neutral-clr-grey-2)',
+          },
+          '100%': {
+            backgroundColor: 'var(--neutral-clr-white)',
+          },
+        },
+        fadeIn: {
+          '0%': {
+            opacity: 0,
+          },
+          '100%': {
+            opacity: 1,
+          },
+        },
+        slideIn: {
+          from: {
+            transform: 'translateX(100%)',
+          },
+          to: {
+            transform: 'translateX(0)',
+          },
+        },
+      },
+      animation: {
+        showSearch: 'showSearch 0.3s ease-in-out forwards',
+        like: 'like 1s',
+        highlights: 'highlights 10s',
+        fadeIn: 'fadeIn 0.5s ease-in-out',
+        slideIn: 'slideIn 0.2s ease-in-out',
+      },
     },
     screens: {
       '2xl': { max: '1535px' },
       // => @media (max-width: 1535px) { ... }
+
+      dashboard: { max: '1400px' },
+      // => @media (max-width: 1400px) { ... }
 
       xl: { max: '1279px' },
       // => @media (max-width: 1279px) { ... }
@@ -84,5 +151,5 @@ export default {
       // => @media (max-width: 300px) { ... }
     },
   },
-  plugins: [],
+  plugins: [require('flowbite/plugin')],
 };

@@ -5,8 +5,8 @@ import { useDispatch } from 'react-redux';
 import { useOutletContext } from 'react-router-dom';
 import { setProfilePicture } from '../../../../../app/slices/generalSlices/userSlice';
 import { useUpdateProfilePictureMutation } from '../../../../../app/slices/apiSlices/accountSlice';
-import { useMediaHandler } from './../hooks/useMediaHandler';
 import Toaster from '../../../../../components/Toaster/Toaster';
+import { useMediaHandler } from '../../../../../hooks/useMediaHandler';
 
 export default function Picturechange() {
   const chooseref = useRef(null);
@@ -15,7 +15,7 @@ export default function Picturechange() {
   const [handleEdit, handleCancel] = useOutletContext();
 
   // custom hook for uploading image
-  const { image, handleMedia, removeImage } = useMediaHandler();
+  const { image, handleMedia, removeMedia } = useMediaHandler();
 
   // style format for drag and drop
   const handleStyleEnter = (e) => {
@@ -75,7 +75,7 @@ export default function Picturechange() {
       handleStateUpdate({
         toastConfig: {
           show: true,
-          text: data.message,
+          text: data?.message,
           type: 'success',
         },
       });
@@ -83,17 +83,17 @@ export default function Picturechange() {
       setTimeout(() => {
         handleCloseToast();
         handleCancel();
-      }, 3000);
+      }, 2000);
     } else if (isError) {
       handleStateUpdate({
         toastConfig: {
           show: true,
           title: 'Upload Error!',
-          text: error?.data.message,
+          text: error?.data?.message,
           type: 'error',
         },
       });
-      removeImage();
+      removeMedia();
       setTimeout(() => handleCloseToast(), 3000);
     }
   }, [isSuccess, isError]);
@@ -128,8 +128,8 @@ export default function Picturechange() {
             >
               Select from device
             </label>
-            {!image &&  <p className='my-5 text-sm'>MAXIMUM SIZE: 500Kb</p>}
-            
+            {!image && <p className="my-5 text-sm">MAXIMUM SIZE: 500Kb</p>}
+
             <input
               type="file"
               name="projectImage"

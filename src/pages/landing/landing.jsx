@@ -1,5 +1,8 @@
 import landingPageStyles from './landing.module.css';
 import Navbar from '../../components/Navbar';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import {
   Bubble,
   Convert3DCube,
@@ -18,18 +21,60 @@ import AboutUsImage from '../../assets/general/AboutusImage.png';
 import { Link } from 'react-router-dom';
 
 const Landing = () => {
+  const heroTaglines = [
+    'Ignite Discussion, Inspire Growth: Welcome to AltCamp',
+    'Collaborate, Communicate, Succeed: AltCamp is Here',
+    'Streamline Communication, Amplify Knowledge: AltCamp',
+  ];
+
+  const outroTaglines = [
+    'Access and share resources',
+    'Create and join communities of like minds',
+    'Collaborate with students from other tracks',
+  ];
+
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 4000, // Adjust the speed as needed
+    nextArrow: <></>,
+    prevArrow: <></>,
+  };
+
+  const settings2 = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2800, // Adjust the speed as needed
+    nextArrow: <></>,
+    prevArrow: <></>,
+  };
   return (
     <>
       <Navbar />
       <div>
         <div className={landingPageStyles['intro-area']}>
           <div className={landingPageStyles['intro-text-area']}>
-            <h1>Transform your skills and learn the easy way</h1>
+            {/* <h1>Transform your skills and learn the easy way</h1> */}
+            <Slider {...settings} className={landingPageStyles['slider-area']}>
+              {heroTaglines.map((tagline, index) => (
+                <div key={index} className="tagline">
+                  <h1>{tagline}</h1>
+                </div>
+              ))}
+            </Slider>
             <p>
               A community for Altschoolers that provides easy access to
               assistance from peers and mentors.
             </p>
-            <Link to="/account">
+            <Link to="/account/login">
               <button>Get Started</button>
             </Link>
           </div>
@@ -57,11 +102,20 @@ const Landing = () => {
         </div>
         <div className={landingPageStyles['about-us-text']}>
           <h2>About Us</h2>
+          <h3>LEARN WITH OTHERS</h3>
           <p>
-            AltCamp is an online e-learning interactive platform that allows
-            Altschoolers post questions on the community, interact with other
-            community members and also receive feedbacks and responses from
-            other students, instructors and mentors.
+            With the increasing desire to move formal education from the regular
+            four walls to virtual spaces comes the need to improve virtual
+            communication to suit academic purposes. More than ever, there’s a
+            need to ensure that students from various locations do not learn in
+            isolation. There is a need to ensure that students in a virtual
+            school can co-learn and even build interpersonal relationships
+            outside of the academic content they consume.
+          </p>
+          <p>
+            AltCamp is a computer-mediated communication (CMC) product by
+            AltSchool. It allows smooth communication among students and
+            lecturers.
           </p>
         </div>
       </div>
@@ -171,7 +225,7 @@ const Landing = () => {
             </p>
           </div>
         </div>
-        <Link to="/account">
+        <Link to="/account/login">
           <button>Get Started</button>
         </Link>
       </div>
@@ -185,12 +239,19 @@ const Landing = () => {
         </div>
 
         <div className={landingPageStyles['call-to-action-area']}>
-          <h1>Learn and share knowledge the easy way</h1>
+          {/* <h1>Learn and share knowledge the easy way</h1> */}
+          <Slider {...settings2} className={landingPageStyles['slider-area']}>
+            {outroTaglines.map((tagline, index) => (
+              <div key={index} className="tagline">
+                <h1>{tagline}</h1>
+              </div>
+            ))}
+          </Slider>
           <p>
             Share what you know even as you learn what you do not know in the
             most convenient way.
           </p>
-          <Link to="/account">
+          <Link to="/account/login">
             <button>Get Started</button>
           </Link>
         </div>
