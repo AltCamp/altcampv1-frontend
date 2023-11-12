@@ -22,7 +22,7 @@ jobs:
             echo VITE_BASE_URL=${{ secrets.VITE_BASE_URL }} >> .env
       - name: "Install dependencies"
         run: |
-            export NODE_OPTIONS=–max-old-space-size=2048
+            export NODE_OPTIONS=–max-old-space-size=4096
             npm install
       - name: "Build"
         run: |
