@@ -19,7 +19,17 @@ jobs:
             touch .env
             echo VITE_TINY_KEY=${{ secrets.VITE_TINY_KEY }} >> .env
             echo VITE_GA_ID=${{ secrets.VITE_GA_ID }} >> .env
-            echo VITE_BASE_URL=${{ secrets.VITE_BASE_URL }} >> .env
+            echo VITE_BASE_URL=${{ secrets.VITE_BASE_URL }} >> .env         
+
+      - name: "Check Node.js version"
+        run: |
+          node -v
+
+      - name: "Install Node.js"
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+          
       - name: "Increase node space"
         run: |
             export NODE_OPTIONS=–max-old-space-size=8192
