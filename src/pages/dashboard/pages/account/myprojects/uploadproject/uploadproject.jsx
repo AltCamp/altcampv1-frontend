@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import projectStyle from '../myprojects.module.css';
-import { useMediaHandler } from './../../hooks/useMediaHandler';
+import { useMediaHandler } from '../../../../../../hooks/useMediaHandler';
 
 export default function Uploadproject({ display }) {
   const chooseref = useRef(null);

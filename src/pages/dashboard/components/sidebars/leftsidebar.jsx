@@ -38,7 +38,7 @@ export default function LeftSidebar({ toggleSideBar, handleSideBar }) {
     <div
       className={`z-10 h-auto min-w-[16rem] overflow-auto bg-white px-4 py-8
       shadow-[0px_2px_12px_0px_#56565626] xl:min-w-fit 
-      tab:fixed tab:left-0 tab:top-0 tab:z-50 tab:h-full tab:-translate-x-full tab:overflow-y-scroll tab:pt-[6rem] tab:transition-all tab:duration-300 ${
+      tab:fixed tab:left-0 tab:top-0 tab:h-full tab:-translate-x-full tab:overflow-y-scroll tab:pt-[6rem] tab:transition-all tab:duration-300 ${
         toggleSideBar && 'tab:translate-x-0'
       }
       `}

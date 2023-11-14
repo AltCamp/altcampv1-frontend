@@ -29,7 +29,7 @@ const Postcomment = forwardRef((props, ref) => {
     isBookmarked || latestComment?.isBookmarked
   );
 
-  const { user } = useSelector((state) => state?.user?.user);
+  const { user } = useSelector((state) => state?.user);
 
   const [queryError, setQueryError] = useState();
 

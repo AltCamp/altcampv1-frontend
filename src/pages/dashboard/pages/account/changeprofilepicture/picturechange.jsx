@@ -5,8 +5,8 @@ import { useDispatch } from 'react-redux';
 import { useOutletContext } from 'react-router-dom';
 import { setProfilePicture } from '../../../../../app/slices/generalSlices/userSlice';
 import { useUpdateProfilePictureMutation } from '../../../../../app/slices/apiSlices/accountSlice';
-import { useMediaHandler } from './../hooks/useMediaHandler';
 import Toaster from '../../../../../components/Toaster/Toaster';
+import { useMediaHandler } from '../../../../../hooks/useMediaHandler';
 
 export default function Picturechange() {
   const chooseref = useRef(null);
