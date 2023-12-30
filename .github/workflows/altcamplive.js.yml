@@ -4,16 +4,18 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
-  build:
-    runs-on: self-hosted
+  build-on-github:
+    name: Github Build
+    runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
       - name: "Create env file"
         run: |
             touch .env
@@ -22,11 +24,42 @@ jobs:
             echo VITE_BASE_URL=${{ secrets.VITE_BASE_URL }} >> .env
       - name: "Install dependencies"
         run: |
-            npm install
+          npm install
       - name: "Build"
         run: |
-            npm run build
-      - name: "Install PM2"
+          npm run build
+      - name: Create deployment tar file
+        run: touch deployment-artifacts1.tar.gz
+      - name: Bundle deployment file
+        run: |
+          tar --exclude=deployment-artifacts1.tar.gz -czf deployment-artifacts1.tar.gz .
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: deployment-artifacts
+          path: deployment-artifacts1.tar.gz
+
+  build:
+    name: DO Build
+    runs-on: self-hosted
+    needs: build-on-github
+
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: deployment-artifacts
+      - name: Delete dist folder
+        run: rm -rf dist
+      - name: Delete src
+        run: rm -rf src
+      - name: Remove node-modules dir
+        run: rm -rf node_modules
+      - name: Remove Environment Variable
+        run: rm -f .env
+      - name: Extract artifact extra comment
+        run: |
+          tar -xvf deployment-artifacts1.tar.gz
+      - name: "Start application"
         run: |
             pm2 stop 0
             pm2 start 0
