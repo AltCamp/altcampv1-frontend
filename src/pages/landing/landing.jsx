@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import landingPageStyles from './landing.module.css';
 import Navbar from '../../components/Navbar';
 import Slider from 'react-slick';
@@ -21,6 +22,9 @@ import AboutUsImage from '../../assets/general/AboutusImage.png';
 import { Link } from 'react-router-dom';
 
 const Landing = () => {
+  const homeRef = useRef(null)
+  const featuresRef = useRef(null)
+  const aboutUsRef = useRef(null)
   const heroTaglines = [
     'Ignite Discussion, Inspire Growth: Welcome to AltCamp',
     'Collaborate, Communicate, Succeed: AltCamp is Here',
@@ -58,9 +62,14 @@ const Landing = () => {
   };
   return (
     <>
-      <Navbar />
+      <Navbar 
+      
+      homeRef={homeRef}
+      aboutUsRef={aboutUsRef}
+      featuresRef={featuresRef}
+      />
       <div>
-        <div className={landingPageStyles['intro-area']}>
+        <div className={landingPageStyles['intro-area']} ref={homeRef}>
           <div className={landingPageStyles['intro-text-area']}>
             {/* <h1>Transform your skills and learn the easy way</h1> */}
             <Slider {...settings} className={landingPageStyles['slider-area']}>
@@ -76,14 +85,14 @@ const Landing = () => {
             </p>
             <Link to="/account/login">
               <button>Get Started</button>
-            </Link>
+            </Link>Features
           </div>
           <div className={landingPageStyles['intro-image-area']}>
             <img src={heroImage} alt="" />
           </div>
         </div>
       </div>
-      <div className={landingPageStyles['about-us-area']}>
+      <div className={landingPageStyles['about-us-area']} ref={aboutUsRef}>
         <div className={landingPageStyles['about-us-image-area']}>
           <div
             className={`${landingPageStyles['decor-box']} ${landingPageStyles['decor-box-1']}`}
@@ -160,7 +169,7 @@ const Landing = () => {
           </div>
         </div>
       </div>
-      <div className={landingPageStyles['benefits-area']}>
+      <div className={landingPageStyles['benefits-area']} ref={featuresRef}>
         <h5>WHY JOIN US</h5>
         <h2>Features of AltCamp</h2>
         <div className={landingPageStyles['benefits-container']}>

@@ -5,24 +5,30 @@ import { HambergerMenu } from 'iconsax-react';
 import { useState } from 'react';
 import altcamplogo from '../assets/general/AuthWhiteLogo.svg';
 
-const MainNavbar = () => {
+const MainNavbar = ({ homeRef, aboutUsRef, featuresRef }) => {
   const [openRegisterOptions, setOpenRegisterOptions] = useState(false);
-
+  const handleScroll = (ref) => {
+    window.scrollTo({
+      top: ref.offsetTop,
+      left: 0,
+      behavior: "smooth"
+    })
+  }
   return (
     <>
       <nav className={mainNavbarStyles['main-nav']}>
-        <NavLink href="">
+        <NavLink href="#home">
           <img src={altcamplogo} alt="logo" />
         </NavLink>
         <ul className={mainNavbarStyles['nav-paths']}>
           <li>
-            <NavLink href="#">Home</NavLink>
+            <NavLink href="#home" onClick={() => handleScroll(homeRef.current)} >Home</NavLink>
           </li>
           <li>
-            <NavLink href="#">About</NavLink>
+            <NavLink href="#about" onClick={() => handleScroll(aboutUsRef.current)} >About</NavLink>
           </li>
           <li>
-            <NavLink href="#">Features</NavLink>
+            <NavLink href="#features" onClick={() => handleScroll(featuresRef.current)}>Features</NavLink>
           </li>
           <NavLink to="/account">
             <button className={mainNavbarStyles['get-started-btn']}>
