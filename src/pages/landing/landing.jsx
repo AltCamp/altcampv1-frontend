@@ -22,9 +22,9 @@ import AboutUsImage from '../../assets/general/AboutusImage.png';
 import { Link } from 'react-router-dom';
 
 const Landing = () => {
-  const homeRef = useRef(null)
-  const featuresRef = useRef(null)
-  const aboutUsRef = useRef(null)
+  const homeRef = useRef(null);
+  const featuresRef = useRef(null);
+  const aboutUsRef = useRef(null);
   const heroTaglines = [
     'Ignite Discussion, Inspire Growth: Welcome to AltCamp',
     'Collaborate, Communicate, Succeed: AltCamp is Here',
@@ -62,11 +62,10 @@ const Landing = () => {
   };
   return (
     <>
-      <Navbar 
-      
-      homeRef={homeRef}
-      aboutUsRef={aboutUsRef}
-      featuresRef={featuresRef}
+      <Navbar
+        homeRef={homeRef}
+        aboutUsRef={aboutUsRef}
+        featuresRef={featuresRef}
       />
       <div>
         <div className={landingPageStyles['intro-area']} ref={homeRef}>
@@ -85,7 +84,7 @@ const Landing = () => {
             </p>
             <Link to="/account/login">
               <button>Get Started</button>
-            </Link>Features
+            </Link>
           </div>
           <div className={landingPageStyles['intro-image-area']}>
             <img src={heroImage} alt="" />
