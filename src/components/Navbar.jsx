@@ -34,14 +34,14 @@ const MainNavbar = ({ homeRef, aboutUsRef, featuresRef }) => {
               About
             </NavLink>
           </li>
-          <li>
+          {/* <li>
             <NavLink
               href="#features"
               onClick={() => handleScroll(featuresRef.current)}
             >
               Features
             </NavLink>
-          </li>
+          </li> */}
           <NavLink to="/account">
             <button className={mainNavbarStyles['get-started-btn']}>
               Get Started
@@ -71,14 +71,18 @@ const MainNavbar = ({ homeRef, aboutUsRef, featuresRef }) => {
           >
             <ul>
               <li>
-                <NavLink>Home</NavLink>
+                <NavLink onClick={() => handleScroll(homeRef.current)}>
+                  Home
+                </NavLink>
               </li>
               <li>
-                <NavLink>About</NavLink>
+                <NavLink onClick={() => handleScroll(aboutUsRef.current)}>
+                  About
+                </NavLink>
               </li>
-              <li>
-                <NavLink>Features</NavLink>
-              </li>
+              {/* <li>
+                <NavLink onClick={() => handleScroll(featuresRef.current)}>Features</NavLink>
+              </li> */}
             </ul>
           </section>
         </ul>
