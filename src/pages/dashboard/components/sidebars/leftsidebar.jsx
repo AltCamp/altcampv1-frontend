@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 
 import navlinkObj from './navlinkobject';
 
-import { Button, Tooltip } from 'flowbite-react';
+import { Tooltip } from 'flowbite-react';
 
 import { useSelector, useDispatch } from 'react-redux';
 
