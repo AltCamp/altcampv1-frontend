@@ -4,7 +4,7 @@
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 
-## [thealtcamp.com](https://thealtcamp.com/)
+## [thealtcamp.com](https://altcampv1.netlify.app/)
 ## About AltCamp
 AltCamp by AltSchool is an e-learning platform that allows students to post messages to the discussion threads, interact and receive feedback from other students and instructors, and hence create a deeper understanding of the subject matter being discussed.
 
