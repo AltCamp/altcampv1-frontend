@@ -217,17 +217,14 @@ export default function Postcard({ post, isBookmarked }) {
                 </div>
               </div>
               <div className="w-[1px] bg-neutral-600 "></div>
-
-              <Link to={`/dashboard/feed/post/${post?._id}`}>
-                <div className="flex items-center gap-[0.3rem] font-medium text-neutral-600 ">
-                  <MessageText1
-                    size={20}
-                    color="#555555"
-                    className="cursor-pointer"
-                  />
-                  <div className="">{post?.comments?.length}</div>
-                </div>
-              </Link>
+              <div className="flex items-center gap-[0.3rem] font-medium text-neutral-600 ">
+                <MessageText1
+                  size={20}
+                  color="#555555"
+                  className="cursor-pointer"
+                />
+                <div className="">{post?.comments?.length}</div>
+              </div>
             </div>
             <div className="">
               <div className="w-fit">
