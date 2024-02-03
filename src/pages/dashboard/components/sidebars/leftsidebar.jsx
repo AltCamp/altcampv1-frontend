@@ -3,13 +3,12 @@ import { NavLink, useNavigate } from 'react-router-dom';
 
 import navlinkObj from './navlinkobject';
 
-import { Button, Tooltip } from 'flowbite-react';
+import { Tooltip } from 'flowbite-react';
 
 import { useSelector, useDispatch } from 'react-redux';
 
 import { removeUser } from '../../../../app/slices/generalSlices/userSlice';
-
-import decode from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 
 export default function LeftSidebar({ toggleSideBar, handleSideBar }) {
   let activeStyle = {
@@ -28,7 +27,7 @@ export default function LeftSidebar({ toggleSideBar, handleSideBar }) {
   // automatically log user out if token as expired
   useEffect(() => {
     if (token) {
-      if (decode(token).exp < Date.now() / 1000) {
+      if (jwtDecode(token).exp < Date.now() / 1000) {
         dispatch(removeUser());
         navigate('/account/login');
       }
