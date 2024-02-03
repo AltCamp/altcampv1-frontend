@@ -62,7 +62,7 @@ export default function Bookmarks() {
           <div className="relative h-full ">
             <button
               className="auth-btn mt-0 flex items-center gap-1 px-2 sm:px-1 sm:text-[13px]  "
-              onClick={handleToggleAction}
+              // onClick={handleToggleAction}
             >
               <span>Action</span>
               <RiArrowDownSLine className="" size="20" color="#fff" />
