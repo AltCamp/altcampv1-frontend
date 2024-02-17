@@ -31,12 +31,12 @@ import VerifyEmailPopUp from '../../../components/verifyEmailPopUp';
 export default function Postpage() {
   const [likeAnimation, setLikeAnimation] = useState(false);
   const [content, setContent] = useState('');
+  const [latestPost, setLatestPost] = useState();
 
   // stored and passed as props to verifyemailpopup modal
   const [queryError, setQueryError] = useState();
 
   // refs
-  const commentsRef = useRef([]);
   const commentWrapperRef = useRef(null);
 
   const navigate = useNavigate();
@@ -52,6 +52,8 @@ export default function Postpage() {
     isError: singlePostIsError,
     error: singlePostError,
   } = useGetPostByIdQuery(postId);
+
+  const post = singlePost?.data;
 
   useEffect(() => {
     if (singlePostError) {
@@ -93,29 +95,87 @@ export default function Postpage() {
   ] = useDeleteBookmarkMutation();
 
   const handleCreateBookmark = () => {
+    // Optimistically update the UI before making the API call
+    setLatestPost({
+      ...post,
+      isBookmarked: true,
+    });
+
     createBookmark({
       postId: postId,
       postType: 'Post',
-    });
+    })
+      .then((response) => {
+        // No action needed if API call was successful due to optimistic UI update
+      })
+      .catch((error) => {
+        setLatestPost(post);
+        setQueryError(error?.data.message);
+      });
   };
 
   const handleDeleteBookmark = () => {
-    deleteBookmark(postId);
+    // Optimistically update the UI before making the API call
+    setLatestPost({
+      ...post,
+      isBookmarked: false,
+    });
+
+    deleteBookmark(postId)
+      .then((response) => {
+        // No action needed if API call was successful due to optimistic UI update
+      })
+      .catch((error) => {
+        setLatestPost(post);
+        setQueryError(error?.data.message);
+      });
   };
 
   const handleLikePost = () => {
-    likePost(postId);
+    const hasLiked = post.upvotedBy.includes(user._id);
+    const updatedUpvotedBy = hasLiked
+      ? post.upvotedBy.filter((id) => id !== user._id)
+      : [...post.upvotedBy, user._id];
+
+    // Store the pre-update state of the post
+    const previousPost = { ...latestPost };
+
+    setLatestPost({
+      ...post,
+      upvotedBy: updatedUpvotedBy,
+    });
+    setLikeAnimation(true);
+
+    likePost(postId)
+      .then((response) => {
+        // No action needed if API call was successful due to optimistic UI update
+      })
+      .catch((error) => {
+        // Revert the optimistic update using the stored pre-update state
+        setLatestPost(previousPost);
+        setLikeAnimation(false);
+        setQueryError(error?.data?.message);
+      });
   };
 
   useEffect(() => {
-    if (likeIsSuccess && singlePost) {
+    if (singlePostSuccess) {
+      setLatestPost(post);
+    }
+    if (singlePostError) {
+      setQueryError(error?.data.message);
+    }
+  }, [singlePostError, singlePostSuccess]);
+
+  useEffect(() => {
+    if (likeIsSuccess) {
       setLikeAnimation(true);
 
       setTimeout(() => {
         setLikeAnimation(false);
-      }, 1000);
+      }, 600);
     }
-  }, [singlePost]);
+  }, [likeIsSuccess]);
 
   const {
     data: comments,
@@ -152,8 +212,6 @@ export default function Postpage() {
       });
     }
   }, [createCommentData]);
-
-  const post = singlePost?.data;
 
   // grab all the errors from api queries and pass the message to queryError state
   useEffect(() => {
@@ -287,7 +345,7 @@ export default function Postpage() {
                         height="20"
                         viewBox="0 0 24 24"
                         fill={
-                          post?.upvotedBy?.includes(user?._id)
+                          latestPost?.upvotedBy?.includes(user?._id)
                             ? 'red'
                             : '#FFFFFF'
                         }
@@ -299,7 +357,7 @@ export default function Postpage() {
                         <path
                           d="M12.62 20.81c-.34.12-.9.12-1.24 0C8.48 19.82 2 15.69 2 8.69 2 5.6 4.49 3.1 7.56 3.1c1.82 0 3.43.88 4.44 2.24a5.53 5.53 0 0 1 4.44-2.24C19.51 3.1 22 5.6 22 8.69c0 7-6.48 11.13-9.38 12.12Z"
                           stroke={
-                            post?.upvotedBy?.includes(user?._id)
+                            latestPost?.upvotedBy?.includes(user?._id)
                               ? 'red'
                               : '#343A40'
                           }
@@ -311,12 +369,12 @@ export default function Postpage() {
                       <div
                         className={`${likeAnimation && 'animate-like'}`}
                         style={{
-                          color: post?.upvotedBy?.includes(user?._id)
+                          color: latestPost?.upvotedBy?.includes(user?._id)
                             ? 'red'
                             : '#343A40',
                         }}
                       >
-                        {post?.upvotedBy?.length}
+                        {latestPost?.upvotedBy?.length}
                       </div>
                     </div>
                     <div className="w-[1px] bg-neutral-600 "></div>
@@ -331,7 +389,7 @@ export default function Postpage() {
                   </div>
                   <div className="">
                     <div className="">
-                      {!post.isBookmarked ? (
+                      {!latestPost?.isBookmarked ? (
                         <BsBookmarkPlus
                           size={17}
                           color="#555555"

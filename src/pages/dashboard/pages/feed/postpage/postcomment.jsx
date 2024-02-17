@@ -71,18 +71,56 @@ const Postcomment = forwardRef((props, ref) => {
   ] = useDeleteBookmarkMutation();
 
   const handleCreateBookmark = () => {
+    setBookmarked(true);
+
     createBookmark({
       postId: comment?._id,
       postType: 'Comment',
-    });
+    })
+      .then((response) => {
+        // No action needed if API call was successful due to optimistic UI update
+      })
+      .catch((error) => {
+        setBookmarked(comment.isBookmarked);
+        setQueryError(error?.data?.message);
+      });
   };
 
   const handleDeleteBookmark = () => {
-    deleteBookmark(comment._id);
+    setBookmarked(false);
+
+    deleteBookmark(comment._id)
+      .then((response) => {
+        // No action needed if API call was successful due to optimistic UI update
+      })
+      .catch((error) => {
+        setBookmarked(comment.isBookmarked);
+        setQueryError(error?.data?.message);
+      });
   };
 
   const handleLikeComment = () => {
-    likeComment(comment?._id);
+    const hasLiked = comment.upvotedBy.includes(user._id);
+    const updatedUpvotedBy = hasLiked
+      ? comment.upvotedBy.filter((id) => id !== user._id)
+      : [...comment.upvotedBy, user._id];
+
+    setLatestComment({
+      ...comment,
+      upvotedBy: updatedUpvotedBy,
+    });
+
+    setLikeAnimation(true);
+
+    likeComment(comment?._id)
+      .then((response) => {
+        // No action needed if API call was successful due to optimistic UI update
+      })
+      .catch((error) => {
+        setLatestComment(post);
+        setLikeAnimation(false);
+        setQueryError(error?.data?.message);
+      });
   };
 
   useEffect(() => {
@@ -92,7 +130,7 @@ const Postcomment = forwardRef((props, ref) => {
 
       setTimeout(() => {
         setLikeAnimation(false);
-      }, 1000);
+      }, 600);
     }
     if (likeCommentIsError) {
       setQueryError(likeCommentError?.message);
