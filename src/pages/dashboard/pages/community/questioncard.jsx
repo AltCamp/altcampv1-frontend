@@ -50,14 +50,32 @@ export default function Questioncard({ question, isBookmarked }) {
   ] = useDeleteBookmarkMutation();
 
   const handleCreateBookmark = () => {
+    setBookmarked(true);
+
     createBookmark({
       postId: question?._id,
       postType: 'Question',
-    });
+    })
+      .then((response) => {
+        // No action needed if API call was successful due to optimistic UI update
+      })
+      .catch((error) => {
+        setBookmarked(question.isBookmarked);
+        setQueryError(error?.data?.message);
+      });
   };
 
   const handleDeleteBookmark = () => {
-    deleteBookmark(question._id);
+    setBookmarked(false);
+
+    deleteBookmark(question._id)
+      .then((response) => {
+        // No action needed if API call was successful due to optimistic UI update
+      })
+      .catch((error) => {
+        setBookmarked(question.isBookmarked);
+        setQueryError(error?.data?.message);
+      });
   };
 
   const location = useLocation();
