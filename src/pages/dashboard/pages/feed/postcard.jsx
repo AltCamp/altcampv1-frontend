@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { Link, useNavigate, useLocation, Outlet } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { ProfileCircle, MessageText1 } from 'iconsax-react';
 
@@ -29,12 +29,9 @@ export default function Postcard({ post, isBookmarked }) {
 
   const { user } = useSelector((state) => state?.user);
 
-  const navigate = useNavigate();
-
   const location = useLocation();
 
-  const [likePost, { data, isLoading, isSuccess, isError, error }] =
-    useLikePostMutation();
+  const [likePost, { data, isSuccess, isError, error }] = useLikePostMutation();
 
   const [
     createBookmark,
@@ -59,18 +56,55 @@ export default function Postcard({ post, isBookmarked }) {
   ] = useDeleteBookmarkMutation();
 
   const handleCreateBookmark = () => {
+    setBookmarked(true);
+
     createBookmark({
       postId: post?._id,
       postType: 'Post',
-    });
+    })
+      .then((response) => {
+        // No action needed if API call was successful due to optimistic UI update
+      })
+      .catch((error) => {
+        setBookmarked(post.isBookmarked);
+        setQueryError(error?.data?.message);
+      });
   };
 
   const handleDeleteBookmark = () => {
-    deleteBookmark(post._id);
+    setBookmarked(false);
+
+    deleteBookmark(post._id)
+      .then((response) => {
+        // No action needed if API call was successful due to optimistic UI update
+      })
+      .catch((error) => {
+        setBookmarked(post.isBookmarked);
+        setQueryError(error?.data?.message);
+      });
   };
 
   const handleLikePost = () => {
-    likePost(post._id);
+    const hasLiked = post.upvotedBy.includes(user._id);
+    const updatedUpvotedBy = hasLiked
+      ? post.upvotedBy.filter((id) => id !== user._id)
+      : [...post.upvotedBy, user._id];
+
+    setLatestPost({
+      ...post,
+      upvotedBy: updatedUpvotedBy,
+    });
+    setLikeAnimation(true);
+
+    likePost(post._id)
+      .then((response) => {
+        // No action needed if API call was successful due to optimistic UI update
+      })
+      .catch((error) => {
+        setLatestPost(post);
+        setLikeAnimation(false);
+        setQueryError(error?.data?.message);
+      });
   };
 
   useEffect(() => {
@@ -80,7 +114,7 @@ export default function Postcard({ post, isBookmarked }) {
 
       setTimeout(() => {
         setLikeAnimation(false);
-      }, 1100);
+      }, 600);
     }
     if (isError) {
       setQueryError(error?.data.message);
@@ -112,15 +146,15 @@ export default function Postcard({ post, isBookmarked }) {
           <div className="flex items-start gap-2">
             <Link
               to={
-                user?._id === post?.author?._id
+                user?._id === latestPost?.author?._id
                   ? `/dashboard/account`
-                  : `/dashboard/users/${post?.author?._id}`
+                  : `/dashboard/users/${latestPost?.author?._id}`
               }
               className="h-10 w-10 overflow-hidden rounded-full"
             >
-              {post?.author?.profilePicture ? (
+              {latestPost?.author?.profilePicture ? (
                 <img
-                  src={post?.author?.profilePicture}
+                  src={latestPost?.author?.profilePicture}
                   alt=""
                   className="h-full w-full object-cover"
                 />
@@ -135,34 +169,36 @@ export default function Postcard({ post, isBookmarked }) {
             <div className="flex flex-col">
               <Link
                 to={
-                  user?._id === post?.author?._id
+                  user?._id === latestPost?.author?._id
                     ? `/dashboard/account`
-                    : `/dashboard/users/${post?.author?._id}`
+                    : `/dashboard/users/${latestPost?.author?._id}`
                 }
                 className="font-semibold text-neutral-900 "
               >
-                {post?.author?.firstName} {post?.author?.lastName}
+                {latestPost?.author?.firstName} {latestPost?.author?.lastName}
               </Link>
               <div className="text-[0.8rem] text-neutral-600">
-                {post?.createdAt && (
-                  <ReactTimeAgo date={post?.createdAt} locale="en-US" />
+                {latestPost?.createdAt && (
+                  <ReactTimeAgo date={latestPost?.createdAt} locale="en-US" />
                 )}
               </div>
             </div>
           </div>
 
           <div className="flex flex-col gap-3.5  font-medium text-neutral-900">
-            <Link to={`/dashboard/feed/post/${post?._id}`}>
-              <p>{post?.content}</p>
+            <Link to={`/dashboard/feed/post/${latestPost?._id}`}>
+              <p>{latestPost?.content}</p>
             </Link>
             <div
               className={`flex h-full max-h-[20rem] w-full items-center justify-between gap-2 overflow-hidden
            
             `}
             >
-              {post?.media.map((media, index) => (
+              {latestPost?.media.map((media, index) => (
                 <Link
-                  to={`/dashboard/feed/post/${post?._id}/images/${index + 1}`}
+                  to={`/dashboard/feed/post/${latestPost?._id}/images/${
+                    index + 1
+                  }`}
                   className={`aspect-video h-full w-full  overflow-hidden`}
                   state={{
                     media: media.url,
@@ -188,7 +224,9 @@ export default function Postcard({ post, isBookmarked }) {
                   height="20"
                   viewBox="0 0 24 24"
                   fill={
-                    post?.upvotedBy?.includes(user?._id) ? 'red' : '#FFFFFF'
+                    latestPost?.upvotedBy?.includes(user?._id)
+                      ? 'red'
+                      : '#FFFFFF'
                   }
                   onClick={handleLikePost}
                   className={`cursor-pointer ${
@@ -198,7 +236,9 @@ export default function Postcard({ post, isBookmarked }) {
                   <path
                     d="M12.62 20.81c-.34.12-.9.12-1.24 0C8.48 19.82 2 15.69 2 8.69 2 5.6 4.49 3.1 7.56 3.1c1.82 0 3.43.88 4.44 2.24a5.53 5.53 0 0 1 4.44-2.24C19.51 3.1 22 5.6 22 8.69c0 7-6.48 11.13-9.38 12.12Z"
                     stroke={
-                      post?.upvotedBy?.includes(user?._id) ? 'red' : '#343A40'
+                      latestPost?.upvotedBy?.includes(user?._id)
+                        ? 'red'
+                        : '#343A40'
                     }
                     strokeWidth="1"
                     strokeLinecap="round"
@@ -208,12 +248,12 @@ export default function Postcard({ post, isBookmarked }) {
                 <div
                   className={`${likeAnimation && 'animate-like'}`}
                   style={{
-                    color: post?.upvotedBy?.includes(user?._id)
+                    color: latestPost?.upvotedBy?.includes(user?._id)
                       ? 'red'
                       : '#343A40',
                   }}
                 >
-                  {post?.upvotedBy?.length}
+                  {latestPost?.upvotedBy?.length}
                 </div>
               </div>
               <div className="w-[1px] bg-neutral-600 "></div>

@@ -167,14 +167,32 @@ export default function Answercard({ answer, isBookmarked }) {
   ] = useDeleteBookmarkMutation();
 
   const handleCreateBookmark = () => {
+    setBookmarked(true);
+
     createBookmark({
       postId: answer?._id,
       postType: 'Answer',
-    });
+    })
+      .then((response) => {
+        // No action needed if API call was successful due to optimistic UI update
+      })
+      .catch((error) => {
+        setBookmarked(answer.isBookmarked);
+        setQueryError(error?.data?.message);
+      });
   };
 
   const handleDeleteBookmark = () => {
-    deleteBookmark(answer._id);
+    setBookmarked(false);
+
+    deleteBookmark(answer._id)
+      .then((response) => {
+        // No action needed if API call was successful due to optimistic UI update
+      })
+      .catch((error) => {
+        setBookmarked(answer.isBookmarked);
+        setQueryError(error?.data?.message);
+      });
   };
 
   useEffect(() => {

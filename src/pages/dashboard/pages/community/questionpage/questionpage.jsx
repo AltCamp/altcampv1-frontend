@@ -52,12 +52,12 @@ export default function Questionpage() {
   const [deleteQuestionModal, setDeleteQuestionModal] = useState(false);
   const [shareModal, setShareModal] = useState(false);
   const [screenWidthState, setScreenWidthState] = useState(false);
+  const [questionDetails, setQuestionDetails] = useState();
 
   const [queryError, setQueryError] = useState();
 
   const navigate = useNavigate();
 
-  const location = useLocation();
   const { questionId } = useParams();
 
   // get currnet page address
@@ -73,13 +73,14 @@ export default function Questionpage() {
     error: questionError,
   } = useGetQuestionByIdQuery(questionId);
 
-  const questionDetails = questionData?.data;
-
   useEffect(() => {
     if (questionIsError) {
       navigate(-1);
     }
-  }, [questionIsError]);
+    if (questionSuccess) {
+      setQuestionDetails(questionData?.data);
+    }
+  }, [questionIsError, questionSuccess, questionData]);
 
   // console.log(questionId)
 
@@ -229,14 +230,42 @@ export default function Questionpage() {
   ] = useDeleteBookmarkMutation();
 
   const handleCreateBookmark = () => {
+    // Optimistically update the UI before making the API call
+    setQuestionDetails({
+      ...questionDetails,
+      isBookmarked: true,
+    });
+
     createBookmark({
       postId: questionId,
       postType: 'Question',
-    });
+    })
+      .then((response) => {
+        // No action needed if API call was successful due to optimistic UI update
+      })
+      .catch((error) => {
+        // If the API call failed, revert the optimistic update
+        setQuestionDetails(questionDetails);
+        setQueryError(error?.data?.message);
+      });
   };
 
   const handleDeleteBookmark = () => {
-    deleteBookmark(questionId);
+    // Optimistically update the UI before making the API call
+    setQuestionDetails({
+      ...questionDetails,
+      isBookmarked: false,
+    });
+
+    deleteBookmark(questionId)
+      .then((response) => {
+        // No action needed if API call was successful due to optimistic UI update
+      })
+      .catch((error) => {
+        // If the API call failed, revert the optimistic update
+        setQuestionDetails(questionDetails);
+        setQueryError(error?.data?.message);
+      });
   };
 
   return (
@@ -492,7 +521,7 @@ export default function Questionpage() {
                         </div>
                       )}
                     </div>
-                    {!questionDetails.isBookmarked ? (
+                    {!questionDetails?.isBookmarked ? (
                       <BsBookmarkPlus
                         size={17}
                         color="#555555"

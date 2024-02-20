@@ -116,7 +116,7 @@ export default {
       },
       animation: {
         showSearch: 'showSearch 0.3s ease-in-out forwards',
-        like: 'like 1s',
+        like: 'like 0.5s',
         highlights: 'highlights 10s',
         fadeIn: 'fadeIn 0.5s ease-in-out',
         slideIn: 'slideIn 0.2s ease-in-out',
